@@ -129,7 +129,7 @@
             <main class="main post-page">
     <article class="article-entry">
         <p>title: 浅谈d3.js中强制异步文件读取同步的四种方法<br>category: visualization</p>
-<h2 id="tags-d3"><a href="#tags-d3" class="headerlink" title="tags: d3"></a>tags: d3</h2><h1 id="问题提出"><a href="#问题提出" class="headerlink" title="问题提出"></a>问题提出</h1><p>在使用d3.js时，我们经常会使用d3.csv()或者d3.json()函数来从文件中读取出数据，不幸的是，偶尔代码的结果并不是我们预料的那样。习惯了过程式编程的我开始的时候也是这样，最让人头疼的是javascript并不会告诉你问题出在哪里了。我第一次遇到这个问题的时候，找了半天bug，确定代码主体部分没有问题之后，我只能开始使用console.log()将变量一个一个的输出到控制台里。<br>第一次遇到这个问题时的图片是这样的：<br><img src="http://i13.tietuku.cn/b620500d4f1d6bb2.jpg" alt=""><br>问题出在第72行和第75行，中间几行完全没有对ordertxt进行操作，但是最后的结果就是和预想的输出不吻合，后来找了个其他方法把这个问题给解决了，今天又遇到了类似的这个问题，就下决心来拔掉这根刺。</p>
+<h2 id="tags-d3-visualization"><a href="#tags-d3-visualization" class="headerlink" title="tags: d3 visualization"></a>tags: d3 visualization</h2><h1 id="问题提出"><a href="#问题提出" class="headerlink" title="问题提出"></a>问题提出</h1><p>在使用d3.js时，我们经常会使用d3.csv()或者d3.json()函数来从文件中读取出数据，不幸的是，偶尔代码的结果并不是我们预料的那样。习惯了过程式编程的我开始的时候也是这样，最让人头疼的是javascript并不会告诉你问题出在哪里了。我第一次遇到这个问题的时候，找了半天bug，确定代码主体部分没有问题之后，我只能开始使用console.log()将变量一个一个的输出到控制台里。<br>第一次遇到这个问题时的图片是这样的：<br><img src="http://i13.tietuku.cn/b620500d4f1d6bb2.jpg" alt=""><br>问题出在第72行和第75行，中间几行完全没有对ordertxt进行操作，但是最后的结果就是和预想的输出不吻合，后来找了个其他方法把这个问题给解决了，今天又遇到了类似的这个问题，就下决心来拔掉这根刺。</p>
 <h1 id="试验"><a href="#试验" class="headerlink" title="试验"></a>试验</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">\&lt;script\&gt;</div><div class="line"></div><div class="line">console.log(&quot;before csv1 &quot;);</div><div class="line">d3.csv(&quot;flowers.csv&quot;, function(data) &#123;console.log(data)&#125;);</div><div class="line">console.log(&quot;before csv2&quot;);</div><div class="line">d3.csv(&quot;flowers.csv&quot;,function(error,data2) &#123;console.log(error, data2)&#125;);</div><div class="line"></div><div class="line">\&lt;/script\&gt;</div><div class="line"></div></pre></td></tr></table></figure>
 <p>believe it or not,上面的代码将产生下面图中的输出结果，因为javascript的<strong>异步特性</strong>。说到异步，大部分时候是让人开心的，但偶尔也会令人头疼，至少在这里，就是令人头疼。</p>
 <p><img src="http://i12.tietuku.cn/1b8435a64150532d.jpg" alt=""></p>
@@ -418,7 +418,7 @@
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/polybrush in d3/" >polybrush in d3</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/drop and drag in d3js/" >[Untitled Post]</a>
         </li>
     
     
@@ -428,7 +428,7 @@
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/drop and drag in d3js/" >[Untitled Post]</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/polybrush in d3/" >polybrush in d3</a>
         </li>
     
     
@@ -452,6 +452,8 @@
     <div class="sidebar-tags-name">
     
         <span class="sidebar-tag-name"><a href= "#">d3</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">d3 visualization</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">Json</a></span>
     
