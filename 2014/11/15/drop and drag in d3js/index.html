@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
     <title>
         
-        Zhihao&#39;s Studio
+        drop and drag in d3 · Zhihao&#39;s Studio
         
     </title>
     <link rel="icon" href= /assests/favicon.ico>
@@ -81,7 +81,7 @@
                 <a href="/" >Zhihao&#39;s Studio.</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name"></a>
+                <a href="#" class="post-name">drop and drag in d3</a>
             </div>
     </div>
     
@@ -102,7 +102,7 @@
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            [Untitled Post]
+            drop and drag in d3
             <!-- 404 -->
             
         </h1>
@@ -118,6 +118,12 @@
         
             <!-- 文章页标签  -->
             
+                <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = d3>d3</a>
+    
+</div>
+            
             <div class="post-intro-meta">
                 <span class="post-intro-calander iconfont-archer">&#xe676;</span>
                 <span class="post-intro-time">2014/11/15</span>
@@ -128,8 +134,7 @@
         <div class="container">
             <main class="main post-page">
     <article class="article-entry">
-        <p>title: drop and drag in d3js<br>category: visualization</p>
-<h2 id="tags-d3"><a href="#tags-d3" class="headerlink" title="tags: d3"></a>tags: d3</h2><h1 id="Behavior-in-d3"><a href="#Behavior-in-d3" class="headerlink" title="Behavior in d3"></a>Behavior in d3</h1><p>在d3中，行为被设计成了一种组件，可以创建一系列的事件，并绑定到调用这些行为的元素上。最常见的行为有拖拽与缩放，使用这些行为可以很方便地在拖拽或者缩放的开始、过程中以及结束时达到想要的效果。</p>
+        <h1 id="Behavior-in-d3"><a href="#Behavior-in-d3" class="headerlink" title="Behavior in d3"></a>Behavior in d3</h1><p>在d3中，行为被设计成了一种组件，可以创建一系列的事件，并绑定到调用这些行为的元素上。最常见的行为有拖拽与缩放，使用这些行为可以很方便地在拖拽或者缩放的开始、过程中以及结束时达到想要的效果。</p>
 <p>这篇博客中，就以拖拽为例，并借助之前实现的热力图，实现拖拽dimension的label以达到reoder维度的效果。为了使用三个阶段，我们会让开始拖拽的时候，维度名变成红色、字体变大来表示强调的效果；在拖拽过程中，让label紧跟鼠标的位置；并且判断最终的位置，交换两个维度，并重新绘制整个热力图。</p>
 <p>理想情况下，开始移动的时候的，运行情况应该像下面这样。<br><img src="http://i3.piimg.com/20f52681eff4f677.jpg" alt=""></p>
 <h1 id="drag"><a href="#drag" class="headerlink" title="drag"></a>drag</h1><p>创建一个新的拖拽行为非常简单，var drag = d3.behavior.drag()就创建好了。在这个行为上，可以指定拖拽事件类型的监听器，支持的事件类型有三种，<strong>dragstart/drag/dragend</strong>，分别是上面提到的拖动开始时触发的函数，拖动时触发和拖动结束时触发。<br>对应到上面的要求，维度名变成红色、字体变大来表示强调的效果（开始拖拽时），让label紧跟鼠标的位置（拖拽过程中），并且判断最终的位置，交换两个维度，并重新绘制整个热力图（拖拽结束后）。</p>
@@ -150,17 +155,17 @@
     <ul class="post-pager">
         
             <li class="next">
-                <a href= "/2014/11/15/D3 on Angular(2)/" title= D3 on Angular(2) >
+                <a href= "/2014/11/15/D3 on Angular/" title= D3 on Angular >
                     <span>Next Post</span>
-                    <span>D3 on Angular(2)</span>
+                    <span>D3 on Angular</span>
                 </a>
             </li>
         
         
             <li class="previous">
-                <a href= "/2014/11/15/数据可视化之散点图/" title= 数据可视化之散点图 >
+                <a href= "/2014/11/15/associate brush/" title= associate brush >
                     <span>Previous Post</span>
-                    <span>数据可视化之散点图</span>
+                    <span>associate brush</span>
                 </a>
             </li>
         
@@ -364,18 +369,7 @@
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <div class="total-archive"> Total : 11 </div>
+    <div class="total-archive"> Total : 10 </div>
     
     <div class="post-archive">
     
@@ -387,22 +381,7 @@
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/高维数据可视化之降维/" >[Untitled Post]</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/Build reuseable visualization using d3.js and AngularJS/" >Build reusable visualization using d3.js and AngularJS</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/浅谈d3.js中的异步文件读取的处理/" >[Untitled Post]</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/浅谈d3.js中的异步文件读取的处理/" >浅谈d3.js中强制异步文件读取同步的四种方法</a>
         </li>
     
     
@@ -412,12 +391,7 @@
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/drop and drag in d3js/" >[Untitled Post]</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
         </li>
     
     
@@ -432,7 +406,22 @@
     
     
         <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/drop and drag in d3js/" >drop and drag in d3</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
             <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular/" >D3 on Angular</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/Build reuseable visualization using d3.js and AngularJS/" >Build reusable visualization using d3.js and AngularJS</a>
         </li>
     
     

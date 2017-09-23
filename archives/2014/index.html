@@ -103,35 +103,6 @@
     
     
         <article class="index-post">
-            <a class="content-show-full" href = "/2014/11/15/冷门但实用的d3.js内置函数/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>冷门但实用的d3.js内置函数</span>
-                    </h2>
-                <div class="abstract-content">
-                    前言在d3.js的API文档中，提供了很多内置的函数，但是有些很有用的内置函数却被无情的忽略了，这篇博客就来整理整理这些被遗忘却很实用的函数。希望整理过后，他们不再被遗忘。
-selection.classed(name,【value】)value参数可选，如果没有指定，则返回与name参数匹配的第一个非空元素是否绑定了指定的CSS类，true表示绑定，false表示未绑定。如果value指定了的话，就是为selection添加/删除CSS类。这点与selection.attr(name,【value】)非常类似，但是相比而言，就冷门的多，恐怕没有多少人不知道selection.attr(...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = d3>d3</a>
-    
-</div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2014/11/15</span>
-                </div>
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
             <a class="content-show-full" href = "/2014/11/15/Build reuseable visualization using d3.js and AngularJS/" >
                     <h2 class="abstract-title">
                         
@@ -161,6 +132,36 @@ selection.classed(name,【value】)value参数可选，如果没有指定，则�
     
     
         <article class="index-post">
+            <a class="content-show-full" href = "/2014/11/15/D3 on Angular(2)/" >
+                    <h2 class="abstract-title">
+                        
+                        <span>D3 on Angular(2)</span>
+                    </h2>
+                <div class="abstract-content">
+                    More Dynamic visualizations上一篇博客介绍了如何借助Angular来完成一个指令，达到可复用目的，但是似乎依然不够动态，我们不得不提前输入想要展示的数组。Angular的最大的特点是双向数据绑定，我们能否借助这个特性来完成更动态的可视化图呢？让Angular帮我们盯着数据，一旦数据改变了，就更新DOM元素。这一切都是Angular帮我们完成的，我们唯一需要做的是指定数据和DOM元素之间的关系，不需要写很多的代码。
+双向数据绑定先来用一个简单的例子来展示一下Angular帮我们完成的双向数据绑定，这里用一个简单的例子来展示一下。
+12345678//\&lt;bo...
+                </div>
+            </a>
+            <div class="abstract-post-meta">
+                <!-- tags  -->
+                
+                <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = d3>d3</a>
+    
+</div>
+                
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2014/11/15</span>
+                </div>
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
             <a class="content-show-full" href = "/2014/11/15/D3 on Angular/" >
                     <h2 class="abstract-title">
                         
@@ -169,6 +170,37 @@ selection.classed(name,【value】)value参数可选，如果没有指定，则�
                 <div class="abstract-content">
                     Angular与D3前面写了几篇分别介绍AngularJS和D3的博客，他们各司其职，都在各自的一亩三分地里备受好评，那么，他们之间能否完成合作，实现共赢呢？这篇博客就来介绍如何将它们结合起来使用，使得我们的可视化能够更具有模块化、方便复用、具有交互性。
 Why Angular使用Angular做可视化有很多原因，但其中最主要的原因还是directives(指令)。 指令使得做可复用的可视化更容易，可以使得我们做的可视化的时候就像使用内置的HTML那么简单，比如我需要一个热力图（后面写博客怎么做），那么我仅仅需要用\\就可以了，想想这种酸爽的滋味吧。即使你不知道热力图是怎么做的，但是你用...
+                </div>
+            </a>
+            <div class="abstract-post-meta">
+                <!-- tags  -->
+                
+                <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = d3>d3</a>
+    
+</div>
+                
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2014/11/15</span>
+                </div>
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
+            <a class="content-show-full" href = "/2014/11/15/drop and drag in d3js/" >
+                    <h2 class="abstract-title">
+                        
+                        <span>drop and drag in d3</span>
+                    </h2>
+                <div class="abstract-content">
+                    Behavior in d3在d3中，行为被设计成了一种组件，可以创建一系列的事件，并绑定到调用这些行为的元素上。最常见的行为有拖拽与缩放，使用这些行为可以很方便地在拖拽或者缩放的开始、过程中以及结束时达到想要的效果。
+这篇博客中，就以拖拽为例，并借助之前实现的热力图，实现拖拽dimension的label以达到reoder维度的效果。为了使用三个阶段，我们会让开始拖拽的时候，维度名变成红色、字体变大来表示强调的效果；在拖拽过程中，让label紧跟鼠标的位置；并且判断最终的位置，交换两个维度，并重新绘制整个热力图。
+理想情况下，开始移动的时候的，运行情况应该像下面这样。
+drag创建一个...
                 </div>
             </a>
             <div class="abstract-post-meta">
@@ -251,15 +283,14 @@ Why Angular使用Angular做可视化有很多原因，但其中最主要的原�
     
     
         <article class="index-post">
-            <a class="content-show-full" href = "/2014/11/15/D3 on Angular(2)/" >
+            <a class="content-show-full" href = "/2014/11/15/冷门但实用的d3.js内置函数/" >
                     <h2 class="abstract-title">
                         
-                        <span>D3 on Angular(2)</span>
+                        <span>冷门但实用的d3.js内置函数</span>
                     </h2>
                 <div class="abstract-content">
-                    More Dynamic visualizations上一篇博客介绍了如何借助Angular来完成一个指令，达到可复用目的，但是似乎依然不够动态，我们不得不提前输入想要展示的数组。Angular的最大的特点是双向数据绑定，我们能否借助这个特性来完成更动态的可视化图呢？让Angular帮我们盯着数据，一旦数据改变了，就更新DOM元素。这一切都是Angular帮我们完成的，我们唯一需要做的是指定数据和DOM元素之间的关系，不需要写很多的代码。
-双向数据绑定先来用一个简单的例子来展示一下Angular帮我们完成的双向数据绑定，这里用一个简单的例子来展示一下。
-12345678//\&lt;bo...
+                    前言在d3.js的API文档中，提供了很多内置的函数，但是有些很有用的内置函数却被无情的忽略了，这篇博客就来整理整理这些被遗忘却很实用的函数。希望整理过后，他们不再被遗忘。
+selection.classed(name,【value】)value参数可选，如果没有指定，则返回与name参数匹配的第一个非空元素是否绑定了指定的CSS类，true表示绑定，false表示未绑定。如果value指定了的话，就是为selection添加/删除CSS类。这点与selection.attr(name,【value】)非常类似，但是相比而言，就冷门的多，恐怕没有多少人不知道selection.attr(...
                 </div>
             </a>
             <div class="abstract-post-meta">
@@ -270,30 +301,6 @@ Why Angular使用Angular做可视化有很多原因，但其中最主要的原�
         <a class="post-tag" href="javascript:void(0);" data-href = d3>d3</a>
     
 </div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2014/11/15</span>
-                </div>
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="content-show-full" href = "/2014/11/15/drop and drag in d3js/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>[Untitled Post]</span>
-                    </h2>
-                <div class="abstract-content">
-                    title: drop and drag in d3jscategory: visualization
-tags: d3Behavior in d3在d3中，行为被设计成了一种组件，可以创建一系列的事件，并绑定到调用这些行为的元素上。最常见的行为有拖拽与缩放，使用这些行为可以很方便地在拖拽或者缩放的开始、过程中以及结束时达到想要的效果。
-这篇博客中，就以拖拽为例，并借助之前实现的热力图，实现拖拽dimension的label以达到reoder维度的效果。为了使用三个阶段，我们会让开始拖拽的时候，维度名变成红色、字体变大来表示强调的效果；在拖拽过程中，让label紧跟鼠标的位置；并且判断最...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
                 
                 <!-- date  -->
                 <div class="abstract-date">
@@ -338,15 +345,20 @@ tags: d3Behavior in d3在d3中，行为被设计成了一种组件，可以创�
             <a class="content-show-full" href = "/2014/11/15/浅谈d3.js中的异步文件读取的处理/" >
                     <h2 class="abstract-title">
                         
-                        <span>[Untitled Post]</span>
+                        <span>浅谈d3.js中强制异步文件读取同步的四种方法</span>
                     </h2>
                 <div class="abstract-content">
-                    title: 浅谈d3.js中强制异步文件读取同步的四种方法category: visualization
-tags: d3 visualization问题提出在使用d3.js时，我们经常会使用d3.csv()或者d3.json()函数来从文件中读取出数据，不幸的是，偶尔代码的结果并不是我们预料的那样。习惯了过程式编程的我开始的时候也是这样，最让人头疼的是javascript并不会告诉你问题出在哪里了。我第一次遇到这个问题的时候，找了半天bug，确定代码主体部分没有问题之后，我只能开始使用console.log()将变量一个一个的输出到控制台里。第一次遇到这个问题时的图片是这样的：问题出...
+                    问题提出在使用d3.js时，我们经常会使用d3.csv()或者d3.json()函数来从文件中读取出数据，不幸的是，偶尔代码的结果并不是我们预料的那样。习惯了过程式编程的我开始的时候也是这样，最让人头疼的是javascript并不会告诉你问题出在哪里了。我第一次遇到这个问题的时候，找了半天bug，确定代码主体部分没有问题之后，我只能开始使用console.log()将变量一个一个的输出到控制台里。第一次遇到这个问题时的图片是这样的：问题出在第72行和第75行，中间几行完全没有对ordertxt进行操作，但是最后的结果就是和预想的输出不吻合，后来找了个其他方法把这个问题给解决了，今天又遇到...
                 </div>
             </a>
             <div class="abstract-post-meta">
                 <!-- tags  -->
+                
+                <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = d3>d3</a>
+    
+</div>
                 
                 <!-- date  -->
                 <div class="abstract-date">
@@ -358,32 +370,35 @@ tags: d3 visualization问题提出在使用d3.js时，我们经常会使用d3.cs
     
     
         <article class="index-post">
-            <a class="content-show-full" href = "/2014/11/15/高维数据可视化之降维/" >
+            <a class="content-show-full" href = "/2014/04/24/用Java生成Json文件/" >
                     <h2 class="abstract-title">
                         
-                        <span>[Untitled Post]</span>
+                        <span>用Java生成Json文件</span>
                     </h2>
                 <div class="abstract-content">
-                    title: 浅谈高维数据可视化中的降维方法category: visualization
-tags: 降维高维数据可视化的主流方法我们生活在三维空间中，很难直接理解三维以上的空间（爱因斯坦等牛人除外）。但是爱因斯坦这样的人毕竟在人群中是少数，对大多数人来说，高维数据如何进行可视化呢？
-聪明的人可以用其他的视觉通道对一些维度进行视觉编码，比如颜色、形状、朝向、体积、半径、表面覆盖物等等。。。不过有两个很显然的问题，1）用户理解起来，不那么方便了。可能要想半天才能反应过来，因为要对这些视觉通道进行一一的反编码，记住这些本身就挺难的。2）维度比较大，不多说，就十几维，恐怕视觉通道已经捉襟见肘...
+                    JsonJson是什么
+  【百度百科】JSON(JavaScript Object Notation) 是一种轻量级的数据交换格式。它基于ECMAScript的一个子集。 JSON采用完全独立于语言的文本格式，但是也使用了类似于C语言家族的习惯（包括C、C++、C#、Java、JavaScript、Perl、Python等）。这些特性使JSON成为理想的数据交换语言。 易于人阅读和编写，同时也易于机器解析和生成(网络传输速率)。
+
+Json语法规则JSON 语法是 JavaScript 对象表示语法的子集。1.数据在键值对中2.数据由逗号分隔3.花括号保存对象4.方括号保存数组例如：1...
                 </div>
             </a>
             <div class="abstract-post-meta">
                 <!-- tags  -->
                 
+                <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = Json>Json</a>
+    
+</div>
+                
                 <!-- date  -->
                 <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2014/11/15</span>
+                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2014/04/24</span>
                 </div>
             </div>
         </article>
     
     <!-- paginator  -->
-    
-    <nav class="page-nav">
-        <span class="page-number current">1</span><a class="page-number" href="/archives/2014/page/2/">2</a><a class="extend next" rel="next" href="/archives/2014/page/2/">#NEXT</a>
-    </nav>
     
 </main>
             <!-- profile -->
@@ -579,18 +594,7 @@ tags: 降维高维数据可视化的主流方法我们生活在三维空间中�
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <div class="total-archive"> Total : 11 </div>
+    <div class="total-archive"> Total : 10 </div>
     
     <div class="post-archive">
     
@@ -602,22 +606,7 @@ tags: 降维高维数据可视化的主流方法我们生活在三维空间中�
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/高维数据可视化之降维/" >[Untitled Post]</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/Build reuseable visualization using d3.js and AngularJS/" >Build reusable visualization using d3.js and AngularJS</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/浅谈d3.js中的异步文件读取的处理/" >[Untitled Post]</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/浅谈d3.js中的异步文件读取的处理/" >浅谈d3.js中强制异步文件读取同步的四种方法</a>
         </li>
     
     
@@ -627,12 +616,7 @@ tags: 降维高维数据可视化的主流方法我们生活在三维空间中�
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/drop and drag in d3js/" >[Untitled Post]</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
         </li>
     
     
@@ -647,7 +631,22 @@ tags: 降维高维数据可视化的主流方法我们生活在三维空间中�
     
     
         <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/drop and drag in d3js/" >drop and drag in d3</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
             <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular/" >D3 on Angular</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/Build reuseable visualization using d3.js and AngularJS/" >Build reusable visualization using d3.js and AngularJS</a>
         </li>
     
     
