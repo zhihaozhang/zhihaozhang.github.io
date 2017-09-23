@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
+    <title>
+        
+        数据可视化之散点图 · Zhihao&#39;s Studio
+        
+    </title>
+    <link rel="icon" href= /assests/favicon.ico>
+    <!-- 提前加载place holder  -->
+    <style>
+        @font-face {
+            font-family: 'Oswald-Regular';
+            src: url('/font/Oswald-Regular.ttf');
+        }
+        @font-face {
+            font-family: 'Source Sans Pro';
+            src: url('/font/Source Sans Pro.woff'),
+            url('/font/Source Sans Pro.woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Source Code Pro';
+            src: url('/font/SourceCodePro-Regular.ttf.woff'),
+            url('/font/SourceCodePro-Regular.ttf.woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        
+        .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0px;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2s ease-out 0s 1;
+        }
+        @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        99% {
+            transform: translate3d(0, 0, 0);
+        }
+        99.1% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(-226px, 0, 0);
+        }
+    }
+    </style>
+    <link rel="stylesheet" href = "/css/style.css?v=20170912" />
+    <script src="//cdn.staticfile.org/jquery/3.2.1/jquery.min.js" defer></script>
+    
+    <script src="/scripts/main.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+</head>
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >Zhihao&#39;s Studio.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">数据可视化之散点图</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>Zhihao's Studio.</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-img" style="background-image: url(http://oumn0o088.bkt.clouddn.com/post-bg.jpg)"></div>
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            数据可视化之散点图
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+        </p>
+        <!-- 404 -->
+        
+        <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+                <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = d3>d3</a>
+    
+</div>
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2014/11/15</span>
+            </div>
+        
+    </div>
+</div>
+        <div class="container">
+            <main class="main post-page">
+    <article class="article-entry">
+        <p>D3.js是当下最火的可视化库之一，这篇博客记录了如何实现一个最基本的散点图，并用三角形表示数据点。</p>
+<p>代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">\&lt;!DOCTYPE html\&gt;</div><div class="line">\&lt;html\&gt;</div><div class="line">\&lt;head lang=&quot;en&quot;\&gt;</div><div class="line">\&lt;meta charset=&quot;UTF-8&quot;\&gt;</div><div class="line">\&lt;title\&gt;\&lt;/title\&gt;</div><div class="line">\&lt;script type=&quot;text/javascript&quot; src=&quot;script/d3.v3.js&quot;\&gt; \&lt;/script\&gt;</div><div class="line">\&lt;/head\&gt;</div><div class="line">\&lt;style\&gt;</div><div class="line">body &#123;</div><div class="line">font: 10px sans-serif;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.axis path,</div><div class="line">.axis line &#123;</div><div class="line">fill: none;</div><div class="line">stroke: #000;</div><div class="line">shape-rendering: crispEdges;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.point &#123;</div><div class="line">fill: steelblue;</div><div class="line">stroke: #000;</div><div class="line">&#125;</div><div class="line"></div><div class="line">\&lt;/style\&gt;</div><div class="line">\&lt;body\&gt;</div><div class="line"></div><div class="line">\&lt;script\&gt;</div><div class="line"></div><div class="line">var margin = &#123;top:20,right:20,bottom:30,left:40&#125;,</div><div class="line">width = 960-margin.left-margin.right,</div><div class="line">height = 500-margin.top-margin.bottom;</div><div class="line"></div><div class="line">var x = d3.scale.linear().range([0,width]());</div><div class="line">var y = d3.scale.linear().range([height,0]());</div><div class="line"></div><div class="line">var svg = d3.select(&apos;body&apos;).append(&apos;svg&apos;).attr(&apos;width&apos;,width+margin.left+margin.right)</div><div class="line">.attr(&apos;height&apos;,height+margin.top+margin.bottom)</div><div class="line">.append(&apos;g&apos;)</div><div class="line">.attr(&apos;transform&apos;,&quot;translate(&quot;+margin.left+&quot;,&quot;+margin.top+&apos;)&apos;);</div><div class="line"></div><div class="line">d3.csv(&apos;tmp.csv&apos;,function(error,data)&#123;</div><div class="line">if(error) throw error;</div><div class="line"></div><div class="line">data.forEach(function(d)&#123;</div><div class="line">d.x=+d.x;</div><div class="line">d.y=+d.y;</div><div class="line">&#125;)</div><div class="line">//        console.log(data);</div><div class="line"></div><div class="line">x.domain(d3.extent(data,function(d)&#123;return d.x&#125;)).nice();</div><div class="line">y.domain(d3.extent(data,function(d)&#123;return d.y&#125;)).nice();</div><div class="line"></div><div class="line">svg.append(&apos;g&apos;)</div><div class="line">.attr(&apos;class&apos;,&apos;x axis&apos;)</div><div class="line">.attr(&apos;transform&apos;,&apos;translate(0,&apos;+height+&quot;)&quot;)</div><div class="line">.call(d3.svg.axis().scale(x).orient(&apos;bottom&apos;));</div><div class="line"></div><div class="line">svg.append(&apos;g&apos;)</div><div class="line">.attr(&apos;class&apos;,&apos;y axis&apos;)</div><div class="line">.call(d3.svg.axis().scale(y).orient(&apos;left&apos;));</div><div class="line"></div><div class="line">svg.selectAll(&apos;.point&apos;)</div><div class="line">.data(data).enter()</div><div class="line">.append(&apos;path&apos;)</div><div class="line">.attr(&apos;class&apos;,&apos;point&apos;)</div><div class="line">.attr(&apos;d&apos;,d3.svg.symbol().type(&apos;triangle-up&apos;))</div><div class="line">.attr(&apos;transform&apos;,function(d)&#123;return &quot;translate(&quot;+x(d.x)+&quot;,&quot;+y(d.y)+&quot;)&quot;&#125;);</div><div class="line"></div><div class="line"></div><div class="line">&#125;)</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">\&lt;/script\&gt;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">\&lt;/body\&gt;</div><div class="line">\&lt;/html\&gt;</div><div class="line"></div></pre></td></tr></table></figure>
+<p>代码本身是很基本的，不过代码里面有一些可以学习的好习惯，比如：</p>
+<ol>
+<li><p>使用var margin = {top:20,right:20,bottom:30,left:40}变量来表示距离上下左右的距离，这样统一管理，只有一个变量。</p>
+</li>
+<li><p>data.forEach(function(d){<br> d.x=+d.x;<br> d.y=+d.y;<br> })<br>使用这种方式直接转换成数值型的变量，免去了使用其他函数的麻烦。</p>
+</li>
+<li>.nice()函数的使用，可以适当扩大extent的范围，这样最大最小值在坐标轴上看起来不会在极端的位置上。</li>
+<li>.attr(‘d’,d3.svg.symbol().type(‘triangle-up’)) 使用不局限于circle的图形来表示一个点</li>
+<li>svg.append(‘g’).attr(‘class’,’y axis’).call(d3.svg.axis().scale(y).orient(‘left’));<br>  一句话里指定要绘制坐标轴需要的所有东西。</li>
+</ol>
+<h1 id="小额资助"><a href="#小额资助" class="headerlink" title="小额资助"></a>小额资助</h1><p>如果本文对您有帮助，请用支付宝扫码小额赞助我，谢谢！<br><img src="http://i13.tietuku.cn/eec06685d2e66e2c.png" alt=""></p>
+
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-pager">
+        
+            <li class="next">
+                <a href= "/2014/11/15/polybrush in d3/" title= polybrush in d3 >
+                    <span>Next Post</span>
+                    <span>polybrush in d3</span>
+                </a>
+            </li>
+        
+        
+            <li class="previous">
+                <a href= "/2014/11/15/浅谈d3.js中的异步文件读取的处理/" title=  >
+                    <span>Previous Post</span>
+                    <span>[Untitled Post]</span>
+                </a>
+            </li>
+        
+    </ul>
+    <!-- 来必力City版安装代码 -->
+
+    
+
+<!-- City版安装代码已完成 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="emailto:zhihaozhang@me.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="https://github.com/zhihaozhang" class="iconfont-archer github" target="_blank" title="github"></a>
+            
+        
+    
+        
+            
+                <a href="http://weibo.com/2854428840/profile?rightmod=1&wvr=6&mod=personinfo" class="iconfont-archer weibo" target="_blank" title="weibo"></a>
+            
+        
+    
+        
+            
+                <a href="https://www.zhihu.com/people/zhihao-zhang-95/activities" class="iconfont-archer zhihu" target="_blank" title="zhihu"></a>
+            
+        
+    
+        
+            
+                <a href="https://www.instagram.com/izhihao_zhang/" class="iconfont-archer instagram" target="_blank" title="instagram"></a>
+            
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span>
+        <span
+            id="theme-info">Theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+</footer>
+    </div>
+    <div class="back-top">&#xe639;</div>
+    <div class="sidebar">
+    <div class="sidebar-header">
+        <div class="sidebar-category">
+            <span class="sidebar-archive-link"><span class="iconfont-archer">&#xe67d;</span>Archive</span>
+            <span class="sidebar-tags-link"><span class="iconfont-archer">&#xe610;</span>Tag</span>
+        </div>
+    </div>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-archive">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 11 </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2014 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/高维数据可视化之降维/" >[Untitled Post]</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/Build reuseable visualization using d3.js and AngularJS/" >Build reusable visualization using d3.js and AngularJS</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/浅谈d3.js中的异步文件读取的处理/" >[Untitled Post]</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/数据可视化之散点图/" >数据可视化之散点图</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/polybrush in d3/" >polybrush in d3</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/drop and drag in d3js/" >[Untitled Post]</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular/" >D3 on Angular</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/24</span><a class="archive-post-title" href= "/2014/04/24/用Java生成Json文件/" >用Java生成Json文件</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name"><a href= "#">d3</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">Json</a></span>
+    
+    </div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #888; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: false
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tag-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var jsInfo = {
+        root: '/'
+    }
+</script>
+    <!-- 不蒜子  -->
+    
+    <!-- CNZZ统计  -->
+    
+    </div>
+    </body>
+</html>
+
+

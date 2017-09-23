@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
+    <title>
+        
+        Build reusable visualization using d3.js and AngularJS · Zhihao&#39;s Studio
+        
+    </title>
+    <link rel="icon" href= /assests/favicon.ico>
+    <!-- 提前加载place holder  -->
+    <style>
+        @font-face {
+            font-family: 'Oswald-Regular';
+            src: url('/font/Oswald-Regular.ttf');
+        }
+        @font-face {
+            font-family: 'Source Sans Pro';
+            src: url('/font/Source Sans Pro.woff'),
+            url('/font/Source Sans Pro.woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Source Code Pro';
+            src: url('/font/SourceCodePro-Regular.ttf.woff'),
+            url('/font/SourceCodePro-Regular.ttf.woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        
+        .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0px;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2s ease-out 0s 1;
+        }
+        @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        99% {
+            transform: translate3d(0, 0, 0);
+        }
+        99.1% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(-226px, 0, 0);
+        }
+    }
+    </style>
+    <link rel="stylesheet" href = "/css/style.css?v=20170912" />
+    <script src="//cdn.staticfile.org/jquery/3.2.1/jquery.min.js" defer></script>
+    
+    <script src="/scripts/main.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+</head>
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >Zhihao&#39;s Studio.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">Build reusable visualization using d3.js and AngularJS</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>Zhihao's Studio.</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-img" style="background-image: url(http://oumn0o088.bkt.clouddn.com/post-bg.jpg)"></div>
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            Build reusable visualization using d3...
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+        </p>
+        <!-- 404 -->
+        
+        <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+                <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = d3>d3</a>
+    
+</div>
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2014/11/15</span>
+            </div>
+        
+    </div>
+</div>
+        <div class="container">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>前面两篇博客介绍了如何借助angular，让我们的可视化图能够更有<strong>模块化</strong>、<strong>方便复用</strong>、<strong>具有交互性</strong>，不过前面的博客只介绍了基本的原理以及最简单的图，在这篇博客中，我们来一起绘制一个相对复杂一些的热力图，最终的效果如下图。<br><img src="http://i13.tietuku.cn/5b566b315d0593c2.jpg" alt=""><br>这个热力图主要是用来展现维度与维度之间的相关性的，而相关性在0-1之间。千万不要小看这个热力图，图中的每一个元素，甚至每一个字都是绘制出来的，完成这个看似简单的热力图大概需要<strong>350行代码</strong>。</p>
+<h1 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h1><h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>我们想要用热力图的时候呢，希望能像内置的html DOM元素一样使用，比如<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">\&lt;heatmap\&gt;\&lt;/heatmap\&gt;</div><div class="line"></div><div class="line">//如果我们能指定一些属性就更好了，比如下面。</div><div class="line"></div><div class="line">\&lt;heatmap class=&quot;chart&quot; data=&quot;data&quot; dispatch=&quot;dispatch&quot; options=&quot;options&quot;\&gt;\&lt;/heatmap\&gt;</div></pre></td></tr></table></figure><br>不要着急我们一步一步来完成。</p>
+<h2 id="create-directive-using-Angular"><a href="#create-directive-using-Angular" class="headerlink" title="create directive using Angular"></a>create directive using Angular</h2><p>前面的博客里已经介绍过了如何使用Angular来构造指令了，主要是借助angular.directive(‘heatmap’,function(){…})来完成的，主体框架如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">angular.module(&quot;heatmap&quot;, []()).directive(&quot;heatmap&quot;,</div><div class="line">function() &#123;</div><div class="line">return &#123;</div><div class="line">restrict: &quot;E&quot;,</div><div class="line">replace: true,</div><div class="line">scope: &#123;</div><div class="line">data: &quot;=&quot;,</div><div class="line">options: &quot;=?&quot;,</div><div class="line">dispatch: &quot;=?&quot;</div><div class="line">&#125;,</div><div class="line">transclude: false,</div><div class="line">template: &quot;\&lt;div\&gt;\&lt;/div\&gt;&quot;,</div><div class="line">link: function(scope, element) &#123;</div><div class="line">…</div><div class="line">//暂时先不贴出来，后面详解。</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line">&#125;）</div><div class="line"></div></pre></td></tr></table></figure></p>
+<h2 id="link-function"><a href="#link-function" class="headerlink" title="link function"></a>link function</h2><p>前面已经提过了，link function类似于面向对象编程中的构造(constructor)函数,在个函数里，我们需要用d3.js来绘制所需的所有视觉元素。首先我们需要一些数据。</p>
+<h3 id="data"><a href="#data" class="headerlink" title="data"></a>data</h3><p>数据是维度与维度之间的相关性，因此，对于每一个数据，我们需要知道的有：维度1，维度2，维度1与维度2之间的相关性。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">\&lt;script\&gt;</div><div class="line"></div><div class="line">var s =[&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;,&quot;e&quot;,&quot;f&quot;,&quot;g&quot;,&quot;h&quot;,&quot;i&quot;,&apos;j&apos;,&apos;k&apos;,&apos;l&apos;]();</div><div class="line">var data = []();</div><div class="line">for(var i=0;i\&lt; s.length;i++)</div><div class="line">for(var j=0;j\&lt; s.length;j++)</div><div class="line">&#123;</div><div class="line">data.push(&#123;&apos;y&apos;:s[j](),&apos;x&apos;:s[i](),&quot;value&quot;:Math.random()&#125;)</div><div class="line">&#125;</div><div class="line"></div><div class="line">\&lt;/script\&gt;</div><div class="line"></div></pre></td></tr></table></figure><br>这样我们得到的数据将会是这样的结构：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">data = [</div><div class="line">]()&#123;</div><div class="line">&quot;y&quot;: &quot;a&quot;,</div><div class="line">&quot;x&quot;: “a”,</div><div class="line">&quot;value&quot;: 1.0</div><div class="line">&#125;,</div><div class="line">&#123;</div><div class="line">&quot;y&quot;: &quot;a&quot;,</div><div class="line">&quot;x&quot;: “b”,</div><div class="line">&quot;value&quot;: 0.73</div><div class="line">&#125;，…]</div></pre></td></tr></table></figure></p>
+<h3 id="options"><a href="#options" class="headerlink" title="options"></a>options</h3><p>为了实现options的可配置，我们需要预先提供一些已经定好的option。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">  var options = &#123;</div><div class="line">legend: true,</div><div class="line">margin: &#123; top: 50, right: 0, bottom: 100, left: 50 &#125;,</div><div class="line">buckets: 9,</div><div class="line">colors: [&quot;#ffffd9&quot;, &quot;#edf8b1&quot;, &quot;#c7e9b4&quot;, &quot;#7fcdbb&quot;, &quot;#41b6c4&quot;, &quot;#1d91c0&quot;, &quot;#225ea8&quot;, &quot;#253494&quot;, &quot;#081d58&quot;](),</div><div class="line">duration: 1000,</div><div class="line">legendWidth: 0.3,</div><div class="line">breaks: null</div><div class="line">&#125;;</div><div class="line"></div></pre></td></tr></table></figure><br>为了使得可以添加或者替换默认的options，我们借助angular.extend()函数将scope里传进来的options和默认的options进行合并，作为新的options。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"> if (scope.options) &#123;</div><div class="line">options = angular.extend(options, scope.options);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="dispatch"><a href="#dispatch" class="headerlink" title="dispatch"></a>dispatch</h3><p>通过dispatch预先定义一些操作，比如click,mouseover,mouse out,mouse move，在特定的情况下可以触发他们。代码这样写起来会比较优雅，显得非常的有条理。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">scope.dispatch = d3.dispatch(&quot;click&quot;, &quot;mouseover&quot;, &quot;mouseout&quot;, &quot;mousemove&quot;);</div><div class="line"></div><div class="line"> $scope.$watch(&quot;dispatch&quot;, function() &#123;</div><div class="line">if ($scope.dispatch) &#123;</div><div class="line">$scope.dispatch.on(&quot;click&quot;, function(e) &#123;</div><div class="line">console.log(e);</div><div class="line">&#125;);</div><div class="line">$scope.dispatch.on(&quot;mouseover&quot;, function(e) &#123;</div><div class="line">return tooltip.text(e.y + &quot;: &quot; + e.x + &quot; (&quot; + e.value + &quot;)&quot;).style(&quot;visibility&quot;, &quot;visible&quot;);</div><div class="line">&#125;)</div><div class="line">$scope.dispatch.on(&quot;mousemove&quot;, function(e) &#123;</div><div class="line">return tooltip.style(&quot;top&quot;, (d3.event.pageY - 10) + &quot;px&quot;).style(&quot;left&quot;, (d3.event.pageX + 10) + &quot;px&quot;);</div><div class="line">&#125;)</div><div class="line">$scope.dispatch.on(&quot;mouseout&quot;, function(e) &#123;</div><div class="line">return tooltip.style(&quot;visibility&quot;, &quot;hidden&quot;);</div><div class="line">&#125;);</div><div class="line">&#125;</div><div class="line">&#125;, true);</div><div class="line"></div></pre></td></tr></table></figure></p>
+<h3 id="render"><a href="#render" class="headerlink" title="render"></a>render</h3><p>前期的准备工作做得差不多了，接下来到了最重要的环节，<strong>绘制</strong>。说重要也重要，但其实这应该是d3.js的基本功了。无非就是控制每个元素的各种属性。值得注意的是，这里定义的svg不再是d3.select(‘body’)了，而是select(element【0】)。<br>相关代码以及注释如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">  var render = function() &#123;</div><div class="line"></div><div class="line">var w = element[0]().offsetWidth;</div><div class="line">var h = element[0]().offsetHeight;</div><div class="line">var width = w - options.margin.left - options.margin.right;</div><div class="line">var height = h - options.margin.top - options.margin.bottom;</div><div class="line">//先要移除之前的记录</div><div class="line">d3.select(element[0]()).select(&quot;svg&quot;).remove();</div><div class="line">//svg的位置、大小</div><div class="line">var svg = d3.select(element[0]()).append(&quot;svg&quot;)</div><div class="line">.attr(&quot;width&quot;, width + options.margin.left + options.margin.right)</div><div class="line">.attr(&quot;height&quot;, height + options.margin.top + options.margin.bottom)</div><div class="line">.append(&quot;g&quot;)</div><div class="line">.attr(&quot;transform&quot;, &quot;translate(&quot; + options.margin.left + &quot;,&quot; + options.margin.top + &quot;)&quot;);</div><div class="line">//找到data中每一个维度的坐标，方便绘制</div><div class="line">var xu = &#123;&#125;;</div><div class="line">var x = []();</div><div class="line">var yu = &#123;&#125;;</div><div class="line">var y = []();</div><div class="line"></div><div class="line">for (var i in scope.data) &#123;</div><div class="line">if (typeof(xu[scope.data\[i]().x]) == &quot;undefined&quot;) &#123;</div><div class="line">x.push(scope.data[i]().x);</div><div class="line">&#125;</div><div class="line">xu[scope.data\[i]().x] = 0;</div><div class="line">if (typeof(yu[scope.data\[i]().y]) == &quot;undefined&quot;) &#123;</div><div class="line">y.push(scope.data[i]().y);</div><div class="line">&#125;</div><div class="line">yu[scope.data\[i]().y] = 0;</div><div class="line">&#125;</div><div class="line"></div><div class="line">for (d in scope.data) &#123;</div><div class="line">scope.data[d]().xIndex = x.indexOf(scope.data[d]().x);</div><div class="line">scope.data[d]().yIndex = y.indexOf(scope.data[d]().y);</div><div class="line">&#125;</div><div class="line">//根据维度来决定热力图每一块的长宽，更dynamic</div><div class="line">var xGridSize = Math.floor(width / x.length);</div><div class="line">var yGridSize = Math.floor(height / y.length);</div><div class="line">var legendElementWidth = Math.floor(width * options.legendWidth / (options.buckets));</div><div class="line">var legendElementHeight = height / 20;</div><div class="line">// 绘制y轴旁的元素名</div><div class="line">var yLabels = svg.selectAll(&quot;.yLabel&quot;)</div><div class="line">.data(y)</div><div class="line">.enter().append(&quot;text&quot;)</div><div class="line">.text(function (d) &#123; return d; &#125;)</div><div class="line">.attr(&quot;x&quot;, 0)</div><div class="line">.attr(&quot;y&quot;, function (d, i) &#123; return i * yGridSize; &#125;)</div><div class="line">.style(&quot;text-anchor&quot;, &quot;end&quot;)</div><div class="line">.attr(&quot;transform&quot;, &quot;translate(-6,&quot; + yGridSize / 1.5 + &quot;)&quot;)</div><div class="line">.attr(&quot;class&quot;, function (d, i) &#123; return (&quot;yLabel axis&quot;); &#125;);</div><div class="line">// 绘制x轴旁的元素名</div><div class="line">var xLabels = svg.selectAll(&quot;.xLabel&quot;)</div><div class="line">.data(x)</div><div class="line">.enter().append(&quot;text&quot;)</div><div class="line">.text(function(d) &#123; return d; &#125;)</div><div class="line">.attr(&quot;y&quot;, function(d, i) &#123; return i * xGridSize; &#125;)</div><div class="line">.attr(&quot;x&quot;, 0)</div><div class="line">.style(&quot;text-anchor&quot;, &quot;start&quot;)</div><div class="line">.attr(&quot;transform&quot;, &quot;rotate(-90) translate(10, &quot; + xGridSize / 2 + &quot;)&quot;)</div><div class="line">.attr(&quot;class&quot;, function(d, i) &#123; return (&quot;xLabel axis&quot;); &#125;);</div><div class="line"></div><div class="line">var colorScales = []();</div><div class="line">if (options.breaks != null &amp;&amp; options.breaks.length \&gt; 0) &#123;</div><div class="line">for (b in options.colors) &#123;</div><div class="line">colorScales.push(d3.scale.quantile()</div><div class="line">.domain([0, options.buckets - 1, d3.max(scope.data, function(d) &#123; return d.value; &#125;)]())</div><div class="line">.range(options.colors[b]()));</div><div class="line">&#125;</div><div class="line">&#125; else &#123;</div><div class="line">colorScales.push(d3.scale.quantile()</div><div class="line">.domain([0, options.buckets - 1, d3.max(scope.data, function(d) &#123; return d.value; &#125;)]())</div><div class="line">.range(options.colors));</div><div class="line">&#125;</div><div class="line">//绘制热力图中的最小cell单位，并制定颜色，动作</div><div class="line">var cards = svg.selectAll(&quot;.square&quot;)</div><div class="line">.data(scope.data);</div><div class="line"></div><div class="line">cards.enter().append(&quot;rect&quot;)</div><div class="line">.filter(function(d) &#123; return d.value != null &#125;)</div><div class="line">.attr(&quot;x&quot;, function(d) &#123; return d.xIndex * xGridSize; &#125;)</div><div class="line">.attr(&quot;y&quot;, function(d) &#123; return d.yIndex * yGridSize; &#125;)</div><div class="line">.attr(&quot;class&quot;, &quot;square&quot;)</div><div class="line">.attr(&quot;width&quot;, xGridSize)</div><div class="line">.attr(&quot;height&quot;, yGridSize)</div><div class="line">.on(&quot;click&quot;, function(d) &#123; scope.dispatch.click(d); &#125;)</div><div class="line">.on(&quot;mouseover&quot;, function(d) &#123; scope.dispatch.mouseover(d); &#125;)</div><div class="line">.on(&quot;mouseout&quot;, function(d) &#123; scope.dispatch.mouseout(d); &#125;)</div><div class="line">.on(&quot;mousemove&quot;, function(d) &#123; scope.dispatch.mousemove(d); &#125;)</div><div class="line">.style(&quot;fill&quot;, &quot;#ffffff&quot;);</div><div class="line"></div><div class="line">//增加动画效果				cards.transition().duration(options.duration).style(&quot;fill&quot;, function(d) &#123;</div><div class="line">if (options.customColors &amp;&amp; options.customColors.hasOwnProperty(d.value)) &#123;</div><div class="line">return options.customColors[d.value]();</div><div class="line">&#125; else if (options.breaks != null &amp;&amp; options.breaks.length \&gt; 0) &#123;</div><div class="line">for (b in options.breaks) &#123;</div><div class="line">if (d.xIndex \&lt; options.breaks[b]()) &#123;</div><div class="line">return colorScales[b]()(d.value);</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line">return colorScales[options.breaks.length]()(d.value);</div><div class="line">&#125; else &#123;</div><div class="line">return colorScales[0]()(d.value);</div><div class="line">&#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">cards.exit().remove();</div><div class="line"></div><div class="line">if (options.legend) &#123;</div><div class="line"></div><div class="line">var legend = svg.selectAll(&quot;.legend&quot;)</div><div class="line">.data([0]().concat(colorScales[0]().quantiles()).concat(d3.max(scope.data, function (d) &#123; return d.value; &#125;)), function(d) &#123; return d; &#125;);</div><div class="line"></div><div class="line">legend.enter().append(&quot;g&quot;).attr(&quot;class&quot;, &quot;legend&quot;);</div><div class="line">//下面的参考数值对应的颜色</div><div class="line">legend.append(&quot;rect&quot;)</div><div class="line">.attr(&quot;x&quot;, function(d, i) &#123; return legendElementWidth * i; &#125;)</div><div class="line">.attr(&quot;y&quot;, height * 1.05)</div><div class="line">.attr(&quot;width&quot;, legendElementWidth)</div><div class="line">.attr(&quot;height&quot;, legendElementHeight)</div><div class="line">.style(&quot;fill&quot;, function(d, i) &#123; return options.colors[i](); &#125;)</div><div class="line">.style(&quot;visibility&quot;, function(d, i) &#123; return(i \&lt; options.buckets ? &quot;visible&quot; : &quot;hidden&quot;) &#125;);</div><div class="line">//参考数值</div><div class="line">legend.append(&quot;text&quot;)</div><div class="line">.attr(&quot;class&quot;, &quot;legendLabel&quot;)</div><div class="line">.text(function(d,i) &#123; return (0.1*i+0.1).toFixed(1); &#125;)</div><div class="line">.attr(&quot;x&quot;, function(d, i) &#123; return legendElementWidth * i; &#125;)</div><div class="line">.attr(&quot;y&quot;, height * 1.15)</div><div class="line">.style(&quot;text-anchor&quot;, &quot;middle&quot;);</div><div class="line"></div><div class="line">legend.exit().remove();</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">&#125;;</div><div class="line"></div></pre></td></tr></table></figure></p>
+<h3 id="增加响应"><a href="#增加响应" class="headerlink" title="增加响应"></a>增加响应</h3><p>当数据变化，或webpage的窗口大小发生改变时，希望能够重新绘制热力图，这也是为什么我们上面将render函数定义为一个变量的原因。<br>监控数据的变化，可以借助angular的$watch函数来完成。为了有延时的效果，需要一个辅助函数，代码如下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">//数据变化了</div><div class="line">scope.$watch(&quot;data&quot;, function() &#123;</div><div class="line">render();</div><div class="line">&#125;, true);</div><div class="line">//窗口大小改变</div><div class="line">d3.select(window).on(&quot;resize&quot;, debounce(function() &#123;</div><div class="line">render();</div><div class="line">&#125;, 500));</div><div class="line"></div><div class="line">//辅助函数，控制延时</div><div class="line">var debounce = function(f, timeout) &#123;</div><div class="line">var id = -1;</div><div class="line">return function() &#123;</div><div class="line">if (id \&gt; -1) &#123;</div><div class="line">window.clearTimeout(id);</div><div class="line">&#125;</div><div class="line">id = window.setTimeout(f, timeout);</div><div class="line">&#125;</div><div class="line">&#125;;</div><div class="line"></div></pre></td></tr></table></figure>
+<h3 id="CSS样式表"><a href="#CSS样式表" class="headerlink" title="CSS样式表"></a>CSS样式表</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">\&lt;style\&gt;</div><div class="line">.xLabel, .yLabel, .legendLabel &#123;</div><div class="line">font-size: 9px;</div><div class="line">font-family: Verdana;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.tooltip &#123;</div><div class="line">font-size: 9px;</div><div class="line">font-family: Verdana;</div><div class="line">background-color: #333333;</div><div class="line">padding: 5px;</div><div class="line">color: #ffffff;</div><div class="line">border-radius: 3px;</div><div class="line">opacity: 0.7;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.chart &#123;</div><div class="line">width: 50%;</div><div class="line">height: 600px;</div><div class="line">background-color: #ffffff;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.square &#123;</div><div class="line">cursor: pointer;</div><div class="line">&#125;</div><div class="line"></div><div class="line">\&lt;/style\&gt;</div></pre></td></tr></table></figure>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol>
+<li>《D3 on AngularJS》 <a href="https://leanpub.com/d3angularjs" target="_blank" rel="external">https://leanpub.com/d3angularjs</a></li>
+<li>《Build custom directives with AngularJS》 <a href="http://ngnewsletter.wpengine.com/?p=218" target="_blank" rel="external">http://ngnewsletter.wpengine.com/?p=218</a></li>
+<li>《AngularJS &amp; D3: Directives for Visualizations》 <a href="https://www.youtube.com/watch?v=aqHBLS_6gF8" target="_blank" rel="external">https://www.youtube.com/watch?v=aqHBLS_6gF8</a></li>
+<li>pieterprovoost’s github <a href="https://github.com/pieterprovoost/heatmap" target="_blank" rel="external">https://github.com/pieterprovoost/heatmap</a></li>
+</ol>
+<h1 id="小额资助"><a href="#小额资助" class="headerlink" title="小额资助"></a>小额资助</h1><p>如果本文对您有帮助，请用支付宝扫码小额赞助我，谢谢！<br><img src="http://i13.tietuku.cn/eec06685d2e66e2c.png" alt=""></p>
+
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-pager">
+        
+            <li class="next">
+                <a href= "/2014/11/15/冷门但实用的d3.js内置函数/" title= 冷门但实用的d3.js内置函数 >
+                    <span>Next Post</span>
+                    <span>冷门但实用的d3.js内置函数</span>
+                </a>
+            </li>
+        
+        
+            <li class="previous">
+                <a href= "/2014/11/15/D3 on Angular/" title= D3 on Angular >
+                    <span>Previous Post</span>
+                    <span>D3 on Angular</span>
+                </a>
+            </li>
+        
+    </ul>
+    <!-- 来必力City版安装代码 -->
+
+    
+
+<!-- City版安装代码已完成 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="emailto:zhihaozhang@me.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="https://github.com/zhihaozhang" class="iconfont-archer github" target="_blank" title="github"></a>
+            
+        
+    
+        
+            
+                <a href="http://weibo.com/2854428840/profile?rightmod=1&wvr=6&mod=personinfo" class="iconfont-archer weibo" target="_blank" title="weibo"></a>
+            
+        
+    
+        
+            
+                <a href="https://www.zhihu.com/people/zhihao-zhang-95/activities" class="iconfont-archer zhihu" target="_blank" title="zhihu"></a>
+            
+        
+    
+        
+            
+                <a href="https://www.instagram.com/izhihao_zhang/" class="iconfont-archer instagram" target="_blank" title="instagram"></a>
+            
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span>
+        <span
+            id="theme-info">Theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+</footer>
+    </div>
+    <div class="back-top">&#xe639;</div>
+    <div class="sidebar">
+    <div class="sidebar-header">
+        <div class="sidebar-category">
+            <span class="sidebar-archive-link"><span class="iconfont-archer">&#xe67d;</span>Archive</span>
+            <span class="sidebar-tags-link"><span class="iconfont-archer">&#xe610;</span>Tag</span>
+        </div>
+    </div>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-archive">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 11 </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2014 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/高维数据可视化之降维/" >[Untitled Post]</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/Build reuseable visualization using d3.js and AngularJS/" >Build reusable visualization using d3.js and AngularJS</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/浅谈d3.js中的异步文件读取的处理/" >[Untitled Post]</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/数据可视化之散点图/" >数据可视化之散点图</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/polybrush in d3/" >polybrush in d3</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/drop and drag in d3js/" >[Untitled Post]</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular/" >D3 on Angular</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/24</span><a class="archive-post-title" href= "/2014/04/24/用Java生成Json文件/" >用Java生成Json文件</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name"><a href= "#">d3</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">Json</a></span>
+    
+    </div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #888; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: false
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tag-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var jsInfo = {
+        root: '/'
+    }
+</script>
+    <!-- 不蒜子  -->
+    
+    <!-- CNZZ统计  -->
+    
+    </div>
+    </body>
+</html>
+
+

@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
+    <title>
+        
+        Zhihao&#39;s Studio
+        
+    </title>
+    <link rel="icon" href= /assests/favicon.ico>
+    <!-- 提前加载place holder  -->
+    <style>
+        @font-face {
+            font-family: 'Oswald-Regular';
+            src: url('/font/Oswald-Regular.ttf');
+        }
+        @font-face {
+            font-family: 'Source Sans Pro';
+            src: url('/font/Source Sans Pro.woff'),
+            url('/font/Source Sans Pro.woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Source Code Pro';
+            src: url('/font/SourceCodePro-Regular.ttf.woff'),
+            url('/font/SourceCodePro-Regular.ttf.woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        
+        .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0px;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2s ease-out 0s 1;
+        }
+        @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        99% {
+            transform: translate3d(0, 0, 0);
+        }
+        99.1% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(-226px, 0, 0);
+        }
+    }
+    </style>
+    <link rel="stylesheet" href = "/css/style.css?v=20170912" />
+    <script src="//cdn.staticfile.org/jquery/3.2.1/jquery.min.js" defer></script>
+    
+    <script src="/scripts/main.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+</head>
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >Zhihao&#39;s Studio.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name"></a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>Zhihao's Studio.</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-img" style="background-image: url(http://oumn0o088.bkt.clouddn.com/post-bg.jpg)"></div>
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            [Untitled Post]
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+        </p>
+        <!-- 404 -->
+        
+        <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2014/11/15</span>
+            </div>
+        
+    </div>
+</div>
+        <div class="container">
+            <main class="main post-page">
+    <article class="article-entry">
+        <p>title: 浅谈d3.js中强制异步文件读取同步的四种方法<br>category: visualization</p>
+<h2 id="tags-d3"><a href="#tags-d3" class="headerlink" title="tags: d3"></a>tags: d3</h2><h1 id="问题提出"><a href="#问题提出" class="headerlink" title="问题提出"></a>问题提出</h1><p>在使用d3.js时，我们经常会使用d3.csv()或者d3.json()函数来从文件中读取出数据，不幸的是，偶尔代码的结果并不是我们预料的那样。习惯了过程式编程的我开始的时候也是这样，最让人头疼的是javascript并不会告诉你问题出在哪里了。我第一次遇到这个问题的时候，找了半天bug，确定代码主体部分没有问题之后，我只能开始使用console.log()将变量一个一个的输出到控制台里。<br>第一次遇到这个问题时的图片是这样的：<br><img src="http://i13.tietuku.cn/b620500d4f1d6bb2.jpg" alt=""><br>问题出在第72行和第75行，中间几行完全没有对ordertxt进行操作，但是最后的结果就是和预想的输出不吻合，后来找了个其他方法把这个问题给解决了，今天又遇到了类似的这个问题，就下决心来拔掉这根刺。</p>
+<h1 id="试验"><a href="#试验" class="headerlink" title="试验"></a>试验</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">\&lt;script\&gt;</div><div class="line"></div><div class="line">console.log(&quot;before csv1 &quot;);</div><div class="line">d3.csv(&quot;flowers.csv&quot;, function(data) &#123;console.log(data)&#125;);</div><div class="line">console.log(&quot;before csv2&quot;);</div><div class="line">d3.csv(&quot;flowers.csv&quot;,function(error,data2) &#123;console.log(error, data2)&#125;);</div><div class="line"></div><div class="line">\&lt;/script\&gt;</div><div class="line"></div></pre></td></tr></table></figure>
+<p>believe it or not,上面的代码将产生下面图中的输出结果，因为javascript的<strong>异步特性</strong>。说到异步，大部分时候是让人开心的，但偶尔也会令人头疼，至少在这里，就是令人头疼。</p>
+<p><img src="http://i12.tietuku.cn/1b8435a64150532d.jpg" alt=""></p>
+<h1 id="解决方法1"><a href="#解决方法1" class="headerlink" title="解决方法1"></a>解决方法1</h1><p>第一次遇到这个问题的时候，我巧妙的绕开了这个问题，使用的方法是：我把数据的处理放在了d3.csv(“flowers.csv”,function(data){dealWithData()…})回调函数里面，这样数据的处理就和d3的读文件操作变成了绑在一根绳上的蚂蚱了，要么一起执行完，要么都不执行。<br>貌似世界和平了，但是今天下午又遇到了这个问题，而且数据的变化是随时随地的，可不是和上一次遇到的那样，所有会发生的变化都可以预先写成代码的。于是我开始了对解决方法的苦苦追寻。</p>
+<h1 id="解决方法2"><a href="#解决方法2" class="headerlink" title="解决方法2"></a>解决方法2</h1><p>第二种方法是借助一些helper类库(queue.js)来强制数据在加载完成之后才去触发相应的操作。这种方法是我在网上看到的，并没有去亲自试过，也许会成功，但是对于我们会变化的数据，不能提前将处理逻辑写出代码，这种方法还是不合格的。</p>
+<h1 id="解决方法3"><a href="#解决方法3" class="headerlink" title="解决方法3"></a>解决方法3</h1><p>第三种方法是在stack overflow里查到的，试了一下是可以的，他这里用的是d3.text()函数，将文件先load进来，然后再使用d3.csv.parse或者d3.csv.parseRows，这样就会是同步的了。参考文末的Reference 3的实现。</p>
+<h1 id="解决方法4"><a href="#解决方法4" class="headerlink" title="解决方法4"></a>解决方法4</h1><p>方法4是我自己想出来的，最近几天一直在做angular和d3结合在一起的工作，我就在想能否借助angular来帮助我们完成呢？万幸，Angular中确实有这么一个函数，似乎就是为这个问题量身定做的，且解决了前面的方法都没有解决的数据后期动态变化的问题。这个函数就是<strong>$watch</strong>函数。</p>
+<h2 id="watch列表"><a href="#watch列表" class="headerlink" title="$watch列表"></a>$watch列表</h2><p>每当我们在视图中追踪一个事件时，会给它注册一个回调函数，然后希望在页面中触发该事件时调用这个回调函数。比如AngularJS中最令人印象深刻的双向绑定，在input中输入一个字母，有着相同ng-model的变量就会跟着input的输入而发生改变。<br>发生这一变化的原因是我们把UI中的输入字段绑定给了$scope.name属性，为了更新这个视图，Angular需要<strong>追踪变化</strong>，是通过给$watch列表添加一个监控函数做到这一点的。</p>
+<h2 id="脏检查"><a href="#脏检查" class="headerlink" title="脏检查"></a>脏检查</h2><p>脏检查是一个简单的过程，可归结为一个非常基础的概念：检查值是否发生了变化，而整个应用还没同步该变化。<br>Angular会遍历$watch列表，只要有任何的值发生比变化，应用将会退回到$watch循环中，直到检测到不在发生任何变化。</p>
+<h2 id="watch"><a href="#watch" class="headerlink" title="$watch"></a>$watch</h2><p>$scope对象上的$watch方法会给Angular事件循环内的每个$digest调用装配一个脏检查，如果在检测到变化，Angular总是会返回$digest循环。<br>$watch函数本身接受两个必要参数和一个可选的参数，第一个参数是watch的对象，第二个参数是<strong>回调函数</strong>，一旦watch的对象变了的时候触发；可选的参数是一个bool值，告诉Angular是否检查<strong>严格相等</strong>。<br>关于回调函数和严格相等，还有一些想说的。</p>
+<h3 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a>回调函数</h3><p>我一直是这么理解回调函数的，研究生的导师会分配给每个研究生活去干，而他自己也有自己的事情，如果给某个研究生安排的活他做好了，就过来给他说一声，导师负责汇总，将活写成论文发表出去。这其实就是回调函数工作的原理。<br>当然导师不可能在这边等着研究生干活，自己什么都不干；或者自己什么都干了，也没研究生什么事了。</p>
+<h3 id="严格相等"><a href="#严格相等" class="headerlink" title="严格相等"></a>严格相等</h3><p>比如有一个数组，a=【1，2，3】，后面修改了a【0】=2,在AngularJS看来，这个数组并没有发生变化，因为还是3个变量，而如果从严格意义上来说，它已经发生了变化，这就是严格相等和相等的不同，在javascript中，也有==和===的区别。</p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>写到这里，大家应该知道该怎么做了，即调用$watch函数来观测我们需要关注的data，每当发生变化的时候，就根据新的data，重新绘制图标。因此，我们最好将render的过程抽象成一个函数，方便我们后期调用。<br>比如，我们想要观测data数组的变化，并且根据它的变化来重新绘制图片。那么我们的代码实现就应该像下面这样。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"> scope.$watch(&quot;data&quot;, function() &#123;</div><div class="line">render();</div><div class="line">//render函数是绘制的过程，换成自己的即可。</div><div class="line">&#125;,true);</div><div class="line"></div></pre></td></tr></table></figure></p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol>
+<li>D3.js加载csv和json数据 <a href="http://www.bubuko.com/infodetail-942138.html" target="_blank" rel="external">http://www.bubuko.com/infodetail-942138.html</a></li>
+<li>d3: make the d3.csv function syncronous <a href="http://stackoverflow.com/questions/19899005/d3-make-the-d3-csv-function-syncronous" target="_blank" rel="external">http://stackoverflow.com/questions/19899005/d3-make-the-d3-csv-function-syncronous</a></li>
+<li>read csv/tsv with no header line in D3 <a href="http://stackoverflow.com/questions/13870265/read-csv-tsv-with-no-header-line-in-d3" target="_blank" rel="external">http://stackoverflow.com/questions/13870265/read-csv-tsv-with-no-header-line-in-d3</a></li>
+<li>《AngularJS权威教程》</li>
+</ol>
+<h1 id="小额资助"><a href="#小额资助" class="headerlink" title="小额资助"></a>小额资助</h1><p>如果本文对您有帮助，请用支付宝扫码小额赞助我，谢谢！<br><img src="http://i13.tietuku.cn/eec06685d2e66e2c.png" alt=""></p>
+
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-pager">
+        
+            <li class="next">
+                <a href= "/2014/11/15/数据可视化之散点图/" title= 数据可视化之散点图 >
+                    <span>Next Post</span>
+                    <span>数据可视化之散点图</span>
+                </a>
+            </li>
+        
+        
+            <li class="previous">
+                <a href= "/2014/11/15/高维数据可视化之降维/" title=  >
+                    <span>Previous Post</span>
+                    <span>[Untitled Post]</span>
+                </a>
+            </li>
+        
+    </ul>
+    <!-- 来必力City版安装代码 -->
+
+    
+
+<!-- City版安装代码已完成 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="emailto:zhihaozhang@me.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="https://github.com/zhihaozhang" class="iconfont-archer github" target="_blank" title="github"></a>
+            
+        
+    
+        
+            
+                <a href="http://weibo.com/2854428840/profile?rightmod=1&wvr=6&mod=personinfo" class="iconfont-archer weibo" target="_blank" title="weibo"></a>
+            
+        
+    
+        
+            
+                <a href="https://www.zhihu.com/people/zhihao-zhang-95/activities" class="iconfont-archer zhihu" target="_blank" title="zhihu"></a>
+            
+        
+    
+        
+            
+                <a href="https://www.instagram.com/izhihao_zhang/" class="iconfont-archer instagram" target="_blank" title="instagram"></a>
+            
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span>
+        <span
+            id="theme-info">Theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+</footer>
+    </div>
+    <div class="back-top">&#xe639;</div>
+    <div class="sidebar">
+    <div class="sidebar-header">
+        <div class="sidebar-category">
+            <span class="sidebar-archive-link"><span class="iconfont-archer">&#xe67d;</span>Archive</span>
+            <span class="sidebar-tags-link"><span class="iconfont-archer">&#xe610;</span>Tag</span>
+        </div>
+    </div>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-archive">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 11 </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2014 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/高维数据可视化之降维/" >[Untitled Post]</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/Build reuseable visualization using d3.js and AngularJS/" >Build reusable visualization using d3.js and AngularJS</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/浅谈d3.js中的异步文件读取的处理/" >[Untitled Post]</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/数据可视化之散点图/" >数据可视化之散点图</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/polybrush in d3/" >polybrush in d3</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/drop and drag in d3js/" >[Untitled Post]</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular/" >D3 on Angular</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/24</span><a class="archive-post-title" href= "/2014/04/24/用Java生成Json文件/" >用Java生成Json文件</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name"><a href= "#">d3</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">Json</a></span>
+    
+    </div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #888; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: false
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tag-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var jsInfo = {
+        root: '/'
+    }
+</script>
+    <!-- 不蒜子  -->
+    
+    <!-- CNZZ统计  -->
+    
+    </div>
+    </body>
+</html>
+
+
