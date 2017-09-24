@@ -132,7 +132,56 @@
     </div>
 </div>
         <div class="container">
-            <main class="main post-page">
+            <style>
+.donate_bar {
+    text-align: center;
+    margin-top: 5%
+}
+
+.donate_bar a.btn_donate {
+    display: inline-block;
+    width: 82px;
+    height: 82px;
+    margin-left: auto;
+    margin-right: auto;
+    background: url(http://img.t.sinajs.cn/t5/style/images/apps_PRF/e_media/btn_reward.gif)no-repeat;
+    -webkit-transition: background 0s;
+    -moz-transition: background 0s;
+    -o-transition: background 0s;
+    -ms-transition: background 0s;
+    transition: background 0s
+}
+
+.donate_bar a.btn_donate:hover {
+    background-position: 0 -82px
+}
+
+.donate_bar .donate_txt {
+    display: block;
+    color: #9d9d9d;
+    font: 14px/2 "Microsoft Yahei"
+}
+.donate_bar.hidden{
+    display: none
+}
+
+.post-donate{
+    margin-top: 80px;
+}
+
+#donate_guide{
+    height: 210px;
+    width: 420px;
+    margin: 0 auto;
+}
+
+#donate_guide img{
+    height: 200px;
+    height: 200px;
+}
+</style>
+
+<main class="main post-page">
     <article class="article-entry">
         <p>这篇博客记录了在上一篇博客加入scatterplot matrix的基础上，实现了associate brush的操作，即，从RadViz中brush一块区域，右边16个scatterplot里对应的点都会高亮出来，其他的点将暗淡下去；同样的，从右边16个scatterplot matrix里任一scatterplot cell里brush一些点，另外15个cell以及左边的RadViz里相应的点都会被highlight出来。具体的效果如下图：<br><img src="http://i12.tietuku.cn/c8876c3f133891c5.jpg" alt=""></p>
 <p>代码如下：</p>

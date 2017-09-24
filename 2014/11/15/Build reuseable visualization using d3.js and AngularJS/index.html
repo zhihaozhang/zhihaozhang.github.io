@@ -132,7 +132,56 @@
     </div>
 </div>
         <div class="container">
-            <main class="main post-page">
+            <style>
+.donate_bar {
+    text-align: center;
+    margin-top: 5%
+}
+
+.donate_bar a.btn_donate {
+    display: inline-block;
+    width: 82px;
+    height: 82px;
+    margin-left: auto;
+    margin-right: auto;
+    background: url(http://img.t.sinajs.cn/t5/style/images/apps_PRF/e_media/btn_reward.gif)no-repeat;
+    -webkit-transition: background 0s;
+    -moz-transition: background 0s;
+    -o-transition: background 0s;
+    -ms-transition: background 0s;
+    transition: background 0s
+}
+
+.donate_bar a.btn_donate:hover {
+    background-position: 0 -82px
+}
+
+.donate_bar .donate_txt {
+    display: block;
+    color: #9d9d9d;
+    font: 14px/2 "Microsoft Yahei"
+}
+.donate_bar.hidden{
+    display: none
+}
+
+.post-donate{
+    margin-top: 80px;
+}
+
+#donate_guide{
+    height: 210px;
+    width: 420px;
+    margin: 0 auto;
+}
+
+#donate_guide img{
+    height: 200px;
+    height: 200px;
+}
+</style>
+
+<main class="main post-page">
     <article class="article-entry">
         <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>前面两篇博客介绍了如何借助angular，让我们的可视化图能够更有<strong>模块化</strong>、<strong>方便复用</strong>、<strong>具有交互性</strong>，不过前面的博客只介绍了基本的原理以及最简单的图，在这篇博客中，我们来一起绘制一个相对复杂一些的热力图，最终的效果如下图。<br><img src="http://i13.tietuku.cn/5b566b315d0593c2.jpg" alt=""><br>这个热力图主要是用来展现维度与维度之间的相关性的，而相关性在0-1之间。千万不要小看这个热力图，图中的每一个元素，甚至每一个字都是绘制出来的，完成这个看似简单的热力图大概需要<strong>350行代码</strong>。</p>
 <h1 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h1><h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>我们想要用热力图的时候呢，希望能像内置的html DOM元素一样使用，比如<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">\&lt;heatmap\&gt;\&lt;/heatmap\&gt;</div><div class="line"></div><div class="line">//如果我们能指定一些属性就更好了，比如下面。</div><div class="line"></div><div class="line">\&lt;heatmap class=&quot;chart&quot; data=&quot;data&quot; dispatch=&quot;dispatch&quot; options=&quot;options&quot;\&gt;\&lt;/heatmap\&gt;</div></pre></td></tr></table></figure><br>不要着急我们一步一步来完成。</p>

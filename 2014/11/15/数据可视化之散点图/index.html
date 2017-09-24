@@ -132,7 +132,56 @@
     </div>
 </div>
         <div class="container">
-            <main class="main post-page">
+            <style>
+.donate_bar {
+    text-align: center;
+    margin-top: 5%
+}
+
+.donate_bar a.btn_donate {
+    display: inline-block;
+    width: 82px;
+    height: 82px;
+    margin-left: auto;
+    margin-right: auto;
+    background: url(http://img.t.sinajs.cn/t5/style/images/apps_PRF/e_media/btn_reward.gif)no-repeat;
+    -webkit-transition: background 0s;
+    -moz-transition: background 0s;
+    -o-transition: background 0s;
+    -ms-transition: background 0s;
+    transition: background 0s
+}
+
+.donate_bar a.btn_donate:hover {
+    background-position: 0 -82px
+}
+
+.donate_bar .donate_txt {
+    display: block;
+    color: #9d9d9d;
+    font: 14px/2 "Microsoft Yahei"
+}
+.donate_bar.hidden{
+    display: none
+}
+
+.post-donate{
+    margin-top: 80px;
+}
+
+#donate_guide{
+    height: 210px;
+    width: 420px;
+    margin: 0 auto;
+}
+
+#donate_guide img{
+    height: 200px;
+    height: 200px;
+}
+</style>
+
+<main class="main post-page">
     <article class="article-entry">
         <p>D3.js是当下最火的可视化库之一，这篇博客记录了如何实现一个最基本的散点图，并用三角形表示数据点。</p>
 <p>代码如下：</p>
