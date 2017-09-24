@@ -147,7 +147,6 @@
 <p>成功了，我们完成了可视化图的复用！</p>
 <h1 id="Isolate-scope"><a href="#Isolate-scope" class="headerlink" title="Isolate scope"></a>Isolate scope</h1><p>但是聪明的你很快就发现了问题，我们的可视化图无论何时都是一样的，这可不行！我们希望可以自己传一些数据，比如第一个图是1，2，3，4；第二个图是2，3，4，5；这样才勉强可以。<br>为了达到这样的目的，我们需要用一个叫isolate scope的东西。它允许我们使用attribute传递数据到指令中。告诉Angular我们的指令需要有一个isolate scope的方法很简单，我们只需从指令声明的返回处增加一个scope属性即可。 在restrict下面增加一行scope:{data:’=},在link函数中，我们就可以直接用scope.data了。<br>当我们使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">\&lt;bodyng-app=&quot;myApp&quot;ng-init=&quot;ourSharedData=[8,2,9]()&quot;\&gt; </div><div class="line">\&lt;donut-chart data=&quot;ourSharedData&quot;\&gt;\&lt;/donut-chart\&gt; </div><div class="line">\&lt;donut-chart data=&quot;ourSharedData&quot;\&gt;\&lt;/donut-chart\&gt; </div><div class="line">\&lt;donut-chart data=&quot;ourSharedData&quot;\&gt;\&lt;/donut-chart\&gt; </div><div class="line"></div></pre></td></tr></table></figure><br>时候，确实达到了我们想要的效果。</p>
 <p><strong>未完待续…</strong> </p>
-<h1 id="小额资助"><a href="#小额资助" class="headerlink" title="小额资助"></a>小额资助</h1><p>如果本文对您有帮助，请用支付宝扫码小额赞助我，谢谢！<br><img src="http://i13.tietuku.cn/eec06685d2e66e2c.png" alt=""></p>
 
 
             <! -- 添加捐赠图标 -->
@@ -179,9 +178,9 @@
     <ul class="post-pager">
         
             <li class="next">
-                <a href= "/2014/11/15/D3 on Angular(2)/" title= D3 on Angular(2) >
+                <a href= "/2014/11/15/Build reuseable visualization using d3.js and AngularJS/" title= Build reusable visualization using d3.js and AngularJS >
                     <span>Next Post</span>
-                    <span>D3 on Angular(2)</span>
+                    <span>Build reusable visualization using d3.js and AngularJS</span>
                 </a>
             </li>
         
@@ -460,26 +459,6 @@
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/polybrush in d3/" >polybrush in d3</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/数据可视化之散点图/" >数据可视化之散点图</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/浅谈d3.js中的异步文件读取的处理/" >浅谈d3.js中强制异步文件读取同步的四种方法</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
             <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/drop and drag in d3js/" >drop and drag in d3</a>
         </li>
     
@@ -490,7 +469,27 @@
     
     
         <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/浅谈d3.js中的异步文件读取的处理/" >浅谈d3.js中强制异步文件读取同步的四种方法</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/数据可视化之散点图/" >数据可视化之散点图</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
             <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/polybrush in d3/" >polybrush in d3</a>
         </li>
     
     
