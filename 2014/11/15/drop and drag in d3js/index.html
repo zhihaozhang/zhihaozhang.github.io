@@ -132,56 +132,7 @@
     </div>
 </div>
         <div class="container">
-            <style>
-.donate_bar {
-    text-align: center;
-    margin-top: 5%
-}
-
-.donate_bar a.btn_donate {
-    display: inline-block;
-    width: 82px;
-    height: 82px;
-    margin-left: auto;
-    margin-right: auto;
-    background: url(http://img.t.sinajs.cn/t5/style/images/apps_PRF/e_media/btn_reward.gif)no-repeat;
-    -webkit-transition: background 0s;
-    -moz-transition: background 0s;
-    -o-transition: background 0s;
-    -ms-transition: background 0s;
-    transition: background 0s
-}
-
-.donate_bar a.btn_donate:hover {
-    background-position: 0 -82px
-}
-
-.donate_bar .donate_txt {
-    display: block;
-    color: #9d9d9d;
-    font: 14px/2 "Microsoft Yahei"
-}
-.donate_bar.hidden{
-    display: none
-}
-
-.post-donate{
-    margin-top: 80px;
-}
-
-#donate_guide{
-    height: 210px;
-    width: 420px;
-    margin: 0 auto;
-}
-
-#donate_guide img{
-    height: 200px;
-    height: 200px;
-}
-</style>
-
-<main class="main post-page">
+            <main class="main post-page">
     <article class="article-entry">
         <h1 id="Behavior-in-d3"><a href="#Behavior-in-d3" class="headerlink" title="Behavior in d3"></a>Behavior in d3</h1><p>在d3中，行为被设计成了一种组件，可以创建一系列的事件，并绑定到调用这些行为的元素上。最常见的行为有拖拽与缩放，使用这些行为可以很方便地在拖拽或者缩放的开始、过程中以及结束时达到想要的效果。</p>
 <p>这篇博客中，就以拖拽为例，并借助之前实现的热力图，实现拖拽dimension的label以达到reoder维度的效果。为了使用三个阶段，我们会让开始拖拽的时候，维度名变成红色、字体变大来表示强调的效果；在拖拽过程中，让label紧跟鼠标的位置；并且判断最终的位置，交换两个维度，并重新绘制整个热力图。</p>
@@ -204,7 +155,7 @@
     <div class ="post-donate">
     <div id="donate_board" class="donate_bar center">
         <a id="btn_donate" class="btn_donate" href="javascript:;" title="打赏"></a>
-        <span class="donate_txt">
+        <span class="donate_txt" style="text-align:center">
            &uarr;<br>
            如果本文对您有帮助，请您小额赞赏支持我继续原创，谢谢。
         </span>
@@ -212,9 +163,9 @@
       </div>  
     <div id="donate_guide" class="donate_bar center hidden" >
         <!-- 支付宝打赏图案 -->
-        <img src="https://syy.freep.cn/588778/zhifubao.png" height="400" width="400" alt="支付宝打赏"> 
+        <img src="https://syy.freep.cn/588778/zhifubao.png" height="200" width="200" alt="支付宝打赏"> 
         <!-- 微信打赏图案 -->
-        <img src="https://syy.freep.cn/588778/wechat.png" height="400" width="400" alt="微信打赏">  
+        <img src="https://syy.freep.cn/588778/wechat.png" height="200" width="200" alt="微信打赏">  
     </div>
     <script type="text/javascript">
         document.getElementById('btn_donate').onclick = function(){
@@ -229,17 +180,17 @@
     <ul class="post-pager">
         
             <li class="next">
-                <a href= "/2014/11/15/associate brush/" title= associate brush >
+                <a href= "/2014/11/15/Build reuseable visualization using d3.js and AngularJS/" title= Build reusable visualization using d3.js and AngularJS >
                     <span>Next Post</span>
-                    <span>associate brush</span>
+                    <span>Build reusable visualization using d3.js and AngularJS</span>
                 </a>
             </li>
         
         
             <li class="previous">
-                <a href= "/2014/11/15/D3 on Angular(2)/" title= D3 on Angular(2) >
+                <a href= "/2014/11/15/浅谈d3.js中的异步文件读取的处理/" title= 浅谈d3.js中强制异步文件读取同步的四种方法 >
                     <span>Previous Post</span>
-                    <span>D3 on Angular(2)</span>
+                    <span>浅谈d3.js中强制异步文件读取同步的四种方法</span>
                 </a>
             </li>
         
@@ -515,12 +466,7 @@
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/Build reuseable visualization using d3.js and AngularJS/" >Build reusable visualization using d3.js and AngularJS</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/浅谈d3.js中的异步文件读取的处理/" >浅谈d3.js中强制异步文件读取同步的四种方法</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
         </li>
     
     
@@ -530,17 +476,22 @@
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/浅谈d3.js中的异步文件读取的处理/" >浅谈d3.js中强制异步文件读取同步的四种方法</a>
         </li>
     
     
         <li class="archive-post-item">
             <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/drop and drag in d3js/" >drop and drag in d3</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/Build reuseable visualization using d3.js and AngularJS/" >Build reusable visualization using d3.js and AngularJS</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
         </li>
     
     
