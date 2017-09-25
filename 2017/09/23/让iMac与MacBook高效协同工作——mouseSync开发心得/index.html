@@ -163,56 +163,15 @@
 <h2 id="右击事件"><a href="#右击事件" class="headerlink" title="右击事件"></a>右击事件</h2><p>右击事件跟单击事件就更像了，只是将名称由left改成了right。</p>
 <h2 id="滑动事件"><a href="#滑动事件" class="headerlink" title="滑动事件"></a>滑动事件</h2><p>滑动事件在x和y方向的变化值分别对应的是event对象里的deltaX和deltaY，将这两个值传给数据中心，并有数据中心跟着这两个值进行相应的滑动即可。通常情况下，用户只会在一个方向上进行滑动(鼠标只能上下滑动)，因此我将鼠标左右和上下的滑动分成了两个部分进行处理，传递的时候判断外围设置在哪个方向上更显著，让数据中心进行相应的滑动。</p>
 <h1 id="在数据中心端模拟鼠标事件"><a href="#在数据中心端模拟鼠标事件" class="headerlink" title="在数据中心端模拟鼠标事件"></a>在数据中心端模拟鼠标事件</h1><h2 id="单击、右击事件的模拟"><a href="#单击、右击事件的模拟" class="headerlink" title="单击、右击事件的模拟"></a>单击、右击事件的模拟</h2><p>前面提到过了，单击和右击事件非常像，因此举同一个例子就可以说明问题。</p>
-<pre><code> func mouseMoveAndClickUp(onPoint point: CGPoint) {
-      guard let upEvent = CGEvent(mouseEventSource: nil, mouseType: .leftMouseUp, mouseCursorPosition: point, mouseButton: .left) else {
-            return
-        }
-
-        upEvent.post(tap: CGEventTapLocation.cghidEventTap)
-}
-</code></pre><p>思路是通过CGEvent创建一个事件，然后调用该事件的post方法告诉系统，执行该事件。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">` void createScrollWheelEventY(float x) &#123;</div><div class="line"> <span class="type">CGEventRef</span> upEvent = <span class="type">CGEventCreateScrollWheelEvent</span>(</div><div class="line"> <span class="type">NULL</span>,</div><div class="line"> kCGScrollEventUnitPixel, <span class="number">2</span>, x*<span class="number">5</span>, <span class="number">0</span> );</div><div class="line"> <span class="type">CGEventPost</span>(kCGHIDEventTap, upEvent);</div><div class="line"> <span class="type">CFRelease</span>(upEvent);</div><div class="line"> &#125;</div><div class="line"> </div><div class="line">  void createScrollWheelEventX(int y) &#123;</div><div class="line"> <span class="type">CGEventRef</span> upEvent = <span class="type">CGEventCreateScrollWheelEvent</span>(</div><div class="line"> <span class="type">NULL</span>,</div><div class="line"> kCGScrollEventUnitPixel, <span class="number">2</span>, <span class="number">0</span>, y*<span class="number">5</span>);</div><div class="line"> <span class="type">CGEventPost</span>(kCGHIDEventTap, upEvent);</div><div class="line"> <span class="type">CFRelease</span>(upEvent);</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<p>`<br>思路是通过CGEvent创建一个事件，然后调用该事件的post方法告诉系统，执行该事件。</p>
 <h2 id="鼠标移动事件的模拟"><a href="#鼠标移动事件的模拟" class="headerlink" title="鼠标移动事件的模拟"></a>鼠标移动事件的模拟</h2><p>移动事件的模拟跟上面思路一样，要注意的是OS X屏幕的坐标系统，x和y方向的变化是加还是减。</p>
 <h2 id="双击事件的模拟"><a href="#双击事件的模拟" class="headerlink" title="双击事件的模拟"></a>双击事件的模拟</h2><p>开始以为双击事件的模拟无非就是模拟两次单击事件，让他们之间的时间间隔非常小。但经过尝试，该方式行不通。在网上搜了一些solution，最后居然是在我最喜欢的炉石传说的一个插件里发现的答案。 代码如下：</p>
-<pre><code>func doubleClick(at location: NSPoint) {
-       let source = CGEventSource(stateID: .privateState)
-
-       var click = CGEvent(mouseEventSource: source, mouseType: .leftMouseDown,
-                           mouseCursorPosition: location, mouseButton: .left)
-       click?.setIntegerValueField(.mouseEventClickState, value: 1)
-       click?.post(tap: .cghidEventTap)
-
-       var release = CGEvent(mouseEventSource: source, mouseType: .leftMouseUp,
-                             mouseCursorPosition: location, mouseButton: .left)
-       release?.setIntegerValueField(.mouseEventClickState, value: 1)
-       release?.post(tap: .cghidEventTap)
-
-       click = CGEvent(mouseEventSource: source, mouseType: .leftMouseDown,
-                       mouseCursorPosition: location, mouseButton: .left)
-       click?.setIntegerValueField(.mouseEventClickState, value: 2)
-       click?.post(tap: .cghidEventTap)
-
-       release = CGEvent(mouseEventSource: source, mouseType: .leftMouseUp,
-                         mouseCursorPosition: location, mouseButton: .left)
-       release?.setIntegerValueField(.mouseEventClickState, value: 2)
-       release?.post(tap: .cghidEventTap)
-   }
-</code></pre><h2 id="滑动事件的模拟"><a href="#滑动事件的模拟" class="headerlink" title="滑动事件的模拟"></a>滑动事件的模拟</h2><p>滑动事件的模拟，swift目前支持的不是很好，我在Stack Overflow上找到了一个比较tricky的方法。需要swift和C混编，借助C来完成任务。关于swift和C/OC的混编内容比较多，这里不展开讲了，感兴趣的可以研究我的开源代码。</p>
-<pre><code>void createScrollWheelEventY(float x) {
-    CGEventRef upEvent = CGEventCreateScrollWheelEvent(
-    NULL,
-    kCGScrollEventUnitPixel, 2, x*5, 0 );
-    CGEventPost(kCGHIDEventTap, upEvent);
-    CFRelease(upEvent);
-}
-
-void createScrollWheelEventX(int y) {
-        CGEventRef upEvent = CGEventCreateScrollWheelEvent(
-    NULL,
-    kCGScrollEventUnitPixel, 2, 0, y*5);
-    CGEventPost(kCGHIDEventTap, upEvent);
-    CFRelease(upEvent);
-}
-</code></pre><p>在这里遇到了一个诡异的问题，上下滑动可以很好的工作，但是左右滑动死活不能和预期的一样，单步跟踪后发现传入函数的确实是float类型的正确值，但是创建upEvent的时候，该变量的值突变了。后面将float类型改成了int类型，又可以正常的工作了。如果知道为什么的同学可以留言告诉我。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">`  <span class="function"><span class="keyword">func</span> <span class="title">doubleClick</span><span class="params">(at location: NSPoint)</span></span> &#123;</div><div class="line"> <span class="keyword">let</span> source = <span class="type">CGEventSource</span>(stateID: .privateState)</div><div class="line"> </div><div class="line"> <span class="keyword">var</span> click = <span class="type">CGEvent</span>(mouseEventSource: source, mouseType: .leftMouseDown,</div><div class="line"> mouseCursorPosition: location, mouseButton: .<span class="keyword">left</span>)</div><div class="line"> click?.setIntegerValueField(.mouseEventClickState, value: <span class="number">1</span>)</div><div class="line"> click?.post(tap: .cghidEventTap)</div><div class="line"> </div><div class="line"> <span class="keyword">var</span> release = <span class="type">CGEvent</span>(mouseEventSource: source, mouseType: .leftMouseUp,</div><div class="line">   mouseCursorPosition: location, mouseButton: .<span class="keyword">left</span>)</div><div class="line"> release?.setIntegerValueField(.mouseEventClickState, value: <span class="number">1</span>)</div><div class="line"> release?.post(tap: .cghidEventTap)</div><div class="line"> </div><div class="line"> click = <span class="type">CGEvent</span>(mouseEventSource: source, mouseType: .leftMouseDown,</div><div class="line"> mouseCursorPosition: location, mouseButton: .<span class="keyword">left</span>)</div><div class="line"> click?.setIntegerValueField(.mouseEventClickState, value: <span class="number">2</span>)</div><div class="line"> click?.post(tap: .cghidEventTap)</div><div class="line"> </div><div class="line"> release = <span class="type">CGEvent</span>(mouseEventSource: source, mouseType: .leftMouseUp,</div><div class="line">   mouseCursorPosition: location, mouseButton: .<span class="keyword">left</span>)</div><div class="line"> release?.setIntegerValueField(.mouseEventClickState, value: <span class="number">2</span>)</div><div class="line"> release?.post(tap: .cghidEventTap)</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<p>`</p>
+<h2 id="滑动事件的模拟"><a href="#滑动事件的模拟" class="headerlink" title="滑动事件的模拟"></a>滑动事件的模拟</h2><p>滑动事件的模拟，swift目前支持的不是很好，我在Stack Overflow上找到了一个比较tricky的方法。需要swift和C混编，借助C来完成任务。关于swift和C/OC的混编内容比较多，这里不展开讲了，感兴趣的可以研究我的开源代码。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">` <span class="function"><span class="keyword">void</span> <span class="title">createScrollWheelEventY</span><span class="params">(<span class="keyword">float</span> x)</span> </span>&#123;</div><div class="line"> CGEventRef upEvent = CGEventCreateScrollWheelEvent(</div><div class="line"> <span class="literal">NULL</span>,</div><div class="line"> kCGScrollEventUnitPixel, <span class="number">2</span>, x*<span class="number">5</span>, <span class="number">0</span> );</div><div class="line">CGEventPost(kCGHIDEventTap, upEvent);</div><div class="line"> CFRelease(upEvent);</div><div class="line"> &#125;</div><div class="line"> </div><div class="line"> <span class="function"><span class="keyword">void</span> <span class="title">createScrollWheelEventX</span><span class="params">(<span class="keyword">int</span> y)</span> </span>&#123;</div><div class="line"> CGEventRef upEvent = CGEventCreateScrollWheelEvent(</div><div class="line"> <span class="literal">NULL</span>,</div><div class="line"> kCGScrollEventUnitPixel, <span class="number">2</span>, <span class="number">0</span>, y*<span class="number">5</span>);</div><div class="line"> CGEventPost(kCGHIDEventTap, upEvent);</div><div class="line"> CFRelease(upEvent);</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<p>`<br>在这里遇到了一个诡异的问题，上下滑动可以很好的工作，但是左右滑动死活不能和预期的一样，单步跟踪后发现传入函数的确实是float类型的正确值，但是创建upEvent的时候，该变量的值突变了。后面将float类型改成了int类型，又可以正常的工作了。如果知道为什么的同学可以留言告诉我。</p>
 <h1 id="demo"><a href="#demo" class="headerlink" title="demo"></a>demo</h1><p><img src="https://syy.freep.cn/588778/demo922.gif" alt=""><br><img src="https://syy.freep.cn/588778/demo1.gif" alt=""><br><img src="https://syy.freep.cn/588778/demo2.gif" alt=""></p>
 <h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><p>开发mouseSync的过程中，让我更深刻的理解了Cocoa的蓝牙框架、键盘鼠标事件。纸上得来终觉浅，绝知此事要躬行。</p>
 <p>另外，mouseSync的开发还没有完成，目前存在的问题是外围设备这边的鼠标容易误操作，因此我准备将外围设备的鼠标控制在一个window内，一旦移除这个window，就强行将光标移动回window中心。通过快捷键控制软件的开启和关闭。还有一个比较重要的功能正在开发中，那就是我非常喜爱的三指拖移功能，敬请期待！</p>
@@ -522,7 +481,7 @@ void createScrollWheelEventX(int y) {
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/浅谈d3.js中的异步文件读取的处理/" >浅谈d3.js中强制异步文件读取同步的四种方法</a>
         </li>
     
     
@@ -532,27 +491,7 @@ void createScrollWheelEventX(int y) {
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/浅谈d3.js中的异步文件读取的处理/" >浅谈d3.js中强制异步文件读取同步的四种方法</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/数据可视化之散点图/" >数据可视化之散点图</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/polybrush in d3/" >polybrush in d3</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
         </li>
     
     
@@ -567,6 +506,26 @@ void createScrollWheelEventX(int y) {
     
     
         <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/数据可视化之散点图/" >数据可视化之散点图</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/polybrush in d3/" >polybrush in d3</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
             <span class="archive-post-date">04/24</span><a class="archive-post-title" href= "/2014/04/24/用Java生成Json文件/" >用Java生成Json文件</a>
         </li>
     
@@ -576,8 +535,6 @@ void createScrollWheelEventX(int y) {
     <div class="sidebar-tags-name">
     
         <span class="sidebar-tag-name"><a href= "#">d3</a></span>
-    
-        <span class="sidebar-tag-name"><a href= "#">d3 visualization</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">Json</a></span>
     
