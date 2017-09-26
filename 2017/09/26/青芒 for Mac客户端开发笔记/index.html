@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
+    <title>
+        
+        青芒 for Mac客户端开发笔记 · Zhihao&#39;s Studio
+        
+    </title>
+    <link rel="icon" href= /assests/favicon.ico>
+    <!-- 提前加载place holder  -->
+    <style>
+        @font-face {
+            font-family: 'Oswald-Regular';
+            src: url('/font/Oswald-Regular.ttf');
+        }
+        @font-face {
+            font-family: 'Source Sans Pro';
+            src: url('/font/Source Sans Pro.woff'),
+            url('/font/Source Sans Pro.woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Source Code Pro';
+            src: url('/font/SourceCodePro-Regular.ttf.woff'),
+            url('/font/SourceCodePro-Regular.ttf.woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        
+        .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0px;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2s ease-out 0s 1;
+        }
+        @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        99% {
+            transform: translate3d(0, 0, 0);
+        }
+        99.1% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(-226px, 0, 0);
+        }
+    }
+    </style>
+    <link rel="stylesheet" href = "/css/style.css?v=20170912" />
+    <script src="//cdn.staticfile.org/jquery/3.2.1/jquery.min.js" defer></script>
+    
+    <script src="/scripts/main.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+</head>
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >Zhihao&#39;s Studio.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">青芒 for Mac客户端开发笔记</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>Zhihao's Studio.</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-img" style="background-image: url(http://oumn0o088.bkt.clouddn.com/post-bg.jpg)"></div>
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            青芒 for Mac客户端开发笔记
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+        </p>
+        <!-- 404 -->
+        
+        <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+                <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = macOS开发>macOS开发</a>
+    
+</div>
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2017/09/26</span>
+            </div>
+        
+    </div>
+</div>
+        <div class="container">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="关于轻芒和青芒"><a href="#关于轻芒和青芒" class="headerlink" title="关于轻芒和青芒"></a>关于轻芒和青芒</h1><p>轻芒阅读是我每天都会打开的app，在它提供的两百多个channel中，我订阅了其中十几个channel，非常喜欢这个产品。这个产品的创始人是王俊煜，他曾经创办了一个更有名的公司——豌豆荚。关于轻芒和俊煜的更多介绍，请参照：(前沿科技)<a href="http://tech2ipo.com/10034248" title="报道" target="_blank" rel="external"></a>的报道。虽然报道里强调了轻芒不是青芒，但是参照知了和知乎的关系，我还是决定把我的客户端取名为青芒。而且取名青芒的一大好处是logo好设计。做完原型的第二天，我就找了非著名设计师Joseph帮我设计了一枚logo，个人觉得还是很赞的。</p>
+<p><img src="https://syy.freep.cn/588778/41854-ddfac87df1936535.jpeg" alt="非著名设计师Joseph设计的logo" title="非著名设计师Joseph设计的logo"></p>
+<h1 id="为什么要做青芒"><a href="#为什么要做青芒" class="headerlink" title="为什么要做青芒"></a>为什么要做青芒</h1><p>8月18日，我在github闲逛的时候发现了轻芒团队仍处于内测阶段的(API文档)<a href="https://github.com/qingmang-team/docs" target="_blank" rel="external"></a>，抱着试一试的态度，我给轻芒团队发送了内测申请的邮件，两天后得到了对方产品经理振辉的回复，同意了我参加内测的申请，在这表示感谢。收到邮件之后我兴奋异常，虽然之前也做了像微博、twitter、Instagram的客户端，但是这些产品早已有比我做的更好的产品上架到Apple Store了，估计除了我以外，没有人会用我开发的简陋版客户端。而轻芒则不同，目前还真没有mac和windows的客户端。<br>轻芒的用户通常对精神生活有丰富的追求，在macOS和windows中，我估计macOS用户会非常多，因此我选择了macOS平台，我认为这对我是一个机会，可能会有不少人试用这款软件。毕竟看到别人电脑或手机上运行着你开发的软件，还是会给人带来很大的成就感的。<br>据不完全统计，自从开源以来，已经有100多人下载了该软件。</p>
+<h1 id="青芒是怎么做的"><a href="#青芒是怎么做的" class="headerlink" title="青芒是怎么做的"></a>青芒是怎么做的</h1><p>知了是知乎日报的mac客户端，青芒跟知了有着相同的需求，即展示channel list、article list、article content三个部分，于是萌生了借鉴知了的念头，搜了一圈之后发现github上并没有类似的mac软件开源出来，于是做了决定：自己从头开始写，并且写完的第一件事就是将项目开源。我相信三段式布局的应用会适用很多场景，并且会给初学者们带来一定的启发。项目开源在(github)<a href="https://github.com/zhihaozhang/qingmang-for-mac" target="_blank" rel="external"></a>上，欢迎fork和star，特别感谢github开发者@jydemo、@immress对本项目提出的改进与code实现，效果图如下。</p>
+<p><img src="https://syy.freep.cn/588778/1BFAC168-DB08-4B9B-9EC4-04E8CE009D08.png" alt="客户端视图（模仿的知了）" title="客户端视图（模仿的知了）"></p>
+<p><img src="https://syy.freep.cn/588778/41854-dfd0c7c1f1826698.jpeg" alt="Notification Center视图（略丑）" title="Notification Center视图（略丑）"></p>
+<p><img src="https://syy.freep.cn/588778/41854-dfd0c7c1f1826698.jpeg" alt="TouchBar视图" title="TouchBar视图"></p>
+<p> 轻芒的API遵循RPC风格，形如 域名/主体.操作，主体和操作都使用小写开头的驼峰命名法，总体上还是比较容易调用的。青芒目前用到了其中的category.list、category.get、article.list、article.get。经测试，发现内测版里提供的channel还非常有限，只有11个，所以目前选择将所有channel展示出来。</p>
+<p>开发青芒过程中，使用到了如下技术：<strong>HTTP请求、json解析、NSSplitView、WebKit、NSTableView、多线程(GCD)、imageView、自定义NSTextField、NSScrollView、自定义Window、NSTouchBar、NCWidgetProviding</strong>等技术。<br>这个项目虽小，但是五脏俱全，窗口端、Touchbar、通知中心都有。</p>
+<h1 id="界面部分"><a href="#界面部分" class="headerlink" title="界面部分"></a>界面部分</h1><p>macOS/ios界面的构建一直是值得争论的话题，大体上有三种可选方式：1.纯代码手写、2.Xib、3.Stroyboard。</p>
+<p>纯手写代码是极客的不二选择，对于多人协作工作是很好的选择，但是缺点主要是不能直观的看到效果、编码速度很慢，例如初始化一个自定义的Button可能就需要二十行代码，非常不利于阅读。</p>
+<p>Xib解决了上面的两个问题，提升了开发效率。其实Xib就是XML格式的文件，在编译过程中，被编译成Nib文件，每个Nib文件跟对应的ViewController关联。Xib的缺点是：代码可能回覆盖UI的设计，而且每个视图都需要单个的Xib，视图间的跳转依然需要代码控制。</p>
+<p>为了解决了Xib的问题，Apple提供了故事板功能。StoryBoard可以看成将很多Xib集中到了一起，像讲述一个故事一样，清晰的看到每个ViewController之间的跳转关系，跳转可以不用写代码了。因此我选用了StoryBoard来构建青芒。</p>
+<p><img src="https://syy.freep.cn/588778/41854-29c7c999adbbd83f.jpeg" alt="青芒的StoryBoard文件截图" title="青芒的StoryBoard文件截图"></p>
+<p>从StroyBoard截图可以清晰的看到整个界面的布局，整个界面的布局是模仿的知乎日报Mac客户端（知了）做的，经典的三段式布局，NSSplitView可以将界面分成左右(或上下)的两部分。考虑到主题一列比较窄，而且主题和相应主题下的文章有强关联关系，因此借用SplitView将Overview Controller一分为二，这样三段式布局就算是完成了。</p>
+<p>先从左边的OverView视图说起，这个视图里由两部分组成，第一个部分是一系列的主题按钮，点击之后，在右边的NSTableview里展示对应主题下的最新文章list。最新文章list点击之后，在右边的DetailView中用一个WebView展现文章的详情。</p>
+<p>黑色的部分是TouchBar的视图，TouchBar是苹果在MacBook Pro 2016机型上加入的一个新的交互设备，围绕他的讨论有很多，我们有空可以单独聊一下，但是为了尊重这条价值4K的bar，我还是决定做了相应的适配，将主题通过按钮的形式放到了Bar上，Bar上的按钮和OverView的按钮是需要做联动功能的，在下文中会提到。</p>
+<p>耐心地拖入相关控件、控制控件之间的相对位置，最初始的原型就算是完成了。当然，经过试用，还是可以发现优化的部分，比如Overview里的tableview并不是顶到window title的，这样用户拖拽那部分的时候，窗口依然可以移动，同样，WebView上方也是需要留白的。虽然只是个很小的细节，但真的很讨好用户。</p>
+<h1 id="自定义取代系统默认"><a href="#自定义取代系统默认" class="headerlink" title="自定义取代系统默认"></a>自定义取代系统默认</h1><p>界面完成后，就需要做功能了，但是等等，好像看起来不大对劲，为什么效果相比于知了差很多呢？下面的截图展现了青芒的第二版，相比于第一版，已经是把window的标题去掉了，但还是给人一种寨寨的、不够简洁的感觉。TableView中选中的颜色跟整体界面很不符。</p>
+<p><img src="https://syy.freep.cn/588778/41854-9395234244a1c39e.jpeg" alt="第二版的青芒原型" title="第二版的青芒原型"></p>
+<p>为什么会出现这样的情况呢？因为一直到现在，我们都是采用的系统默认选项，没有设计人员的审美在里面。如何给用户带来私人订制的感觉呢？这就需要我们覆盖系统的默认行为和属性，具体来说，就是自定义子类，继承并覆盖父类中不符合开发者预期的部分。</p>
+<p>从最后的结果来看，我们需要整个软件看起来背景是白色的，因此我们在每一个view加载的函数中，指定背景色为白色，使用</p>
+<p><code>swift
+view.wantsLayer =true
+self.view.layer?.backgroundColor=NSColor.white.cgColor</code></p>
+<p>虽然所有视图背景色全部设为了白色，但是关闭、最大化、最小化按钮依然title上，而不是overview那部分，设置title为影藏，它们又不见了，让他们正确显示在overview中的做法是在window加载函数中加入：<br><code>swift
+self.window?.titleVisibility = .hidden
+self.window?.titlebarAppearsTransparent =true
+self.window?.styleMask.insert(.fullSizeContentView)</code></p>
+<p>关于TableView中选中状态的背景色，可行的方法有两种。第一种是自定义Cell覆盖NSTableCellView，覆盖父类中的override var backgroundStyle:NSBackgroundStyle{}属性。第二种方法是github上的用户@jydemofork我的项目之后给我提的issue，自定义NSTableRowView，覆盖父类方法：</p>
+<p><code>swift
+override func drawSelection(in dirtyRect:NSRect) {
+    super.drawSelection(in: dirtyRect)
+    var slectorRect =NSInsetRect(self.bounds,0,0)
+    NSColor(calibratedWhite:0.92, alpha:1.0).setStroke()
+    NSColor(calibratedWhite:0.92, alpha:1.0).setFill()
+    var slectorPath =NSBezierPath(roundedRect: slectorRect, xRadius:0, yRadius:0)
+    slectorPath.fill()
+    slectorPath.stroke()
+}</code></p>
+<p>然后实现tableview的代理方法，</p>
+<p><code>swift
+func tableView(_tableView:NSTableView, rowViewForRow row:Int) -&gt;NSTableRowView? {
+    let rowview = MyTableRowView(frame: .zero)
+    return rowview
+}</code></p>
+<p>两个主视图之间的分隔条比较粗，总让人觉得不美，解决方法还是自定义。覆盖NSSplitView，覆盖属性<br><code>swift
+override vardividerThickness:CGFloat{
+    get {return0.5}
+}</code></p>
+<p>如果用户愿意分隔条还是可以左右动的，想禁掉左右动的功能，实现NSSplitView的一个代理方法：<br><code>swift
+override func splitView(_ofDividerAtsplitView:NSSplitView, effectiveRect proposedEffectiveRect:NSRect, forDrawnRect drawnRect:NSRect, ofDividerAt dividerIndex:Int) -&gt;NSRect{
+    return NSRect.zero
+}</code></p>
+<p>经过这一章节，不难发现还是代码靠谱(😎)。经过上面的调整，界面看起来简洁、清爽了不少，可以以假乱真了。</p>
+<p>希望这一章节让大家明白，想要做出看起来美的东西，一定要去大胆地替代系统的默认选项。而具体的做法通常是覆盖父类中的属性和方法，记得要将组件和自定义的类关联起来。</p>
+<p><img src="https://syy.freep.cn/588778/41854-3976993182ab74f9.jpeg" alt="美化后的界面" title="美化后的界面"></p>
+<h1 id="一个坑"><a href="#一个坑" class="headerlink" title="一个坑"></a>一个坑</h1><p>自定义TableView的Cell过程中，由于文章的标题通常是比较长的，因此用NSTextField无法放下，必须使用NSTextView，而NSTextView默认是可以上下左右滑动的，所以在文章列表中上下滑动的时候，每当滑动到TextView里，滑动事件就会白TextView捕获，TableView中的Scroll view没有机会捕获了。</p>
+<p>解决的方法和上一节一样，通过覆盖cell里(请注意是Cell，不是tableview)的scroll view，重写hitTest方法</p>
+<p><code>swift
+override func hitTest(_point:NSPoint) -&gt;NSView? {
+    return nil
+}</code></p>
+<p>告诉cell，这个滑动事件我不处理了，请交给别人处理吧。</p>
+<h1 id="NSTouchBar"><a href="#NSTouchBar" class="headerlink" title="NSTouchBar"></a>NSTouchBar</h1><p>为了赶时髦，应用内做了TouchBar和通知中心的内容。TouchBar需要注意的是NSWindow和NSViewController之间的联动。从NSWindow到NSViewController:<br><code>swift
+let myViewcontroller =self.window?.contentViewControlleras!mainViewController</code><br>相反的过程:<br><code>swift
+let mywindowController=NSApplication.shared().windows[0].windowControlleras?windowController</code></p>
+<p>这样就可以做到在TouchBar中按了某个按钮，在主界面里也可以看到按钮被选中的效果，满足了一致性。</p>
+<h1 id="Notification-Center视图"><a href="#Notification-Center视图" class="headerlink" title="Notification Center视图"></a>Notification Center视图</h1><p>通知中心做的蛮丑的，真的是为了尝试一下TodayExtension的功能而已。模仿知了，目前功能只是展示了首页的文章列表，点击文章可以用系统默认浏览器打开原文。其实这也就够了，毕竟通知中心就是为了看个大概用的，谁也不会经常点开看。通知中心需要注意的是要自定义视图的高度，通过<br>self.preferredContentSize=CGSize(width:self.view.frame.size.width, height:xxx)<br>完成。<br>最后要注意的是用URLSession请求数据，可以防止UI卡顿，UI卡顿给用户带来的感觉非常糟糕。<br>``swift<br>func getData(with urlString:String,success:@escaping(Data?)-&gt;Void, failure: ((Error)-&gt;Void)? =nil) {</p>
+<pre><code>guard let url =URL(string: urlString)else{
+
+return
+</code></pre><p>}<br>    let task =URLSession.shared.dataTask(with: url) { (data:Data?, response:URLResponse?, error:Error?)in</p>
+<pre><code>DispatchQueue.main.async{
+
+if let error = error {
+
+                 failure?(error)
+
+}else{
+
+                  success(data)
+
+             }
+
+      }
+
+  }
+
+ task.resume()
+</code></pre><p>}<br>``</p>
+<h1 id="文章具体内容视图"><a href="#文章具体内容视图" class="headerlink" title="文章具体内容视图"></a>文章具体内容视图</h1><p>青芒团队提供的API里有web-content这一项，只要通过webview包装然后load一下就会将文字和图片展示出来，但是还是有一些细节需要考虑到的。比如有些图片是很大的，虽然限制了窗口不得小于一个值，但有些图片还是远超了这个大小。web-content是没有标题的，看起来会比较突兀，标题和标题需要你手动加上。图片过大时，窗口是可以左右滑动的，怎么把他限制不能滑动。字体如何跟其他部分视图的字体做到没有违和感，都是需要考虑的问题，这些用前端里的CSS样式可以控制，需要开发者有一定的前端开经验。由于本公众号重心在果教，因此这里就不具体展开叙述了，感兴趣的朋友可以参考我的(github)<a href="https://github.com/zhihaozhang/qingmang-for-mac" target="_blank" rel="external"></a> 。</p>
+<h1 id="青芒的宣传"><a href="#青芒的宣传" class="headerlink" title="青芒的宣传"></a>青芒的宣传</h1><p>做完青芒之后，考虑到整个项目是用最新的swift4写成，于是我在微博上@了swiftLanguage，博主是一个不大不小的V，关注者多是对swift感兴趣的或从业人员。短短两天，该微博获得了1万多次阅读，最后我欣喜的发现，王俊煜也给该微博点了赞，感谢俊昱的鼓励与肯定。</p>
+<p><img src="https://syy.freep.cn/588778/41854-9f58bf0f94c7afad.jpeg" alt="微博截图" title="微博截图"></p>
+<h1 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h1><p>青芒的开发只用了两天，其实可以做的东西还有很多。试用软件之后如果您对软件有任何的意见与建议，欢迎留言。</p>
+<p>如果您喜欢这款软件，也欢迎您将它推荐给您的朋友们。让我们一起将青芒变得更好！</p>
+<p>我会在订阅号里不定期分享我个人的macOS/ios开发心得和开发笔记，也会在里面发表对于苹果产品/框架/趋势的拙见，希望爱好科技产品或者苹果生态圈的开发者关注。相信本公众号一定能给您带来收获和启发。<br>【欢迎扫码关注微信公众号】</p>
+<p><img src="https://syy.freep.cn/588778/640.jpeg" alt=""></p>
+
+
+            <! -- 添加捐赠图标 -->
+    <div class ="post-donate">
+    <div id="donate_board" class="donate_bar center">
+        <a id="btn_donate" class="btn_donate" href="javascript:;" title="打赏"></a>
+       <div style="text-align:center;color:#00F" >
+            <strong>如果本文对您有帮助，请您用支付宝或微信小额赞赏支持我继续原创，谢谢。</strong>
+        </div>
+        <br>
+      </div>  
+    <div id="donate_guide" class="donate_bar center hidden" >
+        <!-- 支付宝打赏图案 -->
+        <img src="https://syy.freep.cn/588778/qrcode_1506226737.png" height="240" width="180" alt="支付宝微信打赏"> 
+    </div>
+    <script type="text/javascript">
+        document.getElementById('btn_donate').onclick = function(){
+            $('#donate_board').addClass('hidden');
+            $('#donate_guide').removeClass('hidden');
+        }
+    </script>
+</div>
+<! -- 添加捐赠图标 -->
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-pager">
+        
+        
+            <li class="previous">
+                <a href= "/2017/09/23/让iMac与MacBook高效协同工作——mouseSync开发心得/" title= 让iMac与MacBook高效协同工作——mouseSync开发心得 >
+                    <span>Previous Post</span>
+                    <span>让iMac与MacBook高效协同工作——mouseSync开发心得</span>
+                </a>
+            </li>
+        
+    </ul>
+
+
+
+    <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMTAyMC83NTY5">
+    <script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+    </script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+
+
+    <div style="text-align:center">
+    <span id="busuanzi_container_page_pv" >
+        本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+    </span>
+    </div>
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="emailto:zhihaozhang@me.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="https://github.com/zhihaozhang" class="iconfont-archer github" target="_blank" title="github"></a>
+            
+        
+    
+        
+            
+                <a href="http://weibo.com/2854428840/profile?rightmod=1&wvr=6&mod=personinfo" class="iconfont-archer weibo" target="_blank" title="weibo"></a>
+            
+        
+    
+        
+            
+                <a href="https://www.zhihu.com/people/zhihao-zhang-95/activities" class="iconfont-archer zhihu" target="_blank" title="zhihu"></a>
+            
+        
+    
+        
+            
+                <a href="https://twitter.com/Chih_hao_" class="iconfont-archer twitter" target="_blank" title="twitter"></a>
+            
+        
+    
+        
+            
+                <a href="https://www.instagram.com/izhihao_zhang/" class="iconfont-archer instagram" target="_blank" title="instagram"></a>
+            
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span>
+        <span
+            id="theme-info">Theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">archer</a></span>
+    </div>
+
+</footer>
+    </div>
+    <div class="back-top">&#xe639;</div>
+    <div class="sidebar">
+    <div class="sidebar-header">
+        <div class="sidebar-category">
+            <span class="sidebar-archive-link"><span class="iconfont-archer">&#xe67d;</span>Archive</span>
+            <span class="sidebar-tags-link"><span class="iconfont-archer">&#xe610;</span>Tag</span>
+        </div>
+    </div>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-archive">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 12 </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2017 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/26</span><a class="archive-post-title" href= "/2017/09/26/青芒 for Mac客户端开发笔记/" >青芒 for Mac客户端开发笔记</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/23</span><a class="archive-post-title" href= "/2017/09/23/让iMac与MacBook高效协同工作——mouseSync开发心得/" >让iMac与MacBook高效协同工作——mouseSync开发心得</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2014 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/drop and drag in d3js/" >drop and drag in d3</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/Build reuseable visualization using d3.js and AngularJS/" >Build reusable visualization using d3.js and AngularJS</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/数据可视化之散点图/" >数据可视化之散点图</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular/" >D3 on Angular</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/浅谈d3.js中的异步文件读取的处理/" >浅谈d3.js中强制异步文件读取同步的四种方法</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/polybrush in d3/" >polybrush in d3</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/24</span><a class="archive-post-title" href= "/2014/04/24/用Java生成Json文件/" >用Java生成Json文件</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name"><a href= "#">d3</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">macOS开发</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">Json</a></span>
+    
+    </div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #888; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: false
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tag-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var jsInfo = {
+        root: '/'
+    }
+</script>
+    <!-- 不蒜子  -->
+    
+    <!-- CNZZ统计  -->
+    
+    </div>
+    </body>
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</html>
+
+
