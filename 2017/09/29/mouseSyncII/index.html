@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
     <title>
         
-        浅谈d3.js中强制异步文件读取同步的四种方法 · Zhihao&#39;s Studio
+        mouseSync后续功能完善心得 · Zhihao&#39;s Studio
         
     </title>
     <link rel="icon" href= /assests/favicon.ico>
@@ -81,7 +81,7 @@
                 <a href="/" >Zhihao&#39;s Studio.</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">浅谈d3.js中强制异步文件读取同步的四种方法</a>
+                <a href="#" class="post-name">mouseSync后续功能完善心得</a>
             </div>
     </div>
     
@@ -102,7 +102,7 @@
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            浅谈d3.js中强制异步文件读取同步的四种方法
+            mouseSync后续功能完善心得
             <!-- 404 -->
             
         </h1>
@@ -120,13 +120,13 @@
             
                 <div class= post-intro-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-href = d3>d3</a>
+        <a class="post-tag" href="javascript:void(0);" data-href = macOS开发>macOS开发</a>
     
 </div>
             
             <div class="post-intro-meta">
                 <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                <span class="post-intro-time">2014/11/15</span>
+                <span class="post-intro-time">2017/09/29</span>
             </div>
         
     </div>
@@ -134,26 +134,65 @@
         <div class="container">
             <main class="main post-page">
     <article class="article-entry">
-        <h1 id="问题提出"><a href="#问题提出" class="headerlink" title="问题提出"></a>问题提出</h1><p>在使用d3.js时，我们经常会使用d3.csv()或者d3.json()函数来从文件中读取出数据，不幸的是，偶尔代码的结果并不是我们预料的那样。习惯了过程式编程的我开始的时候也是这样，最让人头疼的是javascript并不会告诉你问题出在哪里了。我第一次遇到这个问题的时候，找了半天bug，确定代码主体部分没有问题之后，我只能开始使用console.log()将变量一个一个的输出到控制台里。<br>第一次遇到这个问题时的图片是这样的：<br><img src="http://i13.tietuku.cn/b620500d4f1d6bb2.jpg" alt=""><br>问题出在第72行和第75行，中间几行完全没有对ordertxt进行操作，但是最后的结果就是和预想的输出不吻合，后来找了个其他方法把这个问题给解决了，今天又遇到了类似的这个问题，就下决心来拔掉这根刺。</p>
-<h1 id="试验"><a href="#试验" class="headerlink" title="试验"></a>试验</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">\&lt;script\&gt;</div><div class="line"></div><div class="line">console.log(&quot;before csv1 &quot;);</div><div class="line">d3.csv(&quot;flowers.csv&quot;, function(data) &#123;console.log(data)&#125;);</div><div class="line">console.log(&quot;before csv2&quot;);</div><div class="line">d3.csv(&quot;flowers.csv&quot;,function(error,data2) &#123;console.log(error, data2)&#125;);</div><div class="line"></div><div class="line">\&lt;/script\&gt;</div><div class="line"></div></pre></td></tr></table></figure>
-<p>believe it or not,上面的代码将产生下面图中的输出结果，因为javascript的<strong>异步特性</strong>。说到异步，大部分时候是让人开心的，但偶尔也会令人头疼，至少在这里，就是令人头疼。</p>
-<p><img src="http://i12.tietuku.cn/1b8435a64150532d.jpg" alt=""></p>
-<h1 id="解决方法1"><a href="#解决方法1" class="headerlink" title="解决方法1"></a>解决方法1</h1><p>第一次遇到这个问题的时候，我巧妙的绕开了这个问题，使用的方法是：我把数据的处理放在了d3.csv(“flowers.csv”,function(data){dealWithData()…})回调函数里面，这样数据的处理就和d3的读文件操作变成了绑在一根绳上的蚂蚱了，要么一起执行完，要么都不执行。<br>貌似世界和平了，但是今天下午又遇到了这个问题，而且数据的变化是随时随地的，可不是和上一次遇到的那样，所有会发生的变化都可以预先写成代码的。于是我开始了对解决方法的苦苦追寻。</p>
-<h1 id="解决方法2"><a href="#解决方法2" class="headerlink" title="解决方法2"></a>解决方法2</h1><p>第二种方法是借助一些helper类库(queue.js)来强制数据在加载完成之后才去触发相应的操作。这种方法是我在网上看到的，并没有去亲自试过，也许会成功，但是对于我们会变化的数据，不能提前将处理逻辑写出代码，这种方法还是不合格的。</p>
-<h1 id="解决方法3"><a href="#解决方法3" class="headerlink" title="解决方法3"></a>解决方法3</h1><p>第三种方法是在stack overflow里查到的，试了一下是可以的，他这里用的是d3.text()函数，将文件先load进来，然后再使用d3.csv.parse或者d3.csv.parseRows，这样就会是同步的了。参考文末的Reference 3的实现。</p>
-<h1 id="解决方法4"><a href="#解决方法4" class="headerlink" title="解决方法4"></a>解决方法4</h1><p>方法4是我自己想出来的，最近几天一直在做angular和d3结合在一起的工作，我就在想能否借助angular来帮助我们完成呢？万幸，Angular中确实有这么一个函数，似乎就是为这个问题量身定做的，且解决了前面的方法都没有解决的数据后期动态变化的问题。这个函数就是<strong>$watch</strong>函数。</p>
-<h2 id="watch列表"><a href="#watch列表" class="headerlink" title="$watch列表"></a>$watch列表</h2><p>每当我们在视图中追踪一个事件时，会给它注册一个回调函数，然后希望在页面中触发该事件时调用这个回调函数。比如AngularJS中最令人印象深刻的双向绑定，在input中输入一个字母，有着相同ng-model的变量就会跟着input的输入而发生改变。<br>发生这一变化的原因是我们把UI中的输入字段绑定给了$scope.name属性，为了更新这个视图，Angular需要<strong>追踪变化</strong>，是通过给$watch列表添加一个监控函数做到这一点的。</p>
-<h2 id="脏检查"><a href="#脏检查" class="headerlink" title="脏检查"></a>脏检查</h2><p>脏检查是一个简单的过程，可归结为一个非常基础的概念：检查值是否发生了变化，而整个应用还没同步该变化。<br>Angular会遍历$watch列表，只要有任何的值发生比变化，应用将会退回到$watch循环中，直到检测到不在发生任何变化。</p>
-<h2 id="watch"><a href="#watch" class="headerlink" title="$watch"></a>$watch</h2><p>$scope对象上的$watch方法会给Angular事件循环内的每个$digest调用装配一个脏检查，如果在检测到变化，Angular总是会返回$digest循环。<br>$watch函数本身接受两个必要参数和一个可选的参数，第一个参数是watch的对象，第二个参数是<strong>回调函数</strong>，一旦watch的对象变了的时候触发；可选的参数是一个bool值，告诉Angular是否检查<strong>严格相等</strong>。<br>关于回调函数和严格相等，还有一些想说的。</p>
-<h3 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a>回调函数</h3><p>我一直是这么理解回调函数的，研究生的导师会分配给每个研究生活去干，而他自己也有自己的事情，如果给某个研究生安排的活他做好了，就过来给他说一声，导师负责汇总，将活写成论文发表出去。这其实就是回调函数工作的原理。<br>当然导师不可能在这边等着研究生干活，自己什么都不干；或者自己什么都干了，也没研究生什么事了。</p>
-<h3 id="严格相等"><a href="#严格相等" class="headerlink" title="严格相等"></a>严格相等</h3><p>比如有一个数组，a=【1，2，3】，后面修改了a【0】=2,在AngularJS看来，这个数组并没有发生变化，因为还是3个变量，而如果从严格意义上来说，它已经发生了变化，这就是严格相等和相等的不同，在javascript中，也有==和===的区别。</p>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>写到这里，大家应该知道该怎么做了，即调用$watch函数来观测我们需要关注的data，每当发生变化的时候，就根据新的data，重新绘制图标。因此，我们最好将render的过程抽象成一个函数，方便我们后期调用。<br>比如，我们想要观测data数组的变化，并且根据它的变化来重新绘制图片。那么我们的代码实现就应该像下面这样。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"> scope.$watch(&quot;data&quot;, function() &#123;</div><div class="line">render();</div><div class="line">//render函数是绘制的过程，换成自己的即可。</div><div class="line">&#125;,true);</div><div class="line"></div></pre></td></tr></table></figure></p>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol>
-<li>D3.js加载csv和json数据 <a href="http://www.bubuko.com/infodetail-942138.html" target="_blank" rel="external">http://www.bubuko.com/infodetail-942138.html</a></li>
-<li>d3: make the d3.csv function syncronous <a href="http://stackoverflow.com/questions/19899005/d3-make-the-d3-csv-function-syncronous" target="_blank" rel="external">http://stackoverflow.com/questions/19899005/d3-make-the-d3-csv-function-syncronous</a></li>
-<li>read csv/tsv with no header line in D3 <a href="http://stackoverflow.com/questions/13870265/read-csv-tsv-with-no-header-line-in-d3" target="_blank" rel="external">http://stackoverflow.com/questions/13870265/read-csv-tsv-with-no-header-line-in-d3</a></li>
-<li>《AngularJS权威教程》</li>
+        <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>在<a href="http://zhihaozhang.github.io/2017/09/23/%E8%AE%A9iMac%E4%B8%8EMacBook%E9%AB%98%E6%95%88%E5%8D%8F%E5%90%8C%E5%B7%A5%E4%BD%9C%E2%80%94%E2%80%94mouseSync%E5%BC%80%E5%8F%91%E5%BF%83%E5%BE%97/">上篇博客</a>中,我介绍了mouseSync这款软件的开发初衷、使用场景和开发的过程，感谢一些朋友试用该软件并给我留言，提出了一些新的需求和issue。同时也感谢开发者头条的推荐至头版的精选板块，让那篇开发笔记被2万开发者阅读过了，收获了<strong>github的star</strong>若干、<strong>公众号的关注</strong>若干、赞赏约<strong>50元</strong>。真的非常感谢大家的关注、star鼓励和金钱赞赏。</p>
+<p>我整理了一下大家的需求，大体上可归纳为3类。</p>
+<ol>
+<li>没有logo</li>
+<li>在外部设备(鼠标/Trackpad真正属于的那台Mac)上容易引起误操作</li>
+<li>一个关键的功能，左键拖拽功能，没有实现</li>
 </ol>
+<p>在这篇博客中，我就来写一下对上面提到的三个需求的解决方案。完成上述三个需求后的软件在<a href="https://pan.baidu.com/s/1i5Gee6T" target="_blank" rel="external">网盘</a>可下载到，最新代码依然开源在<a href="https://github.com/zhihaozhang/mouseSync" target="_blank" rel="external">github</a>上。</p>
+<h1 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h1><h2 id="没有logo"><a href="#没有logo" class="headerlink" title="没有logo"></a>没有logo</h2><p>其实这件事挺尴尬的，我不是设计师，因此平时logo的主要来源是<a href="https://www.flaticon.com" target="_blank" rel="external">flaticon</a>，这次没忍心打扰正在熟睡的非著名设计师Joseph，因此还是在flaticon上找的icon，进行了简单的颜色变换与组合。</p>
+<p>icon考虑到了mouseSync具有鼠标和蓝牙的特性，因此还是比较写实的。考虑到蓝牙客户端有外部设备和数据中心(两台Mac)之分，因此两个icon虽然很相似，但仍有细微的不同。不同点在于，数据中心的icon多了一个类似信号指示的标志，表示它是接收蓝牙信号的一端。</p>
+<p>由于本人设计方面实在业余，还请大家轻喷。有空再找非著名设计师Joseph实现一枚漂亮的logo。</p>
+<p><img src="https://syy.freep.cn/588778/icons.png" alt=""></p>
+<blockquote>
+<p>icons</p>
+</blockquote>
+<h2 id="在外部设备端容易引起误操作"><a href="#在外部设备端容易引起误操作" class="headerlink" title="在外部设备端容易引起误操作"></a>在外部设备端容易引起误操作</h2><p>之前的demo视频中，为了让两台电脑看起来一致，我录的是同时打开文件，同时在图标上右击，在现实生活中，在同一时刻同时操作两台Mac的需求很少不存在。通常情况下，用户还是想对某一台Mac进行操作的。<strong>mouseSync的定位应该是：帮助用户用一个鼠标操作两台电脑，且给用户决定什么时候操作哪台，省去两个鼠标之间换来换去的麻烦。</strong></p>
+<p>之前的项目中，我对鼠标事件添加的均是全局监控事件，因此只要mouseSync<strong>生命周期</strong>没有结束，它的操作将实时被发送到另一台mac上。我想过两个解决方案：</p>
+<ol>
+<li>跟其他共享键盘的软件一样，使用全局快捷键对蓝牙通知服务进行开启/关闭</li>
+<li>将全局监控事件变成局部监控事件，蓝牙通知服务仅在应用视图为Keywindow时有效</li>
+</ol>
+<h3 id="为什么选择Plan-B"><a href="#为什么选择Plan-B" class="headerlink" title="为什么选择Plan B"></a>为什么选择Plan B</h3><p>关于方案1，我觉得作为一款软件，快捷键应当由用户自己决定，虽然cocoapod上已经有非常好的项目<a href="https://github.com/Clipy/KeyHolder" target="_blank" rel="external">KeyHolder</a>进行支持,但是考虑到两个因素还是决定使用Plan B。</p>
+<p>先看看Plan B，Plan B是这样的，首先让当前的window全屏，但是里面没有内容，因此无论在当前试图下如何操作，都不会有可能造成误操作。回到Plan A，快捷键的录入放到哪里呢？如果放到当前视图，将会带来一定的误操作风险；如果放到MenuBar，那么用户将不得不退出全屏模式，到菜单栏进行设置，这样的解决方案破坏了用户体验，综合考虑，最终还是选了Plan B。</p>
+<h3 id="实现过程中遇到的问题"><a href="#实现过程中遇到的问题" class="headerlink" title="实现过程中遇到的问题"></a>实现过程中遇到的问题</h3><p>让当前窗口一打开就全屏的方法是在ViewDidLoad方法体中进行控制的:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">viewDidLoad</span><span class="params">()</span></span> &#123;</div><div class="line">    <span class="keyword">super</span>.viewDidLoad()</div><div class="line">    <span class="keyword">self</span>.view.window?.zoom(<span class="keyword">self</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>但是我很快就发现了问题：<strong>尽管已经将应用全屏了，但是用户依然会有一定几率对dock栏和顶部菜单栏进行误操作。</strong>用户如果在操作另一台电脑的时候，还得注意这台电脑上是不是误操作了，这不符合我们软件开发的初衷。考虑到有些用户将dock放在底部，有些用户将dock放在左边，因此，我加了这样的限制，当用户将鼠标移动到距离屏幕边缘<strong>50px</strong>以内的时候，程序帮助他将鼠标移动至屏幕中央。参照下图，灰色地带就可以作为防止鼠标误操作的缓冲区。</p>
+<p><img src="https://syy.freep.cn/588778/border.png" alt=""></p>
+<blockquote>
+<p>防止对dock和菜单栏误操作解决方法示意图</p>
+</blockquote>
+<p>阅读过上一篇博客的朋友一定注意到了，我们的程序是记录上一个鼠标点的位置，并将上一个鼠标点的位置与当前位置相减，将位置变动作为特征值进行发送。因此，在鼠标被程序移动到屏幕中央的时候，需要将上一个位置更新为屏幕中央的坐标。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//屏幕宽高的获取方式</span></div><div class="line">    <span class="keyword">let</span> <span class="type">SCREEN_WIDTH</span> = <span class="type">NSScreen</span>.main()!.frame.width</div><div class="line">    <span class="keyword">let</span> <span class="type">SCREEN_HEIGHT</span> = <span class="type">NSScreen</span>.main()!.frame.height</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="左键拖拽功能"><a href="#左键拖拽功能" class="headerlink" title="左键拖拽功能"></a>左键拖拽功能</h2><p>左键拖一个文件或窗口到一个新位置这个功能还是经常被使用到的，我使用的是Trackpad，通常是使用<strong>三支拖移</strong>。想要监听外围设备的这个动作并不难，但是想让计算机模拟这个操作相对比较困难。就像双击不是单纯的模拟单击事件两次一样，这次我又踩到坑了，drag and move事件并不是简单的mousedown-> mousemove -> mouseup这么容易的事情。</p>
+<p>我在<a href="https://stackoverflow.com/questions/1817628/clicking-the-mouse-down-to-drag-objects-on-mac" target="_blank" rel="external">Stack Overflow</a>上找到了正确的方法：有一个叫<strong>kCGEventLeftMouseDragged</strong>的事件，专门来处理这件事。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">mouse_left_drag_to</span><span class="params">(<span class="keyword">float</span> x, <span class="keyword">float</span> y)</span> </span>&#123;</div><div class="line">    CGEventRef left_drag_event = CGEventCreateMouseEvent(<span class="literal">NULL</span>, kCGEventLeftMouseDragged, CGPointMake(x, y), <span class="number">0</span>);</div><div class="line"></div><div class="line">    CGEventPost(kCGHIDEventTap, left_drag_event);</div><div class="line">    CFRelease(left_drag_event);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>和Scroll滚轮事件一样，这里我们采用的是Quartz模拟鼠标事件,因此依然需要C与swift进行混编。模拟总共可分为3步：第一步是创建一个Quartz鼠标事件；第二步是讲这个时间放到事件流中，并指定位置；第三步是release这个事件。</p>
+<p>模拟这个事件的时候，随着鼠标拖拽后的不停移动，会不停产生event，而且event中x和y的偏移量始终是相对于第一次鼠标drag按下时的坐标。因此，我们需要记录两件事，第一件事是第一次drag时候的坐标，第二件事是当前是不是开启了新一轮的drag还是仍然在上一轮的drag中。核心代码如下：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">    <span class="keyword">if</span> dragFirst == <span class="literal">true</span>&#123;</div><div class="line">        dragFirst = <span class="literal">false</span></div><div class="line">    mouseLocBeforeDrag = <span class="type">NSEvent</span>.mouseLocation()                 mouseLocBeforeDrag.y = <span class="type">NSHeight</span>(<span class="type">NSScreen</span>.screens()![<span class="number">0</span>].frame) - mouseLocBeforeDrag.y;</div><div class="line">    </div><div class="line">    mouse_left_drag_to(<span class="type">Float</span>(mouseLocBeforeDrag.x)+<span class="type">Float</span>(dx!),<span class="type">Float</span>(mouseLocBeforeDrag.y)-<span class="type">Float</span>(dy!)</div><div class="line">  &#125;<span class="keyword">else</span>&#123;</div><div class="line">    mouse_left_drag_to(<span class="type">Float</span>(mouseLocBeforeDrag.x)+<span class="type">Float</span>(dx!),<span class="type">Float</span>(mouseLocBeforeDrag.y)-<span class="type">Float</span>(dy!))</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上面的代码有两处需要注意：</p>
+<ol>
+<li>dragFirst初始值为true,在mouseUp之后重新置为true，表示一轮的drag已经完成了；</li>
+<li>y的坐标是-，x的坐标是+，这是由OS X的坐标系决定的。</li>
+</ol>
+<p>最后，我用两台电脑同时在画板上写了一个牛B。mouseSync的开发工作算是告一段落了，希望对大家有所帮助！</p>
+<p><img src="https://syy.freep.cn/588778/dragdemo.gif" alt=""></p>
+<blockquote>
+<p>drag事件demo</p>
+</blockquote>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol>
+<li><a href="https://stackoverflow.com/questions/1817628/clicking-the-mouse-down-to-drag-objects-on-mac" target="_blank" rel="external">https://stackoverflow.com/questions/1817628/clicking-the-mouse-down-to-drag-objects-on-mac</a></li>
+<li><a href="https://www.flaticon.com" target="_blank" rel="external">https://www.flaticon.com</a></li>
+</ol>
+<h1 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h1><p>试用软件之后如果您对软件有任何的意见与建议，欢迎留言。如果您喜欢这款软件，也欢迎您将它推荐给您的朋友们。让我们一起将mouseSync变得更好！</p>
+<p>我会在订阅号里不定期分享我个人的macOS/ios开发心得和开发笔记，也会在里面发表对于苹果产品/框架/趋势的拙见，希望爱好科技产品或者苹果生态圈的开发者关注。相信本公众号一定能给您带来收获和启发。</p>
+<p>【欢迎扫码关注微信公众号】</p>
+<p><img src="https://syy.freep.cn/588778/640.jpeg" alt=""></p>
+<blockquote>
+<p>扫码关注微信公众号 骨灰级果粉 获得最新文章更新</p>
+</blockquote>
 
 
             <! -- 添加捐赠图标 -->
@@ -181,18 +220,11 @@
     <!-- 前后页  -->
     <ul class="post-pager">
         
-            <li class="next">
-                <a href= "/2014/11/15/数据可视化之散点图/" title= 数据可视化之散点图 >
-                    <span>Next Post</span>
-                    <span>数据可视化之散点图</span>
-                </a>
-            </li>
-        
         
             <li class="previous">
-                <a href= "/2014/11/15/Build reuseable visualization using d3.js and AngularJS/" title= Build reusable visualization using d3.js and AngularJS >
+                <a href= "/2017/09/26/青芒 for Mac客户端开发笔记/" title= 青芒 for Mac客户端开发笔记 >
                     <span>Previous Post</span>
-                    <span>Build reusable visualization using d3.js and AngularJS</span>
+                    <span>青芒 for Mac客户端开发笔记</span>
                 </a>
             </li>
         
