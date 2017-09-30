@@ -121,32 +121,6 @@
   </entry>
   
   <entry>
-    <title>drop and drag in d3</title>
-    <link href="http://zhihaozhang.github.io/2014/11/15/drop%20and%20drag%20in%20d3js/"/>
-    <id>http://zhihaozhang.github.io/2014/11/15/drop and drag in d3js/</id>
-    <published>2014-11-15T05:54:57.000Z</published>
-    <updated>2017-09-23T11:40:00.000Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;Behavior-in-d3&quot;&gt;&lt;a href=&quot;#Behavior-in-d3&quot; class=&quot;headerlink&quot; title=&quot;Behavior in d3&quot;&gt;&lt;/a&gt;Behavior in
-        
-      
-    
-    </summary>
-    
-      <category term="visualization" scheme="http://zhihaozhang.github.io/categories/visualization/"/>
-    
-    
-      <category term="d3" scheme="http://zhihaozhang.github.io/tags/d3/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Build reusable visualization using d3.js and AngularJS</title>
     <link href="http://zhihaozhang.github.io/2014/11/15/Build%20reuseable%20visualization%20using%20d3.js%20and%20AngularJS/"/>
     <id>http://zhihaozhang.github.io/2014/11/15/Build reuseable visualization using d3.js and AngularJS/</id>
@@ -160,6 +134,32 @@
         
         
           &lt;h1 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="visualization" scheme="http://zhihaozhang.github.io/categories/visualization/"/>
+    
+    
+      <category term="d3" scheme="http://zhihaozhang.github.io/tags/d3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>drop and drag in d3</title>
+    <link href="http://zhihaozhang.github.io/2014/11/15/drop%20and%20drag%20in%20d3js/"/>
+    <id>http://zhihaozhang.github.io/2014/11/15/drop and drag in d3js/</id>
+    <published>2014-11-15T05:54:57.000Z</published>
+    <updated>2017-09-23T11:40:00.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;Behavior-in-d3&quot;&gt;&lt;a href=&quot;#Behavior-in-d3&quot; class=&quot;headerlink&quot; title=&quot;Behavior in d3&quot;&gt;&lt;/a&gt;Behavior in
         
       
     
