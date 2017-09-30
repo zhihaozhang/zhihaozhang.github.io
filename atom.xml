@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Chih-Hao&#39;s Blog</title>
+  <icon>https://www.gravatar.com/avatar/ee6c42acd9e6fdf6da073aabf58a2ad9</icon>
+  <subtitle>骨灰级果粉</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://zhihaozhang.github.io/"/>
+  <updated>2017-09-30T02:39:00.704Z</updated>
+  <id>http://zhihaozhang.github.io/</id>
+  
+  <author>
+    <name>Chih-Hao</name>
+    <email>zhihaozhang@me.com</email>
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>mouseSync后续功能完善心得</title>
+    <link href="http://zhihaozhang.github.io/2017/09/29/mouseSyncII/"/>
+    <id>http://zhihaozhang.github.io/2017/09/29/mouseSyncII/</id>
+    <published>2017-09-29T13:26:44.235Z</published>
+    <updated>2017-09-30T02:39:00.704Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h1&gt;&lt;p&gt;在&lt;a
+        
+      
+    
+    </summary>
+    
+      <category term="苹果开发" scheme="http://zhihaozhang.github.io/categories/%E8%8B%B9%E6%9E%9C%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="macOS开发" scheme="http://zhihaozhang.github.io/tags/macOS%E5%BC%80%E5%8F%91/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>青芒 for Mac客户端开发笔记</title>
+    <link href="http://zhihaozhang.github.io/2017/09/26/%E9%9D%92%E8%8A%92%20for%20Mac%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
+    <id>http://zhihaozhang.github.io/2017/09/26/青芒 for Mac客户端开发笔记/</id>
+    <published>2017-09-26T02:59:15.000Z</published>
+    <updated>2017-09-26T03:54:57.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;关于轻芒和青芒&quot;&gt;&lt;a href=&quot;#关于轻芒和青芒&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="苹果开发" scheme="http://zhihaozhang.github.io/categories/%E8%8B%B9%E6%9E%9C%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="macOS开发" scheme="http://zhihaozhang.github.io/tags/macOS%E5%BC%80%E5%8F%91/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>让iMac与MacBook高效协同工作——mouseSync开发心得</title>
+    <link href="http://zhihaozhang.github.io/2017/09/23/%E8%AE%A9iMac%E4%B8%8EMacBook%E9%AB%98%E6%95%88%E5%8D%8F%E5%90%8C%E5%B7%A5%E4%BD%9C%E2%80%94%E2%80%94mouseSync%E5%BC%80%E5%8F%91%E5%BF%83%E5%BE%97/"/>
+    <id>http://zhihaozhang.github.io/2017/09/23/让iMac与MacBook高效协同工作——mouseSync开发心得/</id>
+    <published>2017-09-23T11:49:34.000Z</published>
+    <updated>2017-09-27T07:03:56.040Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;开发mouseSync的初衷&quot;&gt;&lt;a href=&quot;#开发mouseSync的初衷&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="苹果开发" scheme="http://zhihaozhang.github.io/categories/%E8%8B%B9%E6%9E%9C%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="macOS开发" scheme="http://zhihaozhang.github.io/tags/macOS%E5%BC%80%E5%8F%91/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>associate brush</title>
+    <link href="http://zhihaozhang.github.io/2014/11/15/associate%20brush/"/>
+    <id>http://zhihaozhang.github.io/2014/11/15/associate brush/</id>
+    <published>2014-11-15T05:54:57.000Z</published>
+    <updated>2017-09-24T04:14:34.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;这篇博客记录了在上一篇博客加入scatterplot matrix的基础上，实现了associate
+        
+      
+    
+    </summary>
+    
+      <category term="visualization" scheme="http://zhihaozhang.github.io/categories/visualization/"/>
+    
+    
+      <category term="d3" scheme="http://zhihaozhang.github.io/tags/d3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>drop and drag in d3</title>
+    <link href="http://zhihaozhang.github.io/2014/11/15/drop%20and%20drag%20in%20d3js/"/>
+    <id>http://zhihaozhang.github.io/2014/11/15/drop and drag in d3js/</id>
+    <published>2014-11-15T05:54:57.000Z</published>
+    <updated>2017-09-23T11:40:00.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;Behavior-in-d3&quot;&gt;&lt;a href=&quot;#Behavior-in-d3&quot; class=&quot;headerlink&quot; title=&quot;Behavior in d3&quot;&gt;&lt;/a&gt;Behavior in
+        
+      
+    
+    </summary>
+    
+      <category term="visualization" scheme="http://zhihaozhang.github.io/categories/visualization/"/>
+    
+    
+      <category term="d3" scheme="http://zhihaozhang.github.io/tags/d3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Build reusable visualization using d3.js and AngularJS</title>
+    <link href="http://zhihaozhang.github.io/2014/11/15/Build%20reuseable%20visualization%20using%20d3.js%20and%20AngularJS/"/>
+    <id>http://zhihaozhang.github.io/2014/11/15/Build reuseable visualization using d3.js and AngularJS/</id>
+    <published>2014-11-15T05:54:57.000Z</published>
+    <updated>2017-09-24T04:15:14.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="visualization" scheme="http://zhihaozhang.github.io/categories/visualization/"/>
+    
+    
+      <category term="d3" scheme="http://zhihaozhang.github.io/tags/d3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>D3 on Angular(2)</title>
+    <link href="http://zhihaozhang.github.io/2014/11/15/D3%20on%20Angular(2)/"/>
+    <id>http://zhihaozhang.github.io/2014/11/15/D3 on Angular(2)/</id>
+    <published>2014-11-15T05:54:57.000Z</published>
+    <updated>2017-09-24T04:15:24.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;More-Dynamic-visualizations&quot;&gt;&lt;a href=&quot;#More-Dynamic-visualizations&quot; class=&quot;headerlink&quot; title=&quot;More Dynamic visualizations&quot;&gt;&lt;/a&gt;More
+        
+      
+    
+    </summary>
+    
+      <category term="visualization" scheme="http://zhihaozhang.github.io/categories/visualization/"/>
+    
+    
+      <category term="d3" scheme="http://zhihaozhang.github.io/tags/d3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>冷门但实用的d3.js内置函数</title>
+    <link href="http://zhihaozhang.github.io/2014/11/15/%E5%86%B7%E9%97%A8%E4%BD%86%E5%AE%9E%E7%94%A8%E7%9A%84d3.js%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0/"/>
+    <id>http://zhihaozhang.github.io/2014/11/15/冷门但实用的d3.js内置函数/</id>
+    <published>2014-11-15T05:54:57.000Z</published>
+    <updated>2016-06-07T03:12:00.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="visualization" scheme="http://zhihaozhang.github.io/categories/visualization/"/>
+    
+    
+      <category term="d3" scheme="http://zhihaozhang.github.io/tags/d3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数据可视化之散点图</title>
+    <link href="http://zhihaozhang.github.io/2014/11/15/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E4%B9%8B%E6%95%A3%E7%82%B9%E5%9B%BE/"/>
+    <id>http://zhihaozhang.github.io/2014/11/15/数据可视化之散点图/</id>
+    <published>2014-11-15T05:54:57.000Z</published>
+    <updated>2017-09-24T04:14:12.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;D3.js是当下最火的可视化库之一，这篇博客记录了如何实现一个最基本的散点图，并用三角形表示数据点。&lt;/p&gt;
+&lt;p&gt;代码如下：&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td
+        
+      
+    
+    </summary>
+    
+      <category term="visualization" scheme="http://zhihaozhang.github.io/categories/visualization/"/>
+    
+    
+      <category term="d3" scheme="http://zhihaozhang.github.io/tags/d3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>浅谈d3.js中强制异步文件读取同步的四种方法</title>
+    <link href="http://zhihaozhang.github.io/2014/11/15/%E6%B5%85%E8%B0%88d3.js%E4%B8%AD%E7%9A%84%E5%BC%82%E6%AD%A5%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E7%9A%84%E5%A4%84%E7%90%86/"/>
+    <id>http://zhihaozhang.github.io/2014/11/15/浅谈d3.js中的异步文件读取的处理/</id>
+    <published>2014-11-15T05:54:57.000Z</published>
+    <updated>2017-09-24T04:14:19.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;问题提出&quot;&gt;&lt;a href=&quot;#问题提出&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="visualization" scheme="http://zhihaozhang.github.io/categories/visualization/"/>
+    
+    
+      <category term="d3" scheme="http://zhihaozhang.github.io/tags/d3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>D3 on Angular</title>
+    <link href="http://zhihaozhang.github.io/2014/11/15/D3%20on%20Angular/"/>
+    <id>http://zhihaozhang.github.io/2014/11/15/D3 on Angular/</id>
+    <published>2014-11-15T05:54:57.000Z</published>
+    <updated>2017-09-24T04:15:19.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;Angular与D3&quot;&gt;&lt;a href=&quot;#Angular与D3&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="visualization" scheme="http://zhihaozhang.github.io/categories/visualization/"/>
+    
+    
+      <category term="d3" scheme="http://zhihaozhang.github.io/tags/d3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>polybrush in d3</title>
+    <link href="http://zhihaozhang.github.io/2014/11/15/polybrush%20in%20d3/"/>
+    <id>http://zhihaozhang.github.io/2014/11/15/polybrush in d3/</id>
+    <published>2014-11-15T05:54:57.000Z</published>
+    <updated>2017-09-25T07:02:00.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;&lt;img src=&quot;http://i3.piimg.com/0e2d18cf43f9f605.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="visualization" scheme="http://zhihaozhang.github.io/categories/visualization/"/>
+    
+    
+      <category term="d3" scheme="http://zhihaozhang.github.io/tags/d3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>用Java生成Json文件</title>
+    <link href="http://zhihaozhang.github.io/2014/04/24/%E7%94%A8Java%E7%94%9F%E6%88%90Json%E6%96%87%E4%BB%B6/"/>
+    <id>http://zhihaozhang.github.io/2014/04/24/用Java生成Json文件/</id>
+    <published>2014-04-24T12:55:00.000Z</published>
+    <updated>2017-09-24T04:15:45.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;Json&quot;&gt;&lt;a href=&quot;#Json&quot; class=&quot;headerlink&quot; title=&quot;Json&quot;&gt;&lt;/a&gt;Json&lt;/h1&gt;&lt;h2 id=&quot;Json是什么&quot;&gt;&lt;a href=&quot;#Json是什么&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="Java" scheme="http://zhihaozhang.github.io/categories/Java/"/>
+    
+    
+      <category term="Json" scheme="http://zhihaozhang.github.io/tags/Json/"/>
+    
+  </entry>
+  
+</feed>
