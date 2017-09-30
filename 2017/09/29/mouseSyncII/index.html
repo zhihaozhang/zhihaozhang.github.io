@@ -134,7 +134,7 @@
         <div class="container">
             <main class="main post-page">
     <article class="article-entry">
-        <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>在<a href="http://zhihaozhang.github.io/2017/09/23/%E8%AE%A9iMac%E4%B8%8EMacBook%E9%AB%98%E6%95%88%E5%8D%8F%E5%90%8C%E5%B7%A5%E4%BD%9C%E2%80%94%E2%80%94mouseSync%E5%BC%80%E5%8F%91%E5%BF%83%E5%BE%97/">上篇博客</a>中,我介绍了mouseSync这款软件的开发初衷、使用场景和开发的过程，感谢一些朋友试用该软件并给我留言，提出了一些新的需求和issue。同时也感谢开发者头条的推荐至头版的精选板块，让那篇开发笔记被2万开发者阅读过了，收获了<strong>github的star</strong>若干、<strong>公众号的关注</strong>若干、赞赏约<strong>50元</strong>。真的非常感谢大家的关注、star鼓励和金钱赞赏。</p>
+        <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>在<a href="http://zhihaozhang.github.io/2017/09/23/让iMac与MacBook高效协同工作——mouseSync开发心得/">上篇博客</a>中,我介绍了mouseSync这款软件的开发初衷、使用场景和开发的过程，感谢一些朋友试用该软件并给我留言，提出了一些新的需求和issue。同时也感谢开发者头条的推荐至头版的精选板块，让那篇开发笔记被2万开发者阅读过了，收获了<strong>github的star</strong>若干、<strong>公众号的关注</strong>若干、赞赏约<strong>50元</strong>。真的非常感谢大家的关注、star鼓励和金钱赞赏。</p>
 <p>我整理了一下大家的需求，大体上可归纳为3类。</p>
 <ol>
 <li>没有logo</li>
@@ -145,10 +145,8 @@
 <h1 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h1><h2 id="没有logo"><a href="#没有logo" class="headerlink" title="没有logo"></a>没有logo</h2><p>其实这件事挺尴尬的，我不是设计师，因此平时logo的主要来源是<a href="https://www.flaticon.com" target="_blank" rel="external">flaticon</a>，这次没忍心打扰正在熟睡的非著名设计师Joseph，因此还是在flaticon上找的icon，进行了简单的颜色变换与组合。</p>
 <p>icon考虑到了mouseSync具有鼠标和蓝牙的特性，因此还是比较写实的。考虑到蓝牙客户端有外部设备和数据中心(两台Mac)之分，因此两个icon虽然很相似，但仍有细微的不同。不同点在于，数据中心的icon多了一个类似信号指示的标志，表示它是接收蓝牙信号的一端。</p>
 <p>由于本人设计方面实在业余，还请大家轻喷。有空再找非著名设计师Joseph实现一枚漂亮的logo。</p>
-<p><img src="https://syy.freep.cn/588778/icons.png" alt=""></p>
-<blockquote>
-<p>icons</p>
-</blockquote>
+<div align="center"><br><img src="https://syy.freep.cn/588778/icons.png" alt=""><br>&gt; icons<br></div>
+
 <h2 id="在外部设备端容易引起误操作"><a href="#在外部设备端容易引起误操作" class="headerlink" title="在外部设备端容易引起误操作"></a>在外部设备端容易引起误操作</h2><p>之前的demo视频中，为了让两台电脑看起来一致，我录的是同时打开文件，同时在图标上右击，在现实生活中，在同一时刻同时操作两台Mac的需求很少不存在。通常情况下，用户还是想对某一台Mac进行操作的。<strong>mouseSync的定位应该是：帮助用户用一个鼠标操作两台电脑，且给用户决定什么时候操作哪台，省去两个鼠标之间换来换去的麻烦。</strong></p>
 <p>之前的项目中，我对鼠标事件添加的均是全局监控事件，因此只要mouseSync<strong>生命周期</strong>没有结束，它的操作将实时被发送到另一台mac上。我想过两个解决方案：</p>
 <ol>
@@ -158,30 +156,26 @@
 <h3 id="为什么选择Plan-B"><a href="#为什么选择Plan-B" class="headerlink" title="为什么选择Plan B"></a>为什么选择Plan B</h3><p>关于方案1，我觉得作为一款软件，快捷键应当由用户自己决定，虽然cocoapod上已经有非常好的项目<a href="https://github.com/Clipy/KeyHolder" target="_blank" rel="external">KeyHolder</a>进行支持,但是考虑到两个因素还是决定使用Plan B。</p>
 <p>先看看Plan B，Plan B是这样的，首先让当前的window全屏，但是里面没有内容，因此无论在当前试图下如何操作，都不会有可能造成误操作。回到Plan A，快捷键的录入放到哪里呢？如果放到当前视图，将会带来一定的误操作风险；如果放到MenuBar，那么用户将不得不退出全屏模式，到菜单栏进行设置，这样的解决方案破坏了用户体验，综合考虑，最终还是选了Plan B。</p>
 <h3 id="实现过程中遇到的问题"><a href="#实现过程中遇到的问题" class="headerlink" title="实现过程中遇到的问题"></a>实现过程中遇到的问题</h3><p>让当前窗口一打开就全屏的方法是在ViewDidLoad方法体中进行控制的:</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">viewDidLoad</span><span class="params">()</span></span> &#123;</div><div class="line">    <span class="keyword">super</span>.viewDidLoad()</div><div class="line">    <span class="keyword">self</span>.view.window?.zoom(<span class="keyword">self</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">viewDidLoad</span><span class="params">()</span></span> &#123;</div><div class="line">	<span class="keyword">super</span>.viewDidLoad()</div><div class="line">	<span class="keyword">self</span>.view.window?.zoom(<span class="keyword">self</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>但是我很快就发现了问题：<strong>尽管已经将应用全屏了，但是用户依然会有一定几率对dock栏和顶部菜单栏进行误操作。</strong>用户如果在操作另一台电脑的时候，还得注意这台电脑上是不是误操作了，这不符合我们软件开发的初衷。考虑到有些用户将dock放在底部，有些用户将dock放在左边，因此，我加了这样的限制，当用户将鼠标移动到距离屏幕边缘<strong>50px</strong>以内的时候，程序帮助他将鼠标移动至屏幕中央。参照下图，灰色地带就可以作为防止鼠标误操作的缓冲区。</p>
-<p><img src="https://syy.freep.cn/588778/border.png" alt=""></p>
-<blockquote>
-<p>防止对dock和菜单栏误操作解决方法示意图</p>
-</blockquote>
+<div align="center"><br><img src="https://syy.freep.cn/588778/border.png" alt=""><br>&gt; 防止对dock和菜单栏误操作解决方法示意图<br></div>
+
 <p>阅读过上一篇博客的朋友一定注意到了，我们的程序是记录上一个鼠标点的位置，并将上一个鼠标点的位置与当前位置相减，将位置变动作为特征值进行发送。因此，在鼠标被程序移动到屏幕中央的时候，需要将上一个位置更新为屏幕中央的坐标。</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//屏幕宽高的获取方式</span></div><div class="line">    <span class="keyword">let</span> <span class="type">SCREEN_WIDTH</span> = <span class="type">NSScreen</span>.main()!.frame.width</div><div class="line">    <span class="keyword">let</span> <span class="type">SCREEN_HEIGHT</span> = <span class="type">NSScreen</span>.main()!.frame.height</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="左键拖拽功能"><a href="#左键拖拽功能" class="headerlink" title="左键拖拽功能"></a>左键拖拽功能</h2><p>左键拖一个文件或窗口到一个新位置这个功能还是经常被使用到的，我使用的是Trackpad，通常是使用<strong>三支拖移</strong>。想要监听外围设备的这个动作并不难，但是想让计算机模拟这个操作相对比较困难。就像双击不是单纯的模拟单击事件两次一样，这次我又踩到坑了，drag and move事件并不是简单的mousedown-> mousemove -> mouseup这么容易的事情。</p>
+<h2 id="左键拖拽功能"><a href="#左键拖拽功能" class="headerlink" title="左键拖拽功能"></a>左键拖拽功能</h2><p>左键拖一个文件或窗口到一个新位置这个功能还是经常被使用到的，我使用的是Trackpad，通常是使用<strong>三支拖移</strong>。想要监听外围设备的这个动作并不难，但是想让计算机模拟这个操作相对比较困难。就像双击不是单纯的模拟单击事件两次一样，这次我又踩到坑了，drag and move事件并不是简单的mousedown-&gt; mousemove -&gt; mouseup这么容易的事情。</p>
 <p>我在<a href="https://stackoverflow.com/questions/1817628/clicking-the-mouse-down-to-drag-objects-on-mac" target="_blank" rel="external">Stack Overflow</a>上找到了正确的方法：有一个叫<strong>kCGEventLeftMouseDragged</strong>的事件，专门来处理这件事。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">mouse_left_drag_to</span><span class="params">(<span class="keyword">float</span> x, <span class="keyword">float</span> y)</span> </span>&#123;</div><div class="line">    CGEventRef left_drag_event = CGEventCreateMouseEvent(<span class="literal">NULL</span>, kCGEventLeftMouseDragged, CGPointMake(x, y), <span class="number">0</span>);</div><div class="line"></div><div class="line">    CGEventPost(kCGHIDEventTap, left_drag_event);</div><div class="line">    CFRelease(left_drag_event);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>和Scroll滚轮事件一样，这里我们采用的是Quartz模拟鼠标事件,因此依然需要C与swift进行混编。模拟总共可分为3步：第一步是创建一个Quartz鼠标事件；第二步是讲这个时间放到事件流中，并指定位置；第三步是release这个事件。</p>
+<p>和Scroll滚轮事件一样，这里我们采用的是Quartz模拟鼠标事件,因此依然需要C与swift进行混编。模拟总共可分为3步：第一步是创建一个Quartz鼠标事件；第二步是将这个事件放到事件流中，并指定位置；第三步是release这个事件。</p>
 <p>模拟这个事件的时候，随着鼠标拖拽后的不停移动，会不停产生event，而且event中x和y的偏移量始终是相对于第一次鼠标drag按下时的坐标。因此，我们需要记录两件事，第一件事是第一次drag时候的坐标，第二件事是当前是不是开启了新一轮的drag还是仍然在上一轮的drag中。核心代码如下：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">    <span class="keyword">if</span> dragFirst == <span class="literal">true</span>&#123;</div><div class="line">        dragFirst = <span class="literal">false</span></div><div class="line">    mouseLocBeforeDrag = <span class="type">NSEvent</span>.mouseLocation()                 mouseLocBeforeDrag.y = <span class="type">NSHeight</span>(<span class="type">NSScreen</span>.screens()![<span class="number">0</span>].frame) - mouseLocBeforeDrag.y;</div><div class="line">    </div><div class="line">    mouse_left_drag_to(<span class="type">Float</span>(mouseLocBeforeDrag.x)+<span class="type">Float</span>(dx!),<span class="type">Float</span>(mouseLocBeforeDrag.y)-<span class="type">Float</span>(dy!)</div><div class="line">  &#125;<span class="keyword">else</span>&#123;</div><div class="line">    mouse_left_drag_to(<span class="type">Float</span>(mouseLocBeforeDrag.x)+<span class="type">Float</span>(dx!),<span class="type">Float</span>(mouseLocBeforeDrag.y)-<span class="type">Float</span>(dy!))</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">	<span class="keyword">if</span> dragFirst == <span class="literal">true</span>&#123;</div><div class="line">		dragFirst = <span class="literal">false</span></div><div class="line">    mouseLocBeforeDrag = <span class="type">NSEvent</span>.mouseLocation()                 mouseLocBeforeDrag.y = <span class="type">NSHeight</span>(<span class="type">NSScreen</span>.screens()![<span class="number">0</span>].frame) - mouseLocBeforeDrag.y;</div><div class="line">    </div><div class="line">    mouse_left_drag_to(<span class="type">Float</span>(mouseLocBeforeDrag.x)+<span class="type">Float</span>(dx!),<span class="type">Float</span>(mouseLocBeforeDrag.y)-<span class="type">Float</span>(dy!)</div><div class="line">  &#125;<span class="keyword">else</span>&#123;</div><div class="line">    mouse_left_drag_to(<span class="type">Float</span>(mouseLocBeforeDrag.x)+<span class="type">Float</span>(dx!),<span class="type">Float</span>(mouseLocBeforeDrag.y)-<span class="type">Float</span>(dy!))</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>上面的代码有两处需要注意：</p>
 <ol>
 <li>dragFirst初始值为true,在mouseUp之后重新置为true，表示一轮的drag已经完成了；</li>
 <li>y的坐标是-，x的坐标是+，这是由OS X的坐标系决定的。</li>
 </ol>
 <p>最后，我用两台电脑同时在画板上写了一个牛B。mouseSync的开发工作算是告一段落了，希望对大家有所帮助！</p>
-<p><img src="https://syy.freep.cn/588778/dragdemo.gif" alt=""></p>
-<blockquote>
-<p>drag事件demo</p>
-</blockquote>
+<div align="center"><br><img src="https://syy.freep.cn/588778/dragdemo.gif" alt=""><br>&gt; drag事件demo<br></div>
+
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol>
 <li><a href="https://stackoverflow.com/questions/1817628/clicking-the-mouse-down-to-drag-objects-on-mac" target="_blank" rel="external">https://stackoverflow.com/questions/1817628/clicking-the-mouse-down-to-drag-objects-on-mac</a></li>
 <li><a href="https://www.flaticon.com" target="_blank" rel="external">https://www.flaticon.com</a></li>
@@ -189,11 +183,7 @@
 <h1 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h1><p>试用软件之后如果您对软件有任何的意见与建议，欢迎留言。如果您喜欢这款软件，也欢迎您将它推荐给您的朋友们。让我们一起将mouseSync变得更好！</p>
 <p>我会在订阅号里不定期分享我个人的macOS/ios开发心得和开发笔记，也会在里面发表对于苹果产品/框架/趋势的拙见，希望爱好科技产品或者苹果生态圈的开发者关注。相信本公众号一定能给您带来收获和启发。</p>
 <p>【欢迎扫码关注微信公众号】</p>
-<p><img src="https://syy.freep.cn/588778/640.jpeg" alt=""></p>
-<blockquote>
-<p>扫码关注微信公众号 骨灰级果粉 获得最新文章更新</p>
-</blockquote>
-
+<div align="center"><br><img src="https://syy.freep.cn/588778/640.jpeg" alt=""><br>&gt; 扫码关注微信公众号 骨灰级果粉 获得最新文章更新<br></div>
 
             <! -- 添加捐赠图标 -->
     <div class ="post-donate">
@@ -527,7 +517,7 @@
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/polybrush in d3/" >polybrush in d3</a>
         </li>
     
     
@@ -537,12 +527,7 @@
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/drop and drag in d3js/" >drop and drag in d3</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular/" >D3 on Angular</a>
         </li>
     
     
@@ -557,17 +542,22 @@
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular/" >D3 on Angular</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/polybrush in d3/" >polybrush in d3</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
         </li>
     
     
         <li class="archive-post-item">
             <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/drop and drag in d3js/" >drop and drag in d3</a>
         </li>
     
     
@@ -580,9 +570,9 @@
         <div class="sidebar-tags">
     <div class="sidebar-tags-name">
     
-        <span class="sidebar-tag-name"><a href= "#">macOS开发</a></span>
-    
         <span class="sidebar-tag-name"><a href= "#">d3</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">macOS开发</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">Json</a></span>
     

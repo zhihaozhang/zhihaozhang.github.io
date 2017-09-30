@@ -132,6 +132,36 @@
     
     
         <article class="index-post">
+            <a class="content-show-full" href = "/2014/11/15/D3 on Angular(2)/" >
+                    <h2 class="abstract-title">
+                        
+                        <span>D3 on Angular(2)</span>
+                    </h2>
+                <div class="abstract-content">
+                    More Dynamic visualizations上一篇博客介绍了如何借助Angular来完成一个指令，达到可复用目的，但是似乎依然不够动态，我们不得不提前输入想要展示的数组。Angular的最大的特点是双向数据绑定，我们能否借助这个特性来完成更动态的可视化图呢？让Angular帮我们盯着数据，一旦数据改变了，就更新DOM元素。这一切都是Angular帮我们完成的，我们唯一需要做的是指定数据和DOM元素之间的关系，不需要写很多的代码。
+双向数据绑定先来用一个简单的例子来展示一下Angular帮我们完成的双向数据绑定，这里用一个简单的例子来展示一下。
+12345678//\&lt;bo...
+                </div>
+            </a>
+            <div class="abstract-post-meta">
+                <!-- tags  -->
+                
+                <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = d3>d3</a>
+    
+</div>
+                
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2014/11/15</span>
+                </div>
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
             <a class="content-show-full" href = "/2014/11/15/D3 on Angular/" >
                     <h2 class="abstract-title">
                         
@@ -161,15 +191,15 @@ Why Angular使用Angular做可视化有很多原因，但其中最主要的原�
     
     
         <article class="index-post">
-            <a class="content-show-full" href = "/2014/11/15/D3 on Angular(2)/" >
+            <a class="content-show-full" href = "/2014/11/15/associate brush/" >
                     <h2 class="abstract-title">
                         
-                        <span>D3 on Angular(2)</span>
+                        <span>associate brush</span>
                     </h2>
                 <div class="abstract-content">
-                    More Dynamic visualizations上一篇博客介绍了如何借助Angular来完成一个指令，达到可复用目的，但是似乎依然不够动态，我们不得不提前输入想要展示的数组。Angular的最大的特点是双向数据绑定，我们能否借助这个特性来完成更动态的可视化图呢？让Angular帮我们盯着数据，一旦数据改变了，就更新DOM元素。这一切都是Angular帮我们完成的，我们唯一需要做的是指定数据和DOM元素之间的关系，不需要写很多的代码。
-双向数据绑定先来用一个简单的例子来展示一下Angular帮我们完成的双向数据绑定，这里用一个简单的例子来展示一下。
-12345678//\&lt;bo...
+                    这篇博客记录了在上一篇博客加入scatterplot matrix的基础上，实现了associate brush的操作，即，从RadViz中brush一块区域，右边16个scatterplot里对应的点都会高亮出来，其他的点将暗淡下去；同样的，从右边16个scatterplot matrix里任一scatterplot cell里brush一些点，另外15个cell以及左边的RadViz里相应的点都会被highlight出来。具体的效果如下图：
+代码如下：
+123456789101112131415161718192021222324252627282930313233343536373...
                 </div>
             </a>
             <div class="abstract-post-meta">
@@ -201,36 +231,6 @@ Why Angular使用Angular做可视化有很多原因，但其中最主要的原�
 这篇博客中，就以拖拽为例，并借助之前实现的热力图，实现拖拽dimension的label以达到reoder维度的效果。为了使用三个阶段，我们会让开始拖拽的时候，维度名变成红色、字体变大来表示强调的效果；在拖拽过程中，让label紧跟鼠标的位置；并且判断最终的位置，交换两个维度，并重新绘制整个热力图。
 理想情况下，开始移动的时候的，运行情况应该像下面这样。
 drag创建一个...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = d3>d3</a>
-    
-</div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2014/11/15</span>
-                </div>
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="content-show-full" href = "/2014/11/15/associate brush/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>associate brush</span>
-                    </h2>
-                <div class="abstract-content">
-                    这篇博客记录了在上一篇博客加入scatterplot matrix的基础上，实现了associate brush的操作，即，从RadViz中brush一块区域，右边16个scatterplot里对应的点都会高亮出来，其他的点将暗淡下去；同样的，从右边16个scatterplot matrix里任一scatterplot cell里brush一些点，另外15个cell以及左边的RadViz里相应的点都会被highlight出来。具体的效果如下图：
-代码如下：
-123456789101112131415161718192021222324252627282930313233343536373...
                 </div>
             </a>
             <div class="abstract-post-meta">
@@ -639,7 +639,7 @@ selection.classed(name,【value】)value参数可选，如果没有指定，则�
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/polybrush in d3/" >polybrush in d3</a>
         </li>
     
     
@@ -649,12 +649,7 @@ selection.classed(name,【value】)value参数可选，如果没有指定，则�
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/drop and drag in d3js/" >drop and drag in d3</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular/" >D3 on Angular</a>
         </li>
     
     
@@ -669,17 +664,22 @@ selection.classed(name,【value】)value参数可选，如果没有指定，则�
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular/" >D3 on Angular</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/polybrush in d3/" >polybrush in d3</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
         </li>
     
     
         <li class="archive-post-item">
             <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/drop and drag in d3js/" >drop and drag in d3</a>
         </li>
     
     
@@ -692,9 +692,9 @@ selection.classed(name,【value】)value参数可选，如果没有指定，则�
         <div class="sidebar-tags">
     <div class="sidebar-tags-name">
     
-        <span class="sidebar-tag-name"><a href= "#">macOS开发</a></span>
-    
         <span class="sidebar-tag-name"><a href= "#">d3</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">macOS开发</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">Json</a></span>
     
