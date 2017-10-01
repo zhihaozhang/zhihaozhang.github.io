@@ -145,6 +145,28 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">public void writeToJson(String filePath,JSONArray object) throws IOException</div><div class="line">&#123;</div><div class="line">    File file = new File(filePath);</div><div class="line">    char [] stack = new char[1024];</div><div class="line">    int top=-1;</div><div class="line"></div><div class="line">    String string = object.toString();</div><div class="line"></div><div class="line">    StringBuffer sb = new StringBuffer();</div><div class="line">    char [] charArray = string.toCharArray();</div><div class="line">    for(int i=0;i&lt;charArray.length;i++)&#123;</div><div class="line">        char c= charArray[i];</div><div class="line">        if (&apos;&#123;&apos; == c || &apos;[&apos; == c) &#123;  </div><div class="line">            stack[++top] = c; </div><div class="line">            sb.append(&quot;\n&quot;+charArray[i] + &quot;\n&quot;);  </div><div class="line">            for (int j = 0; j &lt;= top; j++) &#123;  </div><div class="line">                sb.append(&quot;\t&quot;);  </div><div class="line">            &#125;  </div><div class="line">            continue;  </div><div class="line">        &#125;</div><div class="line">         if ((i + 1) &lt;= (charArray.length - 1)) &#123;  </div><div class="line">                char d = charArray[i+1];  </div><div class="line">                if (&apos;&#125;&apos; == d || &apos;]&apos; == d) &#123;  </div><div class="line">                    top--; </div><div class="line">                    sb.append(charArray[i] + &quot;\n&quot;);  </div><div class="line">                    for (int j = 0; j &lt;= top; j++) &#123;  </div><div class="line">                        sb.append(&quot;\t&quot;);  </div><div class="line">                    &#125;  </div><div class="line">                    continue;  </div><div class="line">                &#125;  </div><div class="line">            &#125;  </div><div class="line">            if (&apos;,&apos; == c) &#123;  </div><div class="line">                sb.append(charArray[i] + &quot;&quot;);  </div><div class="line">                for (int j = 0; j &lt;= top; j++) &#123;  </div><div class="line">                    sb.append(&quot;&quot;);  </div><div class="line">                &#125;  </div><div class="line">                continue;  </div><div class="line">            &#125;  </div><div class="line">            sb.append(c);  </div><div class="line">        &#125;  </div><div class="line">        Writer write = new FileWriter(file);  </div><div class="line">        write.write(sb.toString());  </div><div class="line">        write.flush();  </div><div class="line">        write.close();  </div><div class="line">&#125;</div><div class="line"></div></pre></td></tr></table></figure>
 <h1 id="one-more-thing"><a href="#one-more-thing" class="headerlink" title="one more thing"></a>one more thing</h1><p>在将json格式的数据写出到文件的时候，可能需要写出”号来，在控制台输出的时候，很多人都知道使用转意符，即System.out.println(“/“”); ，不过在尝试写入到文件的时候，发现这么搞行不通，输出到文件的时候还是会有/，这该怎么办呢？<br>突发奇想，在需要输出的String的基础上再包一层new String(string)<strong>消化</strong>掉转意符。真的成功了！有时候，真的需要一点灵感~<br><img src="http://ww2.sinaimg.cn/large/aa2320a8gw1evvieprj07j214c0qqn3r.jpg" alt=""></p>
 
+
+            <! -- 添加捐赠图标 -->
+    <div class ="post-donate">
+    <div id="donate_board" class="donate_bar center">
+        <a id="btn_donate" class="btn_donate" href="javascript:;" title="打赏"></a>
+       <div style="text-align:center;color:#00F" >
+            <strong>如果本文对您有帮助，请您用支付宝或微信小额赞赏支持我继续原创，谢谢。</strong>
+        </div>
+        <br>
+      </div>  
+    <div id="donate_guide" class="donate_bar center hidden" >
+        <!-- 支付宝打赏图案 -->
+        <img src="https://syy.freep.cn/588778/qrcode_1506226737.png" height="240" width="180" alt="支付宝微信打赏"> 
+    </div>
+    <script type="text/javascript">
+        document.getElementById('btn_donate').onclick = function(){
+            $('#donate_board').addClass('hidden');
+            $('#donate_guide').removeClass('hidden');
+        }
+    </script>
+</div>
+<! -- 添加捐赠图标 -->
     </article>
     <!-- 前后页  -->
     <ul class="post-pager">
@@ -160,14 +182,17 @@
     </ul>
 
 
+
     <!-- 来必力City版安装代码 -->
 
 <!-- City版安装代码已完成 -->
-    
-    
-    <!--PC版-->
 
-    
+
+    <div style="text-align:center">
+    <span id="busuanzi_container_page_pv" >
+        本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+    </span>
+    </div>
 </main>
             <!-- profile -->
             
@@ -407,6 +432,10 @@
     
     
     
+    
+    
+    
+    
     <div class="total-archive"> Total : 13 </div>
     
     <div class="post-archive">
@@ -448,17 +477,7 @@
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/Build reuseable visualization using d3.js and AngularJS/" >Build reusable visualization using d3.js and AngularJS</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
             <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular/" >D3 on Angular</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/浅谈d3.js中的异步文件读取的处理/" >浅谈d3.js中强制异步文件读取同步的四种方法</a>
         </li>
     
     
@@ -468,12 +487,22 @@
     
     
         <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
             <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/浅谈d3.js中的异步文件读取的处理/" >浅谈d3.js中强制异步文件读取同步的四种方法</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/Build reuseable visualization using d3.js and AngularJS/" >Build reusable visualization using d3.js and AngularJS</a>
         </li>
     
     
@@ -483,7 +512,7 @@
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
         </li>
     
     

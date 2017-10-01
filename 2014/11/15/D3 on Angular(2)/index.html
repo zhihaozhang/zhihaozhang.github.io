@@ -156,36 +156,61 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">//\&lt;!DOCTYPE html\&gt;</div><div class="line">//\&lt;html\&gt;</div><div class="line">//\&lt;head\&gt;</div><div class="line">//  \&lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.js&quot;\&gt;\&lt;/script\&gt;</div><div class="line">//  \&lt;script src=&quot;http://d3js.org/d3.v3.js&quot; charset=&quot;utf-8&quot;\&gt;\&lt;/script\&gt;</div><div class="line">//\&lt;/head\&gt;</div><div class="line">//\&lt;body ng-app=&quot;myApp&quot; ng-init=&quot;chart=[&#123;value: 10&#125;, &#123;value: 20&#125;, &#123;value: 30&#125;]()&quot;\&gt;</div><div class="line">//  \&lt;donut-chart data=&quot;chart&quot; style=&quot;float:right&quot;\&gt;\&lt;/donut-chart\&gt;</div><div class="line">//  \&lt;button ng-click=&quot;chart.push(&#123;value: 10&#125;)&quot;\&gt;add slice\&lt;/button\&gt;</div><div class="line">//  \&lt;button ng-click=&quot;chart.pop()&quot;\&gt;remove slice\&lt;/button\&gt;</div><div class="line">//  \&lt;input type=&quot;range&quot; ng-model=&quot;slice.value&quot; ng-repeat=&quot;slice in chart track by $index&quot;\&gt;</div><div class="line">//  \&lt;script\&gt;</div><div class="line">//    var myApp = angular.module(&apos;myApp&apos;, []());</div><div class="line">//    myApp.directive(&apos;donutChart&apos;, function()&#123;</div><div class="line">//      function link(scope, el, attr)&#123;</div><div class="line">//        var color = d3.scale.category10();</div><div class="line">//        var width = 200;</div><div class="line">//        var height = 200;</div><div class="line">//        var min = Math.min(width, height);</div><div class="line">//        var svg = d3.select(el[0]()).append(&apos;svg&apos;);</div><div class="line">//        var pie = d3.layout.pie().sort(null);</div><div class="line">//        var arc = d3.svg.arc()</div><div class="line">//          .outerRadius(min / 2 \* 0.9)</div><div class="line">//          .innerRadius(min / 2 \* 0.5);</div><div class="line">//</div><div class="line">//        pie.value(function(d)&#123; return d.value; &#125;);</div><div class="line">//  </div><div class="line">//        svg.attr(&#123;width: width, height: height&#125;);</div><div class="line">//        var g = svg.append(&apos;g&apos;)</div><div class="line">//          // center the donut chart</div><div class="line">//          .attr(&apos;transform&apos;, &apos;translate(&apos; + width / 2 + &apos;,&apos; + height / 2 + &apos;)&apos;);</div><div class="line">//  </div><div class="line">//        // add the \&lt;path\&gt;s for each arc slice</div><div class="line">//        var arcs = g.selectAll(&apos;path&apos;);</div><div class="line">//</div><div class="line">//        scope.$watch(&apos;data&apos;, function(data)&#123;</div><div class="line">//          arcs = arcs.data(pie(data));</div><div class="line">//          arcs.enter().append(&apos;path&apos;)</div><div class="line">//            .style(&apos;stroke&apos;, &apos;white&apos;)</div><div class="line">//            .attr(&apos;fill&apos;, function(d, i)&#123; return color(i) &#125;);</div><div class="line">//          arcs.exit().remove();</div><div class="line">//          arcs.attr(&apos;d&apos;, arc);</div><div class="line">//        &#125;, true);</div><div class="line">//      &#125;</div><div class="line">//      return &#123;</div><div class="line">//        link: link,</div><div class="line">//        restrict: &apos;E&apos;,</div><div class="line">//        scope: &#123; data: &apos;=&apos; &#125;</div><div class="line">//      &#125;;</div><div class="line">//    &#125;);</div><div class="line">//  \&lt;/script\&gt;</div><div class="line">//\&lt;/body\&gt;</div><div class="line">//\&lt;/html\&gt;</div><div class="line"></div></pre></td></tr></table></figure>
 <p>基础知识就介绍到这里，下面会介绍一个稍微难一些的例子。</p>
 
+
+            <! -- 添加捐赠图标 -->
+    <div class ="post-donate">
+    <div id="donate_board" class="donate_bar center">
+        <a id="btn_donate" class="btn_donate" href="javascript:;" title="打赏"></a>
+       <div style="text-align:center;color:#00F" >
+            <strong>如果本文对您有帮助，请您用支付宝或微信小额赞赏支持我继续原创，谢谢。</strong>
+        </div>
+        <br>
+      </div>  
+    <div id="donate_guide" class="donate_bar center hidden" >
+        <!-- 支付宝打赏图案 -->
+        <img src="https://syy.freep.cn/588778/qrcode_1506226737.png" height="240" width="180" alt="支付宝微信打赏"> 
+    </div>
+    <script type="text/javascript">
+        document.getElementById('btn_donate').onclick = function(){
+            $('#donate_board').addClass('hidden');
+            $('#donate_guide').removeClass('hidden');
+        }
+    </script>
+</div>
+<! -- 添加捐赠图标 -->
     </article>
     <!-- 前后页  -->
     <ul class="post-pager">
         
             <li class="next">
-                <a href= "/2014/11/15/drop and drag in d3js/" title= drop and drag in d3 >
+                <a href= "/2014/11/15/D3 on Angular/" title= D3 on Angular >
                     <span>Next Post</span>
-                    <span>drop and drag in d3</span>
+                    <span>D3 on Angular</span>
                 </a>
             </li>
         
         
             <li class="previous">
-                <a href= "/2014/11/15/冷门但实用的d3.js内置函数/" title= 冷门但实用的d3.js内置函数 >
+                <a href= "/2014/11/15/drop and drag in d3js/" title= drop and drag in d3 >
                     <span>Previous Post</span>
-                    <span>冷门但实用的d3.js内置函数</span>
+                    <span>drop and drag in d3</span>
                 </a>
             </li>
         
     </ul>
 
 
+
     <!-- 来必力City版安装代码 -->
 
 <!-- City版安装代码已完成 -->
-    
-    
-    <!--PC版-->
 
-    
+
+    <div style="text-align:center">
+    <span id="busuanzi_container_page_pv" >
+        本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+    </span>
+    </div>
 </main>
             <!-- profile -->
             
@@ -425,6 +450,10 @@
     
     
     
+    
+    
+    
+    
     <div class="total-archive"> Total : 13 </div>
     
     <div class="post-archive">
@@ -466,17 +495,7 @@
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/Build reuseable visualization using d3.js and AngularJS/" >Build reusable visualization using d3.js and AngularJS</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
             <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular/" >D3 on Angular</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/浅谈d3.js中的异步文件读取的处理/" >浅谈d3.js中强制异步文件读取同步的四种方法</a>
         </li>
     
     
@@ -486,12 +505,22 @@
     
     
         <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
             <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/浅谈d3.js中的异步文件读取的处理/" >浅谈d3.js中强制异步文件读取同步的四种方法</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/Build reuseable visualization using d3.js and AngularJS/" >Build reusable visualization using d3.js and AngularJS</a>
         </li>
     
     
@@ -501,7 +530,7 @@
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
         </li>
     
     
