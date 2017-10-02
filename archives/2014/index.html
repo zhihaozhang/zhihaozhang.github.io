@@ -103,15 +103,16 @@
     
     
         <article class="index-post">
-            <a class="content-show-full" href = "/2014/11/15/associate brush/" >
+            <a class="content-show-full" href = "/2014/11/15/drop and drag in d3js/" >
                     <h2 class="abstract-title">
                         
-                        <span>associate brush</span>
+                        <span>drop and drag in d3</span>
                     </h2>
                 <div class="abstract-content">
-                    这篇博客记录了在上一篇博客加入scatterplot matrix的基础上，实现了associate brush的操作，即，从RadViz中brush一块区域，右边16个scatterplot里对应的点都会高亮出来，其他的点将暗淡下去；同样的，从右边16个scatterplot matrix里任一scatterplot cell里brush一些点，另外15个cell以及左边的RadViz里相应的点都会被highlight出来。具体的效果如下图：
-代码如下：
-123456789101112131415161718192021222324252627282930313233343536373...
+                    Behavior in d3在d3中，行为被设计成了一种组件，可以创建一系列的事件，并绑定到调用这些行为的元素上。最常见的行为有拖拽与缩放，使用这些行为可以很方便地在拖拽或者缩放的开始、过程中以及结束时达到想要的效果。
+这篇博客中，就以拖拽为例，并借助之前实现的热力图，实现拖拽dimension的label以达到reoder维度的效果。为了使用三个阶段，我们会让开始拖拽的时候，维度名变成红色、字体变大来表示强调的效果；在拖拽过程中，让label紧跟鼠标的位置；并且判断最终的位置，交换两个维度，并重新绘制整个热力图。
+理想情况下，开始移动的时候的，运行情况应该像下面这样。
+drag创建一个...
                 </div>
             </a>
             <div class="abstract-post-meta">
@@ -133,16 +134,15 @@
     
     
         <article class="index-post">
-            <a class="content-show-full" href = "/2014/11/15/drop and drag in d3js/" >
+            <a class="content-show-full" href = "/2014/11/15/associate brush/" >
                     <h2 class="abstract-title">
                         
-                        <span>drop and drag in d3</span>
+                        <span>associate brush</span>
                     </h2>
                 <div class="abstract-content">
-                    Behavior in d3在d3中，行为被设计成了一种组件，可以创建一系列的事件，并绑定到调用这些行为的元素上。最常见的行为有拖拽与缩放，使用这些行为可以很方便地在拖拽或者缩放的开始、过程中以及结束时达到想要的效果。
-这篇博客中，就以拖拽为例，并借助之前实现的热力图，实现拖拽dimension的label以达到reoder维度的效果。为了使用三个阶段，我们会让开始拖拽的时候，维度名变成红色、字体变大来表示强调的效果；在拖拽过程中，让label紧跟鼠标的位置；并且判断最终的位置，交换两个维度，并重新绘制整个热力图。
-理想情况下，开始移动的时候的，运行情况应该像下面这样。
-drag创建一个...
+                    这篇博客记录了在上一篇博客加入scatterplot matrix的基础上，实现了associate brush的操作，即，从RadViz中brush一块区域，右边16个scatterplot里对应的点都会高亮出来，其他的点将暗淡下去；同样的，从右边16个scatterplot matrix里任一scatterplot cell里brush一些点，另外15个cell以及左边的RadViz里相应的点都会被highlight出来。具体的效果如下图：
+代码如下：
+123456789101112131415161718192021222324252627282930313233343536373...
                 </div>
             </a>
             <div class="abstract-post-meta">
@@ -223,35 +223,6 @@ drag创建一个...
     
     
         <article class="index-post">
-            <a class="content-show-full" href = "/2014/11/15/冷门但实用的d3.js内置函数/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>冷门但实用的d3.js内置函数</span>
-                    </h2>
-                <div class="abstract-content">
-                    前言在d3.js的API文档中，提供了很多内置的函数，但是有些很有用的内置函数却被无情的忽略了，这篇博客就来整理整理这些被遗忘却很实用的函数。希望整理过后，他们不再被遗忘。
-selection.classed(name,【value】)value参数可选，如果没有指定，则返回与name参数匹配的第一个非空元素是否绑定了指定的CSS类，true表示绑定，false表示未绑定。如果value指定了的话，就是为selection添加/删除CSS类。这点与selection.attr(name,【value】)非常类似，但是相比而言，就冷门的多，恐怕没有多少人不知道selection.attr(...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = d3>d3</a>
-    
-</div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2014/11/15</span>
-                </div>
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
             <a class="content-show-full" href = "/2014/11/15/数据可视化之散点图/" >
                     <h2 class="abstract-title">
                         
@@ -282,13 +253,14 @@ selection.classed(name,【value】)value参数可选，如果没有指定，则�
     
     
         <article class="index-post">
-            <a class="content-show-full" href = "/2014/11/15/浅谈d3.js中的异步文件读取的处理/" >
+            <a class="content-show-full" href = "/2014/11/15/冷门但实用的d3.js内置函数/" >
                     <h2 class="abstract-title">
                         
-                        <span>浅谈d3.js中强制异步文件读取同步的四种方法</span>
+                        <span>冷门但实用的d3.js内置函数</span>
                     </h2>
                 <div class="abstract-content">
-                    问题提出在使用d3.js时，我们经常会使用d3.csv()或者d3.json()函数来从文件中读取出数据，不幸的是，偶尔代码的结果并不是我们预料的那样。习惯了过程式编程的我开始的时候也是这样，最让人头疼的是javascript并不会告诉你问题出在哪里了。我第一次遇到这个问题的时候，找了半天bug，确定代码主体部分没有问题之后，我只能开始使用console.log()将变量一个一个的输出到控制台里。第一次遇到这个问题时的图片是这样的：问题出在第72行和第75行，中间几行完全没有对ordertxt进行操作，但是最后的结果就是和预想的输出不吻合，后来找了个其他方法把这个问题给解决了，今天又遇到...
+                    前言在d3.js的API文档中，提供了很多内置的函数，但是有些很有用的内置函数却被无情的忽略了，这篇博客就来整理整理这些被遗忘却很实用的函数。希望整理过后，他们不再被遗忘。
+selection.classed(name,【value】)value参数可选，如果没有指定，则返回与name参数匹配的第一个非空元素是否绑定了指定的CSS类，true表示绑定，false表示未绑定。如果value指定了的话，就是为selection添加/删除CSS类。这点与selection.attr(name,【value】)非常类似，但是相比而言，就冷门的多，恐怕没有多少人不知道selection.attr(...
                 </div>
             </a>
             <div class="abstract-post-meta">
@@ -318,6 +290,34 @@ selection.classed(name,【value】)value参数可选，如果没有指定，则�
                 <div class="abstract-content">
                     Angular与D3前面写了几篇分别介绍AngularJS和D3的博客，他们各司其职，都在各自的一亩三分地里备受好评，那么，他们之间能否完成合作，实现共赢呢？这篇博客就来介绍如何将它们结合起来使用，使得我们的可视化能够更具有模块化、方便复用、具有交互性。
 Why Angular使用Angular做可视化有很多原因，但其中最主要的原因还是directives(指令)。 指令使得做可复用的可视化更容易，可以使得我们做的可视化的时候就像使用内置的HTML那么简单，比如我需要一个热力图（后面写博客怎么做），那么我仅仅需要用\\就可以了，想想这种酸爽的滋味吧。即使你不知道热力图是怎么做的，但是你用...
+                </div>
+            </a>
+            <div class="abstract-post-meta">
+                <!-- tags  -->
+                
+                <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = d3>d3</a>
+    
+</div>
+                
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2014/11/15</span>
+                </div>
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
+            <a class="content-show-full" href = "/2014/11/15/浅谈d3.js中的异步文件读取的处理/" >
+                    <h2 class="abstract-title">
+                        
+                        <span>浅谈d3.js中强制异步文件读取同步的四种方法</span>
+                    </h2>
+                <div class="abstract-content">
+                    问题提出在使用d3.js时，我们经常会使用d3.csv()或者d3.json()函数来从文件中读取出数据，不幸的是，偶尔代码的结果并不是我们预料的那样。习惯了过程式编程的我开始的时候也是这样，最让人头疼的是javascript并不会告诉你问题出在哪里了。我第一次遇到这个问题的时候，找了半天bug，确定代码主体部分没有问题之后，我只能开始使用console.log()将变量一个一个的输出到控制台里。第一次遇到这个问题时的图片是这样的：问题出在第72行和第75行，中间几行完全没有对ordertxt进行操作，但是最后的结果就是和预想的输出不吻合，后来找了个其他方法把这个问题给解决了，今天又遇到...
                 </div>
             </a>
             <div class="abstract-post-meta">
@@ -634,6 +634,8 @@ Json语法规则JSON 语法是 JavaScript 对象表示语法的子集。1.数据
     
     
     
+    
+    
     <div class="total-archive"> Total : 13 </div>
     
     <div class="post-archive">
@@ -690,12 +692,12 @@ Json语法规则JSON 语法是 JavaScript 对象表示语法的子集。1.数据
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/数据可视化之散点图/" >数据可视化之散点图</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/数据可视化之散点图/" >数据可视化之散点图</a>
         </li>
     
     
@@ -705,12 +707,12 @@ Json语法规则JSON 语法是 JavaScript 对象表示语法的子集。1.数据
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/drop and drag in d3js/" >drop and drag in d3</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/drop and drag in d3js/" >drop and drag in d3</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
         </li>
     
     
