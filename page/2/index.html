@@ -145,15 +145,14 @@ Why Angular使用Angular做可视化有很多原因，但其中最主要的原�
     
     
         <article class="index-post">
-            <a class="content-show-full" href = "/2014/11/15/D3 on Angular(2)/" >
+            <a class="content-show-full" href = "/2014/11/15/冷门但实用的d3.js内置函数/" >
                     <h2 class="abstract-title">
                         
-                        <span>D3 on Angular(2)</span>
+                        <span>冷门但实用的d3.js内置函数</span>
                     </h2>
                 <div class="abstract-content">
-                    More Dynamic visualizations上一篇博客介绍了如何借助Angular来完成一个指令，达到可复用目的，但是似乎依然不够动态，我们不得不提前输入想要展示的数组。Angular的最大的特点是双向数据绑定，我们能否借助这个特性来完成更动态的可视化图呢？让Angular帮我们盯着数据，一旦数据改变了，就更新DOM元素。这一切都是Angular帮我们完成的，我们唯一需要做的是指定数据和DOM元素之间的关系，不需要写很多的代码。
-双向数据绑定先来用一个简单的例子来展示一下Angular帮我们完成的双向数据绑定，这里用一个简单的例子来展示一下。
-12345678//\&lt;bo...
+                    前言在d3.js的API文档中，提供了很多内置的函数，但是有些很有用的内置函数却被无情的忽略了，这篇博客就来整理整理这些被遗忘却很实用的函数。希望整理过后，他们不再被遗忘。
+selection.classed(name,【value】)value参数可选，如果没有指定，则返回与name参数匹配的第一个非空元素是否绑定了指定的CSS类，true表示绑定，false表示未绑定。如果value指定了的话，就是为selection添加/删除CSS类。这点与selection.attr(name,【value】)非常类似，但是相比而言，就冷门的多，恐怕没有多少人不知道selection.attr(...
                 </div>
             </a>
             <div class="abstract-post-meta">
@@ -531,8 +530,6 @@ Json语法规则JSON 语法是 JavaScript 对象表示语法的子集。1.数据
     
     
     
-    
-    
     <div class="total-archive"> Total : 13 </div>
     
     <div class="post-archive">
@@ -569,12 +566,12 @@ Json语法规则JSON 语法是 JavaScript 对象表示语法的子集。1.数据
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/数据可视化之散点图/" >数据可视化之散点图</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/Build reuseable visualization using d3.js and AngularJS/" >Build reusable visualization using d3.js and AngularJS</a>
         </li>
     
     
@@ -594,22 +591,22 @@ Json语法规则JSON 语法是 JavaScript 对象表示语法的子集。1.数据
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/数据可视化之散点图/" >数据可视化之散点图</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/drop and drag in d3js/" >drop and drag in d3</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/Build reuseable visualization using d3.js and AngularJS/" >Build reusable visualization using d3.js and AngularJS</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
         </li>
     
     
         <li class="archive-post-item">
             <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/polybrush in d3/" >polybrush in d3</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/drop and drag in d3js/" >drop and drag in d3</a>
         </li>
     
     
