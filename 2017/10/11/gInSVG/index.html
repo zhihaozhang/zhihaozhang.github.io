@@ -141,10 +141,10 @@
 <p>SVG中，将元素成组的标签是g元素，之前使用它是将元素进行分组，然后统一进行平移和旋转之类的功能变换。毫无意外的，普通DOM元素获取宽高和位置属性的方法offsetWidth、ClientWidth全部失效，返回值均为<strong>undefined</strong>。我的初步想法是获得这些元素，然后绘制矩形，这样就有了类似div的边框效果。</p>
 <p>在Stack Overflow中，找到了问题的答案，有两个原生的JS方法可以作为候选。</p>
 <h2 id="getBBox"><a href="#getBBox" class="headerlink" title="getBBox"></a>getBBox</h2><p>document.getElementById(“g1”).getBBox()的返回结果如下：</p>
-<div align="center"><br><img src="http://youdaocloud.oss-cn-shanghai.aliyuncs.com/SVG_g_width.4.PNG" alt=""><br></div>
+<div align="center"><br><img src="http://youdaocloud.oss-cn-shanghai.aliyuncs.com/SVG_g_width.4.PNG" alt=""><br>getBBox返回值<br></div>
 
 <h2 id="getBoundingClientRect"><a href="#getBoundingClientRect" class="headerlink" title="getBoundingClientRect()"></a>getBoundingClientRect()</h2><p>而document.getElementById(“g1”).getBoundingClientRect()的返回结果如下：</p>
-<div align="center"><br><img src="http://youdaocloud.oss-cn-shanghai.aliyuncs.com/SVG_g_width.5.PNG" alt=""><br></div>
+<div align="center"><br><img src="http://youdaocloud.oss-cn-shanghai.aliyuncs.com/SVG_g_width.5.PNG" alt=""><br>getBoundingClientRect返回值<br></div>
 
 <h2 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h2><p>发现两个方法的返回结果是不一样的，主要是因为getBBox()获得的是元素在当前SVG坐标中的数据，而getBoundingClientRect()则是浏览器的坐标。<br>显然，getBBox()方法更贴合我们的需求。</p>
 <h1 id="添加背景色"><a href="#添加背景色" class="headerlink" title="添加背景色"></a>添加背景色</h1><p>getBBox方法可以让我们知道矩形该如何绘制，如果让矩形fill none的话，是可以看到底层的文字的，但设计师比较执拗，死磕我需要背景色。而正确获取矩形位置大小是需要先将detail信息绘制到svg画板上的，因此后面再绘制矩形的时候，矩形就盖住了底层的detail信息文字。</p>
@@ -466,12 +466,6 @@
     
     
     
-    
-    
-    
-    
-    
-    
     <div class="total-archive"> Total : 14 </div>
     
     <div class="post-archive">
@@ -481,6 +475,11 @@
     
     <div class="archive-year"> 2017 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/11</span><a class="archive-post-title" href= "/2017/10/11/gInSVG/" >为SVG中大小可变的<g>元素加上边框和背景色</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -523,12 +522,12 @@
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/浅谈d3.js中的异步文件读取的处理/" >浅谈d3.js中强制异步文件读取同步的四种方法</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/数据可视化之散点图/" >数据可视化之散点图</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/数据可视化之散点图/" >数据可视化之散点图</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/浅谈d3.js中的异步文件读取的处理/" >浅谈d3.js中强制异步文件读取同步的四种方法</a>
         </li>
     
     
@@ -543,35 +542,12 @@
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/drop and drag in d3js/" >drop and drag in d3</a>
-        </li>
-    
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> Invalid date </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2017/10/11/gInSVG/" >为SVG中大小可变的<g>元素加上边框和背景色</a>
-        </li>
-    
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> 2014 </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
             <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/drop and drag in d3js/" >drop and drag in d3</a>
         </li>
     
     
@@ -586,9 +562,9 @@
     
         <span class="sidebar-tag-name"><a href= "#">d3</a></span>
     
-        <span class="sidebar-tag-name"><a href= "#">macOS开发</a></span>
-    
         <span class="sidebar-tag-name"><a href= "#">SVG</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">macOS开发</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">Json</a></span>
     
