@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
     <title>
         
-        mouseSync后续功能完善心得 · Zhihao&#39;s Studio
+        为SVG中的大小可变&lt;g&gt;元素加上边框和背景色 · Zhihao&#39;s Studio
         
     </title>
     <link rel="icon" href= /assests/favicon.ico>
@@ -81,7 +81,7 @@
                 <a href="/" >Zhihao&#39;s Studio.</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">mouseSync后续功能完善心得</a>
+                <a href="#" class="post-name">为SVG中的大小可变<g>元素加上边框和背景色</a>
             </div>
     </div>
     
@@ -102,7 +102,7 @@
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            mouseSync后续功能完善心得
+            为SVG中的大小可变元素加上边框和背景色
             <!-- 404 -->
             
         </h1>
@@ -120,13 +120,13 @@
             
                 <div class= post-intro-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-href = macOS开发>macOS开发</a>
+        <a class="post-tag" href="javascript:void(0);" data-href = Json>Json</a>
     
 </div>
             
             <div class="post-intro-meta">
                 <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                <span class="post-intro-time">2017/09/29</span>
+                <span class="post-intro-time">2017/10/11</span>
             </div>
         
     </div>
@@ -134,56 +134,26 @@
         <div class="container">
             <main class="main post-page">
     <article class="article-entry">
-        <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>在<a href="http://zhihaozhang.github.io/2017/09/23/让iMac与MacBook高效协同工作——mouseSync开发心得/">上篇博客</a>中,我介绍了mouseSync这款软件的开发初衷、使用场景和开发的过程，感谢一些朋友试用该软件并给我留言，提出了一些新的需求和issue。同时也感谢开发者头条的推荐至头版的精选板块，让那篇开发笔记被2万开发者阅读过了，收获了<strong>github的star</strong>若干、<strong>公众号的关注</strong>若干、赞赏约<strong>50元</strong>。真的非常感谢大家的关注、star鼓励和金钱赞赏。</p>
-<p>我整理了一下大家的需求，大体上可归纳为3类。</p>
-<ol>
-<li>没有logo</li>
-<li>在外部设备(鼠标/Trackpad真正属于的那台Mac)上容易引起误操作</li>
-<li>一个关键的功能，左键拖拽功能，没有实现</li>
-</ol>
-<p>在这篇博客中，我就来写一下对上面提到的三个需求的解决方案。完成上述三个需求后的软件在<a href="https://pan.baidu.com/s/1i5Gee6T" target="_blank" rel="external">网盘</a>可下载到，最新代码依然开源在<a href="https://github.com/zhihaozhang/mouseSync" target="_blank" rel="external">github</a>上。</p>
-<h1 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h1><h2 id="没有logo"><a href="#没有logo" class="headerlink" title="没有logo"></a>没有logo</h2><p>其实这件事挺尴尬的，我不是设计师，因此平时logo的主要来源是<a href="https://www.flaticon.com" target="_blank" rel="external">flaticon</a>，这次没忍心打扰正在熟睡的非著名设计师Joseph，因此还是在flaticon上找的icon，进行了简单的颜色变换与组合。</p>
-<p>icon考虑到了mouseSync具有鼠标和蓝牙的特性，因此还是比较写实的。考虑到蓝牙客户端有外部设备和数据中心(两台Mac)之分，因此两个icon虽然很相似，但仍有细微的不同。不同点在于，数据中心的icon多了一个类似信号指示的标志，表示它是接收蓝牙信号的一端。</p>
-<p>由于本人设计方面实在业余，还请大家轻喷。有空再找非著名设计师Joseph实现一枚漂亮的logo。</p>
-<div align="center"><br><img src="https://syy.freep.cn/588778/icons.png" alt=""><br>&gt; icons<br></div>
+        <h1 id="问题的出现"><a href="#问题的出现" class="headerlink" title="问题的出现"></a>问题的出现</h1><p>我在使用d3js开发项目过程中，遇到了这样的需求，将鼠标hover到某些元素上时，将该元素的detail信息<strong>逐条展示</strong>出来，而且为了将detail框与其他元素区别开来，需要给detail展示区域添加边框或增加底色，想要的效果大概是下面的图那样的。</p>
+<div align="center"><br><img src="https://ip.freep.cn/588778/screen.png" alt=""><br>预期效果图<br></div>
 
-<h2 id="在外部设备端容易引起误操作"><a href="#在外部设备端容易引起误操作" class="headerlink" title="在外部设备端容易引起误操作"></a>在外部设备端容易引起误操作</h2><p>之前的demo视频中，为了让两台电脑看起来一致，我录的是同时打开文件，同时在图标上右击，在现实生活中，在同一时刻同时操作两台Mac的需求很少不存在。通常情况下，用户还是想对某一台Mac进行操作的。<strong>mouseSync的定位应该是：帮助用户用一个鼠标操作两台电脑，且给用户决定什么时候操作哪台，省去两个鼠标之间换来换去的麻烦。</strong></p>
-<p>之前的项目中，我对鼠标事件添加的均是全局监控事件，因此只要mouseSync<strong>生命周期</strong>没有结束，它的操作将实时被发送到另一台mac上。我想过两个解决方案：</p>
-<ol>
-<li>跟其他共享键盘的软件一样，使用全局快捷键对蓝牙通知服务进行开启/关闭</li>
-<li>将全局监控事件变成局部监控事件，蓝牙通知服务仅在应用视图为Keywindow时有效</li>
-</ol>
-<h3 id="为什么选择Plan-B"><a href="#为什么选择Plan-B" class="headerlink" title="为什么选择Plan B"></a>为什么选择Plan B</h3><p>关于方案1，我觉得作为一款软件，快捷键应当由用户自己决定，虽然cocoapod上已经有非常好的项目<a href="https://github.com/Clipy/KeyHolder" target="_blank" rel="external">KeyHolder</a>进行支持,但是考虑到两个因素还是决定使用Plan B。</p>
-<p>先看看Plan B，Plan B是这样的，首先让当前的window全屏，但是里面没有内容，因此无论在当前试图下如何操作，都不会有可能造成误操作。回到Plan A，快捷键的录入放到哪里呢？如果放到当前视图，将会带来一定的误操作风险；如果放到MenuBar，那么用户将不得不退出全屏模式，到菜单栏进行设置，这样的解决方案破坏了用户体验，综合考虑，最终还是选了Plan B。</p>
-<h3 id="实现过程中遇到的问题"><a href="#实现过程中遇到的问题" class="headerlink" title="实现过程中遇到的问题"></a>实现过程中遇到的问题</h3><p>让当前窗口一打开就全屏的方法是在ViewDidLoad方法体中进行控制的:</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">viewDidLoad</span><span class="params">()</span></span> &#123;</div><div class="line">	<span class="keyword">super</span>.viewDidLoad()</div><div class="line">	<span class="keyword">self</span>.view.window?.zoom(<span class="keyword">self</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>但是我很快就发现了问题：<strong>尽管已经将应用全屏了，但是用户依然会有一定几率对dock栏和顶部菜单栏进行误操作。</strong>用户如果在操作另一台电脑的时候，还得注意这台电脑上是不是误操作了，这不符合我们软件开发的初衷。考虑到有些用户将dock放在底部，有些用户将dock放在左边，因此，我加了这样的限制，当用户将鼠标移动到距离屏幕边缘<strong>50px</strong>以内的时候，程序帮助他将鼠标移动至屏幕中央。参照下图，灰色地带就可以作为防止鼠标误操作的缓冲区。</p>
-<div align="center"><br><img src="https://syy.freep.cn/588778/border.png" alt=""><br>&gt; 防止对dock和菜单栏误操作解决方法示意图<br></div>
+<h1 id="问题解决思路"><a href="#问题解决思路" class="headerlink" title="问题解决思路"></a>问题解决思路</h1><p>普通的HTML元素有很多方法来获得其宽高等其他位置属性的方法。如果是一组元素，可以用div标签将他们组合起来，指定div的border颜色和宽度，div的边框会根据元素的宽高动态改变大小。</p>
+<p>SVG中，将元素成组的标签是g元素，之前使用它是将元素进行分组，然后统一进行平移和旋转之类的功能变换。毫无意外的，普通DOM元素获取宽高和位置属性的方法offsetWidth、ClientWidth全部失效，返回值均为<strong>undefined</strong>。我的初步想法是获得这些元素，然后绘制矩形，这样就有了类似div的边框效果。</p>
+<p>在Stack Overflow中，找到了问题的答案，有两个原生的JS方法可以作为候选。</p>
+<h2 id="getBBox"><a href="#getBBox" class="headerlink" title="getBBox"></a>getBBox</h2><p>document.getElementById(“g1”).getBBox()的返回结果如下：</p>
+<div align="center"><br><img src="http://youdaocloud.oss-cn-shanghai.aliyuncs.com/SVG_g_width.4.PNG" alt=""><br></div>
 
-<p>阅读过上一篇博客的朋友一定注意到了，我们的程序是记录上一个鼠标点的位置，并将上一个鼠标点的位置与当前位置相减，将位置变动作为特征值进行发送。因此，在鼠标被程序移动到屏幕中央的时候，需要将上一个位置更新为屏幕中央的坐标。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//屏幕宽高的获取方式</span></div><div class="line">    <span class="keyword">let</span> <span class="type">SCREEN_WIDTH</span> = <span class="type">NSScreen</span>.main()!.frame.width</div><div class="line">    <span class="keyword">let</span> <span class="type">SCREEN_HEIGHT</span> = <span class="type">NSScreen</span>.main()!.frame.height</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="左键拖拽功能"><a href="#左键拖拽功能" class="headerlink" title="左键拖拽功能"></a>左键拖拽功能</h2><p>左键拖一个文件或窗口到一个新位置这个功能还是经常被使用到的，我使用的是Trackpad，通常是使用<strong>三支拖移</strong>。想要监听外围设备的这个动作并不难，但是想让计算机模拟这个操作相对比较困难。就像双击不是单纯的模拟单击事件两次一样，这次我又踩到坑了，drag and move事件并不是简单的mousedown-&gt; mousemove -&gt; mouseup这么容易的事情。</p>
-<p>我在<a href="https://stackoverflow.com/questions/1817628/clicking-the-mouse-down-to-drag-objects-on-mac" target="_blank" rel="external">Stack Overflow</a>上找到了正确的方法：有一个叫<strong>kCGEventLeftMouseDragged</strong>的事件，专门来处理这件事。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">mouse_left_drag_to</span><span class="params">(<span class="keyword">float</span> x, <span class="keyword">float</span> y)</span> </span>&#123;</div><div class="line">    CGEventRef left_drag_event = CGEventCreateMouseEvent(<span class="literal">NULL</span>, kCGEventLeftMouseDragged, CGPointMake(x, y), <span class="number">0</span>);</div><div class="line"></div><div class="line">    CGEventPost(kCGHIDEventTap, left_drag_event);</div><div class="line">    CFRelease(left_drag_event);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>和Scroll滚轮事件一样，这里我们采用的是Quartz模拟鼠标事件,因此依然需要C与swift进行混编。模拟总共可分为3步：第一步是创建一个Quartz鼠标事件；第二步是将这个事件放到事件流中，并指定位置；第三步是release这个事件。</p>
-<p>模拟这个事件的时候，随着鼠标拖拽后的不停移动，会不停产生event，而且event中x和y的偏移量始终是相对于第一次鼠标drag按下时的坐标。因此，我们需要记录两件事，第一件事是第一次drag时候的坐标，第二件事是当前是不是开启了新一轮的drag还是仍然在上一轮的drag中。核心代码如下：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">	<span class="keyword">if</span> dragFirst == <span class="literal">true</span>&#123;</div><div class="line">		dragFirst = <span class="literal">false</span></div><div class="line">    mouseLocBeforeDrag = <span class="type">NSEvent</span>.mouseLocation()                 mouseLocBeforeDrag.y = <span class="type">NSHeight</span>(<span class="type">NSScreen</span>.screens()![<span class="number">0</span>].frame) - mouseLocBeforeDrag.y;</div><div class="line">    </div><div class="line">    mouse_left_drag_to(<span class="type">Float</span>(mouseLocBeforeDrag.x)+<span class="type">Float</span>(dx!),<span class="type">Float</span>(mouseLocBeforeDrag.y)-<span class="type">Float</span>(dy!)</div><div class="line">  &#125;<span class="keyword">else</span>&#123;</div><div class="line">    mouse_left_drag_to(<span class="type">Float</span>(mouseLocBeforeDrag.x)+<span class="type">Float</span>(dx!),<span class="type">Float</span>(mouseLocBeforeDrag.y)-<span class="type">Float</span>(dy!))</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>上面的代码有两处需要注意：</p>
-<ol>
-<li>dragFirst初始值为true,在mouseUp之后重新置为true，表示一轮的drag已经完成了；</li>
-<li>y的坐标是-，x的坐标是+，这是由OS X的坐标系决定的。</li>
-</ol>
-<p>最后，我用两台电脑同时在画板上写了一个牛B。mouseSync的开发工作算是告一段落了，希望对大家有所帮助！</p>
-<div align="center"><br><img src="https://syy.freep.cn/588778/dragdemo.gif" alt=""><br>&gt; drag事件demo<br></div>
+<h2 id="getBoundingClientRect"><a href="#getBoundingClientRect" class="headerlink" title="getBoundingClientRect()"></a>getBoundingClientRect()</h2><p>而document.getElementById(“g1”).getBoundingClientRect()的返回结果如下：</p>
+<div align="center"><br><img src="http://youdaocloud.oss-cn-shanghai.aliyuncs.com/SVG_g_width.5.PNG" alt=""><br></div>
 
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol>
-<li><a href="https://stackoverflow.com/questions/1817628/clicking-the-mouse-down-to-drag-objects-on-mac" target="_blank" rel="external">https://stackoverflow.com/questions/1817628/clicking-the-mouse-down-to-drag-objects-on-mac</a></li>
-<li><a href="https://www.flaticon.com" target="_blank" rel="external">https://www.flaticon.com</a></li>
-</ol>
-<h1 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h1><p>试用软件之后如果您对软件有任何的意见与建议，欢迎留言。如果您喜欢这款软件，也欢迎您将它推荐给您的朋友们。让我们一起将mouseSync变得更好！</p>
-<p>我会在订阅号里不定期分享我个人的macOS/ios开发心得和开发笔记，也会在里面发表对于苹果产品/框架/趋势的拙见，希望爱好科技产品或者苹果生态圈的开发者关注。相信本公众号一定能给您带来收获和启发。</p>
-<p>【欢迎扫码关注微信公众号】</p>
-<div align="center"><br><img src="https://syy.freep.cn/588778/640.jpeg" alt=""><br>&gt; 扫码关注微信公众号 骨灰级果粉 获得最新文章更新<br></div>
+<h2 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h2><p>发现两个方法的返回结果是不一样的，主要是因为getBBox()获得的是元素在当前SVG坐标中的数据，而getBoundingClientRect()则是浏览器的坐标。<br>显然，getBBox()方法更贴合我们的需求。</p>
+<h1 id="添加背景色"><a href="#添加背景色" class="headerlink" title="添加背景色"></a>添加背景色</h1><p>getBBox方法可以让我们知道矩形该如何绘制，如果让矩形fill none的话，是可以看到底层的文字的，但设计师比较执拗，死磕我需要背景色。而正确获取矩形位置大小是需要先将detail信息绘制到svg画板上的，因此后面再绘制矩形的时候，矩形就盖住了底层的detail信息文字。</p>
+<p>对于这个先有鸡还是先有蛋的问题，我采取了一个比较tricky的方法，即在绘制完矩形之后，再绘制一遍deatil信息，这样后绘制的detail信息就处在了矩形的上层，从而可以被用户看到，而底层的detail信息实际上是存在的，只不过是被矩形这遮挡住了。</p>
+<p>给设计师看过效果之后，他露出了满意的微笑☺。</p>
+<p>代码</p>
+<pre><code><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">drawDeatilBorder</span>(<span class="params">data</span>)</span>&#123;</div><div class="line"></div><div class="line">           vis.selectAll(<span class="string">'.detailBorder'</span>).remove();</div><div class="line"></div><div class="line">           <span class="keyword">var</span> position = <span class="built_in">document</span>.getElementById(<span class="string">"detailInfoBorder"</span>).getBBox();</div><div class="line"></div><div class="line">           vis.append(<span class="string">'rect'</span>).attr(<span class="string">'class'</span>,<span class="string">'detailBorder'</span>).style(<span class="string">'fill'</span>,<span class="string">'#f0f0f0'</span>).attr(<span class="string">'x'</span>,position.x<span class="number">-20</span>).attr(<span class="string">'y'</span>,position.y<span class="number">-20</span>).attr(<span class="string">'width'</span>,position.width+<span class="number">40</span>)</div><div class="line">               .attr(<span class="string">'height'</span>,position.height+<span class="number">40</span>).attr(<span class="string">'fill'</span>,<span class="string">'red'</span>).attr(<span class="string">'rx'</span>,<span class="string">'3px'</span>).attr(<span class="string">'ry'</span>,<span class="string">'3px'</span>).attr(<span class="string">'stroke'</span>,<span class="string">'none'</span>);</div><div class="line"></div><div class="line">           <span class="keyword">var</span> i = <span class="number">0</span>;</div><div class="line">           <span class="keyword">for</span>(<span class="keyword">var</span> key <span class="keyword">in</span> data) &#123;</div><div class="line"></div><div class="line">               <span class="keyword">if</span> (<span class="keyword">typeof</span>(data[key]) !== <span class="string">"object"</span>) &#123;</div><div class="line">                   i++;</div><div class="line">                   vis.append(<span class="string">"text"</span>).attr(<span class="string">'class'</span>, <span class="string">'detailInfo'</span>).attr(<span class="string">"x"</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">                       <span class="keyword">return</span> <span class="number">850</span></div><div class="line">                   &#125;).attr(<span class="string">"y"</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">                       <span class="keyword">return</span> i * <span class="number">20</span> + <span class="number">30</span>;</div><div class="line">                   &#125;).attr(<span class="string">"dy"</span>, <span class="string">".35em"</span>).attr(<span class="string">"text-anchor"</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">                       <span class="keyword">return</span> <span class="string">"start"</span>;</div><div class="line">                   &#125;).text(<span class="function"><span class="keyword">function</span> (<span class="params">d</span>) </span>&#123;</div><div class="line">                       <span class="keyword">return</span> key + <span class="string">" : "</span> + data[key];</div><div class="line">                   &#125;)</div><div class="line">                       .style(<span class="string">"fill-opacity"</span>, <span class="number">1</span>);</div><div class="line">               &#125;</div><div class="line">           &#125;</div><div class="line"></div><div class="line">       &#125;</div></pre></td></tr></table></figure>
+</code></pre><p><a href="https://github.com/zhihaozhang/Topology" target="_blank" rel="external">项目开源地址</a>,供参考。</p>
+
 
             <! -- 添加捐赠图标 -->
     <div class ="post-donate">
@@ -210,18 +180,11 @@
     <!-- 前后页  -->
     <ul class="post-pager">
         
-            <li class="next">
-                <a href= "/2017/10/11/gInSVG/" title= 为SVG中的大小可变<g>元素加上边框和背景色 >
-                    <span>Next Post</span>
-                    <span>为SVG中的大小可变<g>元素加上边框和背景色</span>
-                </a>
-            </li>
-        
         
             <li class="previous">
-                <a href= "/2017/09/26/青芒 for Mac客户端开发笔记/" title= 青芒 for Mac客户端开发笔记 >
+                <a href= "/2017/09/29/mouseSyncII/" title= mouseSync后续功能完善心得 >
                     <span>Previous Post</span>
-                    <span>青芒 for Mac客户端开发笔记</span>
+                    <span>mouseSync后续功能完善心得</span>
                 </a>
             </li>
         
