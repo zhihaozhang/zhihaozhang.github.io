@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
+    <title>
+        
+        Swift4字典和集合的新特性 · Zhihao&#39;s Studio
+        
+    </title>
+    <link rel="icon" href= /assests/favicon.ico>
+    <!-- 提前加载place holder  -->
+    <style>
+        @font-face {
+            font-family: 'Oswald-Regular';
+            src: url('/font/Oswald-Regular.ttf');
+        }
+        @font-face {
+            font-family: 'Source Sans Pro';
+            src: url('/font/Source Sans Pro.woff'),
+            url('/font/Source Sans Pro.woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Source Code Pro';
+            src: url('/font/SourceCodePro-Regular.ttf.woff'),
+            url('/font/SourceCodePro-Regular.ttf.woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        
+        .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0px;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2s ease-out 0s 1;
+        }
+        @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        99% {
+            transform: translate3d(0, 0, 0);
+        }
+        99.1% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(-226px, 0, 0);
+        }
+    }
+    </style>
+    <link rel="stylesheet" href = "/css/style.css?v=20170930" />
+    <script src="//cdn.staticfile.org/jquery/3.2.1/jquery.min.js" defer></script>
+    
+    <script src="/scripts/main.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+</head>
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >Zhihao&#39;s Studio.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">Swift4字典和集合的新特性</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>Zhihao's Studio.</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-img" style="background-image: url(http://oumn0o088.bkt.clouddn.com/post-bg.jpg)"></div>
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            Swift4字典和集合的新特性
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+        </p>
+        <!-- 404 -->
+        
+        <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+                <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = swift>swift</a>
+    
+</div>
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2017/10/13</span>
+            </div>
+        
+    </div>
+</div>
+        <div class="container">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="Swift4中的字典和集合在这些方面变得更好"><a href="#Swift4中的字典和集合在这些方面变得更好" class="headerlink" title="Swift4中的字典和集合在这些方面变得更好"></a>Swift4中的字典和集合在这些方面变得更好</h1><h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>在最新版本的Swift中，dictionaries和sets新增了很多行为方法和初始化方法，让一些常见的任务变得异常简单。诸如组合、过滤和transform值操作可以用一步完成，让使用者可以写出更高效和简洁的代码。</p>
+<p>本篇博客将使用杂货铺中的商品作为例子演示这些新功能。GroceryItem结构体，由名字和部门组成，作为本例的数据类型。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">GroceryItem</span>: <span class="title">Hashable</span> </span>&#123;</div><div class="line">    <span class="keyword">var</span> name: <span class="type">String</span></div><div class="line">    <span class="keyword">var</span> department: <span class="type">Department</span></div><div class="line"></div><div class="line">    <span class="class"><span class="keyword">enum</span> <span class="title">Department</span> </span>&#123;</div><div class="line">        <span class="keyword">case</span> bakery, produce, seafood</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> ==<span class="params">(lhs: GroceryItem, rhs: GroceryItem)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">        <span class="keyword">return</span> (lhs.name, lhs.department) == (rhs.name, rhs.department)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">var</span> hashValue: <span class="type">Int</span> &#123;</div><div class="line">        <span class="comment">// Combine the hash values for the name and department</span></div><div class="line">        <span class="keyword">return</span> name.hashValue &lt;&lt; <span class="number">2</span> | department.hashValue</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// Create some groceries for our store:</span></div><div class="line"><span class="keyword">let</span> 🍎 = <span class="type">GroceryItem</span>(name: <span class="string">"Apples"</span>, department: .produce)</div><div class="line"><span class="keyword">let</span> 🍌 = <span class="type">GroceryItem</span>(name: <span class="string">"Bananas"</span>, department: .produce)</div><div class="line"><span class="keyword">let</span> 🥐 = <span class="type">GroceryItem</span>(name: <span class="string">"Croissants"</span>, department: .bakery)</div><div class="line"><span class="keyword">let</span> 🐟 = <span class="type">GroceryItem</span>(name: <span class="string">"Salmon"</span>, department: .seafood)</div><div class="line"><span class="keyword">let</span> 🍇 = <span class="type">GroceryItem</span>(name: <span class="string">"Grapes"</span>, department: .produce)</div><div class="line"><span class="keyword">let</span> 🍞 = <span class="type">GroceryItem</span>(name: <span class="string">"Bread"</span>, department: .bakery)</div><div class="line"><span class="keyword">let</span> 🍤 = <span class="type">GroceryItem</span>(name: <span class="string">"Shrimp"</span>, department: .seafood)</div><div class="line"></div><div class="line"><span class="keyword">let</span> groceries = [🍎, 🍌, 🥐, 🐟, 🍇, 🍞, 🍤]</div></pre></td></tr></table></figure>
+<p>后面的例子将围绕着groceries数组展示。</p>
+<h2 id="用Key值对原数组进行分组"><a href="#用Key值对原数组进行分组" class="headerlink" title="用Key值对原数组进行分组"></a>用Key值对原数组进行分组</h2><p>字典拥有了一个新的初始化函数，可以将一系列值按照Key值进行分组。下面展示使用该初始化方法根据GroceryItem的department进行分组的一个小例子。</p>
+<div align="center"><br><img src="https://swift.org/assets/images/dictionary-blog/grouping_2x.png" alt=""><br></div>
+
+<p>在老版本的Swift中，用户可以使用如下的代码完成上述任务。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Swift &lt;= 3.1</span></div><div class="line"><span class="keyword">var</span> grouped: [<span class="type">GroceryItem</span>.<span class="type">Department</span>: [<span class="type">GroceryItem</span>]] = [:]</div><div class="line"><span class="keyword">for</span> item <span class="keyword">in</span> groceries &#123;</div><div class="line">    <span class="keyword">if</span> grouped[item.department] != <span class="literal">nil</span> &#123;</div><div class="line">        grouped[item.department]!.append(item)</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        grouped[item.department] = [item]</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这一过程需要使用type annotations、手动循环并且需要检查departement是否已经存在了。</p>
+<p>在Swift4中，用户可以使用<strong>Dictionary(grouping:by)</strong>方法，仅需一行代码就可以达到上述效果。所要做的是传入一个闭包，该闭包返回数组每一项项对应的Key值即可。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Swift 4.0</span></div><div class="line"><span class="keyword">let</span> groceriesByDepartment = <span class="type">Dictionary</span>(grouping: groceries,</div><div class="line">                                       by: &#123; item <span class="keyword">in</span> item.department &#125;)</div><div class="line"><span class="comment">// groceriesByDepartment[.bakery] == [🥐, 🍞]</span></div></pre></td></tr></table></figure>
+<p>最终的字典groceriesByDepartment对每个department都有唯一入口，而且该入口对应着GroceryItem相应的name。例如，使用.bakery作为入口，将返回[🥐, 🍞]数组。</p>
+<h2 id="获得字典值的数量"><a href="#获得字典值的数量" class="headerlink" title="获得字典值的数量"></a>获得字典值的数量</h2><p>使用新的<strong>mapValues(_:)</strong>方法，用户可以方便的获得每个入口对应数组的长度。以上面例子中获取的groceriesByDepartment字典为例：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> departmentCounts = groceriesByDepartment.mapValues &#123; items <span class="keyword">in</span> items.<span class="built_in">count</span> &#125;</div><div class="line"><span class="comment">// departmentCounts[.bakery] == 2</span></div></pre></td></tr></table></figure>
+<p>因为字典有相同的key，只是值不同，所以可以不需要重新计算哈希值，从而使得调用<strong>mapValues(_:)</strong>方法比从头建立字典快很多。</p>
+<h2 id="从键值对建立字典"><a href="#从键值对建立字典" class="headerlink" title="从键值对建立字典"></a>从键值对建立字典</h2><p>Swift4提供了两种方法给用户从键值对序列生成字典，一种方法允许key有重复，另一种不允许。</p>
+<p>使用<strong>zip(<em>:</em>:)</strong>函数可以将一些了键值组合起来。例如下面的代码就创立了一系列(String,GroceryItem)元组。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> zippedNames = <span class="built_in">zip</span>(groceries.<span class="built_in">map</span> &#123; $<span class="number">0</span>.name &#125;, groceries)</div></pre></td></tr></table></figure>
+<p>zippedNames的每一项都是一个元组(tuple)，第一项是<strong>(“Apples”, 🍎)</strong>.因为name值是唯一的，下面的方法就可以创建一个字典，也是我们上面提到的不允许key值重复的方法。</p>
+<div align="center"><br><img src="https://swift.org/assets/images/dictionary-blog/uniqueKeys_2x.png" alt=""><br></div>
+
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> groceriesByName = <span class="type">Dictionary</span>(uniqueKeysWithValues: zippedNames)</div><div class="line"><span class="comment">// groceriesByName["Apples"] == 🍎</span></div><div class="line"><span class="comment">// groceriesByName["Kumquats"] == nil</span></div></pre></td></tr></table></figure>
+<p>当然，要使用该方法的前提是你可以确保key值是不重复的。否则会引起runtime error。</p>
+<p>如果key值可能会重复，使用另一个方法:<strong>Dictionary(_:uniquingKeysWith:)</strong>。这个方法需要传入一个闭包来处理当key重复时的操作。闭包的第一个参数是key(键)对应的old value(值)，而第二个对应的是新值。用户可以在闭包里写相应的逻辑，比如新值替代老值，或者将新老值合并。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> pairs = [(<span class="string">"dog"</span>, <span class="string">"🐕"</span>), (<span class="string">"cat"</span>, <span class="string">"🐱"</span>), (<span class="string">"dog"</span>, <span class="string">"🐶"</span>), (<span class="string">"bunny"</span>, <span class="string">"🐰"</span>)]</div><div class="line"><span class="keyword">let</span> petmoji = <span class="type">Dictionary</span>(pairs,</div><div class="line">                         uniquingKeysWith: &#123; (old, new) <span class="keyword">in</span> new &#125;)</div><div class="line"><span class="comment">// petmoji["cat"] == "🐱"</span></div><div class="line"><span class="comment">// petmoji["dog"] == "🐶"</span></div></pre></td></tr></table></figure>
+<p>看上面的例子，dog对应了两个值。当方法处理到(“dog”, “🐶”)时，闭包的参数是 (“🐕”， “🐶”)，而闭包的逻辑是返回第二个值，因此新值就代替了老值，最终的字典中，dog对应的值就是🐶。</p>
+<h2 id="筛选出特定的项"><a href="#筛选出特定的项" class="headerlink" title="筛选出特定的项"></a>筛选出特定的项</h2><p>字典现在有了一个<strong>filter(_:)</strong>方法，返回值是满足条件的新字典<strong><em>(早期版本的swift返回的是一个数组)</em></strong>。方法传入的参数依然是一个闭包，如果某一项需要在返回值中出现，闭包返回true，否则返回false。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">isOutOfStock</span><span class="params">(<span class="number">_</span> item: GroceryItem)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">    <span class="comment">// Looks up `item` in inventory</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">let</span> outOfStock = groceriesByName.<span class="built_in">filter</span> &#123; (<span class="number">_</span>, item) <span class="keyword">in</span> isOutOfStock(item) &#125;</div><div class="line"><span class="comment">// outOfStock["Croissants"] == 🥐</span></div><div class="line"><span class="comment">// outOfStock["Apples"] == nil</span></div></pre></td></tr></table></figure>
+<p>上例中，isOutOfStock决定某一项该不该出现在返回值字典中。</p>
+<h2 id="使用默认值"><a href="#使用默认值" class="headerlink" title="使用默认值"></a>使用默认值</h2><p>字典现在提供了类似数组下标来获取和更新值，下面的代码定义了一个简单的购物篮，key是商品，value是商品的数量。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Begin with a single banana</span></div><div class="line"><span class="keyword">var</span> cart = [🍌: <span class="number">1</span>]</div></pre></td></tr></table></figure>
+<p>因为某些key在字典中没有对应的值，因此你用key去获取值的时候，返回结果是optional的。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// One banana:</span></div><div class="line">cart[🍌]    <span class="comment">// Optional(1)</span></div><div class="line"><span class="comment">// But no shrimp:</span></div><div class="line">cart[🍤]    <span class="comment">// nil</span></div></pre></td></tr></table></figure>
+<p>可以使用<strong>??</strong>操作符将optinal值拆包为真实的数值，现在swift4提供了另一种解决方案（设置默认值），如果key对应的值存在，那么返回该值，否则返回默认值。如果key没有对应值，那么返回默认值。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Still one banana:</span></div><div class="line">cart[🍌, <span class="keyword">default</span>: <span class="number">0</span>]    <span class="comment">// 1</span></div><div class="line"><span class="comment">// And zero shrimp:</span></div><div class="line">cart[🍤, <span class="keyword">default</span>: <span class="number">0</span>]    <span class="comment">// 0</span></div></pre></td></tr></table></figure>
+<p>甚至用下面的代码简化增加新item到购物车的过程。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> item <span class="keyword">in</span> [🍌, 🍌, 🍞] &#123;</div><div class="line">    cart[item, <span class="keyword">default</span>: <span class="number">0</span>] += <span class="number">1</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>当循环处理到🍌时，检索到当前值，然后自增，放回到原字典中。当检索到🍞时，发现🍞现在并没有对应值，从而返回默认值0，自增为1，存储到字典中，下次检索的时候就变成了1.</p>
+<h2 id="合并两个字典到一个字典中"><a href="#合并两个字典到一个字典中" class="headerlink" title="合并两个字典到一个字典中"></a>合并两个字典到一个字典中</h2><p>将两个字典合并也变得异常简单。swift4提供了<strong>merge(_:uniquingKeysWith:)</strong>方法来处理合并操作。和上面一样，需要传入一个闭包完成合并的逻辑，当两个字典拥有相同的key值时，由该闭包处理如何操作。</p>
+<p><img src="https://swift.org/assets/images/dictionary-blog/merging_2x.png" alt=""></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> otherCart = [🍌: <span class="number">2</span>, 🍇: <span class="number">3</span>]</div><div class="line">cart.merge(otherCart, uniquingKeysWith: +)</div><div class="line"><span class="comment">// cart == [🍌: 5, 🍇: 3, 🍞: 1]</span></div></pre></td></tr></table></figure>
+<p>上面的代码将相同key对应的值相加作为新字典中的值。</p>
+<p>如果不想原地合并，可以使用<strong>merging(_:uniquingKeysWith:)</strong>方法生成一个新字典。</p>
+<h2 id="And-That’s-Not-All…"><a href="#And-That’s-Not-All…" class="headerlink" title="And That’s Not All…"></a>And That’s Not All…</h2><p>上面介绍的新特性并不是全部，限于篇幅，并没有完全介绍全。</p>
+<p>和字典一样，集合也拥有了新的<strong>filter(_:) </strong>方法，返回的也是集合，而不是早起版本中的数组。字典和集合现在提供了暴漏现在capacity的方法:<strong>reserveCapacity(_:)</strong>，有了该方法，用户可以看到并控制他们的内部存储。</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p>本文译自：<a href="https://swift.org/blog/dictionary-and-set-improvements/" target="_blank" rel="external">https://swift.org/blog/dictionary-and-set-improvements/</a></p>
+
+
+            <! -- 添加捐赠图标 -->
+    <div class ="post-donate">
+    <div id="donate_board" class="donate_bar center">
+        <a id="btn_donate" class="btn_donate" href="javascript:;" title="打赏"></a>
+       <div style="text-align:center;color:#00F" >
+            <strong>如果本文对您有帮助，请您用支付宝或微信小额赞赏支持我继续原创，谢谢。</strong>
+        </div>
+        <br>
+      </div>  
+    <div id="donate_guide" class="donate_bar center hidden" >
+        <!-- 支付宝打赏图案 -->
+        <img src="https://syy.freep.cn/588778/qrcode_1506226737.png" height="240" width="180" alt="支付宝微信打赏"> 
+    </div>
+    <script type="text/javascript">
+        document.getElementById('btn_donate').onclick = function(){
+            $('#donate_board').addClass('hidden');
+            $('#donate_guide').removeClass('hidden');
+        }
+    </script>
+</div>
+<! -- 添加捐赠图标 -->
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-pager">
+        
+        
+            <li class="previous">
+                <a href= "/2017/10/11/gInSVG/" title= 为SVG中大小可变的<g>元素加上边框和背景色 >
+                    <span>Previous Post</span>
+                    <span>为SVG中大小可变的<g>元素加上边框和背景色</span>
+                </a>
+            </li>
+        
+    </ul>
+
+
+
+    <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMTAyMC83NTY5">
+    <script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+    </script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+
+
+    <div style="text-align:center">
+    <span id="busuanzi_container_page_pv" >
+        本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+    </span>
+    </div>
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="emailto:zhihaozhang@me.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="https://github.com/zhihaozhang" class="iconfont-archer github" target="_blank" title="github"></a>
+            
+        
+    
+        
+            
+                <a href="http://weibo.com/2854428840/profile?rightmod=1&wvr=6&mod=personinfo" class="iconfont-archer weibo" target="_blank" title="weibo"></a>
+            
+        
+    
+        
+            
+                <a href="https://www.zhihu.com/people/zhihao-zhang-95/activities" class="iconfont-archer zhihu" target="_blank" title="zhihu"></a>
+            
+        
+    
+        
+            
+                <a href="https://twitter.com/Chih_hao_" class="iconfont-archer twitter" target="_blank" title="twitter"></a>
+            
+        
+    
+        
+            
+                <a href="https://www.instagram.com/izhihao_zhang/" class="iconfont-archer instagram" target="_blank" title="instagram"></a>
+            
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span>
+        <span
+            id="theme-info">Theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">archer</a></span>
+    </div>
+
+</footer>
+    </div>
+    <div class="back-top">&#xe639;</div>
+    <div class="sidebar">
+    <div class="sidebar-header">
+        <div class="sidebar-category">
+            <span class="sidebar-archive-link"><span class="iconfont-archer">&#xe67d;</span>Archive</span>
+            <span class="sidebar-tags-link"><span class="iconfont-archer">&#xe610;</span>Tag</span>
+        </div>
+    </div>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-archive">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 15 </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2017 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/13</span><a class="archive-post-title" href= "/2017/10/13/DicAndSetInSwift4/" >Swift4字典和集合的新特性</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/11</span><a class="archive-post-title" href= "/2017/10/11/gInSVG/" >为SVG中大小可变的<g>元素加上边框和背景色</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/29</span><a class="archive-post-title" href= "/2017/09/29/mouseSyncII/" >mouseSync后续功能完善心得</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/26</span><a class="archive-post-title" href= "/2017/09/26/青芒 for Mac客户端开发笔记/" >青芒 for Mac客户端开发笔记</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/23</span><a class="archive-post-title" href= "/2017/09/23/让iMac与MacBook高效协同工作——mouseSync开发心得/" >让iMac与MacBook高效协同工作——mouseSync开发心得</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2014 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/polybrush in d3/" >polybrush in d3</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/Build reuseable visualization using d3.js and AngularJS/" >Build reusable visualization using d3.js and AngularJS</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/浅谈d3.js中的异步文件读取的处理/" >浅谈d3.js中强制异步文件读取同步的四种方法</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/数据可视化之散点图/" >数据可视化之散点图</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular/" >D3 on Angular</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/drop and drag in d3js/" >drop and drag in d3</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/24</span><a class="archive-post-title" href= "/2014/04/24/用Java生成Json文件/" >用Java生成Json文件</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name"><a href= "#">d3</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">swift</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">SVG</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">Json</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">macOS开发</a></span>
+    
+    </div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #888; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: false
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tag-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var jsInfo = {
+        root: '/'
+    }
+</script>
+    <!-- 不蒜子  -->
+    
+    <!-- CNZZ统计  -->
+    
+    </div>
+    </body>
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</html>
+
+
