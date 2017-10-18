@@ -159,11 +159,10 @@
 <pre><code><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">	 toggle = <span class="function"><span class="keyword">function</span>(<span class="params">d</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span>(d) &#123;</div><div class="line">        <span class="keyword">if</span> (d.children) &#123;</div><div class="line">            d._children = d.children;</div><div class="line">            <span class="keyword">return</span> d.children = <span class="literal">null</span>;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            d.children = d._children;</div><div class="line">            <span class="keyword">return</span> d._children = <span class="literal">null</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">update = <span class="function"><span class="keyword">function</span>(<span class="params">source</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> duration, link, node, nodeEnter, nodeExit, nodeUpdate, nodes;</div><div class="line">  duration = d3.event &amp;&amp; d3.event.altKey ? <span class="number">5000</span> : <span class="number">500</span>;</div><div class="line">  nodes = tree.nodes(root).reverse();</div><div class="line">  nodes.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">d</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> d.y = d.depth * <span class="number">180</span>;</div><div class="line">  &#125;);</div><div class="line">  node = vis.selectAll(<span class="string">"g.node"</span>).data(nodes, <span class="function"><span class="keyword">function</span>(<span class="params">d</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> d.id || (d.id = ++i);</div><div class="line">  &#125;).attr(<span class="string">'id'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">d</span>)</span>&#123;</div><div class="line">      <span class="keyword">return</span> d.name;</div><div class="line">  &#125;);</div></pre></td></tr></table></figure>
 </code></pre><h3 id="增删pod的功能"><a href="#增删pod的功能" class="headerlink" title="增删pod的功能"></a>增删pod的功能</h3><p>增删pod的功能是在每条deployment与pod之间的加入两张预先做好的图片，监听click事件，调用相应的后端API，实现增删的功能。值得注意的是，<strong>圆环形、图片、文字说明</strong>是depolyment的一个g，点击图片默认情况下会造成deployment关闭状态。因此要在click事件中加入<strong>d3.event.stopPropagation();</strong>让点击事件不再向下传播。</p>
 <h3 id="hover高亮效果"><a href="#hover高亮效果" class="headerlink" title="hover高亮效果"></a>hover高亮效果</h3><p>注意到，当鼠标hover到某个元素上时，元素代表的text会高亮，从APP开始经该元素到达storage的路径都将会被高亮。这个部分主要是由highlightOn和highlightOff这两个函数控制的。</p>
-<p>在建立路径的时候，我们给每一段路径都加上一个一个id</p>
+<p>在建立路径的时候，我们给每一段路径都加上一个一个id，由path的起始点到path的终点id+name组成，这样就可以唯一确定该path。</p>
 <blockquote>
-<p>path.link.source-“ + d.parent.name+d.parent.id + “.target-“ + d.name+d.id</p>
+<p>id是： path.link.source-“ + d.parent.name+d.parent.id + “.target-“ + d.name+d.id</p>
 </blockquote>
-<p>由path的起始点到path的终点id+name组成，这样就可以唯一确定该path。</p>
 <p>hightlightOn函数中，有两个重要的子函数，<strong>parentLine()和childLine()</strong>，这两个函数是寻找从App到该节点和从该节点到storage节点的路径用的。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">highlightOn = <span class="function"><span class="keyword">function</span>(<span class="params">d</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> parentLine;</div><div class="line">  parentLine = <span class="function"><span class="keyword">function</span>(<span class="params">d</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (d.parent) &#123;</div><div class="line">      parentLine(d.parent);</div><div class="line">      vis.selectAll(<span class="string">"path.link.source-"</span> + d.parent.name+d.parent.id + <span class="string">".target-"</span> + d.name+d.id).classed(<span class="string">'highlight'</span>, <span class="literal">true</span>);</div><div class="line">    &#125;</div><div class="line">  &#125;;</div><div class="line">  parentLine(d);</div><div class="line"></div><div class="line">  <span class="keyword">var</span> childLine = <span class="function"><span class="keyword">function</span>(<span class="params">d</span>)</span>&#123;</div><div class="line">      <span class="keyword">if</span>(d.children &amp;&amp; d.children.length&gt;<span class="number">0</span>)&#123;</div><div class="line">          <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;d.children.length;i++)&#123;</div><div class="line">              childLine(d.children[i]);</div><div class="line">              vis.selectAll(<span class="string">"path.link.source-"</span>+d.name+d.id+<span class="string">".target-"</span>+d.children[i].name+d.children[i].id).classed(<span class="string">'highlight'</span>,<span class="literal">true</span>);</div><div class="line">          &#125;</div><div class="line">      &#125;</div><div class="line">  &#125;;</div><div class="line">  childLine(d);</div><div class="line"></div><div class="line">  <span class="keyword">return</span> update(d);</div><div class="line">&#125;;</div><div class="line"></div><div class="line">highlightOff = <span class="function"><span class="keyword">function</span>(<span class="params">d</span>) </span>&#123;</div><div class="line">  vis.selectAll(<span class="string">"path.link"</span>).classed(<span class="string">'highlight'</span>, <span class="literal">false</span>);</div><div class="line">  <span class="keyword">return</span> update(d);</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
 <h2 id="detail信息"><a href="#detail信息" class="headerlink" title="detail信息"></a>detail信息</h2><p>Detail的信息，之前的博客中写过了，可以参考前面的<a href="http://zhihaozhang.github.io/2017/10/11/gInSVG/">博文</a>。</p>
@@ -498,6 +497,22 @@
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-archive"> Total : 16 </div>
     
     <div class="post-archive">
@@ -549,17 +564,7 @@
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/数据可视化之散点图/" >数据可视化之散点图</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/drop and drag in d3js/" >drop and drag in d3</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/Build reuseable visualization using d3.js and AngularJS/" >Build reusable visualization using d3.js and AngularJS</a>
         </li>
     
     
@@ -574,12 +579,7 @@
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/polybrush in d3/" >polybrush in d3</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/数据可视化之散点图/" >数据可视化之散点图</a>
         </li>
     
     
@@ -589,7 +589,22 @@
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/Build reuseable visualization using d3.js and AngularJS/" >Build reusable visualization using d3.js and AngularJS</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/polybrush in d3/" >polybrush in d3</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/drop and drag in d3js/" >drop and drag in d3</a>
         </li>
     
     
@@ -606,9 +621,9 @@
     
         <span class="sidebar-tag-name"><a href= "#">swift</a></span>
     
-        <span class="sidebar-tag-name"><a href= "#">SVG</a></span>
-    
         <span class="sidebar-tag-name"><a href= "#">visualization</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">SVG</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">macOS开发</a></span>
     
