@@ -163,7 +163,7 @@
 <blockquote>
 <p>id是： path.link.source-“ + d.parent.name+d.parent.id + “.target-“ + d.name+d.id</p>
 </blockquote>
-<p>hightlightOn函数中，有两个重要的子函数，<strong>parentLine()和childLine()</strong>，这两个函数是寻找从App到该节点和从该节点到storage节点的路径用的。</p>
+<p>hightlightOn函数中，有两个重要的子函数，<strong>parentLine()和childLine()</strong>，这两个函数使用了<strong>递归</strong>的方式寻找从App到该节点和从该节点到storage节点的路径。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">highlightOn = <span class="function"><span class="keyword">function</span>(<span class="params">d</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> parentLine;</div><div class="line">  parentLine = <span class="function"><span class="keyword">function</span>(<span class="params">d</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (d.parent) &#123;</div><div class="line">      parentLine(d.parent);</div><div class="line">      vis.selectAll(<span class="string">"path.link.source-"</span> + d.parent.name+d.parent.id + <span class="string">".target-"</span> + d.name+d.id).classed(<span class="string">'highlight'</span>, <span class="literal">true</span>);</div><div class="line">    &#125;</div><div class="line">  &#125;;</div><div class="line">  parentLine(d);</div><div class="line"></div><div class="line">  <span class="keyword">var</span> childLine = <span class="function"><span class="keyword">function</span>(<span class="params">d</span>)</span>&#123;</div><div class="line">      <span class="keyword">if</span>(d.children &amp;&amp; d.children.length&gt;<span class="number">0</span>)&#123;</div><div class="line">          <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;d.children.length;i++)&#123;</div><div class="line">              childLine(d.children[i]);</div><div class="line">              vis.selectAll(<span class="string">"path.link.source-"</span>+d.name+d.id+<span class="string">".target-"</span>+d.children[i].name+d.children[i].id).classed(<span class="string">'highlight'</span>,<span class="literal">true</span>);</div><div class="line">          &#125;</div><div class="line">      &#125;</div><div class="line">  &#125;;</div><div class="line">  childLine(d);</div><div class="line"></div><div class="line">  <span class="keyword">return</span> update(d);</div><div class="line">&#125;;</div><div class="line"></div><div class="line">highlightOff = <span class="function"><span class="keyword">function</span>(<span class="params">d</span>) </span>&#123;</div><div class="line">  vis.selectAll(<span class="string">"path.link"</span>).classed(<span class="string">'highlight'</span>, <span class="literal">false</span>);</div><div class="line">  <span class="keyword">return</span> update(d);</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
 <h2 id="detail信息"><a href="#detail信息" class="headerlink" title="detail信息"></a>detail信息</h2><p>Detail的信息，之前的博客中写过了，可以参考前面的<a href="http://zhihaozhang.github.io/2017/10/11/gInSVG/">博文</a>。</p>
 
@@ -497,22 +497,6 @@
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <div class="total-archive"> Total : 16 </div>
     
     <div class="post-archive">
@@ -564,12 +548,22 @@
     
     
         <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/polybrush in d3/" >polybrush in d3</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
             <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/Build reuseable visualization using d3.js and AngularJS/" >Build reusable visualization using d3.js and AngularJS</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular/" >D3 on Angular</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
         </li>
     
     
@@ -584,27 +578,17 @@
     
     
         <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/drop and drag in d3js/" >drop and drag in d3</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
             <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/polybrush in d3/" >polybrush in d3</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/drop and drag in d3js/" >drop and drag in d3</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular/" >D3 on Angular</a>
         </li>
     
     
