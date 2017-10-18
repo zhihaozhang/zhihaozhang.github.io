@@ -146,7 +146,6 @@
 </code></pre><h2 id="主体信息展示区"><a href="#主体信息展示区" class="headerlink" title="主体信息展示区"></a>主体信息展示区</h2><p>主体信息的展示是拓扑图的核心部分。各个组件的数量会有很大的变化范围，这也是我们弃用老版本拓扑图的原因。坦率的讲，老版本的拓扑图是比较美观的、图形化的，但是遇到的核心问题是当某些组件数量过大时，容易引起大量的重叠问题，造成整个系统不work了。</p>
 <p>而这个版本的拓扑图得益于d3提供的Tree布局方式，比较好的解决了这个问题。它会根据用户指定的画布宽高，算出最适合的布局方式，即每个点应该放置在哪里。</p>
 <p>Tree-layout接受的数据形式如下图所示：</p>
-<p>最新版本的拓扑图效果如下图所示:</p>
 <div align="center"><br><img src="https://ip.freep.cn/588778/E6A8D171-0CC5-4351-9FB3-A4D76BDD6A08.png" alt=""><br>Tree-layout接受的数据格式<br></div>
 
 <p>我们backend提供的json文件与要求的数据格式有较大的差别，下面比较恶心的代码的功能是利用循环将后端提供的json文件转化成Tree-layout需要的格式。</p>
@@ -495,8 +494,6 @@
     
     
     
-    
-    
     <div class="total-archive"> Total : 16 </div>
     
     <div class="post-archive">
@@ -548,7 +545,7 @@
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/polybrush in d3/" >polybrush in d3</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/浅谈d3.js中的异步文件读取的处理/" >浅谈d3.js中强制异步文件读取同步的四种方法</a>
         </li>
     
     
@@ -568,7 +565,7 @@
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/浅谈d3.js中的异步文件读取的处理/" >浅谈d3.js中强制异步文件读取同步的四种方法</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
         </li>
     
     
@@ -583,7 +580,7 @@
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/polybrush in d3/" >polybrush in d3</a>
         </li>
     
     
@@ -605,9 +602,9 @@
     
         <span class="sidebar-tag-name"><a href= "#">swift</a></span>
     
-        <span class="sidebar-tag-name"><a href= "#">visualization</a></span>
-    
         <span class="sidebar-tag-name"><a href= "#">SVG</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">visualization</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">macOS开发</a></span>
     
