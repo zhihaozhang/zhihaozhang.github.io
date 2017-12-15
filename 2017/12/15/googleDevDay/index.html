@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
     <title>
         
-        用Java生成Json文件 · Zhihao&#39;s Studio
+        谷歌开发者大会(GDD2017)见闻 Day1 · Zhihao&#39;s Studio
         
     </title>
     <link rel="icon" href= /assests/favicon.ico>
@@ -81,7 +81,7 @@
                 <a href="/" >Zhihao&#39;s Studio.</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">用Java生成Json文件</a>
+                <a href="#" class="post-name">谷歌开发者大会(GDD2017)见闻 Day1</a>
             </div>
     </div>
     
@@ -102,7 +102,7 @@
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            用Java生成Json文件
+            谷歌开发者大会(GDD2017)见闻 Day1
             <!-- 404 -->
             
         </h1>
@@ -120,13 +120,13 @@
             
                 <div class= post-intro-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-href = Json>Json</a>
+        <a class="post-tag" href="javascript:void(0);" data-href = 随感>随感</a>
     
 </div>
             
             <div class="post-intro-meta">
                 <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                <span class="post-intro-time">2014/04/24</span>
+                <span class="post-intro-time">2017/12/15</span>
             </div>
         
     </div>
@@ -134,16 +134,60 @@
         <div class="container">
             <main class="main post-page">
     <article class="article-entry">
-        <h1 id="Json"><a href="#Json" class="headerlink" title="Json"></a>Json</h1><h2 id="Json是什么"><a href="#Json是什么" class="headerlink" title="Json是什么"></a>Json是什么</h2><blockquote>
-<p>  【百度百科】JSON(JavaScript Object Notation) 是一种轻量级的数据交换格式。它基于ECMAScript的一个子集。 JSON采用完全独立于语言的文本格式，但是也使用了类似于C语言家族的习惯（包括C、C++、C#、Java、JavaScript、Perl、Python等）。这些特性使JSON成为理想的数据交换语言。 易于人阅读和编写，同时也易于机器解析和生成(网络传输速率)。</p>
-</blockquote>
-<h2 id="Json语法规则"><a href="#Json语法规则" class="headerlink" title="Json语法规则"></a>Json语法规则</h2><p>JSON 语法是 JavaScript 对象表示语法的子集。<br>1.数据在键值对中<br>2.数据由逗号分隔<br>3.花括号保存对象<br>4.方括号保存数组<br>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&#123;</div><div class="line">	&quot;people&quot;:[</div><div class="line">	    &#123;&quot;firstName&quot;:&quot;Brett&quot;,&quot;lastName&quot;:&quot;McLaughlin&quot;,&quot;email&quot;:&quot;aaaa&quot;&#125;,</div><div class="line">	    &#123;&quot;firstName&quot;:&quot;Jason&quot;,&quot;lastName&quot;:&quot;Hunter&quot;,&quot;email&quot;:&quot;bbbb&quot;&#125;,</div><div class="line">	    &#123;&quot;firstName&quot;:&quot;Elliotte&quot;,&quot;lastName&quot;:&quot;Harold&quot;,&quot;email&quot;:&quot;cccc&quot;&#125;</div><div class="line">	]</div><div class="line">&#125;</div><div class="line"></div></pre></td></tr></table></figure></p>
-<h1 id="Java写入Json格式数据到-json格式文件"><a href="#Java写入Json格式数据到-json格式文件" class="headerlink" title="Java写入Json格式数据到.json格式文件"></a>Java写入Json格式数据到.json格式文件</h1><p>用Java生成json格式的文件分成两步，第一步是<strong>生成json格式数据</strong>，第二步是<strong>将json格式的数据写入文件</strong>。</p>
-<h2 id="生成json格式数据"><a href="#生成json格式数据" class="headerlink" title="生成json格式数据"></a>生成json格式数据</h2><p>生成json格式的数据是借助json-lib所需的全部jar包做到的，可以到<a href="http://download.csdn.net/detail/u014481096/8493539" target="_blank" rel="external">这里</a>免费下载全部所需的jar包。下载完成后，导入到项目中。<br>这些jar包可以将List、Map、Bean、数组等转成json格式的数据，非常方便。下面的代码示例中，给出了一部分的例子。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">List&lt;String&gt; list = new ArrayList&lt;String&gt;();</div><div class="line">list.add(&quot;hello&quot;);</div><div class="line">list.add(&quot;world&quot;);</div><div class="line">	</div><div class="line">HashMap&lt;String,String&gt; map = new HashMap&lt;String,String&gt;();</div><div class="line">map.put(&quot;name&quot;, &quot;attribute a&quot;);</div><div class="line">map.put(&quot;id&quot;,&quot;dingdangmao&quot;);</div><div class="line">	</div><div class="line">people p1 = new people(&quot;zhangsan&quot;,&quot;310504&quot;,&quot;552339&quot;,259034);</div><div class="line">people p2 = new people(&quot;zhangsi&quot;,&quot;52083&quot;,&quot;85640&quot;,42153);</div><div class="line">people p3 = new people(&quot;zhangwu&quot;,&quot;515910&quot;,&quot;828669&quot;,362642);</div><div class="line">people p4 = new people(&quot;zhangliu&quot;,&quot;315910&quot;,&quot;728669&quot;,562642);</div><div class="line">people p5 = new people(&quot;zhangqi&quot;,&quot;415910&quot;,&quot;928669&quot;,162642);</div><div class="line">	</div><div class="line">ArrayList&lt;String&gt; m = new ArrayList&lt;String&gt;();</div><div class="line">m.add(new String(p1.toString()));</div><div class="line">m.add(new String(p2.toString()));</div><div class="line">m.add(new String(p3.toString()));</div><div class="line">m.add(new String(p4.toString()));</div><div class="line">m.add(new String(p5.toString()));</div><div class="line">	</div><div class="line">JSONArray j = JSONArray.fromObject(m);</div><div class="line">System.out.println(j);</div><div class="line">	</div><div class="line">net.sf.json.JSONArray jsonArray = net.sf.json.JSONArray.fromObject(map);</div><div class="line">	</div><div class="line">boolean[] boolArray = new boolean[]&#123;true,false,true&#125;;      </div><div class="line">JSONArray jsonArray1 = JSONArray.fromObject( boolArray );      </div><div class="line">System.out.println( jsonArray1 );      </div><div class="line">System.out.println(jsonArray.toString());</div><div class="line"></div></pre></td></tr></table></figure>
-<h2 id="将json格式的数据写入文件"><a href="#将json格式的数据写入文件" class="headerlink" title="将json格式的数据写入文件"></a>将json格式的数据写入文件</h2><p>将已有的json格式文件写入文件和其他的Java写文件并没有太大的区别，但为了做到有格式的将json对象写出到文件中，是需要参考数据结构中的括号匹配问题的。这里参考了<a href="http://blog.csdn.net/gemuandyou/article/details/46737879" target="_blank" rel="external">CSDN的博客</a>，感谢作者。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">public void writeToJson(String filePath,JSONArray object) throws IOException</div><div class="line">&#123;</div><div class="line">    File file = new File(filePath);</div><div class="line">    char [] stack = new char[1024];</div><div class="line">    int top=-1;</div><div class="line"></div><div class="line">    String string = object.toString();</div><div class="line"></div><div class="line">    StringBuffer sb = new StringBuffer();</div><div class="line">    char [] charArray = string.toCharArray();</div><div class="line">    for(int i=0;i&lt;charArray.length;i++)&#123;</div><div class="line">        char c= charArray[i];</div><div class="line">        if (&apos;&#123;&apos; == c || &apos;[&apos; == c) &#123;  </div><div class="line">            stack[++top] = c; </div><div class="line">            sb.append(&quot;\n&quot;+charArray[i] + &quot;\n&quot;);  </div><div class="line">            for (int j = 0; j &lt;= top; j++) &#123;  </div><div class="line">                sb.append(&quot;\t&quot;);  </div><div class="line">            &#125;  </div><div class="line">            continue;  </div><div class="line">        &#125;</div><div class="line">         if ((i + 1) &lt;= (charArray.length - 1)) &#123;  </div><div class="line">                char d = charArray[i+1];  </div><div class="line">                if (&apos;&#125;&apos; == d || &apos;]&apos; == d) &#123;  </div><div class="line">                    top--; </div><div class="line">                    sb.append(charArray[i] + &quot;\n&quot;);  </div><div class="line">                    for (int j = 0; j &lt;= top; j++) &#123;  </div><div class="line">                        sb.append(&quot;\t&quot;);  </div><div class="line">                    &#125;  </div><div class="line">                    continue;  </div><div class="line">                &#125;  </div><div class="line">            &#125;  </div><div class="line">            if (&apos;,&apos; == c) &#123;  </div><div class="line">                sb.append(charArray[i] + &quot;&quot;);  </div><div class="line">                for (int j = 0; j &lt;= top; j++) &#123;  </div><div class="line">                    sb.append(&quot;&quot;);  </div><div class="line">                &#125;  </div><div class="line">                continue;  </div><div class="line">            &#125;  </div><div class="line">            sb.append(c);  </div><div class="line">        &#125;  </div><div class="line">        Writer write = new FileWriter(file);  </div><div class="line">        write.write(sb.toString());  </div><div class="line">        write.flush();  </div><div class="line">        write.close();  </div><div class="line">&#125;</div><div class="line"></div></pre></td></tr></table></figure>
-<h1 id="one-more-thing"><a href="#one-more-thing" class="headerlink" title="one more thing"></a>one more thing</h1><p>在将json格式的数据写出到文件的时候，可能需要写出”号来，在控制台输出的时候，很多人都知道使用转意符，即System.out.println(“/“”); ，不过在尝试写入到文件的时候，发现这么搞行不通，输出到文件的时候还是会有/，这该怎么办呢？<br>突发奇想，在需要输出的String的基础上再包一层new String(string)<strong>消化</strong>掉转意符。真的成功了！有时候，真的需要一点灵感~<br><img src="http://ww2.sinaimg.cn/large/aa2320a8gw1evvieprj07j214c0qqn3r.jpg" alt=""></p>
+        <p><img src="http://pic.suiyiyun.cn/588778/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/ddd.jpg" alt=""></p>
+<h1 id="Day-0"><a href="#Day-0" class="headerlink" title="Day 0"></a>Day 0</h1><p>双12晚上，我一改之前晚睡的习惯，罕见的在早上12点之前入睡了。为了第二天早上8：30的谷歌开发者大会。</p>
+<h1 id="出发到达会场、注册"><a href="#出发到达会场、注册" class="headerlink" title="出发到达会场、注册"></a>出发到达会场、注册</h1><p>第二天早上7点15就洗漱完毕出门了。7点多的地铁并没有想象中那么空荡，依然挤满了人，真庆幸自己住的离公司很近，不需要经历上班早高峰的洗礼。一出地铁站，就看到了举着牌子的GDD工作人员，要知道这里离会场还有1.5km左右的距离。解锁了一辆小黄车，几乎在每个路口都能看到指路的工作人员，真的很贴心。</p>
+<p><img src="http://pic.suiyiyun.cn/588778/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/WechatIMG159.jpeg" alt=""></p>
+<p>来到会场的时候,注册的开发者已经排起了长队，时间为早上8：30。注册完领取了印有日程和场地介绍的胸牌、一个供开发者DIY的纸盒音箱和很多人喜欢的谷歌信仰贴纸。随后跟随大部队进入了主会场。</p>
+<h1 id="主会场的开幕式和主题演讲"><a href="#主会场的开幕式和主题演讲" class="headerlink" title="主会场的开幕式和主题演讲"></a>主会场的开幕式和主题演讲</h1><p>在主会场幸运的坐到了第一排，视角挺不错的。由于开场之前还有挺长时间的，现场工作人员借机推广了一波GIORGIO CAM，一个识别照片中的物体，然后唱出一段rap的应用。由现场工作人员通过直播摄像头识别观众举起的物体，刚开始的时候，大部分还是手机、手表、纸币等物体，基本可以识别出来，后面慢慢的画风不对了，变成了香烟、化妆刷一类的东西，识别基本是不成功的。</p>
+<p>时间终于来到了9：30，大会正式开幕的时间。首先是一段非常燃的开场舞，通过将文字投影到舞者手里的白板上和现场观众打招呼，一度将现场气氛带到高潮。</p>
+<p>暖场舞过后是领导讲话，有谷歌的产品总监与谷歌大中华区的总裁石博盟，他们的中文都说的很6，似乎很愿意通过中文拉近与中国开发者的距离。他们介绍了本次开发者大会的举办初衷和谷歌对中国的重视等等，值得一提的是安卓年度最佳应用前100里有13个中国团队，可见中国市场的重要性。</p>
+<p><img src="http://pic.suiyiyun.cn/588778/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/WechatIMG160.jpeg" alt=""></p>
+<p>各个项目的经理/负责人也一一上台介绍了各自的项目，并邀请大家在接下来的分会场活动中去他们的场次中详细了解。给我留下印象比较深的是一个叫金安娜的女孩，她全程用中文演讲，而且据她自己说这是她第一次来到中国。</p>
+<p>大约10点左右，AI专家李飞飞教授从场馆右侧进入了第一排，恰好从我面前经过，给我的感觉是连走路都是这么的雷厉风行。轮到她上台演讲的时候，台下的欢呼声很高，足见她的人气和AI的人气之高。在之后的演讲中，她果然宣布了大新闻————谷歌在北京成立了中国地区的AI研究中心。并由她亲自带领，这是继美国和欧洲之外，在全球成立的第三个AI研究中心。<strong>毫无疑问，中国有巨大的机遇和适合AI的丰富使用场景，只有这种使用场景极其丰富的地方，人工智能才能得到更好的发展。</strong> 同时，中国搞人工智能研究的科研人员也是非常多的，据李飞飞教授说，AAAI2015所收录的论文中，45%有华人的身影。</p>
+<p><img src="http://pic.suiyiyun.cn/588778/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/WechatIMG161.jpeg" alt=""></p>
+<h1 id="场馆外的展区、礼物及其他"><a href="#场馆外的展区、礼物及其他" class="headerlink" title="场馆外的展区、礼物及其他"></a>场馆外的展区、礼物及其他</h1><p>茶歇时间，来到主会场外。有很多展区，每个展区都有一线谷歌工程师，据他们说是被拉壮丁到了现场介绍各个项目的。但可惜的是他们并不一定是做他们介绍的项目的，所以关于项目的很多情况他们也不是特别了解，不过能跟他们交流能了解到谷歌的工作方式和谷歌中国里一些不会公布的小道消息，也蛮不错的。在Iot展台，我领到了一张换取Android Things的物联网开发套件。</p>
+<p><img src="http://pic.suiyiyun.cn/588778/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/WechatIMG164.jpeg" alt=""></p>
+<p>我看这东西有触摸屏，有很多传感器，觉得这东西怎么得值个80刀吧，结果网上一搜，售价$169，而且每个人都可以领一份。看来我真的是被贫穷限制了想象力。在现场，他们展示了两个利用这套开发套件的项目，一个是利用TensorFlow识别图片的应用，它不仅可以识别出照片是一只狗，还能识别出狗的品种；还有一个是拍一张人像后利用黑笔将人像的轮廓画到一张白纸上的应用，都挺有想法的。</p>
+<p>TensorFlow那个项目是开源的，<a href="https://github.com/androidthings/sample-tensorflow-imageclassifier" target="_blank" rel="external">开源地址</a>，同时该项目下还有很多其他有趣的开源项目。</p>
+<p>VR和AR的展台排队非常长，由于我对这个领域相对熟悉，并没有体验，只是看了一下ARCore在安卓手机上的运行情况，给我的感觉是跟苹果的ARKit在流畅性上还是有一些差距的，不知道是不是硬件的原因。</p>
+<p><img src="http://pic.suiyiyun.cn/588778/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/WechatIMG162.jpeg" alt=""></p>
+<p>展区外还有很多填写调查问卷换取各种贴纸、玩偶、布娃娃、T-shirt、钥匙扣等带有谷歌元素的礼物。不过我参加的并不是很多，因为排队的人实在是太多了。扫描胸牌背后的反馈表填写反馈，赠送一个电脑包，质量还不错。</p>
+<p>茶歇提供了蛋糕和咖啡饮料，可以在天台和其他人自由搭讪。第一天的天气很不错，我和一个在金融公司做交易平台的开发者简单交流了十分钟，了解了她们使用的技术栈和金融公司开发软件的流程，总体还是很愉快的。</p>
+<p><img src="http://pic.suiyiyun.cn/588778/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/WechatIMG163.jpeg" alt=""></p>
+<h1 id="分会场活动"><a href="#分会场活动" class="headerlink" title="分会场活动"></a>分会场活动</h1><p>接下来的活动是几个会场同时进行的，意味着观众不得不进行取舍。我主要听了渐进式网页应用和Firbase相关的一些session，避开了相对更火热的android和TensorFlow。接下来简短地介绍一下我对各个分会场活动的见闻和感想。session的<a href="http://www.google.cn/intl/zh-CN/events/developerdays2017china/agenda/" target="_blank" rel="external">日程</a></p>
+<h2 id="渐进式网页应用PWA"><a href="#渐进式网页应用PWA" class="headerlink" title="渐进式网页应用PWA"></a>渐进式网页应用PWA</h2><p>渐进式网页应用 (PWA) 集网络和应用之优势于一身，带来非凡的体验。PWA 网页的加载速度快，其通知功能有助于重新吸引用户，同时还具备通常只有本机应用才具备的其他特性。重点介绍了Service Worker的工作机制、生命周期，如何配置manifest文件使用PWA，渐进式网页应用的优势等等。渐进式网页的出现主要是为了改进用户体验，相比于传统网页，在离线状况下依然可用。</p>
+<p>有用的一些URL：</p>
+<ul>
+<li><a href="https://goo.gl/9DJRJq" target="_blank" rel="external">您的第一个Progressive Web app</a></li>
+<li><a href="https://goo.gl/suGNRb" target="_blank" rel="external">调试Service Worker</a></li>
+<li><a href="https://goo.gl/QRLk5i" target="_blank" rel="external">网络推送通知</a></li>
+<li><a href="https://goo.gl/dxWGdP" target="_blank" rel="external">利用PaymentRequest API实现无缝付款</a></li>
+</ul>
+<h2 id="Firebase"><a href="#Firebase" class="headerlink" title="Firebase"></a>Firebase</h2><p>Firebase也是为用户体验而生的，在现场演讲者结合Google Cloud Platform从头开始构建了一个翻译工具的应用，给我最深的印象是可以不需要建立服务器，同时使用 Firebase 构建应用很简单，使用 Google Cloud Platform 拓展体验很容易。</p>
+<p>下午的讲座中，介绍了Firebase的新特性，印象比较深刻的有：</p>
+<ul>
+<li>A/B testing，将用户群体分类，然后分组进行测试。</li>
+<li>Firebase预测，将即将要弃坑的用户找出来，然后针对他们采取一些行动，比如送装备等。演讲者说，这个功能帮助切西瓜应用留下了20%即将要叛逃的用户，记得很清楚，他用的是<strong>用户粘度</strong>这个词。</li>
+<li>动态链接(Dynamic Links)，使用smart url让现有和潜在用户分享应用内容和链接内容。</li>
+<li>自动崩溃报告方案分类，包含了一定的分析。</li>
+<li>性能监控控制台，可视化的方式监控应用，对性能的提升有一定帮助。</li>
+</ul>
+<p>有用的一些URL：</p>
+<ul>
+<li><a href="https://firebase.google.cn" target="_blank" rel="external">Firebase 网站</a></li>
+<li><a href="https://github.com/mimming/zero-to-app-universal-translator" target="_blank" rel="external">Github代码段</a></li>
+</ul>
+<h2 id="H5游戏市场的前景与变现"><a href="#H5游戏市场的前景与变现" class="headerlink" title="H5游戏市场的前景与变现"></a>H5游戏市场的前景与变现</h2><p>这个session是采用的采访的形式(感觉采访的问题都是提前准备好的)，被采访者是白鹭科技的CEO，他介绍了他之前比较成功的三个项目，以及与谷歌的合作。</p>
+<p>关于游戏的现状，他谈到了两个方面：</p>
+<ul>
+<li>市场方面，2017年H5游戏用户数量超过了3.5亿，游戏市场容量约60亿，相比比喻2014年增长了120倍。</li>
+<li>技术方面，白鹭有自己的游戏引擎，2D渲染能力、跨平台能力提升明显，4k 60fps无压力。</li>
+</ul>
+<p>后面还介绍了一些游戏案例，让我比较震惊的是h5页面居然可以做出童年非常痴迷的传奇那样的大型游戏了。介绍了如何在网页端“优雅的”嵌入广告的三种方式。他指出，游戏的变现方式已经不再是以前那样几乎全靠内购了，很大一部分靠广告，而广告用谁的服务呢？当然是谷歌了，哈哈哈…</p>
+<h1 id="午餐晚宴结束语"><a href="#午餐晚宴结束语" class="headerlink" title="午餐晚宴结束语"></a>午餐晚宴结束语</h1><p>午餐和晚宴都是采用的自助式，吃的还不错，有水果、时蔬和肉、鱼供应，喝的提供的是可乐与橙汁。晚宴相比于中午，添加了乐队的表演，现场也有很多诸如桌上足球、拳皇游戏机、投篮机等丰富多彩的活动，气氛还是不错的。</p>
+<p>第一天就这样结束了，应该说，由于分会场的session都只有30分钟（通常前几分钟是谷歌的广告），对某个技术只能起一个头，接下来的进一步学习需要放到线下，文中给出的链接供感兴趣的读者参考。</p>
+<p><img src="http://pic.suiyiyun.cn/588778/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/WechatIMG166.jpeg" alt=""></p>
 
 
             <! -- 添加捐赠图标 -->
@@ -171,13 +215,13 @@
     <!-- 前后页  -->
     <ul class="post-pager">
         
-            <li class="next">
-                <a href= "/2014/11/15/Build reuseable visualization using d3.js and AngularJS/" title= Build reusable visualization using d3.js and AngularJS >
-                    <span>Next Post</span>
-                    <span>Build reusable visualization using d3.js and AngularJS</span>
+        
+            <li class="previous">
+                <a href= "/2017/10/18/topology/" title= 拓扑图的实现 >
+                    <span>Previous Post</span>
+                    <span>拓扑图的实现</span>
                 </a>
             </li>
-        
         
     </ul>
 

@@ -145,7 +145,7 @@
 <h1 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h1><h2 id="没有logo"><a href="#没有logo" class="headerlink" title="没有logo"></a>没有logo</h2><p>其实这件事挺尴尬的，我不是设计师，因此平时logo的主要来源是<a href="https://www.flaticon.com" target="_blank" rel="external">flaticon</a>，这次没忍心打扰正在熟睡的非著名设计师Joseph，因此还是在flaticon上找的icon，进行了简单的颜色变换与组合。</p>
 <p>icon考虑到了mouseSync具有鼠标和蓝牙的特性，因此还是比较写实的。考虑到蓝牙客户端有外部设备和数据中心(两台Mac)之分，因此两个icon虽然很相似，但仍有细微的不同。不同点在于，数据中心的icon多了一个类似信号指示的标志，表示它是接收蓝牙信号的一端。</p>
 <p>由于本人设计方面实在业余，还请大家轻喷。有空再找非著名设计师Joseph实现一枚漂亮的logo。</p>
-<div align="center"><br><img src="https://syy.freep.cn/588778/icons.png" alt=""><br>&gt; icons<br></div>
+<div align="center"><br><img src="https://ws3.sinaimg.cn/large/006tNc79gy1fli8om5s4tj30bs078jro.jpg" alt=""><br>&gt; icons<br></div>
 
 <h2 id="在外部设备端容易引起误操作"><a href="#在外部设备端容易引起误操作" class="headerlink" title="在外部设备端容易引起误操作"></a>在外部设备端容易引起误操作</h2><p>之前的demo视频中，为了让两台电脑看起来一致，我录的是同时打开文件，同时在图标上右击，在现实生活中，在同一时刻同时操作两台Mac的需求很少不存在。通常情况下，用户还是想对某一台Mac进行操作的。<strong>mouseSync的定位应该是：帮助用户用一个鼠标操作两台电脑，且给用户决定什么时候操作哪台，省去两个鼠标之间换来换去的麻烦。</strong></p>
 <p>之前的项目中，我对鼠标事件添加的均是全局监控事件，因此只要mouseSync<strong>生命周期</strong>没有结束，它的操作将实时被发送到另一台mac上。我想过两个解决方案：</p>
@@ -158,7 +158,7 @@
 <h3 id="实现过程中遇到的问题"><a href="#实现过程中遇到的问题" class="headerlink" title="实现过程中遇到的问题"></a>实现过程中遇到的问题</h3><p>让当前窗口一打开就全屏的方法是在ViewDidLoad方法体中进行控制的:</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">viewDidLoad</span><span class="params">()</span></span> &#123;</div><div class="line">	<span class="keyword">super</span>.viewDidLoad()</div><div class="line">	<span class="keyword">self</span>.view.window?.zoom(<span class="keyword">self</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>但是我很快就发现了问题：<strong>尽管已经将应用全屏了，但是用户依然会有一定几率对dock栏和顶部菜单栏进行误操作。</strong>用户如果在操作另一台电脑的时候，还得注意这台电脑上是不是误操作了，这不符合我们软件开发的初衷。考虑到有些用户将dock放在底部，有些用户将dock放在左边，因此，我加了这样的限制，当用户将鼠标移动到距离屏幕边缘<strong>50px</strong>以内的时候，程序帮助他将鼠标移动至屏幕中央。参照下图，灰色地带就可以作为防止鼠标误操作的缓冲区。</p>
-<div align="center"><br><img src="https://syy.freep.cn/588778/border.png" alt=""><br>&gt; 防止对dock和菜单栏误操作解决方法示意图<br></div>
+<div align="center"><br><img src="https://ws1.sinaimg.cn/large/006tNc79gy1fli8on3pu5j30vw0j8q3s.jpg" alt=""><br>&gt; 防止对dock和菜单栏误操作解决方法示意图<br></div>
 
 <p>阅读过上一篇博客的朋友一定注意到了，我们的程序是记录上一个鼠标点的位置，并将上一个鼠标点的位置与当前位置相减，将位置变动作为特征值进行发送。因此，在鼠标被程序移动到屏幕中央的时候，需要将上一个位置更新为屏幕中央的坐标。</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//屏幕宽高的获取方式</span></div><div class="line">    <span class="keyword">let</span> <span class="type">SCREEN_WIDTH</span> = <span class="type">NSScreen</span>.main()!.frame.width</div><div class="line">    <span class="keyword">let</span> <span class="type">SCREEN_HEIGHT</span> = <span class="type">NSScreen</span>.main()!.frame.height</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -174,7 +174,7 @@
 <li>y的坐标是-，x的坐标是+，这是由OS X的坐标系决定的。</li>
 </ol>
 <p>最后，我用两台电脑同时在画板上写了一个牛B。mouseSync的开发工作算是告一段落了，希望对大家有所帮助！</p>
-<div align="center"><br><img src="https://syy.freep.cn/588778/dragdemo.gif" alt=""><br>&gt; drag事件demo<br></div>
+<div align="center"><br><img src="https://ws3.sinaimg.cn/large/006tNc79gy1fli8pduogag307k0dcx6s.gif" alt=""><br>&gt; drag事件demo<br></div>
 
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol>
 <li><a href="https://stackoverflow.com/questions/1817628/clicking-the-mouse-down-to-drag-objects-on-mac" target="_blank" rel="external">https://stackoverflow.com/questions/1817628/clicking-the-mouse-down-to-drag-objects-on-mac</a></li>
@@ -183,7 +183,7 @@
 <h1 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h1><p>试用软件之后如果您对软件有任何的意见与建议，欢迎留言。如果您喜欢这款软件，也欢迎您将它推荐给您的朋友们。让我们一起将mouseSync变得更好！</p>
 <p>我会在订阅号里不定期分享我个人的macOS/ios开发心得和开发笔记，也会在里面发表对于苹果产品/框架/趋势的拙见，希望爱好科技产品或者苹果生态圈的开发者关注。相信本公众号一定能给您带来收获和启发。</p>
 <p>【欢迎扫码关注微信公众号】</p>
-<div align="center"><br><img src="https://syy.freep.cn/588778/640.jpeg" alt=""><br>&gt; 扫码关注微信公众号 骨灰级果粉 获得最新文章更新<br></div>
+<div align="center"><br><img src="https://ws2.sinaimg.cn/large/006tNc79gy1fli8pjz4gag307k0dcx6s.gif" alt=""><br>&gt; 扫码关注微信公众号 骨灰级果粉 获得最新文章更新<br></div>
 
             <! -- 添加捐赠图标 -->
     <div class ="post-donate">
@@ -521,7 +521,20 @@
     
     
     
-    <div class="total-archive"> Total : 16 </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 17 </div>
     
     <div class="post-archive">
     
@@ -530,6 +543,11 @@
     
     <div class="archive-year"> 2017 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2017/12/15/googleDevDay/" >谷歌开发者大会(GDD2017)见闻 Day1</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -582,7 +600,12 @@
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular/" >D3 on Angular</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/drop and drag in d3js/" >drop and drag in d3</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
         </li>
     
     
@@ -592,27 +615,22 @@
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
             <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/数据可视化之散点图/" >数据可视化之散点图</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/drop and drag in d3js/" >drop and drag in d3</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular/" >D3 on Angular</a>
         </li>
     
     
         <li class="archive-post-item">
             <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/polybrush in d3/" >polybrush in d3</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
         </li>
     
     
@@ -630,6 +648,8 @@
         <span class="sidebar-tag-name"><a href= "#">swift</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">SVG</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">随感</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">macOS开发</a></span>
     
