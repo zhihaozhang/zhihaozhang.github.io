@@ -116,6 +116,39 @@
     
     
         <article class="index-post">
+            <a class="content-show-full" href = "/2017/12/17/googleDevDay2/" >
+                    <h2 class="abstract-title">
+                        
+                        <span>谷歌开发者大会(GDD2017)见闻 Day2</span>
+                    </h2>
+                <div class="abstract-content">
+                    
+写在前面上一篇博客写了挺多开发者大会期间的花絮(虽然花絮本身就是开发者大会重要的组成部分)，而在这篇博客里将更专注于session本身，对场外的花絮和花边新闻尽量少的提及。话不多说，我们开始吧。
+Android things安卓things是一种支持世界各地计算需求的新平台，其出现的初衷是简化IoT设备的开发和生成。安卓things运行的仍然是安卓系统，因此对安卓开发比较熟悉的朋友可以很快的上手来完成一些应用。
+在现场，演讲者详细演示了如何在大会赠送的Android things设备上进行程序开发。他利用温度传感器和气压传感器开发了一个温度计和气压计的应用。开发共分为三个步骤：
+
+拼装...
+                </div>
+            </a>
+            <div class="abstract-post-meta">
+                <!-- tags  -->
+                
+                <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = 随感>随感</a>
+    
+</div>
+                
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/12/17</span>
+                </div>
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
             <a class="content-show-full" href = "/2017/12/15/googleDevDay/" >
                     <h2 class="abstract-title">
                         
@@ -340,14 +373,16 @@ SVG中，将元素成组的标签是g元素，之前使用它是将元素进行�
     
     
         <article class="index-post">
-            <a class="content-show-full" href = "/2014/11/15/冷门但实用的d3.js内置函数/" >
+            <a class="content-show-full" href = "/2014/11/15/drop and drag in d3js/" >
                     <h2 class="abstract-title">
                         
-                        <span>冷门但实用的d3.js内置函数</span>
+                        <span>drop and drag in d3</span>
                     </h2>
                 <div class="abstract-content">
-                    前言在d3.js的API文档中，提供了很多内置的函数，但是有些很有用的内置函数却被无情的忽略了，这篇博客就来整理整理这些被遗忘却很实用的函数。希望整理过后，他们不再被遗忘。
-selection.classed(name,【value】)value参数可选，如果没有指定，则返回与name参数匹配的第一个非空元素是否绑定了指定的CSS类，true表示绑定，false表示未绑定。如果value指定了的话，就是为selection添加/删除CSS类。这点与selection.attr(name,【value】)非常类似，但是相比而言，就冷门的多，恐怕没有多少人不知道selection.attr(...
+                    Behavior in d3在d3中，行为被设计成了一种组件，可以创建一系列的事件，并绑定到调用这些行为的元素上。最常见的行为有拖拽与缩放，使用这些行为可以很方便地在拖拽或者缩放的开始、过程中以及结束时达到想要的效果。
+这篇博客中，就以拖拽为例，并借助之前实现的热力图，实现拖拽dimension的label以达到reoder维度的效果。为了使用三个阶段，我们会让开始拖拽的时候，维度名变成红色、字体变大来表示强调的效果；在拖拽过程中，让label紧跟鼠标的位置；并且判断最终的位置，交换两个维度，并重新绘制整个热力图。
+理想情况下，开始移动的时候的，运行情况应该像下面这样。
+drag创建一个...
                 </div>
             </a>
             <div class="abstract-post-meta">
@@ -378,37 +413,6 @@ selection.classed(name,【value】)value参数可选，如果没有指定，则�
                     More Dynamic visualizations上一篇博客介绍了如何借助Angular来完成一个指令，达到可复用目的，但是似乎依然不够动态，我们不得不提前输入想要展示的数组。Angular的最大的特点是双向数据绑定，我们能否借助这个特性来完成更动态的可视化图呢？让Angular帮我们盯着数据，一旦数据改变了，就更新DOM元素。这一切都是Angular帮我们完成的，我们唯一需要做的是指定数据和DOM元素之间的关系，不需要写很多的代码。
 双向数据绑定先来用一个简单的例子来展示一下Angular帮我们完成的双向数据绑定，这里用一个简单的例子来展示一下。
 12345678//\&lt;bo...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = d3>d3</a>
-    
-</div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2014/11/15</span>
-                </div>
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="content-show-full" href = "/2014/11/15/polybrush in d3/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>polybrush in d3</span>
-                    </h2>
-                <div class="abstract-content">
-                    
-前言你是否也像我一样，厌倦了d3默认的矩形的brush，或者你发现矩形的brush已经不能满足你的需要了;又或者你只是单纯的被上面的图片所吸引。不管怎样，我们将介绍一下polybrush。
-这篇博客的名字叫polybrush in d3，现在想来，好像有点错误，因为polybrush并不是d3内置的，它是由Geoffrey T. Bell在2012年开发的d3插件，因其方便、好用，所以广受好评。
-但无奈目前中文的相关资料和博客几乎没有，因此我来试着写一下如何使用它，以及它的原理，还会包含源码粗略解读，polybrush.js的github参考项目下载地址是：https://gist.g...
                 </div>
             </a>
             <div class="abstract-post-meta">
@@ -791,7 +795,34 @@ selection.classed(name,【value】)value参数可选，如果没有指定，则�
     
     
     
-    <div class="total-archive"> Total : 17 </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 18 </div>
     
     <div class="post-archive">
     
@@ -800,6 +831,11 @@ selection.classed(name,【value】)value参数可选，如果没有指定，则�
     
     <div class="archive-year"> 2017 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/17</span><a class="archive-post-title" href= "/2017/12/17/googleDevDay2/" >谷歌开发者大会(GDD2017)见闻 Day2</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -847,22 +883,12 @@ selection.classed(name,【value】)value参数可选，如果没有指定，则�
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
             <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/Build reuseable visualization using d3.js and AngularJS/" >Build reusable visualization using d3.js and AngularJS</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/drop and drag in d3js/" >drop and drag in d3</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular/" >D3 on Angular</a>
         </li>
     
     
@@ -877,17 +903,27 @@ selection.classed(name,【value】)value参数可选，如果没有指定，则�
     
     
         <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
             <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular/" >D3 on Angular</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/polybrush in d3/" >polybrush in d3</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/polybrush in d3/" >polybrush in d3</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/drop and drag in d3js/" >drop and drag in d3</a>
         </li>
     
     
@@ -904,9 +940,9 @@ selection.classed(name,【value】)value参数可选，如果没有指定，则�
     
         <span class="sidebar-tag-name"><a href= "#">swift</a></span>
     
-        <span class="sidebar-tag-name"><a href= "#">SVG</a></span>
-    
         <span class="sidebar-tag-name"><a href= "#">随感</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">SVG</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">macOS开发</a></span>
     
