@@ -219,7 +219,7 @@
 <p>关于<strong>图像</strong>，他建议适宜时提供SVG，否则提供webP图像。SVG是矢量图，在任何分辨率小可以不失真，而且体量很小。动态图一般比较大，最好告知用户动态图大小。当然他也提到了PWA的离线缓存体验，不至于在网速慢或没网的时候，让用户感觉到应用不可用(虽然确实不可用)。</p>
 <p>在构建应用的时候，也需要专门为<strong>中小屏幕</strong>构建，针对中低密度屏幕进行优化，并通过模拟器配置进行测试。</p>
 <p><strong>内存</strong>作为一种重要的资源，他鼓励应用应该按可用的RAM调整占用的空间，避免长时间运行的进程。而上文提到的Android Studio内存监视器可以帮助开发者做到这一点。</p>
-<p>APK安装包的大小跟流量很相关，而其中图像消耗的流量最多。压缩APK文件，他推荐使用<strong>ProGuard</strong>降低代码大小，并在build.gradle中将<strong>多APK</strong>作为一个选项。同时，数据流量的使用也是可以在<br>Android Studio中看到的。而且应该赋予用户选择的权力，比如网易云音乐就允许用户选择仅在wifi可用时下载歌曲。</p>
+<p>APK安装包的大小跟流量很相关，而其中图像消耗的流量最多。压缩APK文件，他推荐使用<strong>ProGuard</strong>降低代码大小，并在build.gradle中将<strong>多APK</strong>作为一个选项。同时，数据流量的使用也是可以在Android Studio中看到的。而且应该赋予用户选择的权力，比如网易云音乐就允许用户选择仅在wifi可用时下载歌曲。</p>
 <p><strong>电池消耗</strong>方面，应用避免不必要的唤醒，比如GPS定位，这个服务就挺耗电的，不要在后台一直使用。网络请求最好使用批处理的方式，有利于节能。当然也非常推荐使用他们家的<strong>Firebase JobDispatcher</strong>。</p>
 <p><strong>快速自适应式界面</strong>方面，他鼓励处处提供触摸反馈，按了按钮之后，即使需要等一会儿，由于有反馈告诉用户确实按下去了，他们通常愿意等一会儿。第二点是界面需要始终处于可交互的状态，也就是安卓主线程中，不应该处理其他事务，因为有可能会造成UI的卡顿。UI刷新率，始终要达到60fps，才会给人流畅的感觉。关于<strong>界面</strong>的最佳做法，当然是符合谷歌的<strong>Material Design</strong>咯。</p>
 <p><strong>本地化方面</strong>，他谈到大部分开发者考虑到了提供给用户多语言环境的支持，但是往往忽略的一点是<strong>字体</strong>的选择，某些字体在某些国家的文字下很不适合阅读。</p>
@@ -358,14 +358,6 @@
     <div class="sidebar-content sidebar-content-show-archive">
           <div class="sidebar-archive">
     <!-- 在ejs中将archive按照时间排序 -->
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     
