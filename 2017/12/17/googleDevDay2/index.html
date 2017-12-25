@@ -134,7 +134,7 @@
         <div class="container">
             <main class="main post-page">
     <article class="article-entry">
-        <p><img src="http://pic.suiyiyun.cn/588778/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/ddd.jpg" alt=""></p>
+        <p><img src="https://ws1.sinaimg.cn/large/006tKfTcgy1fmt1rm8dkpj30zk0nptb6.jpg" alt=""></p>
 <h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1><p>上一篇博客写了挺多开发者大会期间的花絮(虽然花絮本身就是开发者大会重要的组成部分)，而在这篇博客里将更专注于session本身，对场外的花絮和花边新闻尽量少的提及。<strong>话不多说，我们开始吧。</strong></p>
 <h1 id="Android-things"><a href="#Android-things" class="headerlink" title="Android things"></a>Android things</h1><p>安卓things是一种支持世界各地计算需求的新平台，其出现的初衷是简化IoT设备的开发和生成。安卓things运行的仍然是安卓系统，因此对安卓开发比较熟悉的朋友可以很快的上手来完成一些应用。</p>
 <p>在现场，演讲者详细演示了如何在大会赠送的Android things设备上进行程序开发。他利用温度传感器和气压传感器开发了一个<a href="bit.ly/codelab-weatherstation">温度计和气压计的应用</a>。开发共分为三个步骤：</p>
@@ -143,13 +143,13 @@
 <li>烧构件版本 Flash Android things</li>
 <li>开发应用 Develop Apps, 用Android studio 3.0+</li>
 </ol>
-<p><img src="http://pic.suiyiyun.cn/588778/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/WechatIMG180.jpeg" alt=""></p>
+<p><img src="https://ws1.sinaimg.cn/large/006tKfTcgy1fmt1rnlllcj31400u0443.jpg" alt=""></p>
 <p>例子部分最重要的是学习如何对外围设备进行<strong>输入</strong>、<strong>输出</strong>，怎么让程序知道某个按钮被按下了，怎么样将传感器测得的值显示出来，以及如何整合应用外围设备输入输出库的驱动器。感兴趣的朋友，推荐去<a href="bit.ly/codelab-peripherals">codelab</a>学习一下。codelab也是谷歌极力推荐的一个学习网站，在展区有一个专门的展台，而且越来越多的教程被翻译为了中文，还是挺不错的。</p>
 <h1 id="PWA的框架和工具"><a href="#PWA的框架和工具" class="headerlink" title="PWA的框架和工具"></a>PWA的框架和工具</h1><p>渐进式网页应用(PWA)上篇已经简单的介绍过了，第二天依然有两个session围绕着它展开。首先是PWA的工具，讲者首先介绍了为什么要工具。所谓工具，就是让用户更方便的完成某项工作的东西，节省用户的时间。</p>
 <p>PWA一大特点是节省用户带宽，让浏览器和网页了解你的应用，在默认生成的基础上，如果能帮助用户指定决策就更好了。Chrome在开发者panel中可以看到安装时和安装后的网络请求情况，将运行时的网络请求可视化，从而对用户制定缓存策略产生一定建议。</p>
 <p>在构建PWA时，他介绍的通用工具是Workbox这个JavaScript库作为<strong>创建、测试、体验</strong>Service Worker的工具集合。接下来他介绍了PWA和Vue、react、Angular等流行框架的CLI如何结合使用，主要是如何基于json进行配置。</p>
 <h1 id="TensorFlow"><a href="#TensorFlow" class="headerlink" title="TensorFlow"></a>TensorFlow</h1><p>TensorFlow真是火，如果说去年的GDD主角是Angular，那么今年的主角无疑是TF。从分会场排的长龙以及增加的场次，不难反映谷歌的策略已经从<strong>Mobile First 转为了 AI First</strong>。这个session依然是金安娜全程用中文来介绍的，虽然有时候结结巴巴的，但还是坚持了下来。这个session主要是广告，说TF怎么受欢迎、TF在医学领域取得了成功(超过了很多年经验的医生)、AlphaGo战胜了世界顶级围棋选手。TF支持了更多的硬件平台，包括CPU、GPU、Cloud TPU甚至安卓、ios、Android things。最后简短的带过了TF的架构。</p>
-<p><img src="http://pic.suiyiyun.cn/588778/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/WechatIMG179.jpeg" alt=""></p>
+<p><img src="https://ws3.sinaimg.cn/large/006tKfTcgy1fmt1roixr5j30x40n2gpq.jpg" alt=""></p>
 <blockquote>
 <pre><code>TensorFLow架构图 
 </code></pre></blockquote>
@@ -165,7 +165,7 @@
 <li>光估测</li>
 </ol>
 <p>跟踪状态指的是无论你摄像头怎么动，模型也会跟着进行一定的角度和位置变换来欺骗人眼，以为模型真的就更场景融合到了一起，这一过程也叫偏移校正。这里需要提到的是<strong>锚点</strong>的概念，即AR的对象添加的实际的对象时指定的位置。</p>
-<p>另一个概念是平面，这需要一定的时间来进行检测，跟ARKit一样，也是采取的用若干特征点确定一个平面的方式，我们都是知道三个点可以确定一个面，这里采用多个点可能是从计算的效率方面出发的，快速确定平面以及平面的边界。当然，平面的多个平面也是可以同时检测到的。<br><img src="http://pic.suiyiyun.cn/588778/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/WX20171217-114954@2x.png" alt=""></p>
+<p>另一个概念是平面，这需要一定的时间来进行检测，跟ARKit一样，也是采取的用若干特征点确定一个平面的方式，我们都是知道三个点可以确定一个面，这里采用多个点可能是从计算的效率方面出发的，快速确定平面以及平面的边界。当然，平面的多个平面也是可以同时检测到的。<br><img src="https://ws2.sinaimg.cn/large/006tKfTcgy1fmt1rqsf9gj31fk0lmb29.jpg" alt=""></p>
 <p>光线检测的例子让我印象比较深刻，它采用的是一头狮子，当灯关闭后，似乎被惊吓到了，然后跳了起来，对检测光线从亮到暗这一过程的诠释简直完美。<a href="https://developers.google.cn/ar/" target="_blank" rel="external">视频地址</a>。</p>
 <h1 id="Android-Oreo"><a href="#Android-Oreo" class="headerlink" title="Android Oreo"></a>Android Oreo</h1><p>Android 8.0版本名是奥利奥(流口水),不可避免的也在本次大会上开了几个session，由于我不是安卓开发者，所以在选择分会场的时候，基本都避开了这个主题，但由于某些分会场人多到进不去了，又不想浪费时间，也零零散散的听了一些。</p>
 <p>首先是Android Studio的更新，可以帮助用户分析并提升应用的性能，也是采用的可视化的方式，将<strong>网络请求</strong>、<strong>CPU使用率</strong>、<strong>内存管理</strong>等控制用户体验核心的一些指标按<strong>时间序列</strong>进行了可视化，从而用户可以方便的看到，在哪些时间点资源的消耗比较明显，从而进入到相关函数内部进行优化。现场举了一个内存管理失误并修正的例子。</p>
@@ -582,10 +582,6 @@
     
     
     
-    
-    
-    
-    
     <div class="total-archive"> Total : 18 </div>
     
     <div class="post-archive">
@@ -647,37 +643,7 @@
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/数据可视化之散点图/" >数据可视化之散点图</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/Build reuseable visualization using d3.js and AngularJS/" >Build reusable visualization using d3.js and AngularJS</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/drop and drag in d3js/" >drop and drag in d3</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/浅谈d3.js中的异步文件读取的处理/" >浅谈d3.js中强制异步文件读取同步的四种方法</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
             <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
         </li>
     
     
@@ -687,7 +653,37 @@
     
     
         <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/drop and drag in d3js/" >drop and drag in d3</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/Build reuseable visualization using d3.js and AngularJS/" >Build reusable visualization using d3.js and AngularJS</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/浅谈d3.js中的异步文件读取的处理/" >浅谈d3.js中强制异步文件读取同步的四种方法</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/数据可视化之散点图/" >数据可视化之散点图</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
             <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/polybrush in d3/" >polybrush in d3</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
         </li>
     
     
