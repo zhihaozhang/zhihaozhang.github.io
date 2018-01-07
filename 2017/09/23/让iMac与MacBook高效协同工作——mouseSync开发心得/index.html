@@ -135,7 +135,7 @@
             <main class="main post-page">
     <article class="article-entry">
         <h1 id="开发mouseSync的初衷"><a href="#开发mouseSync的初衷" class="headerlink" title="开发mouseSync的初衷"></a>开发mouseSync的初衷</h1><p>或许是不想让买显示器送主机的笑话成真，Apple将iMac 2015之后的版本关闭了纯显示器模式。Apple store里LG的显示器挺贵的，27寸5K版本售价超过了1万元，衬托出了iMac 27寸13000+的定价之良心。考虑到两者颜值的差别，在看脸的时代，iMac的销量还是很不错的。iMac的用户很可能也是MacBook的用户，因此让iMac和MacBook协同工作是很有意义的一件事。当然，也同样适用于两台MacBook之间的协同工作。</p>
-<p><img src="https://syy.freep.cn/588778/1.jpeg" alt="" title="老版本iMac的Target Display 模式"></p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79gy1fn7vk8bg59j30hs09x0t5.jpg" alt="" title="老版本iMac的Target Display 模式"></p>
 <p> 为了让两台Mac协同工作，我发现最痛苦的事情莫过于需要两套触摸板(鼠标)和键盘。在谷歌里搜了半天，发现了很多通过蓝牙将一台mac的键盘作为另一台mac键盘的软件，但是将一台mac的鼠标作为另一台mac的鼠标的软件却很少。比较知名的软件是Synergy，但是它的普通版售价19刀、pro版售价29刀，作为一个工程师的我不愿意掏这钱，于是mouseSync出现了。和以前一样，它是开源的，托管在github上，地址是：<a href="https://github.com/zhihaozhang/mouseSync" target="_blank" rel="external">https://github.com/zhihaozhang/mouseSync</a></p>
 <h1 id="mouseSync开发步骤"><a href="#mouseSync开发步骤" class="headerlink" title="mouseSync开发步骤"></a>mouseSync开发步骤</h1><p>开发任何东西，我首先问自己的事情便是:大象放进冰箱一共分几步？要想让一台mac的鼠标事件同步给另一台mac，首先需要将两台电脑连接起来，建立一条稳定的专用通道。然后每当宿主机发生相应时间的时候，发通知给另一台Mac，让它的鼠标也跟着移动。</p>
 <h2 id="为什么选用蓝牙"><a href="#为什么选用蓝牙" class="headerlink" title="为什么选用蓝牙"></a>为什么选用蓝牙</h2><p>考虑到协同工作肯定两台电脑靠的很近，在蓝牙的接收范围内。再考虑到蓝牙4.0标准的耗电量很低，而且即使在没有wifi的情况下依然可以工作，因此我选用了蓝牙技术来建立专用通道。蓝牙框架中值得注意的概念大约有5个。我想举一个我生活中的例子来介绍下面的概念:我每天会用一个体重计量一下体重，然后体重计会通过蓝牙传到我的手机App里，这样我就可以知道我每天的体重以及近期体重的趋势。</p>
@@ -146,15 +146,15 @@
 <li>Characteristic(特征值) 服务中的数据成为特征值，对应上面例子中的体重数据、体质数据等其他数据。</li>
 <li>UUID 服务或特征值的唯一标志。每个服务或特征值均有一个唯一标识。比如我的体重计不仅能称重，还能测体脂、水分等特征值，手机App端能区分体重数据和水分数据，就靠UUID。当然，UUID的值需要数据中心和外围设置通讯前就约定好。</li>
 </ol>
-<p><img src="https://syy.freep.cn/588778/2.jpeg" alt="" title="蓝牙通讯的流程"></p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79gy1fn7vktu3fnj30hs0ewgm0.jpg" alt="" title="蓝牙通讯的流程"></p>
 <p>蓝牙通讯的流程图清楚的解释了蓝牙通讯的整个过程，这个过程类似TCP/IP的三次握手，不过没有那么严格。简单的来说，这个过程就是外设将自己的特征值通过服务的形式打包发布，通过建立起来的蓝牙通道广播给数据中心。首先，数据中心扫描蓝牙信号，发现外设后，与外设建立起链接，请求服务携带的数据，一次最基本的读取数据交换就算是完成了。当然，数据中心也可以发指令给外设。对于经常变化的特征值，数据中心可以订阅它，每当它发生变化时，可以实时通知数据中心，以便数据中心做出相应变化。具体到Cocoa框架，蓝牙的相关类见下图。</p>
-<p><img src="https://syy.freep.cn/588778/3.jpeg" alt="" title=" 蓝牙的相关类"></p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1fn7vlh9v8fj30hs0gd0t4.jpg" alt="" title=" 蓝牙的相关类"></p>
 <h3 id="Peripheral相关类"><a href="#Peripheral相关类" class="headerlink" title="Peripheral相关类"></a>Peripheral相关类</h3><p>CBPeripheralManager是管理外设的，提供了发布服务，广播方法，CBPeripheralManagerDelegate是它的代理方法，考虑到了外设和数据中心之间数据交换是异步的，它定义了一组协议方法，根据不同的状态出发回调代理方法完成双方数据交换。</p>
 <p>CBPeripheral类是建立蓝牙连接后，给CBCentral调用peripheral外设提供的对象。CBPeripheralDelegate是它的代理协议，提供辅助CBPeripheral完成服务发现、数据获取、订阅数据后的回调方法。</p>
 <h3 id="Central相关类"><a href="#Central相关类" class="headerlink" title="Central相关类"></a>Central相关类</h3><p>CBCentral是数据中心类，完成蓝牙设备发现，建立连接，请求服务数据功能。CBCentralDelegate是它的代理协议，辅助它central提供Peripheral发现，建立连接后的回调。</p>
 <h3 id="service相关类"><a href="#service相关类" class="headerlink" title="service相关类"></a>service相关类</h3><p>CBMutableService是可变类型的服务对象类，UUID和特征值可以修改。与它对应的是CBService，属性不可修改的服务对象类。</p>
 <h3 id="characteristic相关类"><a href="#characteristic相关类" class="headerlink" title="characteristic相关类"></a>characteristic相关类</h3><p>CBMutableCharacteristic是可变类型的特征值对象类，UUID、properties属性可以修改。与它对应的是CBCharacteristic类，上述属性不能修改。</p>
-<p><img src="https://syy.freep.cn/588778/4.jpeg" alt="" title="外设、服务、特征间的关系"></p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79gy1fn7vlyrlknj30hs0ck0sv.jpg" alt="" title="外设、服务、特征间的关系"></p>
 <p>回到mouseSync,两台Mac中，负责采集触摸板事件的那台Mac是外围设置，另一台Mac是数据中心。建立起蓝牙物理通道之后，接下来要做的事是监听外围设置的触摸板事件，然后通知数据中心的触摸板跟着该事件进行响应。</p>
 <h1 id="在外围设备端监听鼠标事件"><a href="#在外围设备端监听鼠标事件" class="headerlink" title="在外围设备端监听鼠标事件"></a>在外围设备端监听鼠标事件</h1><p>鼠标事件的监听分为全局监听和应用内监听，显然全局监听更符合我们的要求。对键盘鼠标事件的监听，主要调用的是NSEvnet里的addGlobalMonitorForEvents方法。鼠标事件有很多种，这里我选取了比较重要的几种，分别是移动(.mouseMoved)、单击(.leftMouseDown/up)、双击(特殊处理)、右击(.rightMouseDonw/up)、触摸板的上下左右滑动(.scrollWheel)和鼠标的上下滑动。</p>
 <h2 id="移动事件"><a href="#移动事件" class="headerlink" title="移动事件"></a>移动事件</h2><p>移动比较好处理，这里我关心的是当前位置相比于上一个位置x和y方向的坐标变动情况，因此需要一个变量记录上一个位置，然后将x和y方向的变动通过蓝牙发送给数据中心，让数据中心的鼠标也进行相应的变动。值得注意的是，Mac的坐标(0,0)点在左下方，因此移动鼠标的时候需要进行相应的转换。</p>
@@ -171,13 +171,13 @@
 <h2 id="滑动事件的模拟"><a href="#滑动事件的模拟" class="headerlink" title="滑动事件的模拟"></a>滑动事件的模拟</h2><p>滑动事件的模拟，swift目前支持的不是很好，我在Stack Overflow上找到了一个比较tricky的方法。需要swift和C混编，借助C来完成任务。关于swift和C/OC的混编内容比较多，这里不展开讲了，感兴趣的可以研究我的开源代码。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">` <span class="function"><span class="keyword">void</span> <span class="title">createScrollWheelEventY</span><span class="params">(<span class="keyword">float</span> x)</span> </span>&#123;</div><div class="line"> CGEventRef upEvent = CGEventCreateScrollWheelEvent(</div><div class="line"> <span class="literal">NULL</span>,</div><div class="line"> kCGScrollEventUnitPixel, <span class="number">2</span>, x*<span class="number">5</span>, <span class="number">0</span> );</div><div class="line">CGEventPost(kCGHIDEventTap, upEvent);</div><div class="line"> CFRelease(upEvent);</div><div class="line"> &#125;</div><div class="line"> </div><div class="line"> <span class="function"><span class="keyword">void</span> <span class="title">createScrollWheelEventX</span><span class="params">(<span class="keyword">int</span> y)</span> </span>&#123;</div><div class="line"> CGEventRef upEvent = CGEventCreateScrollWheelEvent(</div><div class="line"> <span class="literal">NULL</span>,</div><div class="line"> kCGScrollEventUnitPixel, <span class="number">2</span>, <span class="number">0</span>, y*<span class="number">5</span>);</div><div class="line"> CGEventPost(kCGHIDEventTap, upEvent);</div><div class="line"> CFRelease(upEvent);</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
 <p>在这里遇到了一个诡异的问题，上下滑动可以很好的工作，但是左右滑动死活不能和预期的一样，单步跟踪后发现传入函数的确实是float类型的正确值，但是创建upEvent的时候，该变量的值突变了。后面将float类型改成了int类型，又可以正常的工作了。如果知道为什么的同学可以留言告诉我。</p>
-<h1 id="demo"><a href="#demo" class="headerlink" title="demo"></a>demo</h1><p><img src="https://syy.freep.cn/588778/demo922.gif" alt=""><br><img src="https://syy.freep.cn/588778/demo1.gif" alt=""><br><img src="https://syy.freep.cn/588778/demo2.gif" alt=""></p>
+<h1 id="demo"><a href="#demo" class="headerlink" title="demo"></a>demo</h1><p><img src="https://ws4.sinaimg.cn/large/006tNc79gy1fn7vnmdovpg30hs0a3u17.gif" alt=""><br><img src="https://ws2.sinaimg.cn/large/006tNc79gy1fn7vod1xowg307k0dcb2c.gif" alt=""><br><img src="https://ws4.sinaimg.cn/large/006tNc79gy1fn7vpbd4qyg307k0dcx6s.gif" alt=""></p>
 <h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><p>开发mouseSync的过程中，让我更深刻的理解了Cocoa的蓝牙框架、键盘鼠标事件。纸上得来终觉浅，绝知此事要躬行。</p>
 <p>另外，mouseSync的开发还没有完成，目前存在的问题是外围设备这边的鼠标容易误操作，因此我准备将外围设备的鼠标控制在一个window内，一旦移除这个window，就强行将光标移动回window中心。通过快捷键控制软件的开启和关闭。还有一个比较重要的功能正在开发中，那就是我非常喜爱的三指拖移功能，敬请期待！</p>
 <p><em>你对mouseSync的功能还有哪些期待或建议呢？不妨留言告诉我吧！</em></p>
 <p>开发和写本文过程中参考了以下资料，在这表示感谢：<br>【1】 macOS应用开发，赵剑 张帆 合著<br>【2】HSTracker的github开源代码 <a href="https://github.com/HearthSim/HSTracker/blob/master/HSTracker/Utility/Automation.swift" target="_blank" rel="external">https://github.com/HearthSim/HSTracker/blob/master/HSTracker/Utility/Automation.swift</a><br>【3】Stack Overflow: <a href="https://stackoverflow.com/questions/42813264/cocoa-application-scroll-programmatically" target="_blank" rel="external">https://stackoverflow.com/questions/42813264/cocoa-application-scroll-programmatically</a><br>【4】 ios蓝牙技术：<a href="http://www.jianshu.com/p/c1154179da8a" target="_blank" rel="external">http://www.jianshu.com/p/c1154179da8a</a></p>
 <p><em>我会在微信公众号【骨灰级果粉】中不定期分享我个人的macOS/ios开发心得和开发笔记，也会在里面发表对于苹果产品/框架/趋势的拙见，希望爱好科技产品或者苹果生态圈的开发者关注。相信本公众号一定能给您带来收获和启发。</em></p>
-<p><img src="https://syy.freep.cn/588778/640.jpeg" alt=""></p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79gy1fn7vflyyajj30by0by0t2.jpg" alt=""></p>
 
 
             <! -- 添加捐赠图标 -->
@@ -216,9 +216,9 @@
         
         
             <li class="previous">
-                <a href= "/2014/11/15/浅谈d3.js中的异步文件读取的处理/" title= 浅谈d3.js中强制异步文件读取同步的四种方法 >
+                <a href= "/2014/11/15/冷门但实用的d3.js内置函数/" title= 冷门但实用的d3.js内置函数 >
                     <span>Previous Post</span>
-                    <span>浅谈d3.js中强制异步文件读取同步的四种方法</span>
+                    <span>冷门但实用的d3.js内置函数</span>
                 </a>
             </li>
         
@@ -561,6 +561,8 @@
     
     
     
+    
+    
     <div class="total-archive"> Total : 19 </div>
     
     <div class="post-archive">
@@ -627,7 +629,7 @@
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/浅谈d3.js中的异步文件读取的处理/" >浅谈d3.js中强制异步文件读取同步的四种方法</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
         </li>
     
     
@@ -637,7 +639,7 @@
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/polybrush in d3/" >polybrush in d3</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
         </li>
     
     
@@ -647,17 +649,17 @@
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
             <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/polybrush in d3/" >polybrush in d3</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/浅谈d3.js中的异步文件读取的处理/" >浅谈d3.js中强制异步文件读取同步的四种方法</a>
         </li>
     
     
@@ -684,13 +686,13 @@
     
         <span class="sidebar-tag-name"><a href= "#">swift</a></span>
     
-        <span class="sidebar-tag-name"><a href= "#">SVG</a></span>
-    
         <span class="sidebar-tag-name"><a href= "#">随感</a></span>
     
-        <span class="sidebar-tag-name"><a href= "#">macOS开发</a></span>
+        <span class="sidebar-tag-name"><a href= "#">SVG</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">Json</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">macOS开发</a></span>
     
     </div>
     <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
