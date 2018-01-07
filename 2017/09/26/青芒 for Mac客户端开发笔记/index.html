@@ -135,7 +135,7 @@
             <main class="main post-page">
     <article class="article-entry">
         <h1 id="关于轻芒和青芒"><a href="#关于轻芒和青芒" class="headerlink" title="关于轻芒和青芒"></a>关于轻芒和青芒</h1><p>轻芒阅读是我每天都会打开的app，在它提供的两百多个channel中，我订阅了其中十几个channel，非常喜欢这个产品。这个产品的创始人是王俊煜，他曾经创办了一个更有名的公司——豌豆荚。关于轻芒和俊煜的更多介绍，请参照： <a href="http://tech2ipo.com/10034248" target="_blank" rel="external">前沿科技</a>的报道。虽然报道里强调了轻芒不是青芒，但是参照知了和知乎的关系，我还是决定把我的客户端取名为青芒。而且取名青芒的一大好处是logo好设计。做完原型的第二天，我就找了非著名设计师Joseph帮我设计了一枚logo，个人觉得还是很赞的。</p>
-<p><img src="https://syy.freep.cn/588778/41854-ddfac87df1936535.jpeg" alt="非著名设计师Joseph设计的logo" title="非著名设计师Joseph设计的logo"></p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79gy1fn7v2jbv2gj309m09ya9y.jpg" alt="非著名设计师Joseph设计的logo" title="非著名设计师Joseph设计的logo"></p>
 <blockquote>
 <p>非著名设计师Joseph设计的logo</p>
 </blockquote>
@@ -143,15 +143,15 @@
 <p>轻芒的用户通常对精神生活有丰富的追求，在macOS和windows中，我估计macOS用户会非常多，因此我选择了macOS平台，我认为这对我是一个机会，可能会有不少人试用这款软件。毕竟看到别人电脑或手机上运行着你开发的软件，还是会给人带来很大的成就感的。(偷笑)</p>
 <p>据不完全统计，自从开源以来，已经有100多人下载了该软件。</p>
 <h1 id="青芒是怎么做的"><a href="#青芒是怎么做的" class="headerlink" title="青芒是怎么做的"></a>青芒是怎么做的</h1><p>知了是知乎日报的mac客户端，青芒跟知了有着相同的需求，即展示channel list、article list、article content三个部分，于是萌生了借鉴知了的念头，搜了一圈之后发现github上并没有类似的mac软件开源出来，于是做了决定：自己从头开始写，并且写完的第一件事就是将项目开源。我相信三段式布局的应用会适用很多场景，并且会给初学者们带来一定的启发。项目开源在<a href="https://github.com/zhihaozhang/qingmang-for-mac" target="_blank" rel="external">我的github</a>上，欢迎fork和star，特别感谢github开发者@jydemo、@immress对本项目提出的改进与code实现，效果图如下。</p>
-<p><img src="https://syy.freep.cn/588778/1BFAC168-DB08-4B9B-9EC4-04E8CE009D08.png" alt="客户端视图（模仿的知了）" title="客户端视图（模仿的知了）"></p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1fn7v94jow3j31kw17eu0x.jpg" alt="客户端视图（模仿的知了）" title="客户端视图（模仿的知了）"></p>
 <blockquote>
 <p>客户端视图（模仿的知了）</p>
 </blockquote>
-<p><img src="https://syy.freep.cn/588778/41854-4a66018d8973436d.jpeg" alt="Notification Center视图（略丑）" title="Notification Center视图（略丑）"></p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79gy1fn7v9xllkcj30hs0q6409.jpg" alt="Notification Center视图（略丑）" title="Notification Center视图（略丑）"></p>
 <blockquote>
 <p>Notification Center视图（略丑）</p>
 </blockquote>
-<p><img src="https://syy.freep.cn/588778/41854-dfd0c7c1f1826698.jpeg" alt="TouchBar视图" title="TouchBar视图"></p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1fn7vatotr1j30hs0dc74p.jpg" alt="TouchBar视图" title="TouchBar视图"></p>
 <blockquote>
 <p>TouchBar视图</p>
 </blockquote>
@@ -166,7 +166,7 @@
 <h2 id="纯手写代码"><a href="#纯手写代码" class="headerlink" title="纯手写代码"></a>纯手写代码</h2><p>纯手写代码是极客的不二选择，对于多人协作工作是很好的选择，但是缺点主要是不能直观的看到效果、编码速度很慢，例如初始化一个自定义的Button可能就需要二十行代码，非常不利于阅读。</p>
 <h2 id="Xib文件"><a href="#Xib文件" class="headerlink" title="Xib文件"></a>Xib文件</h2><p>Xib解决了上面的两个问题，提升了开发效率。其实Xib就是XML格式的文件，在编译过程中，被编译成Nib文件，每个Nib文件跟对应的ViewController关联。Xib的缺点是：代码可能回覆盖UI的设计，而且每个视图都需要单个的Xib，视图间的跳转依然需要代码控制。</p>
 <h2 id="Stroyboard"><a href="#Stroyboard" class="headerlink" title="Stroyboard"></a>Stroyboard</h2><p>为了解决了Xib的问题，Apple提供了故事板功能。StoryBoard可以看成将很多Xib集中到了一起，像讲述一个故事一样，清晰的看到每个ViewController之间的跳转关系，跳转可以不用写代码了。因此我选用了StoryBoard来构建青芒。</p>
-<p><img src="https://syy.freep.cn/588778/41854-29c7c999adbbd83f.jpeg" alt="青芒的StoryBoard文件截图" title="青芒的StoryBoard文件截图"></p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79gy1fn7vbolacsj30hs09zt8r.jpg" alt="青芒的StoryBoard文件截图" title="青芒的StoryBoard文件截图"></p>
 <blockquote>
 <p>青芒的StoryBoard文件截图</p>
 </blockquote>
@@ -175,7 +175,7 @@
 <p>黑色的部分是TouchBar的视图，TouchBar是苹果在MacBook Pro 2016机型上加入的一个新的交互设备，围绕他的讨论有很多，我们有空可以单独聊一下，但是为了尊重这条价值4K的bar，我还是决定做了相应的适配，将主题通过按钮的形式放到了Bar上，Bar上的按钮和OverView的按钮是需要做联动功能的，在下文中会提到。</p>
 <p>耐心地拖入相关控件、控制控件之间的相对位置，最初始的原型就算是完成了。当然，经过试用，还是可以发现优化的部分，比如Overview里的tableview并不是顶到window title的，这样用户拖拽那部分的时候，窗口依然可以移动，同样，WebView上方也是需要留白的。虽然只是个很小的细节，但真的很讨好用户。</p>
 <h1 id="自定义取代系统默认"><a href="#自定义取代系统默认" class="headerlink" title="自定义取代系统默认"></a>自定义取代系统默认</h1><p>界面完成后，就需要做功能了，但是等等，好像看起来不大对劲，为什么效果相比于知了差很多呢？下面的截图展现了青芒的第二版，相比于第一版，已经是把window的标题去掉了，但还是给人一种寨寨的、不够简洁的感觉。TableView中选中的颜色跟整体界面很不符。</p>
-<p><img src="https://syy.freep.cn/588778/41854-9395234244a1c39e.jpeg" alt="第二版的青芒原型" title="第二版的青芒原型"></p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79gy1fn7vd1m4vtj30hs0dddgw.jpg" alt="第二版的青芒原型" title="第二版的青芒原型"></p>
 <blockquote>
 <p>第二版的青芒原型</p>
 </blockquote>
@@ -189,7 +189,7 @@
 <p>如果用户愿意分隔条还是可以左右动的，想禁掉左右动的功能，实现NSSplitView的一个代理方法：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">splitView</span><span class="params">(_ofDividerAtsplitView:NSSplitView, effectiveRect proposedEffectiveRect:NSRect, forDrawnRect drawnRect:NSRect, ofDividerAt dividerIndex:Int)</span></span> -&gt;<span class="type">NSRect</span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="type">NSRect</span>.zero</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>经过这一章节，不难发现还是代码靠谱(😎)。经过上面的调整，界面看起来简洁、清爽了不少，可以以假乱真了。</p>
 <p>希望这一章节让大家明白，想要做出看起来美的东西，一定要去大胆地替代系统的默认选项。而具体的做法通常是覆盖父类中的属性和方法，记得要将组件和自定义的类关联起来。</p>
-<p><img src="https://syy.freep.cn/588778/41854-3976993182ab74f9.jpeg" alt="美化后的界面" title="美化后的界面"></p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79gy1fn7ve21lc8j31kw0yfnh6.jpg" alt="美化后的界面" title="美化后的界面"></p>
 <blockquote>
 <p>美化后的界面</p>
 </blockquote>
@@ -203,14 +203,14 @@
 <h1 id="Notification-Center视图"><a href="#Notification-Center视图" class="headerlink" title="Notification Center视图"></a>Notification Center视图</h1><p>通知中心做的蛮丑的，真的是为了尝试一下TodayExtension的功能而已。模仿知了，目前功能只是展示了首页的文章列表，点击文章可以用系统默认浏览器打开原文。其实这也就够了，毕竟通知中心就是为了看个大概用的，谁也不会经常点开看。通知中心需要注意的是要自定义视图的高度，通过<br>self.preferredContentSize=CGSize(width:self.view.frame.size.width, height:xxx)<br>完成。<br>最后要注意的是用URLSession请求数据，可以防止UI卡顿，UI卡顿给用户带来的感觉非常糟糕。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">getData</span><span class="params">(with urlString:String,success:@escaping<span class="params">(Data?)</span></span></span>-&gt;<span class="type">Void</span>, failure: ((<span class="type">Error</span>)-&gt;<span class="type">Void</span>)? =<span class="literal">nil</span>) &#123;</div><div class="line"></div><div class="line">         <span class="keyword">guard</span> <span class="keyword">let</span> url =<span class="type">URL</span>(string: urlString)<span class="keyword">else</span>&#123;</div><div class="line"></div><div class="line">         <span class="keyword">return</span></div><div class="line"></div><div class="line">&#125;</div><div class="line">    <span class="keyword">let</span> task =<span class="type">URLSession</span>.shared.dataTask(with: url) &#123; (data:<span class="type">Data</span>?, response:<span class="type">URLResponse</span>?, error:<span class="type">Error</span>?)<span class="keyword">in</span></div><div class="line">    <span class="type">DispatchQueue</span>.main.async&#123;</div><div class="line">    <span class="keyword">if</span> <span class="keyword">let</span> error = error &#123;</div><div class="line">                     failure?(error)</div><div class="line">    &#125;<span class="keyword">else</span>&#123;</div><div class="line">                      success(data)</div><div class="line">                 &#125;</div><div class="line">          &#125;</div><div class="line">      &#125;</div><div class="line">     task.resume()</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <h1 id="文章具体内容视图"><a href="#文章具体内容视图" class="headerlink" title="文章具体内容视图"></a>文章具体内容视图</h1><p>青芒团队提供的API里有web-content这一项，只要通过webview包装然后load一下就会将文字和图片展示出来，但是还是有一些细节需要考虑到的。比如有些图片是很大的，虽然限制了窗口不得小于一个值，但有些图片还是远超了这个大小。web-content是没有标题的，看起来会比较突兀，标题和标题需要你手动加上。图片过大时，窗口是可以左右滑动的，怎么把他限制不能滑动。字体如何跟其他部分视图的字体做到没有违和感，都是需要考虑的问题，这些用前端里的CSS样式可以控制，需要开发者有一定的前端开经验。由于本公众号重心在果教，因此这里就不具体展开叙述了，感兴趣的朋友可以参考<a href="https://github.com/zhihaozhang/qingmang-for-mac" target="_blank" rel="external">我的github</a>。</p>
 <h1 id="青芒的宣传"><a href="#青芒的宣传" class="headerlink" title="青芒的宣传"></a>青芒的宣传</h1><p>做完青芒之后，考虑到整个项目是用最新的swift4写成，于是我在微博上@了swiftLanguage，博主是一个不大不小的V，关注者多是对swift感兴趣的或从业人员。短短两天，该微博获得了1万多次阅读，最后我欣喜的发现，王俊煜也给该微博点了赞，感谢俊昱的鼓励与肯定。</p>
-<p><img src="https://syy.freep.cn/588778/41854-9f58bf0f94c7afad.jpeg" alt="微博截图" title="微博截图"></p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79gy1fn7vet0hoaj30hs0vm75z.jpg" alt="微博截图" title="微博截图"></p>
 <blockquote>
 <p>微博截图</p>
 </blockquote>
 <h1 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h1><p>青芒的开发只用了两天，其实可以做的东西还有很多。试用软件之后如果您对软件有任何的意见与建议，欢迎留言。</p>
 <p>如果您喜欢这款软件，也欢迎您将它推荐给您的朋友们。让我们一起将青芒变得更好！</p>
 <p>我会在订阅号里不定期分享我个人的macOS/ios开发心得和开发笔记，也会在里面发表对于苹果产品/框架/趋势的拙见，希望爱好科技产品或者苹果生态圈的开发者关注。相信本公众号一定能给您带来收获和启发。<br>【欢迎扫码关注微信公众号】</p>
-<p><img src="https://syy.freep.cn/588778/640.jpeg" alt=""></p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79gy1fn7vflyyajj30by0by0t2.jpg" alt=""></p>
 
 
             <! -- 添加捐赠图标 -->
@@ -588,6 +588,12 @@
     
     
     
+    
+    
+    
+    
+    
+    
     <div class="total-archive"> Total : 19 </div>
     
     <div class="post-archive">
@@ -654,7 +660,7 @@
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular/" >D3 on Angular</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/浅谈d3.js中的异步文件读取的处理/" >浅谈d3.js中强制异步文件读取同步的四种方法</a>
         </li>
     
     
@@ -664,22 +670,22 @@
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
             <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/polybrush in d3/" >polybrush in d3</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/浅谈d3.js中的异步文件读取的处理/" >浅谈d3.js中强制异步文件读取同步的四种方法</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular/" >D3 on Angular</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/数据可视化之散点图/" >数据可视化之散点图</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
         </li>
     
     
@@ -689,7 +695,7 @@
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/数据可视化之散点图/" >数据可视化之散点图</a>
         </li>
     
     
@@ -711,9 +717,9 @@
     
         <span class="sidebar-tag-name"><a href= "#">swift</a></span>
     
-        <span class="sidebar-tag-name"><a href= "#">随感</a></span>
-    
         <span class="sidebar-tag-name"><a href= "#">SVG</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">随感</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">macOS开发</a></span>
     
