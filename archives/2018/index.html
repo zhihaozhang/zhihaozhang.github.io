@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
     <title>
         
-        数据可视化之散点图 · Zhihao&#39;s Studio
+        Zhihao&#39;s Studio
         
     </title>
     <link rel="icon" href= /assests/favicon.ico>
@@ -68,22 +68,11 @@
     
 </head>
     
-        <body class="post-body">
-    
     
 <header class="header">
 
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
-    
-    <div class="banner">
-            <div class="blog-title">
-                <a href="/" >Zhihao&#39;s Studio.</a>
-            </div>
-            <div class="post-title">
-                <a href="#" class="post-name">数据可视化之散点图</a>
-            </div>
-    </div>
     
     <a class="home-link" href=/>Zhihao's Studio.</a>
 </header>
@@ -91,135 +80,66 @@
         <div class="site-intro">
     
     <!-- 主页  -->
-    
-    
-    <!-- 404页  -->
             
-    <div class="site-intro-img" style="background-image: url(http://oumn0o088.bkt.clouddn.com/post-bg.jpg)"></div>
+    <div class="site-intro-img" style="background-image: url(/)"></div>
     <div class="site-intro-placeholder"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            数据可视化之散点图
-            <!-- 404 -->
-            
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
-            
-        </p>
-        <!-- 404 -->
-        
         <!-- 文章页meta -->
-        
-            <!-- 文章页标签  -->
-            
-                <div class= post-intro-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = d3>d3</a>
-    
-</div>
-            
-            <div class="post-intro-meta">
-                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                <span class="post-intro-time">2014/11/15</span>
-            </div>
         
     </div>
 </div>
         <div class="container">
-            <main class="main post-page">
-    <article class="article-entry">
-        <p>D3.js是当下最火的可视化库之一，这篇博客记录了如何实现一个最基本的散点图，并用三角形表示数据点。</p>
-<p>代码如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">\&lt;!DOCTYPE html\&gt;</div><div class="line">\&lt;html\&gt;</div><div class="line">\&lt;head lang=&quot;en&quot;\&gt;</div><div class="line">\&lt;meta charset=&quot;UTF-8&quot;\&gt;</div><div class="line">\&lt;title\&gt;\&lt;/title\&gt;</div><div class="line">\&lt;script type=&quot;text/javascript&quot; src=&quot;script/d3.v3.js&quot;\&gt; \&lt;/script\&gt;</div><div class="line">\&lt;/head\&gt;</div><div class="line">\&lt;style\&gt;</div><div class="line">body &#123;</div><div class="line">font: 10px sans-serif;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.axis path,</div><div class="line">.axis line &#123;</div><div class="line">fill: none;</div><div class="line">stroke: #000;</div><div class="line">shape-rendering: crispEdges;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.point &#123;</div><div class="line">fill: steelblue;</div><div class="line">stroke: #000;</div><div class="line">&#125;</div><div class="line"></div><div class="line">\&lt;/style\&gt;</div><div class="line">\&lt;body\&gt;</div><div class="line"></div><div class="line">\&lt;script\&gt;</div><div class="line"></div><div class="line">var margin = &#123;top:20,right:20,bottom:30,left:40&#125;,</div><div class="line">width = 960-margin.left-margin.right,</div><div class="line">height = 500-margin.top-margin.bottom;</div><div class="line"></div><div class="line">var x = d3.scale.linear().range([0,width]());</div><div class="line">var y = d3.scale.linear().range([height,0]());</div><div class="line"></div><div class="line">var svg = d3.select(&apos;body&apos;).append(&apos;svg&apos;).attr(&apos;width&apos;,width+margin.left+margin.right)</div><div class="line">.attr(&apos;height&apos;,height+margin.top+margin.bottom)</div><div class="line">.append(&apos;g&apos;)</div><div class="line">.attr(&apos;transform&apos;,&quot;translate(&quot;+margin.left+&quot;,&quot;+margin.top+&apos;)&apos;);</div><div class="line"></div><div class="line">d3.csv(&apos;tmp.csv&apos;,function(error,data)&#123;</div><div class="line">if(error) throw error;</div><div class="line"></div><div class="line">data.forEach(function(d)&#123;</div><div class="line">d.x=+d.x;</div><div class="line">d.y=+d.y;</div><div class="line">&#125;)</div><div class="line">//        console.log(data);</div><div class="line"></div><div class="line">x.domain(d3.extent(data,function(d)&#123;return d.x&#125;)).nice();</div><div class="line">y.domain(d3.extent(data,function(d)&#123;return d.y&#125;)).nice();</div><div class="line"></div><div class="line">svg.append(&apos;g&apos;)</div><div class="line">.attr(&apos;class&apos;,&apos;x axis&apos;)</div><div class="line">.attr(&apos;transform&apos;,&apos;translate(0,&apos;+height+&quot;)&quot;)</div><div class="line">.call(d3.svg.axis().scale(x).orient(&apos;bottom&apos;));</div><div class="line"></div><div class="line">svg.append(&apos;g&apos;)</div><div class="line">.attr(&apos;class&apos;,&apos;y axis&apos;)</div><div class="line">.call(d3.svg.axis().scale(y).orient(&apos;left&apos;));</div><div class="line"></div><div class="line">svg.selectAll(&apos;.point&apos;)</div><div class="line">.data(data).enter()</div><div class="line">.append(&apos;path&apos;)</div><div class="line">.attr(&apos;class&apos;,&apos;point&apos;)</div><div class="line">.attr(&apos;d&apos;,d3.svg.symbol().type(&apos;triangle-up&apos;))</div><div class="line">.attr(&apos;transform&apos;,function(d)&#123;return &quot;translate(&quot;+x(d.x)+&quot;,&quot;+y(d.y)+&quot;)&quot;&#125;);</div><div class="line"></div><div class="line"></div><div class="line">&#125;)</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">\&lt;/script\&gt;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">\&lt;/body\&gt;</div><div class="line">\&lt;/html\&gt;</div><div class="line"></div></pre></td></tr></table></figure>
-<p>代码本身是很基本的，不过代码里面有一些可以学习的好习惯，比如：</p>
-<ol>
-<li><p>使用var margin = {top:20,right:20,bottom:30,left:40}变量来表示距离上下左右的距离，这样统一管理，只有一个变量。</p>
-</li>
-<li><p>data.forEach(function(d){<br> d.x=+d.x;<br> d.y=+d.y;<br> })<br>使用这种方式直接转换成数值型的变量，免去了使用其他函数的麻烦。</p>
-</li>
-<li>.nice()函数的使用，可以适当扩大extent的范围，这样最大最小值在坐标轴上看起来不会在极端的位置上。</li>
-<li>.attr(‘d’,d3.svg.symbol().type(‘triangle-up’)) 使用不局限于circle的图形来表示一个点</li>
-<li>svg.append(‘g’).attr(‘class’,’y axis’).call(d3.svg.axis().scale(y).orient(‘left’));<br>  一句话里指定要绘制坐标轴需要的所有东西。</li>
-</ol>
+            <main class="main index-page">
+    
+    
+    
+        <article class="index-post">
+            <a class="content-show-full" href = "/2018/01/16/FileHider/" >
+                    <h2 class="abstract-title">
+                        
+                        <span>AVHider for macOS开发笔记</span>
+                    </h2>
+                <div class="abstract-content">
+                    软件介绍AVHider （oh NO） FileHider是一款将你的文件夹或文件隐藏起来的效率软件，适用于macOS X 10.10及以后的macOS版本。百度网盘下载地址,欢迎大家试用，并提出改进建议！
 
 
-            <! -- 添加捐赠图标 -->
-    <div class ="post-donate">
-    <div id="donate_board" class="donate_bar center">
-        <a id="btn_donate" class="btn_donate" href="javascript:;" title="打赏"></a>
-       <div style="text-align:center;color:#00F" >
-            <strong>如果本文对您有帮助，请您用支付宝或微信小额赞赏支持我继续原创；也可以用支付宝扫左边的码领取最高99的红包，并由支付宝送我一个小红包。谢谢~</strong>
-        </div>
-        <br>
-      </div>  
-    <div id="donate_guide" class="donate_bar center hidden" >
-        <!-- 支付宝打赏图案 -->
-        <img style="display:inline" src="https://ws1.sinaimg.cn/large/aa2320a8ly1fmz23st4psj20fr0nomz1" height="240" width="180" alt="支付宝微信打赏"> 
-        <img style="margin-left:100px;display:inline" src="https://ws1.sinaimg.cn/large/aa2320a8ly1fmz23siwjyj20p00xw77e" height="240" width="180" alt="支付宝微信打赏">
+Specially thanks to unfamous Designer Joseph, who designed the exquisite logo for this Application!
 
-    </div>
-    <script type="text/javascript">
-        document.getElementById('btn_donate').onclick = function(){
-            $('#donate_board').addClass('hidden');
-            $('#donate_guide').removeClass('hidden');
-        }
-    </script>
+软件的使用也非常简单，基本可以实现文件/文件夹的可见/不可见一键切换，录了一个gif动画。
+
+
+软件使用demo
+
+开发初衷开发这款软件的初衷是将xxx.mp4/xxx.avi/x...
+                </div>
+            </a>
+            <div class="abstract-post-meta">
+                <!-- tags  -->
+                
+                <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = macOS开发>macOS开发</a>
+    
 </div>
-<! -- 添加捐赠图标 -->
-    </article>
-    <!-- 前后页  -->
-    <ul class="post-pager">
-        
-            <li class="next">
-                <a href= "/2014/11/15/D3 on Angular(2)/" title= D3 on Angular(2) >
-                    <span>Next Post</span>
-                    <span>D3 on Angular(2)</span>
-                </a>
-            </li>
-        
-        
-            <li class="previous">
-                <a href= "/2014/11/15/浅谈d3.js中的异步文件读取的处理/" title= 浅谈d3.js中强制异步文件读取同步的四种方法 >
-                    <span>Previous Post</span>
-                    <span>浅谈d3.js中强制异步文件读取同步的四种方法</span>
-                </a>
-            </li>
-        
-    </ul>
-
-
-
-    <!-- 来必力City版安装代码 -->
-<div id="lv-container" data-id="city" data-uid="MTAyMC8zMTAyMC83NTY5">
-    <script type="text/javascript">
-   (function(d, s) {
-       var j, e = d.getElementsByTagName(s)[0];
-
-       if (typeof LivereTower === 'function') { return; }
-
-       j = d.createElement(s);
-       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-       j.async = true;
-
-       e.parentNode.insertBefore(j, e);
-   })(document, 'script');
-    </script>
-<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
-</div>
-<!-- City版安装代码已完成 -->
-
-
-    <div style="text-align:center">
-    <span id="busuanzi_container_page_pv" >
-        本文总阅读量<span id="busuanzi_value_page_pv"></span>次
-    </span>
-    </div>
+                
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2018/01/16</span>
+                </div>
+            </div>
+        </article>
+    
+    <!-- paginator  -->
+    
 </main>
             <!-- profile -->
             

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
     <title>
         
-        浅谈可视交互的方法在大数据平台数据产生、前期处理方面的应用 · Zhihao&#39;s Studio
+        AVHider for macOS开发笔记 · Zhihao&#39;s Studio
         
     </title>
     <link rel="icon" href= /assests/favicon.ico>
@@ -81,7 +81,7 @@
                 <a href="/" >Zhihao&#39;s Studio.</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">浅谈可视交互的方法在大数据平台数据产生、前期处理方面的应用</a>
+                <a href="#" class="post-name">AVHider for macOS开发笔记</a>
             </div>
     </div>
     
@@ -102,7 +102,7 @@
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            浅谈可视交互的方法在大数据平台数据产生、前期处理方面的应用
+            AVHider for macOS开发笔记
             <!-- 404 -->
             
         </h1>
@@ -120,13 +120,13 @@
             
                 <div class= post-intro-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-href = 随感>随感</a>
+        <a class="post-tag" href="javascript:void(0);" data-href = macOS开发>macOS开发</a>
     
 </div>
             
             <div class="post-intro-meta">
                 <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                <span class="post-intro-time">2017/12/31</span>
+                <span class="post-intro-time">2018/01/16</span>
             </div>
         
     </div>
@@ -134,48 +134,57 @@
         <div class="container">
             <main class="main post-page">
     <article class="article-entry">
-        <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>作为一个一本正经的大数据公司，Helium亟需一个平台HAN(Helium Analytical Network)，它涵盖数据完整的生命周期（产生 – 处理 – 使用 – 销毁）。用户通过低学习成本的方式（如SQL， JSON）来定义这个生命周期，即数据从哪来，怎么计算，怎么使用，何时销毁。在平台上，希望用户能用JSON的方式部分覆盖OLAP的功能，即用户从数据的建立到完成OLAP查询的完整过程。</p>
-<p>本文的工作主要集中在第一二个阶段，即数据的产生和部分的处理上。相比于传统的前端配置方式，我们的创新点在于将数据集的流向与产生以图形化的方式进行展现，使得用户清晰地看到每一个数据集产生的过程和流向。带来的好处除了形象化、直观之外，还可降低用户在操作数据过程中产生错误的几率，并且及时发现并补救产生的错误。</p>
-<h1 id="总览"><a href="#总览" class="headerlink" title="总览"></a>总览</h1><h2 id="界面总览"><a href="#界面总览" class="headerlink" title="界面总览"></a>界面总览</h2><p><img src="https://ws1.sinaimg.cn/large/aa2320a8ly1fmzx522ht7j21sm172n0r" alt=""></p>
+        <h1 id="软件介绍"><a href="#软件介绍" class="headerlink" title="软件介绍"></a>软件介绍</h1><p><del>AVHider （oh NO）</del> FileHider是一款将你的文件夹或文件隐藏起来的效率软件，适用于<strong>macOS X 10.10及以后的macOS版本</strong>。<a href="https://pan.baidu.com/s/1dGccUbB" target="_blank" rel="external">百度网盘下载地址</a>,欢迎大家试用，并提出改进建议！</p>
+<p><img src="https://ws1.sinaimg.cn/large/aa2320a8ly1fnhgwuj4h0j208y08wgls" alt=""></p>
 <blockquote>
-<p>总览</p>
+<p>Specially thanks to <del>un</del>famous Designer <strong>Joseph</strong>, who designed the exquisite logo for this Application!</p>
 </blockquote>
-<p>整体界面由三部分组成，比较简洁清爽。最上面是选择Task的panel，因为数据集的操作是分数据集进行的；中间部分是一块画布，展现的是数据集的细节信息；最下方是operators panel，又可细分为左边的数据集与操作panel与右边的系统级操作panel。</p>
-<h2 id="文件结构总览"><a href="#文件结构总览" class="headerlink" title="文件结构总览"></a>文件结构总览</h2><p>经过数次重构，整体文件的结构如下图：<br><img src="https://ws1.sinaimg.cn/large/aa2320a8ly1fmzx70q1gxj20d60pgwgq" alt=""></p>
-<p>还是一个比较传统的前端工程，遵循着MVC模式。其中css文件夹控制着整体工程的样式；image文件主要是按钮和数据集相关的一些图片资源，js文件夹下面分为外部引入的资源(library文件夹)和我编写的js文件；jsonData是前后端未联通时，进行测试用的json文件样例，HAN.html是整个系统的入口。</p>
-<p><img src="https://ws1.sinaimg.cn/large/aa2320a8ly1fmzxhl9jqyj20qo0k00sz" alt=""></p>
+<p>软件的使用也非常简单，基本可以实现文件/文件夹的可见/不可见一键切换，录了一个gif动画。</p>
+<p><img src="https://ws1.sinaimg.cn/large/aa2320a8ly1fnhbezm45wg20hs0dc7q5" alt=""></p>
 <blockquote>
-<p>MVC架构图</p>
+<p>软件使用demo</p>
 </blockquote>
-<p>上面的架构图中，我故意将Controller这部分绘制成了红色，体积也明显大于其他部分，不难看出Controller在本项目中的重要性。跟ios类似，传统的Model仅仅是一些class或者struct(在js中为object)，由于本项目中Controller部分太过臃肿，负担过重，我将Model相关的操作也移到了Model模块中，以增加代码的可读性，因此在本项目中，Model理解为Model-related-Module更为合适。</p>
-<h1 id="Model部分"><a href="#Model部分" class="headerlink" title="Model部分"></a>Model部分</h1><p>Model部分的数据结构本身比较简单，可分为两大类，<strong>Stream</strong>数据集与<strong>Batch</strong>数据集；其中数据集本身又可以根据数据来源分为<strong>From Souce</strong>和<strong>From operator</strong>两种类型。</p>
-<p>Model.js中定义了这两种数据集，由数据集中的一个字段区分数据集本身的来源。对数据集的增删查改功能也放到了Model.js中，上文有所提及，这部分代码本应该放在Controller中的。</p>
-<p>Operators在本项目中也是等同与Model的一等公民，因此我们也特意为其定制了相应的数据结构，同样可分为单目操作和双目操作，对每种数据集都设置了相应的字段存储相应的内容。同样放到Model中的，还有对数据集进行操作的逻辑，这样可以大大减轻Controller部分的代码，方便其他同事理解阅读这个项目的源码。下面的关系图很好的说明了数据集和操作符之间的关系，单目操作不改变数据集类型，双目操作只要涉及到Stream类型的数据集，生成的数据集就为Stream类型。</p>
-<p><img src="https://ws1.sinaimg.cn/large/aa2320a8ly1fmzybodnwoj20qo0k0mxn" alt=""></p>
-<p>为了方便Controller与服务器端的通信，在这里分别设立了batch数据集、stream数据集、operators数据集的数组，并提供了一套根据数据集/操作的id快速找到相应model的方法，以便于快速将view和model关联起来。</p>
-<h1 id="View部分"><a href="#View部分" class="headerlink" title="View部分"></a>View部分</h1><p>View部分是这个系统的创新点所在，传统的前端项目使用的是DOM元素，DOM元素没有SVG元素自由，打个不恰当的比方，如果对DOM元素的操作是美图秀秀，那么对SVG元素的操作就是Photoshop。SVG元素的绘制、动画方面的可自定义化非常强。</p>
-<p>经过公司领导和其他同事的反复重构之后，我将绘制通用流程图的通用部分抽取了出来，并提供给使用这个库的用户足够的自由，自定义所涉及到的大部分外观样式和监听事件的补充。</p>
-<p><img src="https://ws1.sinaimg.cn/large/aa2320a8ly1fmzyq4r5xuj20qo0k0aa0" alt=""></p>
+<h1 id="开发初衷"><a href="#开发初衷" class="headerlink" title="开发初衷"></a>开发初衷</h1><p>开发这款软件的<strong>初衷</strong>是<del>将xxx.mp4/xxx.avi/xxx.mkv在白天藏起来，免得被其他人发现。</del> 在Apple store上发现了一款类似的软件，售价163元，而且卖的不错。作为一个工程师，我是不愿意掏这份冤枉钱的，因为我觉得这东西一天内可以搞出来，于是就花了一晚上做出了功能类似的软件FileHider(认真脸)。</p>
+<p><img src="https://ws1.sinaimg.cn/large/aa2320a8ly1fnhba8qhjfj20tz13pq71" alt=""></p>
 <blockquote>
-<p>构成流程图的基本元素</p>
+<p>在Mac App Store定价为163元的Secret Folder</p>
 </blockquote>
-<p>如上图所示，构成一个完成流程图/数据流图所需要的最基本的两个元素是Entity与Entity之间的关联关系。其中Entity是由两部分组成，即上方的图片(img)和下方的描述文字(text)，关于这个部分，我们提供的可视化库(Helium_vis.js)中都进行了<strong>深度</strong>的定制化，您可以<strong>自定义</strong>img和text的宽高、img左上角的位置、img的透明度、text的字体、大小、对其方式等一系列您想得到与想不到的属性。</p>
-<p>Entity与Entity之间的关联关系目前是定好了从第一个出Entity的图片的右边中点与第二个入Entity左边中点，其他部分由三次贝塞尔曲线进行插值生成漂亮的曲线。关系的render部分目前只提供了粗细的可配项目，后期需要加上关系的描述文字，并提供居中或相对中点偏移量的可配项。</p>
-<p>事件部分，我们希望Entity可以被选中，并且将选中的元素进行高亮区别显示，并且在本项目中，选中的Entity所代表的dataset应该在其他地方进行展示，并且在该处可由用户对dataset的model进行修改、删除等操作。而这部分业务逻辑相关的代码显然不应该放到库内，因为其他项目并不需要这个部分的逻辑，很可能需要改成其他项目的逻辑。同样的，作为一个一本正经的流程图库，我们希望用户有权力去修改每个Entity默认的位置，因此也对每个Entity配备了Drag事件，通用Drag事件，Helium_vis实现了Entity本身跟随鼠标的移动和该Entity相关操作(曲线)的实时移动，另外，针对特定的项目，还支持以传入回调函数的方式将项目特定的逻辑进行传入。比如，在HAN这个项目中，由于需要保存并恢复Entity的位置信息，因此在Drag事件中，添加了对Entity位置的计算相关的逻辑。</p>
-<p>具体的做法比较tricky，是将每个Entity此次render的初始位置加上此次操作的偏移量保存下来，并以此作为下次打开时的初始render位置。</p>
-<p>另外一个可重用并在本项目中反复利用的项目是圆角矩形，在此，我们同样对其进行了封装，提供了很多可配置的选项，并且支持以类似jQuery的链式操作。这样就可以通过配置的方式，用两行代码render出所需要的图形，大大缩减了代码的长度。<strong>代码少了，带来的最大好处是bug也少了。</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">//代码使用样例</div><div class="line">var canvasConfig = &#123;x:10 , y:20, width:1100, height:590, rx: 10, ry:10, fill:&quot;#e0e0e0&quot;, svg:d3.select(&quot;#canvas&quot;),id:&quot;mainCanvas&quot;&#125;;</div><div class="line">    var mainCanvas = new HeliumCanvas(canvasConfig);</div><div class="line">    </div><div class="line">    mainCanvas.drawSelf().calculatePosition();</div><div class="line"></div></pre></td></tr></table></figure>
-<p>在底层的Operators panel部分，我们还加入了一个脑动大开的类似新版MacBook Pro上Touch Bar的图标收起、图标展开的动画以展示影藏的二级菜单，得益于SVG元素强大的动画能力，这些操作实现起来并不是很复杂。</p>
-<p><img src="https://ws1.sinaimg.cn/large/aa2320a8ly1fmzzfuk2qbg23i00bsx6p" alt=""></p>
+<p>与Secret Folder不同的地方在于它的TableView中有两列，而我认为显示当前文件可见/不可见的列跟右边的NSSegmentedControl信息重复了，因此我就除去了该列。</p>
+<p>还有一点不同是Secret Folder设置了Require Password这个选项，这个我觉得可以不加，因为如果一个人在用户不在的时候能够进入到系统中，那么user的密码也是多余的，FileHider的目的是对有机会看到你电脑屏幕却没有机会操作你电脑的人隐藏文件。</p>
+<p>起初我还想在用户切换文件可见性的时候发送一个Notification，但是觉得过度设计了，因为这些通知如果不手动删除，将会在通知中心保留下来，这显然会增加别人知道有文件隐藏起来的可能性。</p>
+<h1 id="开发过程"><a href="#开发过程" class="headerlink" title="开发过程"></a>开发过程</h1><h2 id="界面部分"><a href="#界面部分" class="headerlink" title="界面部分"></a>界面部分</h2><p>界面部分完全模仿了Secret Folder的布局，是一个single-Page的应用，依然采用了StoryBoard构造界面。</p>
+<p><img src="https://ws1.sinaimg.cn/large/aa2320a8ly1fniorm8ub3j21gk1z0423" alt=""></p>
 <blockquote>
-<p>Touch-bar like animation</p>
+<p>项目storyboard截图</p>
 </blockquote>
-<h1 id="Controller"><a href="#Controller" class="headerlink" title="Controller"></a>Controller</h1><p>在本项目中，Controller捕获到view层面的按钮点击事件、drag事件，去调用Model里的增删改查方法；或者经过Model中的from Operator事件产生了新的Model，经过Controller去调用View部分，render出新的视觉元素与之对应。经过前面的功能疏散，这部分代码已经轻量级了很多。</p>
-<p>剩下的一大块功能是与服务器的通信，有正向与逆向两个方向。正向的是去主动通知服务器，将某个任务启动起来、将某个任务删除、保存当前任务信息等等。逆向的部分是从服务器端将上次某个task的保存数据获取到，并由Controller调用相关方法进行重新render，并且render后的canvas依然允许用户像第一次进行操作那般顺滑。</p>
-<p>点击数据集、Operators后的弹出框、配置框等还是沿用的传统前端技术，并不符合本文主题（用可视交互的方法），因此这里就不展开介绍了。</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>之前写代码比较混乱，可能是因为我做过太多外包中的毒，只求迅速将功能实现交付给甲方就完事了，很少有对项目整体重构的思考。经过两次公司领导的亲自指导重构，有所反思，重构确实让代码看起来清爽了很多、并且可维护性有所提升，以后写项目的时候，应该提前规划好，而不是立即就上手去做，毕竟磨刀不误砍柴工。</p>
-<p>今天是2017年的最后一天了，就将本文作为今年的收官之作吧。最后，祝大家在新的一年里，开开心心、平平安安，每天都能有所进步！</p>
-<p><img src="https://ws1.sinaimg.cn/large/aa2320a8ly1fmzzz1urulj20dc06odfz" alt=""></p>
+<p>左右分为垂直的两栏，使用了<strong>NSSplitView</strong>，并调整左右两栏的大小比例，左边显示文件列表和对列表的增加/删除按钮；右边是文件的详细信息与文件隐藏/可见之间切换的<strong>NSSegmentedControl</strong>。对各个组件定好布局，确保在窗口resize后依然保持着相对较好的样式。</p>
+<h2 id="TableView部分"><a href="#TableView部分" class="headerlink" title="TableView部分"></a>TableView部分</h2><p>文件列表是放到TableView中进行显示的，它也是本应用的核心部分。默认的TableView Cell高度只有17px，每个Cell要塞进去一个文件缩略图icon和文件名，显然过于小了，因此需要定制Cell。在本项目中，我将Cell设置为了30px，其中文件缩略图为24 X 24 px,我觉得大小是比较合适的。</p>
+<p><img src="https://ws1.sinaimg.cn/large/aa2320a8ly1fnipejzy5xj20gy0880te" alt=""></p>
+<p>一个TableView要想成功显示需要知道两件事：<strong>1.显示几行、2.每行显示什么。</strong>和其他应用一样，驱动这个TableView的是一个数组，filesList : [<strong>URL</strong>]。请注意这里是一个URL的数组，文件路径的URL都是定义为file://+文件路径这种格式的。URL在Swift中有相当多的方法，方便拿到文件名、路径名、根据完整路径拿到对应文件的缩略图、文件的detail信息等等。具体的使用可以参考<a href="https://developer.apple.com/documentation/foundation/url" target="_blank" rel="external">官方API文档</a>。</p>
+<h2 id="数据持久化"><a href="#数据持久化" class="headerlink" title="数据持久化"></a>数据持久化</h2><p>对于本应用，用户对某个文件的操作并不是一次性隐藏就完事了的，它需要保留恢复为可见的权力，显然让用户记住哪些文件被隐藏、甚至隐藏在哪个路径下是很不现实的，因此需要数据持久化，保证用户下次打开应用的时候可以知道哪些文件是有过隐藏历史的。因为有过<strong>前科</strong>的文件很可能需要二次隐藏。</p>
+<p>数据持久化的选择很多，最典型的有比较重的<strong>core data</strong>和比较轻量级的<strong>userDefaults</strong>。由于文件列表的路径通常不会很长，因此我选用了相对轻量级的userDefaults。</p>
+<p>在使用userDefaults存储前面提到的URL类型的filesList数组的时候，我发现会报一个错误，<strong>Attempt to set a non-property-list object as an NSUserDefaults</strong>。 后面在网上发现了一些solution，主要的原因是NSUserDefaults只支持NSArray, NSDictionary, NSString, NSData, NSNumber, 和 NSDate的数据类型，对于URL这种类型，网上大多数的solution都是建议将数组编码为NSData，然后进行存储。我考虑到URL和String之间的互转比较方便，因此我将其转换为了string类型的数组进行存储。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// String -&gt; URL</span></div><div class="line">	<span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">viewDidLoad</span><span class="params">()</span></span> &#123;</div><div class="line">		<span class="keyword">let</span> defaults = <span class="type">UserDefaults</span>.standard</div><div class="line">        <span class="keyword">if</span> <span class="keyword">let</span> filesListFromUserDefaults = defaults.array(forKey: <span class="string">"filesPath"</span>)&#123;</div><div class="line">            <span class="keyword">var</span> tmpFilePath : [<span class="type">String</span>] = filesListFromUserDefaults <span class="keyword">as</span>! [<span class="type">String</span>]</div><div class="line">            <span class="keyword">for</span> str <span class="keyword">in</span> tmpFilePath&#123;</div><div class="line">                <span class="keyword">self</span>.filesList.append(<span class="type">URL</span>(string: str)!)</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">        </div><div class="line"><span class="comment">// URL -&gt; String</span></div><div class="line">	<span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">viewWillDisappear</span><span class="params">()</span></span> &#123;</div><div class="line">        <span class="keyword">let</span> defaults = <span class="type">UserDefaults</span>.standard</div><div class="line">        <span class="keyword">var</span> array : [<span class="type">String</span>] = []</div><div class="line">        <span class="keyword">for</span> url <span class="keyword">in</span> filesList&#123;</div><div class="line">            array.append(url.absoluteString)</div><div class="line">        &#125;</div><div class="line">        defaults.<span class="keyword">set</span>(array, forKey: <span class="string">"filesPath"</span>)</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>URL与String数组之间的互转</p>
+</blockquote>
+<p>转换的时机很重要，这会提高应用的性能。String-&gt;URL这个方向仅在应用打开时，view加载完毕后进行；而URL-&gt;String这个方向是在应用关闭后，view消失的时候触发一次。</p>
+<h2 id="文件列表的增加"><a href="#文件列表的增加" class="headerlink" title="文件列表的增加"></a>文件列表的增加</h2><p>文件的增加目前是靠比较简单的NSOpenPanel来实现的，显然这很不<strong>Mac</strong>，后面需要做的是<strong>drag-and-drop</strong>，一种更为<strong>优雅</strong>的solution。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@IBAction</span> <span class="function"><span class="keyword">func</span> <span class="title">selectFile</span><span class="params">(<span class="number">_</span> sender: Any)</span></span> &#123;</div><div class="line">        </div><div class="line">        <span class="keyword">let</span> openPanel = <span class="type">NSOpenPanel</span>()</div><div class="line">        </div><div class="line">        openPanel.message = <span class="string">"Please select file to Hide"</span></div><div class="line">        openPanel.canChooseDirectories = <span class="literal">true</span></div><div class="line">        <span class="comment">//    openPanel.allowsMultipleSelection = true</span></div><div class="line">        </div><div class="line">        openPanel.beginSheetModal(<span class="keyword">for</span>: view.window!, completionHandler: &#123;(result) <span class="keyword">in</span></div><div class="line">            <span class="keyword">if</span> result == <span class="type">NSModalResponseOK</span>&#123;</div><div class="line">                <span class="keyword">self</span>.selectedFolder = openPanel.url!</div><div class="line">            &#125;</div><div class="line">        &#125;)</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h2 id="文件列表的删除"><a href="#文件列表的删除" class="headerlink" title="文件列表的删除"></a>文件列表的删除</h2><p>文件列表的删除依然是对上文提到的filesList进行操作，通过tableviewDelegate中的tableViewSelectionDidChange方法得到需要删除的元素index。<strong>需要注意的是，</strong>需要增加判断，确保当前有元素被选中。<strong>(如果没有元素被选中，index值会是-1，这很可能引起应用的崩溃)</strong></p>
+<p>无论是文件列表的增加还是删除，都需要调用tableview.reloadData()方法对视图进行更新。</p>
+<h2 id="隐藏和非隐藏的实现"><a href="#隐藏和非隐藏的实现" class="headerlink" title="隐藏和非隐藏的实现"></a>隐藏和非隐藏的实现</h2><p>Unix系统中实现一个文件隐藏的方法很多，甚至可以给该文件进行加密。我能想到的最简单的方法是在原文件前面加一个.，并用mv xxx.mp4 .xxx.mp4将该文件就地在原路径下进行隐藏。这也符合了本软件的设计初衷，将文件从有机会从你电脑边路过，但却没有机会真正操作你电脑的人隐藏。</p>
+<p>模拟console执行命令，是通过Process()来完成的。这里有一些坑，不幸的被我全踩了。</p>
+<p>第一个坑是普通文件和文件夹的URL是不同的，文件夹是以/结尾的，而普通文件则不是，为了得到path和文件名，我调用了String.components(separatedBy: “/“)方法，那么文件夹的文件名就存在了方法得到数组的倒数第二项中；而其他普通文件的文件名存在了数组的倒数第一项中。</p>
+<p>第二个是当用户不是第一次打开应用时，执行mv的参数设置方式需要分四种情况讨论，这也是前面为了应用的效率，不及时update fileList挖下的坑。果然凡事都是有两面性的~</p>
+<h2 id="致谢、结束语"><a href="#致谢、结束语" class="headerlink" title="致谢、结束语"></a>致谢、结束语</h2><p>首先感谢<del>非</del>著名设计师Joseph给我提供的精美logo，感谢Secret Folder，让我有了灵感和动力去做一个类似的软件。</p>
+<p>周五有幸聆听了公司CTO的演讲，一个工程师的日常。我不禁联想到了我自己，我因为原软件定价过高，做过Syngery的替代品mouseSync、Manico的替代品Manico-substitution、Re Desktop的替代品HideDesktop，这也许就是我作为一个工程师的日常吧。</p>
+<p>Drag-and-drop是更为优雅的文件与应用的交互方式，我将于近期抽空集成进应用中，届时再见！</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li><a href="https://stackoverflow.com/questions/19720611/attempt-to-set-a-non-property-list-object-as-an-nsuserdefaults" target="_blank" rel="external">stackoverflow</a></li>
+<li><a href="https://www.raywenderlich.com/157986/filemanager-class-tutorial-macos-getting-started-file-system" target="_blank" rel="external">FileManager Class Tutorial for macOS</a></li>
+<li><a href="https://itunes.apple.com/cn/app/secret-folder/id507968596?mt=12" target="_blank" rel="external">APPLE STORE：Secret Folder</a></li>
+</ol>
 
 
             <! -- 添加捐赠图标 -->
@@ -205,18 +214,11 @@
     <!-- 前后页  -->
     <ul class="post-pager">
         
-            <li class="next">
-                <a href= "/2018/01/16/FileHider/" title= AVHider for macOS开发笔记 >
-                    <span>Next Post</span>
-                    <span>AVHider for macOS开发笔记</span>
-                </a>
-            </li>
-        
         
             <li class="previous">
-                <a href= "/2017/12/17/googleDevDay2/" title= 谷歌开发者大会(GDD2017)见闻 Day2 >
+                <a href= "/2017/12/31/HAN/" title= 浅谈可视交互的方法在大数据平台数据产生、前期处理方面的应用 >
                     <span>Previous Post</span>
-                    <span>谷歌开发者大会(GDD2017)见闻 Day2</span>
+                    <span>浅谈可视交互的方法在大数据平台数据产生、前期处理方面的应用</span>
                 </a>
             </li>
         
