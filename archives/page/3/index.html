@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
     <title>
         
-        冷门但实用的d3.js内置函数 · Zhihao&#39;s Studio
+        Zhihao&#39;s Studio
         
     </title>
     <link rel="icon" href= /assests/favicon.ico>
@@ -68,22 +68,11 @@
     
 </head>
     
-        <body class="post-body">
-    
     
 <header class="header">
 
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
-    
-    <div class="banner">
-            <div class="blog-title">
-                <a href="/" >Zhihao&#39;s Studio.</a>
-            </div>
-            <div class="post-title">
-                <a href="#" class="post-name">冷门但实用的d3.js内置函数</a>
-            </div>
-    </div>
     
     <a class="home-link" href=/>Zhihao's Studio.</a>
 </header>
@@ -91,142 +80,63 @@
         <div class="site-intro">
     
     <!-- 主页  -->
-    
-    
-    <!-- 404页  -->
             
-    <div class="site-intro-img" style="background-image: url(http://oumn0o088.bkt.clouddn.com/post-bg.jpg)"></div>
+    <div class="site-intro-img" style="background-image: url(/)"></div>
     <div class="site-intro-placeholder"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            冷门但实用的d3.js内置函数
-            <!-- 404 -->
-            
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
-            
-        </p>
-        <!-- 404 -->
-        
         <!-- 文章页meta -->
-        
-            <!-- 文章页标签  -->
-            
-                <div class= post-intro-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = d3>d3</a>
-    
-</div>
-            
-            <div class="post-intro-meta">
-                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                <span class="post-intro-time">2014/11/15</span>
-            </div>
         
     </div>
 </div>
         <div class="container">
-            <main class="main post-page">
-    <article class="article-entry">
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在d3.js的API文档中，提供了很多内置的函数，但是有些很有用的内置函数却被无情的忽略了，这篇博客就来整理整理这些被遗忘却很实用的函数。希望整理过后，他们不再被遗忘。</p>
-<h1 id="selection-classed-name-【value】"><a href="#selection-classed-name-【value】" class="headerlink" title="selection.classed(name,【value】)"></a>selection.classed(name,【value】)</h1><p>value参数可选，如果没有指定，则返回与name参数匹配的第一个非空元素是否绑定了指定的CSS类，true表示绑定，false表示未绑定。如果value指定了的话，就是为selection添加/删除CSS类。<br>这点与selection.attr(name,【value】)非常类似，但是相比而言，就冷门的多，恐怕没有多少人不知道selection.attr(name,【value】)，但是有很多人真的不知道selection.classed(name,【value】)。<br>这个函数很实用，比如鼠标进入某些点，让这些点高亮以表示强调，但是移出去之后，让他们回复原来的样式就可以用这个函数，免去了重新设置样式的麻烦，甚至有时候恢复原来样式的时候，还需要判断，就更麻烦了。</p>
-<h1 id="transition-filter-selector"><a href="#transition-filter-selector" class="headerlink" title="transition.filter(selector)"></a>transition.filter(selector)</h1><p>过滤也有过渡，这点可能很多人都忽略了，比如设置动画结束时，索引为奇数的元素旋转30度。甚至可以自己定义规则，如第5、10、15个元素改变，其他的不变。</p>
-<h1 id="d3-interpolate-a-b"><a href="#d3-interpolate-a-b" class="headerlink" title="d3.interpolate(a,b)"></a>d3.interpolate(a,b)</h1><p>返回一个介于a,b之间的默认插值器，插值器的类型取决于b的类型。<br>1）如果b是颜色类型，那么返回的是interpolateRgb插值器<br>2）如果是字符串类型，则返回interpolateString插值器<br>3）如果是数组类型，则返回interpolateArray插值器<br>4）如果是对象类型，且不能强制转换成字符串类型，则返回interpolateObject插值器<br>5）否则，返回interpolateNumber插值器</p>
-<h1 id="数组相关API"><a href="#数组相关API" class="headerlink" title="数组相关API"></a>数组相关API</h1><p>使用d3时，会有大量的数组操作，如果能合理运用d3提供的数组相关的函数，将会使得工作效率大大提高。</p>
-<h2 id="d3-ascending-a-b"><a href="#d3-ascending-a-b" class="headerlink" title="d3.ascending(a,b)"></a>d3.ascending(a,b)</h2><p>如果a\<b,返回-1，a\>b，返回1，如果a=b,返回0.<br>在可视化元素需要有序的时候，这个函数很有用，可以帮助我们排好序。</b,返回-1，a\></p>
-<h2 id="d3-min-d3-max-d3-extent"><a href="#d3-min-d3-max-d3-extent" class="headerlink" title="d3.min(),d3.max(),d3.extent()"></a>d3.min(),d3.max(),d3.extent()</h2><p>前两个函数知道的人应该不少，但是最后一个却相对冷门，它可以直接返回数组自然排序的最小值和最大值，省的同时调用前面两个函数了。</p>
-<h2 id="d3-sum-d3-mean-d3-median-d3-quantile"><a href="#d3-sum-d3-mean-d3-median-d3-quantile" class="headerlink" title="d3.sum(),d3.mean(),d3.median(),d3.quantile()"></a>d3.sum(),d3.mean(),d3.median(),d3.quantile()</h2><p>基本的求和、平均数、中位数、p分位数，都帮你实现好了，之前还傻乎乎的自己去实现了，虽然不难，但是代码会很难看。</p>
-<h2 id="d3-shuffle-array"><a href="#d3-shuffle-array" class="headerlink" title="d3.shuffle(array)"></a>d3.shuffle(array)</h2><p>用Fisher-Yates shuffle算法把传入的数组随机排序。这样想得到乱序的时候会不会比较高大上呢？嘿嘿。</p>
-<h2 id="d3-keys-object-d3-values-object"><a href="#d3-keys-object-d3-values-object" class="headerlink" title="d3.keys(object),d3.values(object)"></a>d3.keys(object),d3.values(object)</h2><p>keys返回一个包含指定对象(关联数组)中所有属性名称的数组。这点很有用，比如用d3.csv()读文件的时候，想要滤掉一些无关的dimension，比如id等等，用这个函数就很有用。</p>
-<h2 id="d3-map-d3-set"><a href="#d3-map-d3-set" class="headerlink" title="d3.map(),d3.set()"></a>d3.map(),d3.set()</h2><p>映射与集合是很常见的数据结构，但是不是所有js版本中都有默认的实现的，但是d3提供了。昨天在做项目的时候就遇到了这个问题，最后是借用了d3提供的map与set解决了。</p>
-<h2 id="d3-merge（arrays）"><a href="#d3-merge（arrays）" class="headerlink" title="d3.merge（arrays）"></a>d3.merge（arrays）</h2><p>合并指定参数arrays为一个数组，与内置的concat类似，不过处理二维数组的时候，它会更方便。</p>
-<h2 id="d3-zip-arrays-，d3-pairs-arrays"><a href="#d3-zip-arrays-，d3-pairs-arrays" class="headerlink" title="d3.zip(arrays)，d3.pairs(arrays)"></a>d3.zip(arrays)，d3.pairs(arrays)</h2><p>d3.zip(【1，2】，【3，4，5】)返回【【1，3】，【2，4】】有啥用自己体会。<br>d3.pairs(【1，2，3，4】)返回【【1，2】，【2，3】，【3，4】】</p>
-<h2 id="d3-transpose-matrix"><a href="#d3-transpose-matrix" class="headerlink" title="d3.transpose(matrix)"></a>d3.transpose(matrix)</h2><p>转置二维矩阵用的。</p>
-<h1 id="brush"><a href="#brush" class="headerlink" title="brush"></a>brush</h1><p>作为一个可视化系统，怎么能没有brush！实现brush的功能非常简单，构造刷子之前，需要制定x/y比例尺和空的范围。绘制的刷子可以重新调整大小和位置。<br>关于brush的使用，请看前面的博客（associate brush）。</p>
-<h1 id="时间的计数"><a href="#时间的计数" class="headerlink" title="时间的计数"></a>时间的计数</h1><p>d3.time.dayOfYear(date) 返回参数date是一年里的第几天，1月1日是第0天。<br>weekOfYear….等等函数也是有的，需要用的时候可以查查API，省的写闰年的判断，嘿嘿。</p>
-<h1 id="布局"><a href="#布局" class="headerlink" title="布局"></a>布局</h1><p>Stack(layers【,index】),让我记忆最深，之前做一个项目的时候，就不知道有这东西存在，愣是自己实现了一遍，麻烦不说,对不对可能还一定.</p>
-<h1 id="地理"><a href="#地理" class="headerlink" title="地理"></a>地理</h1><p>地理的API这块我很陌生,没有什么机会做这方面的项目,所以用的很少,后面有机会再来补充.</p>
-<h1 id="几何"><a href="#几何" class="headerlink" title="几何"></a>几何</h1><p>同样陌生的还有几何这部分的内容,比如四叉树/凸包/多边形/泰森多边形,记住这部分有就可以了,后面用过之后再来补充.</p>
-<h1 id="行为"><a href="#行为" class="headerlink" title="行为"></a>行为</h1><p>由zoom和drag两部分组成，很重要却很简单的内容，希望好好掌握。</p>
+            <main class="main index-page">
+    
+    
+    
+        <article class="index-post">
+            <a class="content-show-full" href = "/2014/04/24/用Java生成Json文件/" >
+                    <h2 class="abstract-title">
+                        
+                        <span>用Java生成Json文件</span>
+                    </h2>
+                <div class="abstract-content">
+                    JsonJson是什么
+  【百度百科】JSON(JavaScript Object Notation) 是一种轻量级的数据交换格式。它基于ECMAScript的一个子集。 JSON采用完全独立于语言的文本格式，但是也使用了类似于C语言家族的习惯（包括C、C++、C#、Java、JavaScript、Perl、Python等）。这些特性使JSON成为理想的数据交换语言。 易于人阅读和编写，同时也易于机器解析和生成(网络传输速率)。
 
-
-            <! -- 添加捐赠图标 -->
-    <div class ="post-donate">
-    <div id="donate_board" class="donate_bar center">
-        <a id="btn_donate" class="btn_donate" href="javascript:;" title="打赏"></a>
-       <div style="text-align:center;color:#00F" >
-            <strong>如果本文对您有帮助，请您用支付宝或微信小额赞赏支持我继续原创；也可以用支付宝扫左边的码领取最高99的红包，并由支付宝送我一个小红包。谢谢~</strong>
-        </div>
-        <br>
-      </div>  
-    <div id="donate_guide" class="donate_bar center hidden" >
-        <!-- 支付宝打赏图案 -->
-        <img style="display:inline" src="https://ws1.sinaimg.cn/large/aa2320a8ly1fmz23st4psj20fr0nomz1" height="240" width="180" alt="支付宝微信打赏"> 
-        <img style="margin-left:100px;display:inline" src="https://ws1.sinaimg.cn/large/aa2320a8ly1fmz23siwjyj20p00xw77e" height="240" width="180" alt="支付宝微信打赏">
-
-    </div>
-    <script type="text/javascript">
-        document.getElementById('btn_donate').onclick = function(){
-            $('#donate_board').addClass('hidden');
-            $('#donate_guide').removeClass('hidden');
-        }
-    </script>
+Json语法规则JSON 语法是 JavaScript 对象表示语法的子集。1.数据在键值对中2.数据由逗号分隔3.花括号保存对象4.方括号保存数组例如：1...
+                </div>
+            </a>
+            <div class="abstract-post-meta">
+                <!-- tags  -->
+                
+                <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = Json>Json</a>
+    
 </div>
-<! -- 添加捐赠图标 -->
-    </article>
-    <!-- 前后页  -->
-    <ul class="post-pager">
-        
-            <li class="next">
-                <a href= "/2014/11/15/drop and drag in d3js/" title= drop and drag in d3 >
-                    <span>Next Post</span>
-                    <span>drop and drag in d3</span>
-                </a>
-            </li>
-        
-        
-            <li class="previous">
-                <a href= "/2014/11/15/associate brush/" title= associate brush >
-                    <span>Previous Post</span>
-                    <span>associate brush</span>
-                </a>
-            </li>
-        
-    </ul>
-
-
-
-    <!-- 来必力City版安装代码 -->
-<div id="lv-container" data-id="city" data-uid="MTAyMC8zMTAyMC83NTY5">
-    <script type="text/javascript">
-   (function(d, s) {
-       var j, e = d.getElementsByTagName(s)[0];
-
-       if (typeof LivereTower === 'function') { return; }
-
-       j = d.createElement(s);
-       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-       j.async = true;
-
-       e.parentNode.insertBefore(j, e);
-   })(document, 'script');
-    </script>
-<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
-</div>
-<!-- City版安装代码已完成 -->
-
-
-    <div style="text-align:center">
-    <span id="busuanzi_container_page_pv" >
-        本文总阅读量<span id="busuanzi_value_page_pv"></span>次
-    </span>
-    </div>
+                
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2014/04/24</span>
+                </div>
+            </div>
+        </article>
+    
+    <!-- paginator  -->
+    
+    <nav class="page-nav">
+        <a class="extend prev" rel="prev" href="/archives/page/2/">#PREV</a><a class="page-number" href="/archives/">1</a><a class="page-number" href="/archives/page/2/">2</a><span class="page-number current">3</span>
+    </nav>
+    
 </main>
             <!-- profile -->
             
