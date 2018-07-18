@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
     <title>
         
-        冷门但实用的d3.js内置函数 · Zhihao&#39;s Studio
+        魔都买房杂记(下) · Zhihao&#39;s Studio
         
     </title>
     <link rel="icon" href= /assests/favicon.ico>
@@ -81,7 +81,7 @@
                 <a href="/" >Zhihao&#39;s Studio.</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">冷门但实用的d3.js内置函数</a>
+                <a href="#" class="post-name">魔都买房杂记(下)</a>
             </div>
     </div>
     
@@ -102,7 +102,7 @@
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            冷门但实用的d3.js内置函数
+            魔都买房杂记(下)
             <!-- 404 -->
             
         </h1>
@@ -120,13 +120,13 @@
             
                 <div class= post-intro-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-href = d3>d3</a>
+        <a class="post-tag" href="javascript:void(0);" data-href = 随感>随感</a>
     
 </div>
             
             <div class="post-intro-meta">
                 <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                <span class="post-intro-time">2014/11/15</span>
+                <span class="post-intro-time">2018/07/18</span>
             </div>
         
     </div>
@@ -134,26 +134,64 @@
         <div class="container">
             <main class="main post-page">
     <article class="article-entry">
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在d3.js的API文档中，提供了很多内置的函数，但是有些很有用的内置函数却被无情的忽略了，这篇博客就来整理整理这些被遗忘却很实用的函数。希望整理过后，他们不再被遗忘。</p>
-<h1 id="selection-classed-name-【value】"><a href="#selection-classed-name-【value】" class="headerlink" title="selection.classed(name,【value】)"></a>selection.classed(name,【value】)</h1><p>value参数可选，如果没有指定，则返回与name参数匹配的第一个非空元素是否绑定了指定的CSS类，true表示绑定，false表示未绑定。如果value指定了的话，就是为selection添加/删除CSS类。<br>这点与selection.attr(name,【value】)非常类似，但是相比而言，就冷门的多，恐怕没有多少人不知道selection.attr(name,【value】)，但是有很多人真的不知道selection.classed(name,【value】)。<br>这个函数很实用，比如鼠标进入某些点，让这些点高亮以表示强调，但是移出去之后，让他们回复原来的样式就可以用这个函数，免去了重新设置样式的麻烦，甚至有时候恢复原来样式的时候，还需要判断，就更麻烦了。</p>
-<h1 id="transition-filter-selector"><a href="#transition-filter-selector" class="headerlink" title="transition.filter(selector)"></a>transition.filter(selector)</h1><p>过滤也有过渡，这点可能很多人都忽略了，比如设置动画结束时，索引为奇数的元素旋转30度。甚至可以自己定义规则，如第5、10、15个元素改变，其他的不变。</p>
-<h1 id="d3-interpolate-a-b"><a href="#d3-interpolate-a-b" class="headerlink" title="d3.interpolate(a,b)"></a>d3.interpolate(a,b)</h1><p>返回一个介于a,b之间的默认插值器，插值器的类型取决于b的类型。<br>1）如果b是颜色类型，那么返回的是interpolateRgb插值器<br>2）如果是字符串类型，则返回interpolateString插值器<br>3）如果是数组类型，则返回interpolateArray插值器<br>4）如果是对象类型，且不能强制转换成字符串类型，则返回interpolateObject插值器<br>5）否则，返回interpolateNumber插值器</p>
-<h1 id="数组相关API"><a href="#数组相关API" class="headerlink" title="数组相关API"></a>数组相关API</h1><p>使用d3时，会有大量的数组操作，如果能合理运用d3提供的数组相关的函数，将会使得工作效率大大提高。</p>
-<h2 id="d3-ascending-a-b"><a href="#d3-ascending-a-b" class="headerlink" title="d3.ascending(a,b)"></a>d3.ascending(a,b)</h2><p>如果a\<b,返回-1，a\>b，返回1，如果a=b,返回0.<br>在可视化元素需要有序的时候，这个函数很有用，可以帮助我们排好序。</b,返回-1，a\></p>
-<h2 id="d3-min-d3-max-d3-extent"><a href="#d3-min-d3-max-d3-extent" class="headerlink" title="d3.min(),d3.max(),d3.extent()"></a>d3.min(),d3.max(),d3.extent()</h2><p>前两个函数知道的人应该不少，但是最后一个却相对冷门，它可以直接返回数组自然排序的最小值和最大值，省的同时调用前面两个函数了。</p>
-<h2 id="d3-sum-d3-mean-d3-median-d3-quantile"><a href="#d3-sum-d3-mean-d3-median-d3-quantile" class="headerlink" title="d3.sum(),d3.mean(),d3.median(),d3.quantile()"></a>d3.sum(),d3.mean(),d3.median(),d3.quantile()</h2><p>基本的求和、平均数、中位数、p分位数，都帮你实现好了，之前还傻乎乎的自己去实现了，虽然不难，但是代码会很难看。</p>
-<h2 id="d3-shuffle-array"><a href="#d3-shuffle-array" class="headerlink" title="d3.shuffle(array)"></a>d3.shuffle(array)</h2><p>用Fisher-Yates shuffle算法把传入的数组随机排序。这样想得到乱序的时候会不会比较高大上呢？嘿嘿。</p>
-<h2 id="d3-keys-object-d3-values-object"><a href="#d3-keys-object-d3-values-object" class="headerlink" title="d3.keys(object),d3.values(object)"></a>d3.keys(object),d3.values(object)</h2><p>keys返回一个包含指定对象(关联数组)中所有属性名称的数组。这点很有用，比如用d3.csv()读文件的时候，想要滤掉一些无关的dimension，比如id等等，用这个函数就很有用。</p>
-<h2 id="d3-map-d3-set"><a href="#d3-map-d3-set" class="headerlink" title="d3.map(),d3.set()"></a>d3.map(),d3.set()</h2><p>映射与集合是很常见的数据结构，但是不是所有js版本中都有默认的实现的，但是d3提供了。昨天在做项目的时候就遇到了这个问题，最后是借用了d3提供的map与set解决了。</p>
-<h2 id="d3-merge（arrays）"><a href="#d3-merge（arrays）" class="headerlink" title="d3.merge（arrays）"></a>d3.merge（arrays）</h2><p>合并指定参数arrays为一个数组，与内置的concat类似，不过处理二维数组的时候，它会更方便。</p>
-<h2 id="d3-zip-arrays-，d3-pairs-arrays"><a href="#d3-zip-arrays-，d3-pairs-arrays" class="headerlink" title="d3.zip(arrays)，d3.pairs(arrays)"></a>d3.zip(arrays)，d3.pairs(arrays)</h2><p>d3.zip(【1，2】，【3，4，5】)返回【【1，3】，【2，4】】有啥用自己体会。<br>d3.pairs(【1，2，3，4】)返回【【1，2】，【2，3】，【3，4】】</p>
-<h2 id="d3-transpose-matrix"><a href="#d3-transpose-matrix" class="headerlink" title="d3.transpose(matrix)"></a>d3.transpose(matrix)</h2><p>转置二维矩阵用的。</p>
-<h1 id="brush"><a href="#brush" class="headerlink" title="brush"></a>brush</h1><p>作为一个可视化系统，怎么能没有brush！实现brush的功能非常简单，构造刷子之前，需要制定x/y比例尺和空的范围。绘制的刷子可以重新调整大小和位置。<br>关于brush的使用，请看前面的博客（associate brush）。</p>
-<h1 id="时间的计数"><a href="#时间的计数" class="headerlink" title="时间的计数"></a>时间的计数</h1><p>d3.time.dayOfYear(date) 返回参数date是一年里的第几天，1月1日是第0天。<br>weekOfYear….等等函数也是有的，需要用的时候可以查查API，省的写闰年的判断，嘿嘿。</p>
-<h1 id="布局"><a href="#布局" class="headerlink" title="布局"></a>布局</h1><p>Stack(layers【,index】),让我记忆最深，之前做一个项目的时候，就不知道有这东西存在，愣是自己实现了一遍，麻烦不说,对不对可能还一定.</p>
-<h1 id="地理"><a href="#地理" class="headerlink" title="地理"></a>地理</h1><p>地理的API这块我很陌生,没有什么机会做这方面的项目,所以用的很少,后面有机会再来补充.</p>
-<h1 id="几何"><a href="#几何" class="headerlink" title="几何"></a>几何</h1><p>同样陌生的还有几何这部分的内容,比如四叉树/凸包/多边形/泰森多边形,记住这部分有就可以了,后面用过之后再来补充.</p>
-<h1 id="行为"><a href="#行为" class="headerlink" title="行为"></a>行为</h1><p>由zoom和drag两部分组成，很重要却很简单的内容，希望好好掌握。</p>
+        <h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1><p>上一篇博客<a href="http://zhihaozhang.github.io/2018/07/16/buy-house/">魔都买房杂记(上)</a>写完分享以来，我只在朋友圈进行了分享，得到了近300次的阅读，要知道，我微信好友一共才<em>400</em>人。虽然可能存在某些好友多次阅读了这个文章的现象，但还是不难看出<strong>楼市</strong>的受关注度，毕竟它挑动着很多人的<strong>神经</strong>，每个人都迟早是有一块地方要安定下来的。</p>
+<p>在写这篇博客的时候，我已经走完了剩下的几乎所有流程，完成了<strong>草签</strong>(合同与正式网签一样)，只剩下网签这最后一步了。这篇博客，我准备书接上文，将后续的流程写出来，方便读者就看到完整的新房购买过程;同时，将重点放在二手房的<strong>看房、选购</strong>和<strong>谈价</strong>技巧，和上文一样，由于我的<em>不专业性</em>，所提意见有强烈的<em>个人主观色彩</em>，也不接受质疑和撕逼，仅供大家参考。</p>
+<h1 id="选房后的签约"><a href="#选房后的签约" class="headerlink" title="选房后的签约"></a>选房后的签约</h1><p>签约有很多流程，由于我认购楼盘的房源比较多，需要打印的东西太多，即使10台打印机同事出动依然来不及。并且网签需要时间，而zf网签系统只在指定的时间段内开放，所以昨晚我经历的只能算是<strong>草签</strong>。</p>
+<p>草签和正式签差别并不大，所有合同都是一样的，只是为了<em>减少正式网签</em>的确认时间，过程还是需要<strong>仔细核对</strong>的，我在核对过程中就发现草签合同里把我购买的房屋售价<strong>写错</strong>了。</p>
+<p>需要签的合同非常多，而且通常至少是一式两份，如果嫌写名字太麻烦，也可以带<strong>个人印章</strong>。合同的细节非常多，这时候我不知道除了接受，还有没有argue的余地了。反正我是无脑的签完了，整个流程需要<strong>两个小时</strong>。</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79gy1fte9lrckdnj30r80qadh3.jpg" alt=""></p>
+<blockquote>
+<p>众多合同之一，其他涉及敏感信息的合同不宜展示</p>
+</blockquote>
+<p>草签最终合同之前，是需要付清<strong>除了贷款部分所有钱的</strong>。注意，只能刷个人名下的银行卡(最多两张)。由于金额太大，刷卡前最好跟银行客服确认好刷卡额度，现场排队的时候你再去跟人确认申请调整就太浪费时间了。付完钱后，注意<strong>一定</strong>要保留好pos机的票和<strong>收据</strong>。</p>
+<p>接下来就是等正式的网签通知啦~</p>
+<h1 id="二手房看房、选购、谈价"><a href="#二手房看房、选购、谈价" class="headerlink" title="二手房看房、选购、谈价"></a>二手房看房、选购、谈价</h1><p>坦率的讲，这批16年被捂的新盘开完后，上海未来三年内新房将会极少。这是由土拍市场决定的，而且后面zf想租售并举，所以买新房的机会真的<strong>不多</strong>了，有<strong>房票</strong>和<strong>火力</strong>的抓紧了。<br><img src="https://ws3.sinaimg.cn/large/006tNc79gy1fte9rsnspej30u60omgn3.jpg" alt=""></p>
+<p>我看的二手房也不少，也经历过几次与房东谈价格(包括面对面和电话谈价)，也小小的总结了一点点经验和教训，提供给有购买二手房打算的朋友做个参考。</p>
+<h2 id="二手房看房"><a href="#二手房看房" class="headerlink" title="二手房看房"></a>二手房看房</h2><p>二手房看房一般是需要提前预约的，守时很重要，因为对方交易也想找个靠谱、讲信用的人，而守时都不能做到，会大大减分。</p>
+<p>除此之外，我觉得二手房看房最需要注意是<strong>不卑不亢</strong>，在房东(包括中介)面前不要<strong>暴露</strong>出你的真实想法。在房东面前，<strong>尽量找他房子的一些缺点</strong>，比如<em>楼层不好、朝向不好、装修</em>不好等，<strong>暗示他你的房子并没有你想象的那么好</strong>，给后面的谈价<strong>留出足够的余地</strong>。之前就是有次在某个房东面前表现的太喜欢他房子了，最后跟他谈价没有成功，后面他以低于我报价的价格将房子售出了。</p>
+<p>如果真的是很喜欢，暗自窃喜就行，也不要表现出来，最多就说还行吧。如果真的不喜欢，那也好办，当房东面多说一些他的优点，出门后再也不联系就行。</p>
+<p>我发现我最开始看房最大的一个错误就是主要<strong>看装修了</strong>，其实装修好这事也不全是好处。房东会在总价里体现出来，而房屋的装修用料什么的需要时间来检验。其实看二手房，最主要看的是<strong>户型</strong>，户型好很重要，<em>装修其实没那么值钱</em>。有些装修一般的房子，售价要比<strong>号称“精装”</strong>的房子便宜非常多，那他的房子就显得性价比非常高了。</p>
+<p>之前有人说毛坯房最好，自己拿来想怎么装修就怎么装修。这点我非常认同，因为那种<strong>半吊子</strong>房屋你如果想重新装修，不得不先把之前装修处理掉，然后再进行重新装修，这个过程显然是比毛坯直接装修要<strong>麻烦</strong>的。</p>
+<p>觉得满意的房子，在正式进入谈价之前，需要<strong>做产调、确认房子无抵押、里面没有出过事。</strong></p>
+<p>总结：</p>
+<blockquote>
+<p>二手房<strong>看户型不看装修</strong>，通常 毛坯房 &gt; 简装房，<strong>真</strong>精装房根据与毛坯的溢价定，谈价前请中介做产调。</p>
+</blockquote>
+<h2 id="二手房谈价"><a href="#二手房谈价" class="headerlink" title="二手房谈价"></a>二手房谈价</h2><p>二手房谈价是个技术活，一般是由中介进行<strong>初步沟通</strong>的。比如这个房子你想以500万买到，你就应该告诉中介，我最多出480万，让他去跟房东进行沟通。房东一般是不同意的，会抛出一个价格，如果不高于520，那你们就可以坐下来面对面谈了，因为房东对中介也不会说出心里的底价，最终价格都是需要和真实的面对面商量的。</p>
+<p>有了上一步的铺垫，你抓住他房子的缺点，告诉他你出价的理由(列缺点)，如果对方态度友好，最后能达到你的心理预期价格，你就装作免为其难的<strong>接受</strong>吧，毕竟人都有贪小便宜的缺点，愉快的成交就行。如果实在不行，而且你又很想得到这个房子，那就看加价的幅度能不能承受。</p>
+<p>谈价分为税费各付价和买房付价，其实差别也不大，羊毛还是出在羊身上。这种重要的事情最好是能够当面坐下来谈，如果谈到价格低于你的心理预期了，可以付个十万二十万定金，防止房东<strong>反悔</strong>。</p>
+<h2 id="对中介的态度"><a href="#对中介的态度" class="headerlink" title="对中介的态度"></a>对中介的态度</h2><p>买二手房，选中介真的很重要，好的中介推荐的房子靠谱，而且砍价多，做事稳妥。站在中介的立场上考虑，他最希望的就是卖家和买家尽快成交，他好去搞定新的客户，最怕把战线拖的太长了。</p>
+<p>一般中介不会特别<strong>偏袒</strong>买家或者卖家，他能迅速找到一个价格，让买卖双方都能接受，拿到中介费，对他来说是最重要的。在中介面前也需要有所保留，不能把你心里的真实想法和价格告诉他。极端情况下，你甚至可以给中介<strong>悬赏</strong>，比如上面的例子，你告诉他如果他能把价格搞到480万，你另给5万他作为奖励，这样他就会<strong>有动力</strong>去跟房东砍价，中介的口才一般是比你好的多的。如果最终他做到了，你也以485万(低于心理预期的500万)成交了；如果他没有做到，有了上面中介与房东的砍价过程，一般你后面再谈价会顺利一些。</p>
+<p>如果价格合适，双方都能接受，下面就是谈中介费了。很遗憾，我没能走到这一步，因此不能给出太多有效建议，但是上海的中介一般会要求你给房屋售价的<strong>2%</strong>，从我身边朋友了解到的情况来看，通常最终都在<strong>1.4%-1.6%</strong>之间，这里推荐<strong>正规的大中介(如链家)</strong>。</p>
+<h1 id="市区二手小房子和郊区大房子怎么选"><a href="#市区二手小房子和郊区大房子怎么选" class="headerlink" title="市区二手小房子和郊区大房子怎么选"></a>市区二手小房子和郊区大房子怎么选</h1><p>写在前面:如果你资金足够，市区成熟的<em>学区、医院和商场</em>还是会给你的生活带来很多便利。这个章节主要是给预算<strong>不那么足</strong>的人看的。</p>
+<p>选购市区二手房的主要原因可能还是由于它的<em>地段好，周边配套比较齐全</em>。相比于郊区的房子，市区的二手房更为<strong>保值</strong>，这点是毋庸置疑的。保值是指大环境不好，万一房价下跌时候，市区价格表现更为坚挺;但是对于房价上涨，升值空间就不好说了，由于市区配套已经很齐全了，周边配套暂时不全的郊区完善后带来的利好，市区是享受不到的。</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79gy1fte4z3bv7pj308c0ckglz.jpg" alt=""></p>
+<blockquote>
+<p>1997年从东方明珠上俯瞰陆家嘴</p>
+</blockquote>
+<p>1997年从东方明珠上俯瞰陆家嘴，是上图的场景，从图片中看，还不如现在的郊区。你会投资吗？房子买的是未来，买配套成熟的不叫<strong>投资</strong>，只能叫<strong>储蓄</strong>。</p>
+<p>郊区空气好，环境好，也相对比较安静。但某些郊区可能会有<strong>飞机</strong>经过、<strong>高铁</strong>经过，距离<em>垃圾焚烧厂、变电站</em>等对人体不利的功能场所比较近。</p>
+<h1 id="最后的感悟"><a href="#最后的感悟" class="headerlink" title="最后的感悟"></a>最后的感悟</h1><p>其实在大城市买房，是需要<em>两代</em>(<em>甚至三代人</em>)的努力的，知乎上经常有问题问该不该掏空6个钱包来买房这种问题。大部分的回答是趋同的，即<em>应该掏空买</em>。因为这样能让父辈和祖辈的资产更保值甚至升值，因为把钱投入到楼市，比起存到银行，已经是<strong>对抗通货膨胀</strong>很好的方法了。房贷也是这样，<strong>4.9%</strong>的基本利率，比起每年通货膨胀率的7%-9%来说，<strong>很赚</strong>，因此能多贷尽量多贷。毕竟国家肯一次性借给你这么多钱的机会，也就买房这一次。</p>
+<p>工薪阶层如果完全白手起家，是很难凑够首付的，正如上篇博客结尾梁老师微博说的那样，郊区买不也别拧巴，东南沿海城市了解一下，实在不行就回家找个能发挥先进经验的行业，<strong>给孩子铺个路。</strong></p>
+<h2 id="三代人的“美国梦”"><a href="#三代人的“美国梦”" class="headerlink" title="三代人的“美国梦”"></a>三代人的“美国梦”</h2><p>文末，我写两个故事。第一个是美国<strong>华裔</strong>前商务部部长骆家辉的故事。骆家辉先生的祖父<strong>1880</strong>年去到美国，从一名仆人做起，学习语言同时挣钱，而后回到中国组建家庭。在骆家辉的父亲12岁时，祖父又把一家人带回了美国。骆家辉父亲像半个ABC一样，在美国度过了青少年时光，成年后参军并参加了第二次世界大战，还参与了诺曼底登陆。随后，他的父亲也像祖父一样，回到香港组建了家庭，最后再次举家回到美国，定居西雅图。</p>
+<p>骆家辉记得，在自己幼儿园时期，母亲也在为了成为美国公民学习英语。除了学习语言，父母还做了一些小生意维持生计。不管做什么，他很清楚的认识到，家庭的重心，父母的重心，都放在三件事情上：<strong>第一，获得优良的教育；第二，努力奋斗；第三相互扶持。</strong></p>
+<p>他的父母和中国大多数父母一样，节俭的生活，即使再穷也没有穷子女的教育，为的就是让他们能够过上更好的生活，抓住更多的机遇。正是因为如此，骆家辉先生成为了美国历史上第一位美国本土的亚裔州长和第一位华裔州长。</p>
+<p><img src="https://gss0.bdstatic.com/94o3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike80%2C5%2C5%2C80%2C26/sign=920aeb7fbe096b63951456026d5aec21/b03533fa828ba61e309fe47f4134970a304e5968.jpg" alt=""></p>
+<blockquote>
+<p>在就职典礼上，他开玩笑说，州长宅邸距离自己祖父曾经帮佣的那间房子只有一英里的距离，但是他们家族花了100年时间才走完这段路。</p>
+</blockquote>
+<h2 id="《神秘的西夏》"><a href="#《神秘的西夏》" class="headerlink" title="《神秘的西夏》"></a>《神秘的西夏》</h2><p>还有一个类似的故事是我最近看的一部央视纪录片《神秘的西夏》，讲的是西夏的开国皇帝<strong>李元昊</strong>在祖父李继迁和父亲<strong>李德明</strong>长达数十年积攒实力后，<strong>称帝</strong>并和建立了与宋、辽三分天下的百年基业。</p>
+<p><img src="https://gss2.bdstatic.com/9fo3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike80%2C5%2C5%2C80%2C26/sign=4720b4d9b6b7d0a26fc40ccfaa861d6c/50da81cb39dbb6fdb8723d4d0d24ab18972b37b4.jpg" alt=""></p>
+<p>神秘的西夏这部纪录片，是由央视出品的诚意之作，涉及了<em>文化、经济、政治、军事</em>等很多方面，看完这部纪录片我懂了很多，历史就是不断重复的人性，很多道理和规律放到今天还是这样，强烈建议感兴趣的朋友可以去看看。</p>
+<h2 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h2><p>买房这段时间我一直在想，我的<strong>成长过程</strong>和我的孩子将来会怎么样。</p>
+<p>我出生于江苏<strong>四线</strong>城市(的镇子上)，从小少有人管，属于完全的<strong>放养</strong>状态。由于父母比较忙，我经常是只能放了学玩到天黑，饿到不行才到隔壁老爷爷家吃上口饭。虽然贪玩，但我还算自觉，基本能坚持做到先做完作业再玩。初到大学，我发现周围的同学都有很多才艺，而我却没有什么拿得出手的才艺。我从未抱怨过，我觉得农民身上的<strong>纯朴</strong>是千金难换的。</p>
+<p>我预感到我孩子将来的成长环境同比会比我好一些，可能也会像很多城里孩子那样接受很多种类的学前班、兴趣班。另外，优秀小学也是个资源，这就是<strong>学区房</strong>售价高的主要原因，但是由于预算不够，暂时不能给他提供好的学区。</p>
+<p>上一辈总是希望下一辈能够过的比自己好，因为下一辈总是站在上一辈的肩膀上。和平年代，那种<strong>朝为田舍郎，暮登天子堂</strong>的情况几乎不可能发生，某一代人突然成为行业的领袖、一飞冲天，概率也并不是很大。大部分家庭是需要一代人接着上一代人进行<strong>扎实努力</strong>，<em>扶摇向上</em>的。最后希望大家日子都能越过越好，家族越来越兴旺，一代更比一代强!</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1fte9nruvz2j30u01sz78m.jpg" alt=""></p>
+<blockquote>
+<p>我未来的家(总高16楼的12楼)</p>
+</blockquote>
+<p>——————————————<strong>谨以此文献给我的亲人们</strong>——————————————</p>
 
 
             <! -- 添加捐赠图标 -->
@@ -177,18 +215,11 @@
     <!-- 前后页  -->
     <ul class="post-pager">
         
-            <li class="next">
-                <a href= "/2014/11/15/associate brush/" title= associate brush >
-                    <span>Next Post</span>
-                    <span>associate brush</span>
-                </a>
-            </li>
-        
         
             <li class="previous">
-                <a href= "/2014/11/15/D3 on Angular/" title= D3 on Angular >
+                <a href= "/2018/07/16/buy-house/" title= 魔都买房杂记(上) >
                     <span>Previous Post</span>
-                    <span>D3 on Angular</span>
+                    <span>魔都买房杂记(上)</span>
                 </a>
             </li>
         
