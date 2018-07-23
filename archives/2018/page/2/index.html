@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
     <title>
         
-        GoBACKSPACE————致敬Go2Shell的Finder插件 · Zhihao&#39;s Studio
+        Zhihao&#39;s Studio
         
     </title>
     <link rel="icon" href= /assests/favicon.ico>
@@ -68,22 +68,11 @@
     
 </head>
     
-        <body class="post-body">
-    
     
 <header class="header">
 
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
-    
-    <div class="banner">
-            <div class="blog-title">
-                <a href="/" >Zhihao&#39;s Studio.</a>
-            </div>
-            <div class="post-title">
-                <a href="#" class="post-name">GoBACKSPACE————致敬Go2Shell的Finder插件</a>
-            </div>
-    </div>
     
     <a class="home-link" href=/>Zhihao's Studio.</a>
 </header>
@@ -91,151 +80,67 @@
         <div class="site-intro">
     
     <!-- 主页  -->
-    
-    
-    <!-- 404页  -->
             
-    <div class="site-intro-img" style="background-image: url(http://oumn0o088.bkt.clouddn.com/post-bg.jpg)"></div>
+    <div class="site-intro-img" style="background-image: url(/)"></div>
     <div class="site-intro-placeholder"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            GoBACKSPACE————致敬Go2Shell的Finder插件
-            <!-- 404 -->
-            
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
-            
-        </p>
-        <!-- 404 -->
-        
         <!-- 文章页meta -->
-        
-            <!-- 文章页标签  -->
-            
-                <div class= post-intro-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = macOS开发>macOS开发</a>
-    
-</div>
-            
-            <div class="post-intro-meta">
-                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                <span class="post-intro-time">2018/04/17</span>
-            </div>
         
     </div>
 </div>
         <div class="container">
-            <main class="main post-page">
-    <article class="article-entry">
-        <p>仅以此项目<strong>向Go2Shell致敬</strong>、也庆祝Github10周年生日快乐，整个项目开源于<a href="https://github.com/zhihaozhang/GoBACKSPACE" target="_blank" rel="external">Github</a>，直接想用的朋友可以去<a href="https://pan.baidu.com/s/1EhGCUSVwVk1oXUCwbMfa5w" target="_blank" rel="external">百度网盘</a>下载。</p>
-<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>在macOS系统中，<strong>Finder</strong>(中文被官方译为访达)扮演着文件管理器的角色。在大多数场景下，Finder还是挺好用的，但是有一点让我很抓狂，那就是我在Finder视图中发现了一个文件或文件夹，想去它的父级目录时比较麻烦，因为Finder工具栏左边的&lt; &gt;按钮经常是灰色的，而且也只是能记录着你之前访问过的文件路径历史，有点类似于safari里访问过网页的历史。</p>
-<p><img src="https://ws3.sinaimg.cn/large/006tKfTcgy1fqfyhfema8j3096050wei.jpg" alt=""></p>
-<blockquote>
-<p>Finder(访达)的工具栏截图 (&lt; &gt;为灰色)，蓝色指南针为GoBACKSPACE</p>
-</blockquote>
-<p>macOS的Finder只帮你记录了按时间先后访问过的文件地址，<strong>这意味着按&lt;键并不一定意味着去父级文件夹，它只表示是你之前访问过的文件夹。</strong> 更多情况下，&lt;和&gt;按键是灰色的，不让按的状态。</p>
-<p>而GoBACKSPACE的出现将彻底改变这一现状，GoBACKSPACE可以做到的就是让你在文件的<strong>绝对</strong>路径关系之间浏览文件。主要需要解决的绝对路径去父文件夹的功能，因为去子文件夹只需要靠双击操作即可。我觉得<strong>绝对</strong>路径关系是更符合我思考的一种方式。去父文件夹这件事还是经常发生的，比如你在一个项目视图下，想去父目录将整个项目删除或AirDrop分享给其他人；搜索到了一张照片，想将该目录下所有照片打包等…</p>
-<p>由于GoBACKSPACE和Finder之间的关系紧密，把它做成一个类似Go2Shell那样的插件是更好的选择；考虑到GoBACKSPACE的开发初衷是帮助用户更好的在不同文件夹间切换，因此这里选用了一个指南针作为logo，乍一看跟safari的图标好像，估计上架时会被苹果喷。看着旁边的Go2Shell，竟毫无违和感。</p>
-<p>希望至此，读者已经明白了我<strong>为什么</strong>要开发GoBACKSPACE。</p>
-<h1 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h1><p>首先要下载这个软件，我将安装文件打包上传到了<a href="https://pan.baidu.com/s/1EhGCUSVwVk1oXUCwbMfa5w" target="_blank" rel="external">百度网盘</a>，无需密码即可下载。</p>
-<p>为了帮助读者将GoBACKSPACE添加到Finder工具栏，我做了一个Gif如下。</p>
-<p><img src="https://ws1.sinaimg.cn/large/006tKfTcgy1fqfwji6347g30go0dekjm.gif" alt=""></p>
-<blockquote>
-<p>将GoBACKSPACE添加到Finder工具栏的方法</p>
-</blockquote>
-<p>一次添加即可，无需重复添加，使用它的时候，需要两个步骤：</p>
-<ul>
-<li>步骤1：点击icon</li>
-<li>步骤2：<strong>没有步骤2!!</strong></li>
-</ul>
-<p><img src="https://ws3.sinaimg.cn/large/006tKfTcgy1fqfxcspvfig30go09lqv5.gif" alt="App icon"></p>
-<blockquote>
-<p>插件的最终效果demo</p>
-</blockquote>
-<h1 id="核心功能的实现"><a href="#核心功能的实现" class="headerlink" title="核心功能的实现"></a>核心功能的实现</h1><p>本项目的需求是我个人的真实需求，实现的时候参考了PathToGo这个项目，该项目返回上层使用了<strong>AppleScript</strong>，苹果自己的脚本语言，并使用Swift与之进行交互，返回脚本执行成功与否；并根据脚本的执行情况给用户弹toast，以免在最顶层目录时，不能继续往父级目录前进给用户带来困扰。</p>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">tell</span> <span class="built_in">application</span> <span class="string">"Finder"</span></div><div class="line">	<span class="keyword">set</span> currentPath <span class="keyword">to</span> <span class="keyword">POSIX path</span> <span class="keyword">of</span> (target <span class="keyword">of</span> window <span class="number">1</span> <span class="keyword">as</span> <span class="built_in">alias</span>)</div><div class="line">	<span class="keyword">set</span> myArray <span class="keyword">to</span> <span class="keyword">my</span> theSplit(currentPath, <span class="string">"/"</span>)</div><div class="line">	<span class="keyword">set</span> lengthOfArray <span class="keyword">to</span> <span class="keyword">the</span> <span class="built_in">length</span> <span class="keyword">of</span> myArray</div><div class="line">	<span class="keyword">set</span> the_path <span class="keyword">to</span> <span class="string">""</span> <span class="keyword">as</span> <span class="built_in">string</span></div><div class="line">	</div><div class="line">	<span class="keyword">if</span> lengthOfArray ≤ <span class="number">3</span> <span class="keyword">then</span></div><div class="line"><span class="built_in">		return</span> <span class="string">"fail"</span></div><div class="line">	<span class="keyword">else</span></div><div class="line">		<span class="keyword">set</span> lengthOfNewArray <span class="keyword">to</span> (lengthOfArray - <span class="number">2</span>)</div><div class="line">		<span class="keyword">set</span> parentPath <span class="keyword">to</span> items <span class="number">2</span> <span class="keyword">through</span> lengthOfNewArray <span class="keyword">of</span> myArray</div><div class="line">		</div><div class="line">		<span class="keyword">repeat</span> <span class="keyword">with</span> anItem <span class="keyword">in</span> parentPath</div><div class="line">			<span class="keyword">set</span> the_path <span class="keyword">to</span> the_path &amp; <span class="string">"/"</span> &amp; anItem</div><div class="line">		<span class="keyword">end</span> <span class="keyword">repeat</span></div><div class="line">		<span class="keyword">set</span> the_path <span class="keyword">to</span> the_path &amp; <span class="string">"/"</span></div><div class="line">		<span class="comment">-- go2Parent(the_path)</span></div><div class="line">		<span class="keyword">set</span> the_folder <span class="keyword">to</span> (<span class="keyword">POSIX file</span> the_path) <span class="keyword">as</span> <span class="built_in">alias</span></div><div class="line">		<span class="keyword">tell</span> <span class="built_in">application</span> <span class="string">"Finder"</span></div><div class="line">			<span class="built_in">activate</span></div><div class="line">			<span class="keyword">if</span> window <span class="number">1</span> exists <span class="keyword">then</span></div><div class="line">				<span class="keyword">set</span> target <span class="keyword">of</span> window <span class="number">1</span> <span class="keyword">to</span> the_folder</div><div class="line">			<span class="keyword">else</span></div><div class="line">				reveal the_folder</div><div class="line">			<span class="keyword">end</span> <span class="keyword">if</span></div><div class="line">		<span class="keyword">end</span> <span class="keyword">tell</span></div><div class="line">		</div><div class="line"><span class="built_in">		return</span> <span class="string">"OK"</span></div><div class="line">		</div><div class="line">		</div><div class="line">	<span class="keyword">end</span> <span class="keyword">if</span></div><div class="line">	</div><div class="line"><span class="built_in">	return</span> myArray</div><div class="line"><span class="keyword">end</span> <span class="keyword">tell</span></div><div class="line"></div><div class="line"><span class="keyword">on</span> theSplit(theString, theDelimiter)</div><div class="line">	<span class="comment">-- save delimiters to restore old settings</span></div><div class="line">	<span class="keyword">set</span> oldDelimiters <span class="keyword">to</span> <span class="literal">AppleScript</span>'s <span class="literal">text item delimiters</span></div><div class="line">	<span class="comment">-- set delimiters to delimiter to be used</span></div><div class="line">	<span class="keyword">set</span> <span class="literal">AppleScript</span>'s <span class="literal">text item delimiters</span> <span class="keyword">to</span> theDelimiter</div><div class="line">	<span class="comment">-- create the array</span></div><div class="line">	<span class="keyword">set</span> theArray <span class="keyword">to</span> <span class="keyword">every</span> <span class="built_in">text</span> <span class="built_in">item</span> <span class="keyword">of</span> theString</div><div class="line">	<span class="comment">-- restore the old setting</span></div><div class="line">	<span class="keyword">set</span> <span class="literal">AppleScript</span>'s <span class="literal">text item delimiters</span> <span class="keyword">to</span> oldDelimiters</div><div class="line">	<span class="comment">-- return the result</span></div><div class="line"><span class="built_in">	return</span> theArray</div><div class="line"><span class="keyword">end</span> theSplit</div></pre></td></tr></table></figure>
-<p>AppleScript的逻辑是将当前Finder视图的路径返回，然后将这个路径以”/”进行分割，并根据返回数组的长度，去掉最后两个元素，形成新的路径，让AppleScript控制Finder将当前页面替换为新的文件夹路径，由于AppleScript的原生性，体验还是非常顺滑的。</p>
-<p>Toast的出现和消除添加了动画，且动画的时间都是可以设置的，实现于ToastWindowController.swift文件中，感兴趣的读者可以去将项目clone下来看看，我觉得这个部分可以单独抽出去成为一个小轮子，也来源于PathToGO。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
-<li><a href="https://github.com/HansonStudio/PathToGo" target="_blank" rel="external">PathToGO</a></li>
-<li><a href="https://www.flaticon.com" target="_blank" rel="external">flaticon</a></li>
-<li><a href="https://segmentfault.com/a/1190000011273388" target="_blank" rel="external">AppleScript教程1</a></li>
-<li><a href="http://erikslab.com/2007/08/31/applescript-how-to-split-a-string/" target="_blank" rel="external">Erik’s Lab</a></li>
-</ul>
+            <main class="main index-page">
+    
+    
+    
+        <article class="index-post">
+            <a class="content-show-full" href = "/2018/01/16/FileHider/" >
+                    <h2 class="abstract-title">
+                        
+                        <span>AVHider for macOS开发笔记</span>
+                    </h2>
+                <div class="abstract-content">
+                    软件介绍AVHider （oh NO） FileHider是一款将你的文件夹或文件隐藏起来的效率软件，适用于macOS X 10.10及以后的macOS版本。百度网盘下载地址,欢迎大家试用，并提出改进建议！有开发能力的朋友也可以去Github将项目fork后contribute您的code。
 
 
-            <! -- 添加捐赠图标 -->
-    <div class ="post-donate">
-    <div id="donate_board" class="donate_bar center">
-        <a id="btn_donate" class="btn_donate" href="javascript:;" title="打赏"></a>
+Specially thanks to unfamous Designer Joseph, who designed the exquisite logo for this Application!
 
-        <div style="text-align:center;color:#00F" >
-           
-        </div>
+软件的使用也非常简单，基本可以实现文件/文件夹的可见/不可见一键切换，录了一个gif动画。
 
-    <script type="text/javascript">
-        document.getElementById('btn_donate').onclick = function(){
-            $('#donate_board').addClass('hidden');
-            $('#donate_guide').removeClass('hidden');
-        }
-    </script>
+...
+                </div>
+            </a>
+            <div class="abstract-post-meta">
+                <!-- tags  -->
+                
+                <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = macOS开发>macOS开发</a>
+    
 </div>
-<! -- 添加捐赠图标 -->
-    </article>
-    <!-- 前后页  -->
-    <ul class="post-pager">
-        
-            <li class="next">
-                <a href= "/2018/05/09/swift5/" title= Swift5 新特性了解一下？ >
-                    <span>Next Post</span>
-                    <span>Swift5 新特性了解一下？</span>
-                </a>
-            </li>
-        
-        
-            <li class="previous">
-                <a href= "/2018/02/10/turingCal/" title= 极客编程日历桌面版开发笔记 >
-                    <span>Previous Post</span>
-                    <span>极客编程日历桌面版开发笔记</span>
-                </a>
-            </li>
-        
-    </ul>
-
-
-
-    <!-- 来必力City版安装代码 -->
-<div id="lv-container" data-id="city" data-uid="MTAyMC8zMTAyMC83NTY5">
-    <script type="text/javascript">
-   (function(d, s) {
-       var j, e = d.getElementsByTagName(s)[0];
-
-       if (typeof LivereTower === 'function') { return; }
-
-       j = d.createElement(s);
-       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-       j.async = true;
-
-       e.parentNode.insertBefore(j, e);
-   })(document, 'script');
-    </script>
-<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
-</div>
-<!-- City版安装代码已完成 -->
-
-
-    <div style="text-align:center">
-    <span id="busuanzi_container_page_pv" >
-        本文总阅读量<span id="busuanzi_value_page_pv"></span>次
-    </span>
-    </div>
+                
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2018/01/16</span>
+                </div>
+            </div>
+        </article>
+    
+    <!-- paginator  -->
+    
+    <nav class="page-nav">
+        <a class="extend prev" rel="prev" href="/archives/2018/">#PREV</a><a class="page-number" href="/archives/2018/">1</a><span class="page-number current">2</span>
+    </nav>
+    
 </main>
             <!-- profile -->
             

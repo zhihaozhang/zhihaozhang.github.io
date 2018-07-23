@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
     <title>
         
-        GoBACKSPACE————致敬Go2Shell的Finder插件 · Zhihao&#39;s Studio
+        Match for iPhone开发笔记 &lt;二&gt; 网络请求和数据流篇 · Zhihao&#39;s Studio
         
     </title>
     <link rel="icon" href= /assests/favicon.ico>
@@ -81,7 +81,7 @@
                 <a href="/" >Zhihao&#39;s Studio.</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">GoBACKSPACE————致敬Go2Shell的Finder插件</a>
+                <a href="#" class="post-name">Match for iPhone开发笔记 <二> 网络请求和数据流篇</a>
             </div>
     </div>
     
@@ -102,7 +102,7 @@
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            GoBACKSPACE————致敬Go2Shell的Finder插件
+            Match for iPhone开发笔记  网络请求和数据流篇
             <!-- 404 -->
             
         </h1>
@@ -120,13 +120,13 @@
             
                 <div class= post-intro-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-href = macOS开发>macOS开发</a>
+        <a class="post-tag" href="javascript:void(0);" data-href = iOS开发>iOS开发</a>
     
 </div>
             
             <div class="post-intro-meta">
                 <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                <span class="post-intro-time">2018/04/17</span>
+                <span class="post-intro-time">2018/07/23</span>
             </div>
         
     </div>
@@ -134,41 +134,44 @@
         <div class="container">
             <main class="main post-page">
     <article class="article-entry">
-        <p>仅以此项目<strong>向Go2Shell致敬</strong>、也庆祝Github10周年生日快乐，整个项目开源于<a href="https://github.com/zhihaozhang/GoBACKSPACE" target="_blank" rel="external">Github</a>，直接想用的朋友可以去<a href="https://pan.baidu.com/s/1EhGCUSVwVk1oXUCwbMfa5w" target="_blank" rel="external">百度网盘</a>下载。</p>
-<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>在macOS系统中，<strong>Finder</strong>(中文被官方译为访达)扮演着文件管理器的角色。在大多数场景下，Finder还是挺好用的，但是有一点让我很抓狂，那就是我在Finder视图中发现了一个文件或文件夹，想去它的父级目录时比较麻烦，因为Finder工具栏左边的&lt; &gt;按钮经常是灰色的，而且也只是能记录着你之前访问过的文件路径历史，有点类似于safari里访问过网页的历史。</p>
-<p><img src="https://ws3.sinaimg.cn/large/006tKfTcgy1fqfyhfema8j3096050wei.jpg" alt=""></p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>书接<a href="http://zhihaozhang.github.io/2018/07/11/Match/">上文</a>,作为一个<strong>数据驱动</strong>(<em>Data driven</em>)类型的APP,如何从服务器端<em>获取到数据</em>并<strong>尽量少</strong>的减少请求次数是一个非常重要的点，甚至被定为<strong>最重要</strong>的一点也不为过。这篇博客将介绍我在做Match这个应用过程中使用到的技术以及优化的方法。</p>
+<h1 id="网络请求库"><a href="#网络请求库" class="headerlink" title="网络请求库"></a>网络请求库</h1><h2 id="Alamofire、Moya和Just"><a href="#Alamofire、Moya和Just" class="headerlink" title="Alamofire、Moya和Just"></a>Alamofire、Moya和Just</h2><p>现有的网络请求库非常多，从OC时代<em>大名鼎鼎</em>的<strong><a href="https://github.com/AFNetworking/AFNetworking" target="_blank" rel="external">AFNetworking</a></strong>到Swift时代的<strong><a href="https://github.com/Alamofire/Alamofire" target="_blank" rel="external">Alamofire</a></strong>及它的进一步封装<em>Moya</em>,他们都是对苹果网络层URLSession的封装，且有着相似的目的<strong>：将网络请求从ViewController中解耦出去。</strong>ViewController中如果混杂了太多的网络请求的<strong>构建</strong>、<strong>发送</strong>、<strong>响应接收</strong>、<strong>响应请求的处理</strong>，会使得ViewController非常<strong>臃肿</strong>，不利于代码维护。</p>
+<p><img src="https://moya.github.io/web/diagram.png" alt=""></p>
 <blockquote>
-<p>Finder(访达)的工具栏截图 (&lt; &gt;为灰色)，蓝色指南针为GoBACKSPACE</p>
+<p>Moya在Alamofire的基础上进一步对网络请求进行了封装，使网络请求更容易</p>
 </blockquote>
-<p>macOS的Finder只帮你记录了按时间先后访问过的文件地址，<strong>这意味着按&lt;键并不一定意味着去父级文件夹，它只表示是你之前访问过的文件夹。</strong> 更多情况下，&lt;和&gt;按键是灰色的，不让按的状态。</p>
-<p>而GoBACKSPACE的出现将彻底改变这一现状，GoBACKSPACE可以做到的就是让你在文件的<strong>绝对</strong>路径关系之间浏览文件。主要需要解决的绝对路径去父文件夹的功能，因为去子文件夹只需要靠双击操作即可。我觉得<strong>绝对</strong>路径关系是更符合我思考的一种方式。去父文件夹这件事还是经常发生的，比如你在一个项目视图下，想去父目录将整个项目删除或AirDrop分享给其他人；搜索到了一张照片，想将该目录下所有照片打包等…</p>
-<p>由于GoBACKSPACE和Finder之间的关系紧密，把它做成一个类似Go2Shell那样的插件是更好的选择；考虑到GoBACKSPACE的开发初衷是帮助用户更好的在不同文件夹间切换，因此这里选用了一个指南针作为logo，乍一看跟safari的图标好像，估计上架时会被苹果喷。看着旁边的Go2Shell，竟毫无违和感。</p>
-<p>希望至此，读者已经明白了我<strong>为什么</strong>要开发GoBACKSPACE。</p>
-<h1 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h1><p>首先要下载这个软件，我将安装文件打包上传到了<a href="https://pan.baidu.com/s/1EhGCUSVwVk1oXUCwbMfa5w" target="_blank" rel="external">百度网盘</a>，无需密码即可下载。</p>
-<p>为了帮助读者将GoBACKSPACE添加到Finder工具栏，我做了一个Gif如下。</p>
-<p><img src="https://ws1.sinaimg.cn/large/006tKfTcgy1fqfwji6347g30go0dekjm.gif" alt=""></p>
+<p>考虑到Alamofire和Moya引入的成本较高，我发现了另一个更容易上手的库，名字也很酷，叫<a href="https://github.com/JustHTTP/Just" target="_blank" rel="external">Just</a>,名字就感觉<strong>屌屌</strong>的，用起来也是出奇的好用，调用<em>GET/POST</em>请求<strong>Just</strong>需要一行代码，</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//  get request</span></div><div class="line"><span class="type">Just</span>.<span class="keyword">get</span>(<span class="string">"http://httpbin.org/get"</span>)</div><div class="line"></div><div class="line"><span class="comment">//  post request</span></div><div class="line"><span class="type">Just</span>.post(</div><div class="line">    <span class="string">"http://justiceleauge.org/member/register"</span>,</div><div class="line">    data: [<span class="string">"username"</span>: <span class="string">"barryallen"</span>, <span class="string">"password"</span>:<span class="string">"ReverseF1ashSucks"</span>],</div><div class="line">    files: [<span class="string">"profile_photo"</span>: .<span class="type">URL</span>(fileURLWithPath:<span class="string">"flash.jpeg"</span>, <span class="literal">nil</span>)]</div><div class="line">) &#123; r <span class="keyword">in</span></div><div class="line">    <span class="keyword">if</span> r.ok &#123; <span class="comment">/* success! */</span> &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>但由于这个项目已经1年多没人维护了，只支持到了Swift 3，在github上发现一堆Swift 4的issue list，因此不得不再寻找其他网络请求库。这时候，<a href="https://github.com/daltoniam/SwiftHTTP" target="_blank" rel="external">SwiftHTTP</a>出现，并成了我最终的选择。</p>
+<h2 id="SwiftHTTP成了最终的选择"><a href="#SwiftHTTP成了最终的选择" class="headerlink" title="SwiftHTTP成了最终的选择"></a>SwiftHTTP成了最终的选择</h2><p>SiwftHTTP有着和Just类似的简洁语法，能做到一行代码解决HTTP请求。对需要快速完成整个APP开发的我来说，它能够做到<em>构建请求并发送</em>、<em>接收响应并处理</em>，加上它的体积小、用法简单，简直就是<strong>简单、可依赖</strong>最好的诠释。当然，Alamofire和Moya存在的价值是不可否定的。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/4/3/16288fa6039c2696?imageView2/0/w/1280/h/960/ignore-error/1" alt=""></p>
 <blockquote>
-<p>将GoBACKSPACE添加到Finder工具栏的方法</p>
+<p>网络请求库的简单流程</p>
 </blockquote>
-<p>一次添加即可，无需重复添加，使用它的时候，需要两个步骤：</p>
-<ul>
-<li>步骤1：点击icon</li>
-<li>步骤2：<strong>没有步骤2!!</strong></li>
-</ul>
-<p><img src="https://ws3.sinaimg.cn/large/006tKfTcgy1fqfxcspvfig30go09lqv5.gif" alt="App icon"></p>
+<h2 id="SwiftHTTP响应的处理"><a href="#SwiftHTTP响应的处理" class="headerlink" title="SwiftHTTP响应的处理"></a>SwiftHTTP响应的处理</h2><p>网络请求的响应都是二进制数据，具体到iOS，是NSData类型的数据，因此需要将响应结果进行<strong>编码</strong>。比如拿到的结果是一张图片，在你用<strong>UIImage</strong>对其<em>编码(decode)</em>之前，在计算机看来，它跟其他音频、视频甚至字符串没有什么俩样，都是一串二进制数。</p>
+<p>有过网络方面开发经验的朋友都知道，无论是响应还是请求，除了我们最想要数据部分(<em>请求体</em>)，还有额外的<strong>开销(头部)</strong>，他们告诉你这段请求成功了没有、什么原因没有成功、请求从哪里来、到哪里去，真正有用的部分其实只占了一部分。这也是为什么需要尽量减少网络请求次数的原因，因为这些<strong>额外</strong>的部分，也是会带来大量<strong>开销</strong>的。网络请求次数太多难免造成应用卡顿，使得用户体验较差。</p>
+<p>具体到SwiftHTTP，我获取到的相应体可能是一个<strong>String</strong>、一个<strong>Int</strong>值、一个<strong>Double</strong>值，更多的时候，是一个<em>对象**</em>(Object)**，我们需要根据和后端开发者的约定，将其进行正确编码。对Object的编码是教为复杂的,示例如下:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"> <span class="type">HTTP</span>.<span class="type">POST</span>(servlet_path!+<span class="string">"/xxx"</span>)&#123; response <span class="keyword">in</span></div><div class="line">            <span class="keyword">if</span> <span class="keyword">let</span> error = response.error&#123;</div><div class="line">                <span class="built_in">print</span>(error)</div><div class="line">                <span class="keyword">return</span></div><div class="line">            &#125;</div><div class="line">            </div><div class="line">            <span class="keyword">do</span> &#123;</div><div class="line">                <span class="keyword">let</span> decoder = <span class="type">JSONDecoder</span>()</div><div class="line">                <span class="keyword">self</span>.user_history = <span class="keyword">try</span> decoder.decode(history.<span class="keyword">self</span>, from: r.data)</div><div class="line">            &#125;<span class="keyword">catch</span>&#123;</div><div class="line">                <span class="keyword">return</span></div><div class="line">            &#125;</div><div class="line">            </div><div class="line">        &#125;</div><div class="line">        </div><div class="line"></div><div class="line"><span class="comment">// history 遵从**Codable**</span></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">history</span> : **<span class="title">Codable</span>**</span>&#123;</div><div class="line">    </div><div class="line">    <span class="keyword">var</span> asked : [<span class="type">Int</span>]!</div><div class="line">    <span class="keyword">var</span> campaigning : [<span class="type">Int</span>]!</div><div class="line">    <span class="keyword">var</span> favourite : [<span class="type">Int</span>]!</div><div class="line">    <span class="keyword">var</span> phoneNumber : <span class="type">Int</span>!</div><div class="line">    <span class="keyword">var</span> replied : [<span class="type">Int</span>]!</div><div class="line">    <span class="keyword">var</span> tableIndex : <span class="type">Int</span>!</div><div class="line">    <span class="keyword">var</span> voting : [<span class="type">Int</span>]!</div><div class="line">    <span class="keyword">var</span> won : [<span class="type">Int</span>]!</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>相应的处理流程是先判断有没有错误，如果有错，直接返回；没有错误的前提下，使用SwiftyJSON中的JSONDecoder对Object进行编码，需要用do和catch<strong>包围</strong>，因为这一过程不保证一定能成功。</p>
 <blockquote>
-<p>插件的最终效果demo</p>
+<p>如果结果是数组，将<strong>history.self</strong>改为<strong>[history].self</strong>即可。</p>
 </blockquote>
-<h1 id="核心功能的实现"><a href="#核心功能的实现" class="headerlink" title="核心功能的实现"></a>核心功能的实现</h1><p>本项目的需求是我个人的真实需求，实现的时候参考了PathToGo这个项目，该项目返回上层使用了<strong>AppleScript</strong>，苹果自己的脚本语言，并使用Swift与之进行交互，返回脚本执行成功与否；并根据脚本的执行情况给用户弹toast，以免在最顶层目录时，不能继续往父级目录前进给用户带来困扰。</p>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">tell</span> <span class="built_in">application</span> <span class="string">"Finder"</span></div><div class="line">	<span class="keyword">set</span> currentPath <span class="keyword">to</span> <span class="keyword">POSIX path</span> <span class="keyword">of</span> (target <span class="keyword">of</span> window <span class="number">1</span> <span class="keyword">as</span> <span class="built_in">alias</span>)</div><div class="line">	<span class="keyword">set</span> myArray <span class="keyword">to</span> <span class="keyword">my</span> theSplit(currentPath, <span class="string">"/"</span>)</div><div class="line">	<span class="keyword">set</span> lengthOfArray <span class="keyword">to</span> <span class="keyword">the</span> <span class="built_in">length</span> <span class="keyword">of</span> myArray</div><div class="line">	<span class="keyword">set</span> the_path <span class="keyword">to</span> <span class="string">""</span> <span class="keyword">as</span> <span class="built_in">string</span></div><div class="line">	</div><div class="line">	<span class="keyword">if</span> lengthOfArray ≤ <span class="number">3</span> <span class="keyword">then</span></div><div class="line"><span class="built_in">		return</span> <span class="string">"fail"</span></div><div class="line">	<span class="keyword">else</span></div><div class="line">		<span class="keyword">set</span> lengthOfNewArray <span class="keyword">to</span> (lengthOfArray - <span class="number">2</span>)</div><div class="line">		<span class="keyword">set</span> parentPath <span class="keyword">to</span> items <span class="number">2</span> <span class="keyword">through</span> lengthOfNewArray <span class="keyword">of</span> myArray</div><div class="line">		</div><div class="line">		<span class="keyword">repeat</span> <span class="keyword">with</span> anItem <span class="keyword">in</span> parentPath</div><div class="line">			<span class="keyword">set</span> the_path <span class="keyword">to</span> the_path &amp; <span class="string">"/"</span> &amp; anItem</div><div class="line">		<span class="keyword">end</span> <span class="keyword">repeat</span></div><div class="line">		<span class="keyword">set</span> the_path <span class="keyword">to</span> the_path &amp; <span class="string">"/"</span></div><div class="line">		<span class="comment">-- go2Parent(the_path)</span></div><div class="line">		<span class="keyword">set</span> the_folder <span class="keyword">to</span> (<span class="keyword">POSIX file</span> the_path) <span class="keyword">as</span> <span class="built_in">alias</span></div><div class="line">		<span class="keyword">tell</span> <span class="built_in">application</span> <span class="string">"Finder"</span></div><div class="line">			<span class="built_in">activate</span></div><div class="line">			<span class="keyword">if</span> window <span class="number">1</span> exists <span class="keyword">then</span></div><div class="line">				<span class="keyword">set</span> target <span class="keyword">of</span> window <span class="number">1</span> <span class="keyword">to</span> the_folder</div><div class="line">			<span class="keyword">else</span></div><div class="line">				reveal the_folder</div><div class="line">			<span class="keyword">end</span> <span class="keyword">if</span></div><div class="line">		<span class="keyword">end</span> <span class="keyword">tell</span></div><div class="line">		</div><div class="line"><span class="built_in">		return</span> <span class="string">"OK"</span></div><div class="line">		</div><div class="line">		</div><div class="line">	<span class="keyword">end</span> <span class="keyword">if</span></div><div class="line">	</div><div class="line"><span class="built_in">	return</span> myArray</div><div class="line"><span class="keyword">end</span> <span class="keyword">tell</span></div><div class="line"></div><div class="line"><span class="keyword">on</span> theSplit(theString, theDelimiter)</div><div class="line">	<span class="comment">-- save delimiters to restore old settings</span></div><div class="line">	<span class="keyword">set</span> oldDelimiters <span class="keyword">to</span> <span class="literal">AppleScript</span>'s <span class="literal">text item delimiters</span></div><div class="line">	<span class="comment">-- set delimiters to delimiter to be used</span></div><div class="line">	<span class="keyword">set</span> <span class="literal">AppleScript</span>'s <span class="literal">text item delimiters</span> <span class="keyword">to</span> theDelimiter</div><div class="line">	<span class="comment">-- create the array</span></div><div class="line">	<span class="keyword">set</span> theArray <span class="keyword">to</span> <span class="keyword">every</span> <span class="built_in">text</span> <span class="built_in">item</span> <span class="keyword">of</span> theString</div><div class="line">	<span class="comment">-- restore the old setting</span></div><div class="line">	<span class="keyword">set</span> <span class="literal">AppleScript</span>'s <span class="literal">text item delimiters</span> <span class="keyword">to</span> oldDelimiters</div><div class="line">	<span class="comment">-- return the result</span></div><div class="line"><span class="built_in">	return</span> theArray</div><div class="line"><span class="keyword">end</span> theSplit</div></pre></td></tr></table></figure>
-<p>AppleScript的逻辑是将当前Finder视图的路径返回，然后将这个路径以”/”进行分割，并根据返回数组的长度，去掉最后两个元素，形成新的路径，让AppleScript控制Finder将当前页面替换为新的文件夹路径，由于AppleScript的原生性，体验还是非常顺滑的。</p>
-<p>Toast的出现和消除添加了动画，且动画的时间都是可以设置的，实现于ToastWindowController.swift文件中，感兴趣的读者可以去将项目clone下来看看，我觉得这个部分可以单独抽出去成为一个小轮子，也来源于PathToGO。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
-<li><a href="https://github.com/HansonStudio/PathToGo" target="_blank" rel="external">PathToGO</a></li>
-<li><a href="https://www.flaticon.com" target="_blank" rel="external">flaticon</a></li>
-<li><a href="https://segmentfault.com/a/1190000011273388" target="_blank" rel="external">AppleScript教程1</a></li>
-<li><a href="http://erikslab.com/2007/08/31/applescript-how-to-split-a-string/" target="_blank" rel="external">Erik’s Lab</a></li>
-</ul>
+<p>需要提前申明Object的类型，且服从<strong>Codable</strong>协议。这里我选用了<strong>Strcut</strong>而不是<strong>Class</strong>，两者的具体区别感兴趣的可以自行去搜索，主要区别是Struct是<strong>值类型</strong>，Class是<strong>引用类型</strong>的。</p>
+<p>当然，String和Int等其他基本类型也有自己的编码方法。比如String的编码方法为:String(data: r.data, encoding: String.Encoding.utf8)。</p>
+<h2 id="Object-Model文件的生成和注意事项"><a href="#Object-Model文件的生成和注意事项" class="headerlink" title="Object Model文件的生成和注意事项"></a>Object Model文件的生成和注意事项</h2><p>Struct和Class的生成可以借助第三方工具<strong><a href="https://github.com/Ahmed-Ali/JSONExport" target="_blank" rel="external">JSONExport</a></strong>完成，国内有人将其进行了<a href="https://github.com/yagamis/JSONExport" target="_blank" rel="external">汉化</a>,很方便的导出Swift文件。</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tKfTcgy1ftjvs2fp0rj31hc17awq0.jpg" alt=""></p>
+<blockquote>
+<p>JSONExport汉化版界面</p>
+</blockquote>
+<p>在使用JSONExport之前，网络请求的结果一般是通过PostMan获取的，有些项的结果可能是<strong>Nil</strong>,直接复制进去JSONExport就会将该字段申明为<strong>Any</strong>，但是这就让编译器为难了，他并不知道需要为这个字段开多大的空间，因此当你尝试服从<strong>Codable</strong>协议时，<strong>会报错</strong>，这时就需要与后端开发人员沟通，<em>将Any改为正确的特定类型。</em></p>
+<h1 id="从数据流角度减少网络请求数"><a href="#从数据流角度减少网络请求数" class="headerlink" title="从数据流角度减少网络请求数"></a>从数据流角度减少网络请求数</h1><p>上文已经提到了，网络请求会给系统带来很大的一笔开销，减少网络请求数也是开发者在开发应用过程中优化应用的一个<strong>重要方面</strong>。这里，我给出我在做Match过程中优化网络请求数比较Hack的一个小技巧，也不知道对不对，总之是有效的减少了网络请求数。</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tKfTcgy1ftjx2jktw7j31j417yadt.jpg" alt=""></p>
+<blockquote>
+<p>从数据流(data-flow)角度看应用</p>
+</blockquote>
+<p>由于在应用开发过程中反复了这种模式，这里就举一个例子来说明。上图中涉及了三个场景，第一个场景是问题列表页，是一个TableView，数据是从服务器端获取的，默认是20个。当用户点击TableView的某个Cell，会跳转到问题详情页，包含了该问题的题干和回复部分，这部分数据是由第一个场景传过来的，至此没有<strong>再次</strong>发送网络请求。</p>
+<p>第三个场景是用户尝试回答这道题目，点击发送之后，回到第二个场景，这时候如果不做任何动作，用户是看不到自己刚刚的回复内容的，这很容易让用户<strong>造成困惑。</strong>但是我又不想再次发送网络请求来更新数据，于是我借助了<strong>App Delegate</strong>这个<em>中转站</em>，将刚刚用户回复的相关信息进行了保存，并<em>人为的</em>添加到了TableView的数据中。这样，在没有发送任何数据请求的前提下，做到了视图已经更新的<strong>假象</strong>。</p>
+<h1 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h1><p>早在写上一篇开发笔记的时候，就有读者问能否像之前的应用一样将Match<strong>开源</strong>。诚然，作为一个完整的应用，有着较大的借鉴意义，但是考虑到朋友为这个应用的开发向我支付了不菲的费用，这个应用最终版权应属于他，所以考虑再三，决定<strong>不开源</strong>，还望大家理解。</p>
 
 
             <! -- 添加捐赠图标 -->
@@ -192,18 +195,11 @@
     <!-- 前后页  -->
     <ul class="post-pager">
         
-            <li class="next">
-                <a href= "/2018/05/09/swift5/" title= Swift5 新特性了解一下？ >
-                    <span>Next Post</span>
-                    <span>Swift5 新特性了解一下？</span>
-                </a>
-            </li>
-        
         
             <li class="previous">
-                <a href= "/2018/02/10/turingCal/" title= 极客编程日历桌面版开发笔记 >
+                <a href= "/2018/07/18/buy-house2/" title= 魔都买房杂记(下) >
                     <span>Previous Post</span>
-                    <span>极客编程日历桌面版开发笔记</span>
+                    <span>魔都买房杂记(下)</span>
                 </a>
             </li>
         
