@@ -135,7 +135,7 @@
             <main class="main post-page">
     <article class="article-entry">
         <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>书接<a href="http://zhihaozhang.github.io/2018/07/11/Match/">上文</a>,作为一个<strong>数据驱动</strong>(<em>Data driven</em>)类型的APP,如何从服务器端<em>获取到数据</em>并<strong>尽量少</strong>的减少请求次数是一个非常重要的点，甚至被定为<strong>最重要</strong>的一点也不为过。这篇博客将介绍我在做Match这个应用过程中使用到的技术以及优化的方法。</p>
-<h1 id="网络请求库"><a href="#网络请求库" class="headerlink" title="网络请求库"></a>网络请求库</h1><h2 id="Alamofire、Moya和Just"><a href="#Alamofire、Moya和Just" class="headerlink" title="Alamofire、Moya和Just"></a>Alamofire、Moya和Just</h2><p>现有的网络请求库非常多，从OC时代<em>大名鼎鼎</em>的<strong><a href="https://github.com/AFNetworking/AFNetworking" target="_blank" rel="external">AFNetworking</a></strong>到Swift时代的<strong><a href="https://github.com/Alamofire/Alamofire" target="_blank" rel="external">Alamofire</a></strong>及它的进一步封装<em>Moya</em>,他们都是对苹果网络层URLSession的封装，且有着相似的目的<strong>：将网络请求从ViewController中解耦出去。</strong>ViewController中如果混杂了太多的网络请求的<strong>构建</strong>、<strong>发送</strong>、<strong>响应接收</strong>、<strong>响应请求的处理</strong>，会使得ViewController非常<strong>臃肿</strong>，不利于代码维护。</p>
+<h1 id="网络请求库"><a href="#网络请求库" class="headerlink" title="网络请求库"></a>网络请求库</h1><h2 id="Alamofire、Moya和Just"><a href="#Alamofire、Moya和Just" class="headerlink" title="Alamofire、Moya和Just"></a>Alamofire、Moya和Just</h2><p>现有的网络请求库非常多，从OC时代<em>大名鼎鼎</em>的<strong><a href="https://github.com/AFNetworking/AFNetworking" target="_blank" rel="external">AFNetworking</a></strong>到Swift时代的<strong><a href="https://github.com/Alamofire/Alamofire" target="_blank" rel="external">Alamofire</a></strong>及它的进一步封装<em><a href="https://github.com/Moya/Moya" target="_blank" rel="external">Moya</a></em>,他们都是对苹果网络层URLSession的封装，且有着相似的目的<strong>：将网络请求从ViewController中解耦出去。</strong>ViewController中如果混杂了太多的网络请求的<strong>构建</strong>、<strong>发送</strong>、<strong>响应接收</strong>、<strong>响应请求的处理</strong>，会使得ViewController非常<strong>臃肿</strong>，不利于代码维护。</p>
 <p><img src="https://moya.github.io/web/diagram.png" alt=""></p>
 <blockquote>
 <p>Moya在Alamofire的基础上进一步对网络请求进行了封装，使网络请求更容易</p>
@@ -159,7 +159,7 @@
 <p>需要提前申明Object的类型，且服从<strong>Codable</strong>协议。这里我选用了<strong>Strcut</strong>而不是<strong>Class</strong>，两者的具体区别感兴趣的可以自行去搜索，主要区别是Struct是<strong>值类型</strong>，Class是<strong>引用类型</strong>的。</p>
 <p>当然，String和Int等其他基本类型也有自己的编码方法。比如String的编码方法为:String(data: r.data, encoding: String.Encoding.utf8)。</p>
 <h2 id="Object-Model文件的生成和注意事项"><a href="#Object-Model文件的生成和注意事项" class="headerlink" title="Object Model文件的生成和注意事项"></a>Object Model文件的生成和注意事项</h2><p>Struct和Class的生成可以借助第三方工具<strong><a href="https://github.com/Ahmed-Ali/JSONExport" target="_blank" rel="external">JSONExport</a></strong>完成，国内有人将其进行了<a href="https://github.com/yagamis/JSONExport" target="_blank" rel="external">汉化</a>,很方便的导出Swift文件。</p>
-<p><img src="https://ws1.sinaimg.cn/large/006tKfTcgy1ftjvs2fp0rj31hc17awq0.jpg" alt=""></p>
+<p><img src="https://ws3.sinaimg.cn/large/006tKfTcgy1ftjy4408vwj31ju1440xs.jpg" alt=""></p>
 <blockquote>
 <p>JSONExport汉化版界面</p>
 </blockquote>
@@ -735,10 +735,6 @@
     
     
     
-    
-    
-    
-    
     <div class="total-archive"> Total : 30 </div>
     
     <div class="post-archive">
@@ -849,13 +845,22 @@
     
         </ul>
     
-    <div class="archive-year"> 2014 </div>
+    <div class="archive-year"> Invalid date </div>
     <ul class="year-list">
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2018/02/10/turingCal/" >极客编程日历桌面版开发笔记</a>
         </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2014 </div>
+    <ul class="year-list">
     
     
         <li class="archive-post-item">
@@ -864,7 +869,7 @@
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular/" >D3 on Angular</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
         </li>
     
     
@@ -940,26 +945,17 @@
     
     
         <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular/" >D3 on Angular</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
             <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
         </li>
     
     
         <li class="archive-post-item">
             <span class="archive-post-date">04/24</span><a class="archive-post-title" href= "/2014/04/24/用Java生成Json文件/" >用Java生成Json文件</a>
-        </li>
-    
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> Invalid date </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2018/02/10/turingCal/" >极客编程日历桌面版开发笔记</a>
         </li>
     
     </div>
@@ -973,9 +969,9 @@
     
         <span class="sidebar-tag-name"><a href= "#">macOS开发</a></span>
     
-        <span class="sidebar-tag-name"><a href= "#">随感</a></span>
-    
         <span class="sidebar-tag-name"><a href= "#">iOS开发</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">随感</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">SVG</a></span>
     
