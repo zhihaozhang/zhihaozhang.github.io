@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
     <title>
         
-        Swift5 新特性了解一下 · Zhihao&#39;s Studio
+        浅谈函数式编程(Introducing Functional Programming) · Zhihao&#39;s Studio
         
     </title>
     <link rel="icon" href= /assests/favicon.ico>
@@ -81,7 +81,7 @@
                 <a href="/" >Zhihao&#39;s Studio.</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">Swift5 新特性了解一下</a>
+                <a href="#" class="post-name">浅谈函数式编程(Introducing Functional Programming)</a>
             </div>
     </div>
     
@@ -102,7 +102,7 @@
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            Swift5 新特性了解一下
+            浅谈函数式编程(Introducing Functional Programming)
             <!-- 404 -->
             
         </h1>
@@ -126,7 +126,7 @@
             
             <div class="post-intro-meta">
                 <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                <span class="post-intro-time">2018/05/09</span>
+                <span class="post-intro-time">2018/07/30</span>
             </div>
         
     </div>
@@ -134,58 +134,73 @@
         <div class="container">
             <main class="main post-page">
     <article class="article-entry">
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>话说这两天好像是Google IO召开的日子，借机蹭一波热度，唱个反调，浅析一下Swift5可能会出现的新特性，也算是为下个月即将举办的<strong>WWDC</strong>预热预热吧。</p>
-<h1 id="ABI稳定性"><a href="#ABI稳定性" class="headerlink" title="ABI稳定性"></a>ABI稳定性</h1><p>ABI稳定性这个话题是一个历史遗留任务，最初是Swift3的目标，苹果的拖延症一直拖到了Swift5，还不一定可以实现。这也是国内很多公司不敢全面拥抱Swift的<strong>重要原因之一</strong>。</p>
-<h2 id="ABI是啥"><a href="#ABI是啥" class="headerlink" title="ABI是啥"></a>ABI是啥</h2><p>ABI是Application Binary Interfaces（应用二进制接口）的缩写，它描述了应用程序和操作系统或其他应用程序的低级接口。</p>
-<p>在应用程序运行时，Swift二进制需要和其他库或组件通过ABI进行接触，因此ABI定义了非常底层的细节。比如：如何调用一个函数，数据在内存中是如何存储的、元数据在哪以及如何获取到。</p>
-<p>由于现在ABI是不稳定的，因此每一个APP都不得不绑定特定版本的Swift动态库。这样从外面看起来，Swift与App的关联比ios系统要更紧密。</p>
-<p>举个例子来说，app1使用的是Swift 4.0，因此它绑定的是包含4.0 ABI的Swift 4.0动态库，而app2使用的是Swift 4.1，它绑定的就是包含4.1 ABI的Swift 4.1动态库。如果ABI变得稳定了，那么ABI就可以抽出来，集成到ios系统中，因为它可以跟Swift的任一版本兼容。</p>
-<h2 id="ABI的重要性"><a href="#ABI的重要性" class="headerlink" title="ABI的重要性"></a>ABI的重要性</h2><p>通过上面的描述，应该不难看出ABI的重要性了，总结一下ABI稳定性带来的好处吧：</p>
-<ul>
-<li>App所占的大小会减小</li>
-<li>Swift变化也没现在这么频繁</li>
-<li>版本变化时，更少的改动</li>
-<li>因为不需要绑定特定版本的swift，开发者可以做出预编译的框架</li>
-</ul>
-<p>但凡事都有两面性，由于带上了ABI这个脚链，不可避免的也会引入一些缺点：</p>
-<ul>
-<li>限制了接口的变动</li>
-<li>Swift的发展和演化需要考虑的东西也渐渐多了起来</li>
-</ul>
-<h1 id="Async-Await-模式"><a href="#Async-Await-模式" class="headerlink" title="Async/Await 模式"></a>Async/Await 模式</h1><p>熟悉javascript的朋友应该对这个模式不陌生，在ES7中，也加入了这个模式应对异步编程。这个好用的特性，即将引入Swift5！</p>
-<h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><p>之前，例如错误处理、回调之类的异步API用起来挺麻烦的，组合调用时很容易产生出复杂的控制流，用Swift的guard let语法糖在闭包调用中看起来重重嵌套，开发者很难知道当前所处的上下文。</p>
-<p>举个例子：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">loadWebResource</span><span class="params">(<span class="number">_</span> path: String, completionBlock: <span class="params">(result: Resource)</span></span></span> -&gt; <span class="type">Void</span>) &#123; ... &#125;</div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">decodeImage</span><span class="params">(<span class="number">_</span> r1: Resource, <span class="number">_</span> r2: Resource, completionBlock: <span class="params">(result: Image)</span></span></span> -&gt; <span class="type">Void</span>)</div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">dewarpAndCleanupImage</span><span class="params">(<span class="number">_</span> i : Image, completionBlock: <span class="params">(result: Image)</span></span></span> -&gt; <span class="type">Void</span>)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">processImageData1</span><span class="params">(completionBlock: <span class="params">(result: Image)</span></span></span> -&gt; <span class="type">Void</span>) &#123;</div><div class="line">   loadWebResource(<span class="string">"dataprofile.txt"</span>) &#123; dataResource <span class="keyword">in</span></div><div class="line">      loadWebResource(<span class="string">"imagedata.dat"</span>) &#123; imageResource <span class="keyword">in</span></div><div class="line">         decodeImage(dataResource, imageResource) &#123; imageTmp <span class="keyword">in</span></div><div class="line">            dewarpAndCleanupImage(imageTmp) &#123; imageResult <span class="keyword">in</span></div><div class="line">               completionBlock(imageResult)</div><div class="line">             &#125;</div><div class="line">          &#125;</div><div class="line">       &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>引入Async/Await模式后，现在的代码如下：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">loadWebResource</span><span class="params">(<span class="number">_</span> path: String)</span></span> async -&gt; <span class="type">Resource</span></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">decodeImage</span><span class="params">(<span class="number">_</span> r1: Resource, <span class="number">_</span> r2: Resource)</span></span> async -&gt; <span class="type">Image</span></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">dewarpAndCleanupImage</span><span class="params">(<span class="number">_</span> i : Image)</span></span> async -&gt; <span class="type">Image</span></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">processImageData1</span><span class="params">()</span></span> async -&gt; <span class="type">Image</span> &#123;</div><div class="line">    <span class="keyword">let</span> dataResource = await loadWebResource(<span class="string">"dataprofile.txt"</span>)</div><div class="line">    <span class="keyword">let</span> imageResource = await loadWebResource(<span class="string">"imagedata.dat"</span>)</div><div class="line">    <span class="keyword">let</span> imageTmp = await decodeImage(dataResource, imageResource)</div><div class="line">    <span class="keyword">let</span> imageResult = await dewarpAndCleanupImage(imageTmp)</div><div class="line">    <span class="keyword">return</span> imageResult</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近两周利用空余时间<strong>艰难</strong>“啃完”了objc.io出版的<img src="https://objccn.io/products/functional-swift/" alt="《函数式Swift》">这本书，感觉有些摸到了函数式编程的门道;在函数式编程<strong>思维</strong>的影响下，将之前的项目代码进行了改造。关于函数式编程，也算是有了一点心得，遂写成此文，虽然本文主要是以Swift为<strong>载体</strong>举例，但并不影响函数式思想的介绍。由于本人才疏学浅，而函数式编程本身<em>博大精深</em>，故谬误在所难免，如发现，还请指出。</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79ly1fts0h9ibzrj31kw0r2ahf.jpg" alt=""></p>
 <blockquote>
-<p>此处应有掌声</p>
+<p>《函数式Swift》</p>
 </blockquote>
-<h1 id="Actors"><a href="#Actors" class="headerlink" title="Actors"></a>Actors</h1><ul>
-<li>Actors是一个新概念，它表示现实世界中的一些概念，比如“一个文档”、“一台设备”、“一次网络请求”等。</li>
-<li>它是调度队列、可运行在该队列上并受该队列保护的数据的组合</li>
-<li>可以认为是类似于class和protocol的一种新类型</li>
-<li>允许开发者在其中定义内部变量/函数从而管理数据、进行相关操作</li>
-<li>不能返回值、抛出异常、没有inout参数</li>
-<li>开发者可以与之异步通信，Actor可以保证它所保护的数据只被运行于其上的代码接触到</li>
-<li>UIKit和AppKit可以将主线程建模成MainActor</li>
-<li>和class、protocol一样，开发者可以用extension关键字扩展MainActor</li>
-<li>当引用数变为0时，Actor生命周期完成</li>
-</ul>
-<p>举个例子，假设正在开发一个tableview的应用，内容是一个string数组(受保护数据)，代码看起来应该是这样:</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">actor <span class="type">TableModel</span> &#123;</div><div class="line">    <span class="keyword">let</span> mainActor : <span class="type">TheMainActor</span></div><div class="line">    <span class="keyword">var</span> theList : [<span class="type">String</span>] = [] &#123;</div><div class="line">        <span class="keyword">didSet</span> &#123;</div><div class="line">            mainActor.updateTableView(theList)</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">init</span>(mainActor: <span class="type">TheMainActor</span>) &#123; </div><div class="line">        <span class="keyword">self</span>.mainActor = mainActor </div><div class="line">    &#125;</div><div class="line">    actor <span class="function"><span class="keyword">func</span> <span class="title">add</span><span class="params">(entry: String)</span></span> &#123;</div><div class="line">      theList.append(entry)</div><div class="line">    &#125;</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
-<h1 id="其他提升"><a href="#其他提升" class="headerlink" title="其他提升"></a>其他提升</h1><ul>
-<li>String:对正则表达式<strong>Language级别</strong>的支持、性能提升。</li>
-<li>标准库的改进</li>
-<li>改进Foundation</li>
-<li>增加了新语法</li>
-</ul>
-<p>让我们一起静待WWDC2018的到来！</p>
-<p>参考</p>
+<h1 id="函数式编程"><a href="#函数式编程" class="headerlink" title="函数式编程"></a>函数式编程</h1><h2 id="WHAT-is-函数式编程"><a href="#WHAT-is-函数式编程" class="headerlink" title="WHAT is 函数式编程"></a>WHAT is 函数式编程</h2><p>wiki对于函数式编程的定义如下:</p>
+<blockquote>
+<p>In computer science, functional programming is a <strong>programming paradigm</strong>—a style of building the structure and elements of computer programs—that treats computation as the evaluation of mathematical functions and avoids changing-state and mutable data. It is a <strong>declarative</strong> programming paradigm, which means programming is done with expressions or declarations instead of statements. </p>
+</blockquote>
+<p>我认为最重要的两个单词是<strong>programming Paradigm</strong>和<strong>declarative</strong>，而后者又是为了描述前者准备的。什么是programming Paradigm？我在前几个月写的博客<a href="http://zhihaozhang.github.io/2018/05/20/ProtocolOP/">《面向协议编程初探》</a>中已经解释过了，中文可以翻译为<em>编程范式</em>，我理解为<strong>编程语言设计者希望编程语言的使用者在使用编程语言的时候，思考问题的方式。</strong></p>
+<p>而declarative可以翻译为<em>声明式</em>的，与之相对应的是<strong>imperative</strong>(指令式的)，目前最为广泛使用的<em>面向对象编程</em>就可以划到指令式编程这一类。</p>
+<h2 id="函数式编程的和面向对象编程的历史"><a href="#函数式编程的和面向对象编程的历史" class="headerlink" title="函数式编程的和面向对象编程的历史"></a>函数式编程的和面向对象编程的历史</h2><p>在函数式编程面前，面向对象编程其实是晚辈。如果以smalltalk的出现作为面向对象编程元年，那么面向对象编程的历史应该从1975年算起(数据来源<a href="https://baike.baidu.com/item/smalltalk/1379989?fr=aladdin" target="_blank" rel="external">百度百科</a>);而函数式编程的元年可以追溯到Lisp语言出现的1958年(数据来源<a href="https://baike.baidu.com/item/LISP/22083" target="_blank" rel="external">百度百科</a>)。</p>
+<p>函数式编程被很多大佬美誉为<strong>”the next big thing”</strong>，甚至被称为<strong>最好</strong>的编程范式。让人不免疑惑，既然比面向对象编程出来的早，为什么之前没火，而现在又活了呢？</p>
+<h2 id="WHY函数式编程这两年又火了"><a href="#WHY函数式编程这两年又火了" class="headerlink" title="WHY函数式编程这两年又火了"></a>WHY函数式编程这两年又火了</h2><p>带着疑问，我在搜索引擎中搜索了“函数式编程”和“火了”这两个关键词，找到了一个<a href="https://www.zhihu.com/question/30190384/answer/142902047" target="_blank" rel="external">知乎问答</a>，了解了这一段历史。</p>
+<p>很赞成知乎用户<em>狗好看</em>的回答:</p>
+<blockquote>
+<p>根本的原因是<em>摩尔定律</em>不适用。cpu的性能提升将体现在<strong>核数</strong>增加，这样并行的程序运行速度会越来越快。并行的程序的写法就是找出不能并行的地方，其他地方都尽量并行。如果要这样写，最需要避免的事情就是赋值。函数式编程的本质就是，规避掉“赋值”。</p>
+</blockquote>
+<p>他的回答比较不容易懂，我来用我的理解<em>翻译翻译</em>。</p>
+<blockquote>
+<p>摩尔定律: 当价格不变时，集成电路上可容纳的元器件的数目，约每隔18-24个月便会增加一倍，性能也将提升一倍。</p>
+</blockquote>
+<p>越来越多的人知道，放在初期还是成立的摩尔定律，最近有点不适用了。这和其他很多学科一样，开始的指数级发展，很容易让人过于乐观，到了瓶颈期后，学科发展很容易停滞不前。一个最明显的例子是医学领域关于癌症的笑话，说癌症被攻克，<strong>永远还需要30年</strong>。我用的第一台电脑的CPU是<strong>奔腾4</strong>的，同期经常听到的词还有<strong>赛扬</strong>，奔四有1.4GHz左右的内核时钟，到今天我用的是2016年的顶配MacBook Pro，查了一下，参数为2.7GHz(<em>约20年过去了，还不到2000年的两倍</em>)。</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79ly1fts1rk3ge3j30wk0jo46i.jpg" alt=""></p>
+<blockquote>
+<p>2016年的顶配MacBook Pro</p>
+</blockquote>
+<p>Intel的工程师也尝试过将这一参数加到3GHz甚至更高，但是他们发现功耗太高、发热太快。但是每年产品线又要更新，那怎么办呢？只能是往CPU里<em>塞核心</em>来获得<strong>计算能力</strong>和<strong>吞吐量</strong>，刚刚发布的MacBook Pro 2018顶配已经用上了<strong>多达8核心的i9</strong>处理器，甚至连iPhone X都已经有了6个核心。将这些核心都利用上，可以让设备充分发挥作用，在面向对象编程中，经常用到的技术是<strong>同步机制和加锁</strong>，但由于函数式编程的特性，在函数式编程的世界里就不会出现这个问题，因此函数式编程又<strong>火了</strong>。</p>
+<p>其实在科技界这种死灰复燃的例子还有很多，zelear的<em>王自如</em>在他的节目《科技相对论》<a href="http://www.zealer.com/post/223.html" target="_blank" rel="external">小众产品复活指南</a>里曾经介绍过几款死灰复燃产品，比如：<em>有轨电车、死飞、机械键盘、拍立得、车载广播</em>等。这些产品和函数式编程一样，都没有被<strong>替代</strong>的那么彻底，时过境迁，找到了合适的土壤，用户突然又开始想念他的某个功能，所以又活过来了。</p>
+<h1 id="函数式编程的特性-HOW"><a href="#函数式编程的特性-HOW" class="headerlink" title="函数式编程的特性(HOW)"></a>函数式编程的特性(HOW)</h1><p>很遗憾，经过上一节的解释，我依然未能说清函数式编程是什么。这个问题跟面向对象等其他编程范式一样很难给出准确的定义，只能从几个比较<strong>热门</strong>的特性列举一些例子。</p>
+<h2 id="一等函数"><a href="#一等函数" class="headerlink" title="一等函数"></a>一等函数</h2><p>函数的重要性在函数式编程里不言而喻，在支持函数式编程特性的语言里，函数被<strong>提到</strong>了一个非常重要的位置，他跟<em>Int、String、Bool</em>有着相同的地位。函数可以作为变量的字面量存储起来、作为函数的参数和返回值在函数之间传递。</p>
+<p>函数作为变量的例子很多，只想说一句话：</p>
+<blockquote>
+<p>闭包是函数的<em>字面量</em>，就像1之于Int，true之于Bool。</p>
+</blockquote>
+<h2 id="Currying"><a href="#Currying" class="headerlink" title="Currying"></a>Currying</h2><p>接下来举一个函数作为返回值的例子：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">addFactory</span><span class="params">(value1 : Int)</span></span> -&gt; (<span class="type">Int</span> -&gt; <span class="type">Int</span>)&#123;</div><div class="line">		<span class="function"><span class="keyword">func</span> <span class="title">adder</span><span class="params">(value2 : Int)</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">				<span class="keyword">return</span> value1+value2</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> adder</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">let</span> addOne = addFactory(<span class="number">1</span>)</div><div class="line">addOne(<span class="number">2</span>)  <span class="comment">// return 3</span></div><div class="line"></div><div class="line">addFactory(<span class="number">1</span>)(<span class="number">2</span>)  <span class="comment">// return 3</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">add</span><span class="params">(value1 : Int , value2 : Int)</span></span>&#123;</div><div class="line">	<span class="keyword">return</span> value1 + value2</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>addFactory返回的值是一个函数，其类型为(Int -&gt; Int),意思是返回值是一个接受Int并且返回Int的函数，我们可以用两种方式调用它。其中第二种addFactory(1)(2)又被称为我们习以为常的add(1,2)这种函数调用方式的<strong>Currying(柯里化)</strong>。多说一句，Currying是一个人的名字，他的全名叫<em>Haskell</em> Currying，剩下的应该不需要多解释了。</p>
+<h2 id="高阶函数"><a href="#高阶函数" class="headerlink" title="高阶函数"></a>高阶函数</h2><p>接受其它函数作为参数的函数有时被称为<strong>高阶函数</strong>。或许大多数人都使用过<em>Map/Reduce/Filter</em>，他们就是高阶函数最常见的例子。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> nums = [<span class="number">1</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">5</span>]</div><div class="line"></div><div class="line"><span class="comment">// way 1</span></div><div class="line"><span class="keyword">let</span> strs : [<span class="type">String</span>] = []</div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> (<span class="number">0</span>..&lt;nums.<span class="built_in">count</span>) &#123;</div><div class="line">	strs[i] = <span class="string">"No."</span> + <span class="type">String</span>(nums[i])</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// way 2</span></div><div class="line"><span class="keyword">let</span> brr = nums.<span class="built_in">map</span> &#123;</div><div class="line">    <span class="string">"No."</span> + <span class="type">String</span>($<span class="number">0</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>以Map为例，假设我们有这样一个需求，将一个整型数组，变为一个String类型的数组，并且在每个数字前加上“No.”，一个没有函数式编程思想的程序员极可能写出way1的代码，这种循环的代码几乎每个程序员都写了几千遍了，很好懂也并没有觉得有什么异常，但其实这是一种<strong>指令式</strong>的编程方式。何为指令式编程呢？就是人以机器的思维方式去思考，我们把自己当做了一台机器，比如上面way1的实现方式，就是我们将思维映射到了CPU上，强迫自己像CPU一样去思考。机器是怎么处理这个问题的呢？他首先要开辟一片内存，然后变更寄存器的值映射到变量i上，通过递增来做循环，然后创建字符串的字面量放到刚开辟出来的内存指定位置上。</p>
+<p>way2使用了集合类型的高阶函数，它接收一个参数，这个参数是另一个函数(函数名不重要)，负责String的初始化的方法。当它拿到这个函数之后，自动帮我们把里面的每一个元素拿出来，传到这个String的初始化函数里面去，就生成了最终的数组。这就是<strong>声明式编程</strong>，好处很明显，代码比以前短了很多，思维方式变得更像人思考的方式了。</p>
+<p>有了高阶函数，函数可以自由<strong>装配</strong>，由一些简单的函数<strong>装配</strong>出一些高级的函数。</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1fts5pfl6e9j30fz089jrz.jpg" alt=""></p>
+<blockquote>
+<p>装配过程的可视化</p>
+</blockquote>
+<h2 id="纯函数-pure-function"><a href="#纯函数-pure-function" class="headerlink" title="纯函数(pure function)"></a>纯函数(pure function)</h2><p>在函数式编程中，对于函数还有两点特殊的要求。</p>
 <ol>
-<li><a href="https://www.developerinsider.in/what-will-be-new-in-swift-5/" target="_blank" rel="external">本文主要翻译自：DeveloperInsider</a>.</li>
-<li><a href="https://www.jianshu.com/p/5860f5542f21" target="_blank" rel="external">Swift库二进制接口(ABI)兼容性研究</a></li>
-<li><a href="https://imtx.me/archives/2370.html" target="_blank" rel="external">Swift 5 的蓝图：ABI 稳定</a></li>
+<li>不依赖外部</li>
+<li>不改变外部<br>满足上面两点要求的函数被称为<em>纯函数(pure function)</em>。这两点保证了无论在什么时候调用函数，对于相同的输入，总会得到相同的输出。这至少带来了两点好处：</li>
+<li>函数的可测试性</li>
+<li>上文提到的函数式编程没有的<em>同步与加锁</em>问题</li>
+</ol>
+<p>至此也可以引出函数式编程的<strong>思想</strong>了:</p>
+<blockquote>
+<p>避免使用程序状态和可变对象，是降低程序复杂度的有效方式之一，而这也正是函数式编程的精髓。函数式编程强调执行的结果，而非执行的过程。我们先构建一系列简单却具有一定功能的小函数，然后再将这些函数进行组装以实现完整的逻辑和复杂的运算，这是函数式编程的基本思想。</p>
+</blockquote>
+<h2 id="函子、适用函子、单子-Functor-Applicative-Monad"><a href="#函子、适用函子、单子-Functor-Applicative-Monad" class="headerlink" title="函子、适用函子、单子(Functor, Applicative, Monad)"></a>函子、适用函子、单子(Functor, Applicative, Monad)</h2><p>这个部分需要单独写一篇文章介绍，我在理解过程中发现了一个很好的<a href="http://jiyinyiyong.github.io/monads-in-pictures/" target="_blank" rel="external">图解blog</a>.</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79ly1fts5vo3dsoj30og07gmy7.jpg" alt=""></p>
+<p>这里先给出结论：<br>functor: 通过 fmap 或者 &lt;$&gt; 应用是函数到封装过的值<br>applicative: 通过 &lt;*&gt; 或者 liftA 应用封装过的函数到封装过的值<br>monads: 通过 &gt;&gt;= 或者 liftM 应用会返回封装过的值的函数到封装过的值</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li>《函数式Swift》(<a href="https://objccn.io/products/functional-swift/" target="_blank" rel="external">https://objccn.io/products/functional-swift/</a>)</li>
+<li>smallTalk 百度百科 (<a href="https://baike.baidu.com/item/smalltalk/1379989?fr=aladdin" target="_blank" rel="external">https://baike.baidu.com/item/smalltalk/1379989?fr=aladdin</a>)</li>
+<li>Lisp 百度百科(<a href="https://baike.baidu.com/item/LISP/22083" target="_blank" rel="external">https://baike.baidu.com/item/LISP/22083</a>)</li>
+<li>知乎:为什么函数式编程这两年又火了(<a href="https://www.zhihu.com/question/30190384/answer/142902047" target="_blank" rel="external">https://www.zhihu.com/question/30190384/answer/142902047</a>)</li>
+<li>《科技相对论》小众产品复活指南(<a href="http://www.zealer.com/post/223.html" target="_blank" rel="external">http://www.zealer.com/post/223.html</a>)</li>
+<li>Functor, Applicative, 以及 Monad 的图片阐释 (<a href="http://jiyinyiyong.github.io/monads-in-pictures/" target="_blank" rel="external">http://jiyinyiyong.github.io/monads-in-pictures/</a>)</li>
 </ol>
 
 
@@ -210,18 +225,11 @@
     <!-- 前后页  -->
     <ul class="post-pager">
         
-            <li class="next">
-                <a href= "/2018/05/20/ProtocolOP/" title= 面向协议编程初探 >
-                    <span>Next Post</span>
-                    <span>面向协议编程初探</span>
-                </a>
-            </li>
-        
         
             <li class="previous">
-                <a href= "/2018/04/17/GoBACKSPACE/" title= GoBACKSPACE————致敬Go2Shell的Finder插件 >
+                <a href= "/2018/07/23/Match2/" title= Match for iPhone开发笔记 <二> 网络请求和数据流篇 >
                     <span>Previous Post</span>
-                    <span>GoBACKSPACE————致敬Go2Shell的Finder插件</span>
+                    <span>Match for iPhone开发笔记 <二> 网络请求和数据流篇</span>
                 </a>
             </li>
         
