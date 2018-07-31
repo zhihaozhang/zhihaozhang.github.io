@@ -134,7 +134,7 @@
         <div class="container">
             <main class="main post-page">
     <article class="article-entry">
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近两周利用空余时间<strong>艰难</strong>“啃完”了objc.io出版的<a href="https://objccn.io/products/functional-swift/" target="_blank" rel="external">《函数式Swift》</a>这本书，感觉有些摸到了函数式编程的门道;在函数式编程<strong>思维</strong>的影响下，将之前的项目代码进行了改造。关于函数式编程，也算是有了一点心得，遂写成此文，虽然本文主要是以Swift为<strong>载体</strong>举例，但并不影响函数式思想的介绍。由于本人才疏学浅，而函数式编程本身<em>博大精深</em>，故谬误在所难免，如发现，还请指出。</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近两周利用空余时间<strong>艰难</strong>“啃完”了objc.io出版的<a href="https://objccn.io/products/functional-swift/" target="_blank" rel="external">《函数式Swift》</a>这本书，感觉有些摸到了函数式编程的门道;在函数式编程<strong>思维</strong>的影响下，将之前的项目代码进行了改造。关于函数式编程，也算是有了一点心得，遂写成此文，虽然行文主要是以Swift为<strong>载体</strong>，但并不影响函数式思想的介绍。由于本人才疏学浅，而函数式编程本身<em>博大精深</em>，故谬误在所难免，如发现，还请指出。</p>
 <p><img src="https://ws3.sinaimg.cn/large/006tNc79ly1fts0h9ibzrj31kw0r2ahf.jpg" alt=""></p>
 <blockquote>
 <p>《函数式Swift》</p>
@@ -144,7 +144,7 @@
 <p>In computer science, functional programming is a <strong>programming paradigm</strong>—a style of building the structure and elements of computer programs—that treats computation as the evaluation of mathematical functions and avoids changing-state and mutable data. It is a <strong>declarative</strong> programming paradigm, which means programming is done with expressions or declarations instead of statements. </p>
 </blockquote>
 <p>我认为最重要的两个单词是<strong>programming Paradigm</strong>和<strong>declarative</strong>，而后者又是为了描述前者准备的。什么是programming Paradigm？我在前几个月写的博客<a href="http://zhihaozhang.github.io/2018/05/20/ProtocolOP/">《面向协议编程初探》</a>中已经解释过了，中文可以翻译为<em>编程范式</em>，我理解为<strong>编程语言设计者希望编程语言的使用者在使用编程语言的时候，思考问题的方式。</strong></p>
-<p>而declarative可以翻译为<em>声明式</em>的，与之相对应的是<strong>imperative</strong>(指令式的)，目前最为广泛使用的<em>面向对象编程</em>就可以划到指令式编程这一类。</p>
+<p>而declarative可以翻译为<em>声明式</em>的，与之相对应的是<strong>imperative</strong>(指令式的)，目前最为广泛使用的<em>面向对象编程</em>就可以划到指令式编程这一类。(declarative和imperative的区别在下文中有所提及)</p>
 <h2 id="函数式编程的和面向对象编程的历史"><a href="#函数式编程的和面向对象编程的历史" class="headerlink" title="函数式编程的和面向对象编程的历史"></a>函数式编程的和面向对象编程的历史</h2><p>在函数式编程面前，面向对象编程其实是晚辈。如果以smalltalk的出现作为面向对象编程元年，那么面向对象编程的历史应该从1975年算起(数据来源<a href="https://baike.baidu.com/item/smalltalk/1379989?fr=aladdin" target="_blank" rel="external">百度百科</a>);而函数式编程的元年可以追溯到Lisp语言出现的1958年(数据来源<a href="https://baike.baidu.com/item/LISP/22083" target="_blank" rel="external">百度百科</a>)。</p>
 <p>函数式编程被很多大佬美誉为<strong>the next big thing</strong>，甚至被称为<strong>最好</strong>的编程范式。让人不免疑惑，既然比面向对象编程出来的早，为什么之前没火，而现在又火了呢？</p>
 <h2 id="WHY函数式编程这两年又火了"><a href="#WHY函数式编程这两年又火了" class="headerlink" title="WHY函数式编程这两年又火了"></a>WHY函数式编程这两年又火了</h2><p>带着疑问，我在搜索引擎中搜索了“函数式编程”和“火了”这两个关键词，找到了一个<a href="https://www.zhihu.com/question/30190384/answer/142902047" target="_blank" rel="external">知乎问答</a>，了解了这一段历史。</p>
@@ -156,12 +156,12 @@
 <blockquote>
 <p>摩尔定律: 当价格不变时，集成电路上可容纳的元器件的数目，约每隔18-24个月便会增加一倍，性能也将提升一倍。</p>
 </blockquote>
-<p>越来越多的人知道，放在初期还是成立的摩尔定律，最近有点不适用了。这和其他很多学科一样，开始的指数级发展，很容易让人过于乐观，到了瓶颈期后，学科发展很容易停滞不前。一个最明显的例子是医学领域关于癌症的笑话，说癌症被攻克，<strong>永远还需要30年</strong>。我用的第一台电脑的CPU是<strong>奔腾4</strong>的，同期经常听到的词还有<strong>赛扬</strong>，奔四有1.4GHz左右的内核时钟，到今天我用的是2016年的顶配MacBook Pro，查了一下，参数为2.7GHz(<em>约20年过去了，还不到2000年的两倍</em>)。</p>
+<p>越来越多的人知道，放在初期还是成立的摩尔定律，最近有点不适用了。这和其他很多学科一样，开始的指数级发展，很容易让人过于乐观，到了瓶颈期后，学科发展很容易停滞不前。一个最明显的例子是医学领域关于癌症的笑话，说癌症被攻克，<strong>永远还需要30年</strong>。我用的第一台电脑的CPU是<strong>奔腾4</strong>的，同期经常听到的词还有<strong>赛扬</strong>处理器，奔四有1.4GHz左右的内核时钟，到今天我用的是2016年的顶配MacBook Pro，查了一下，参数为2.7GHz(<em>约20年过去了，还不到2000年的两倍</em>)。</p>
 <p><img src="https://ws2.sinaimg.cn/large/006tNc79ly1fts1rk3ge3j30wk0jo46i.jpg" alt=""></p>
 <blockquote>
 <p>2016年的顶配MacBook Pro</p>
 </blockquote>
-<p>Intel的工程师也尝试过将这一参数加到3GHz甚至更高，但是他们发现功耗太高、发热太快。但是每年产品线又要更新，那怎么办呢？只能是往CPU里<em>塞核心</em>来获得<strong>计算能力</strong>和<strong>吞吐量</strong>，刚刚发布的MacBook Pro 2018顶配已经用上了<strong>多达8核心的i9</strong>处理器，甚至连iPhone X都已经有了6个核心。将这些核心都利用上，可以让设备充分发挥作用，在面向对象编程中，经常用到的技术是<strong>同步机制和加锁</strong>，但由于函数式编程的特性，在函数式编程的世界里就不会出现这个问题，因此函数式编程又<strong>火了</strong>。</p>
+<p>Intel的工程师也尝试过将这一参数加到3GHz甚至更高，但是他们发现功耗太高、发热太快。但是每年产品线又要更新，那怎么办呢？只能是往CPU里<em>塞核心</em>来获得<strong>计算能力</strong>和<strong>吞吐量</strong>，刚刚发布的MacBook Pro 2018顶配已经用上了<strong>多达8核心的i9</strong>处理器，甚至连iPhone X都已经有了6个核心。将这些核心都利用上，可以让设备充分发挥作用，如果没有充分利用，很多核心就会在那里空转。为了充分利用多核心，在面向对象编程的世界中，经常用到的技术是<strong>同步机制和加锁</strong>，但由于函数式编程的特性，在函数式编程的世界里就不会出现这个问题，因此函数式编程又<strong>火了</strong>。</p>
 <p>其实在科技界这种死灰复燃的例子还有很多，zelear的<em>王自如</em>在他的节目《科技相对论》<a href="http://www.zealer.com/post/223.html" target="_blank" rel="external">小众产品复活指南</a>里曾经介绍过几款死灰复燃产品，比如：<em>有轨电车、死飞、机械键盘、拍立得、车载广播</em>等。这些产品和函数式编程一样，都没有被<strong>替代</strong>的那么彻底，时过境迁，找到了合适的土壤，用户突然又开始想念他的某个功能，所以又活过来了。</p>
 <h1 id="函数式编程的特性-HOW"><a href="#函数式编程的特性-HOW" class="headerlink" title="函数式编程的特性(HOW)"></a>函数式编程的特性(HOW)</h1><p>很遗憾，经过上一节的解释，我依然未能说清函数式编程是什么。这个问题跟面向对象等其他编程范式一样很难给出准确的定义，只能从几个比较<strong>热门</strong>的特性列举一些例子。</p>
 <h2 id="一等函数"><a href="#一等函数" class="headerlink" title="一等函数"></a>一等函数</h2><p>函数的重要性在函数式编程里不言而喻，在支持函数式编程特性的语言里，函数被<strong>提到</strong>了一个非常重要的位置，他跟<em>Int、String、Bool</em>有着相同的地位。函数可以作为变量的字面量存储起来、作为函数的参数和返回值在函数之间传递。</p>
@@ -183,8 +183,10 @@
 <h2 id="纯函数-pure-function"><a href="#纯函数-pure-function" class="headerlink" title="纯函数(pure function)"></a>纯函数(pure function)</h2><p>在函数式编程中，对于函数还有两点特殊的要求。</p>
 <ol>
 <li>不依赖外部</li>
-<li>不改变外部<br>满足上面两点要求的函数被称为<em>纯函数(pure function)</em>。这两点保证了无论在什么时候调用函数，对于相同的输入，总会得到相同的输出。这至少带来了两点好处：</li>
-<li>函数的可测试性</li>
+<li><p>不改变外部<br>满足上面两点要求的函数被称为<em>纯函数(pure function)</em>。这两点保证了无论在什么时候调用函数，对于相同的输入，总会得到相同的输出。这至少带来了两点好处：</p>
+</li>
+<li><p>函数的可测试性</p>
+</li>
 <li>上文提到的函数式编程没有的<em>同步与加锁</em>问题</li>
 </ol>
 <p>至此也可以引出函数式编程的<strong>思想</strong>了:</p>
@@ -764,6 +766,24 @@
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-archive"> Total : 31 </div>
     
     <div class="post-archive">
@@ -884,7 +904,7 @@
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
         </li>
     
     
@@ -927,7 +947,7 @@
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/drop and drag in d3js/" >drop and drag in d3</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular/" >D3 on Angular</a>
         </li>
     
     
@@ -941,31 +961,18 @@
         </li>
     
     
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> Invalid date </div>
-    <ul class="year-list">
-    
-    
         <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2018/05/09/swift5/" >Swift5 新特性了解一下</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
         </li>
     
     
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> 2014 </div>
-    <ul class="year-list">
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/drop and drag in d3js/" >drop and drag in d3</a>
+        </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular/" >D3 on Angular</a>
+            <span class="archive-post-date">04/24</span><a class="archive-post-title" href= "/2014/04/24/用Java生成Json文件/" >用Java生成Json文件</a>
         </li>
     
     
@@ -988,17 +995,12 @@
     
         </ul>
     
-    <div class="archive-year"> 2014 </div>
+    <div class="archive-year"> Invalid date </div>
     <ul class="year-list">
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">04/24</span><a class="archive-post-title" href= "/2014/04/24/用Java生成Json文件/" >用Java生成Json文件</a>
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2018/05/09/swift5/" >Swift5 新特性了解一下</a>
         </li>
     
     </div>
@@ -1012,9 +1014,9 @@
     
         <span class="sidebar-tag-name"><a href= "#">swift</a></span>
     
-        <span class="sidebar-tag-name"><a href= "#">iOS开发</a></span>
-    
         <span class="sidebar-tag-name"><a href= "#">随感</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">iOS开发</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">SVG</a></span>
     
