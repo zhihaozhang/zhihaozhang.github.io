@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
     <title>
         
-        mouseSync后续功能完善心得 · Zhihao&#39;s Studio
+        Swift5 新特性了解一下 · Zhihao&#39;s Studio
         
     </title>
     <link rel="icon" href= /assests/favicon.ico>
@@ -81,7 +81,7 @@
                 <a href="/" >Zhihao&#39;s Studio.</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">mouseSync后续功能完善心得</a>
+                <a href="#" class="post-name">Swift5 新特性了解一下</a>
             </div>
     </div>
     
@@ -102,7 +102,7 @@
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            mouseSync后续功能完善心得
+            Swift5 新特性了解一下
             <!-- 404 -->
             
         </h1>
@@ -120,13 +120,13 @@
             
                 <div class= post-intro-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-href = macOS开发>macOS开发</a>
+        <a class="post-tag" href="javascript:void(0);" data-href = swift>swift</a>
     
 </div>
             
             <div class="post-intro-meta">
                 <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                <span class="post-intro-time">2017/09/29</span>
+                <span class="post-intro-time">2018/05/09</span>
             </div>
         
     </div>
@@ -134,56 +134,60 @@
         <div class="container">
             <main class="main post-page">
     <article class="article-entry">
-        <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>在<a href="http://zhihaozhang.github.io/2017/09/23/让iMac与MacBook高效协同工作——mouseSync开发心得/">上篇博客</a>中,我介绍了mouseSync这款软件的开发初衷、使用场景和开发的过程，感谢一些朋友试用该软件并给我留言，提出了一些新的需求和issue。同时也感谢开发者头条的推荐至头版的精选板块，让那篇开发笔记被2万开发者阅读过了，收获了<strong>github的star</strong>若干、<strong>公众号的关注</strong>若干、赞赏约<strong>50元</strong>。真的非常感谢大家的关注、star鼓励和金钱赞赏。</p>
-<p>我整理了一下大家的需求，大体上可归纳为3类。</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>话说这两天好像是Google IO召开的日子，借机蹭一波热度，唱个反调，浅析一下Swift5可能会出现的新特性，也算是为下个月即将举办的<strong>WWDC</strong>预热预热吧。</p>
+<h1 id="ABI稳定性"><a href="#ABI稳定性" class="headerlink" title="ABI稳定性"></a>ABI稳定性</h1><p>ABI稳定性这个话题是一个历史遗留任务，最初是Swift3的目标，苹果的拖延症一直拖到了Swift5，还不一定可以实现。这也是国内很多公司不敢全面拥抱Swift的<strong>重要原因之一</strong>。</p>
+<h2 id="ABI是啥"><a href="#ABI是啥" class="headerlink" title="ABI是啥"></a>ABI是啥</h2><p>ABI是Application Binary Interfaces（应用二进制接口）的缩写，它描述了应用程序和操作系统或其他应用程序的低级接口。</p>
+<p>在应用程序运行时，Swift二进制需要和其他库或组件通过ABI进行接触，因此ABI定义了非常底层的细节。比如：如何调用一个函数，数据在内存中是如何存储的、元数据在哪以及如何获取到。</p>
+<p>由于现在ABI是不稳定的，因此每一个APP都不得不绑定特定版本的Swift动态库。这样从外面看起来，Swift与App的关联比ios系统要更紧密。</p>
+<p>举个例子来说，app1使用的是Swift 4.0，因此它绑定的是包含4.0 ABI的Swift 4.0动态库，而app2使用的是Swift 4.1，它绑定的就是包含4.1 ABI的Swift 4.1动态库。如果ABI变得稳定了，那么ABI就可以抽出来，集成到ios系统中，因为它可以跟Swift的任一版本兼容。</p>
+<h2 id="ABI的重要性"><a href="#ABI的重要性" class="headerlink" title="ABI的重要性"></a>ABI的重要性</h2><p>通过上面的描述，应该不难看出ABI的重要性了，总结一下ABI稳定性带来的好处吧：</p>
+<ul>
+<li>App所占的大小会减小</li>
+<li>Swift变化也没现在这么频繁</li>
+<li>版本变化时，更少的改动</li>
+<li>因为不需要绑定特定版本的swift，开发者可以做出预编译的框架</li>
+</ul>
+<p>但凡事都有两面性，由于带上了ABI这个脚链，不可避免的也会引入一些缺点：</p>
+<ul>
+<li>限制了接口的变动</li>
+<li>Swift的发展和演化需要考虑的东西也渐渐多了起来</li>
+</ul>
+<h1 id="Async-Await-模式"><a href="#Async-Await-模式" class="headerlink" title="Async/Await 模式"></a>Async/Await 模式</h1><p>熟悉javascript的朋友应该对这个模式不陌生，在ES7中，也加入了这个模式应对异步编程。这个好用的特性，即将引入Swift5！</p>
+<h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><p>之前，例如错误处理、回调之类的异步API用起来挺麻烦的，组合调用时很容易产生出复杂的控制流，用Swift的guard let语法糖在闭包调用中看起来重重嵌套，开发者很难知道当前所处的上下文。</p>
+<p>举个例子：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">loadWebResource</span><span class="params">(<span class="number">_</span> path: String, completionBlock: <span class="params">(result: Resource)</span></span></span> -&gt; <span class="type">Void</span>) &#123; ... &#125;</div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">decodeImage</span><span class="params">(<span class="number">_</span> r1: Resource, <span class="number">_</span> r2: Resource, completionBlock: <span class="params">(result: Image)</span></span></span> -&gt; <span class="type">Void</span>)</div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">dewarpAndCleanupImage</span><span class="params">(<span class="number">_</span> i : Image, completionBlock: <span class="params">(result: Image)</span></span></span> -&gt; <span class="type">Void</span>)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">processImageData1</span><span class="params">(completionBlock: <span class="params">(result: Image)</span></span></span> -&gt; <span class="type">Void</span>) &#123;</div><div class="line">   loadWebResource(<span class="string">"dataprofile.txt"</span>) &#123; dataResource <span class="keyword">in</span></div><div class="line">      loadWebResource(<span class="string">"imagedata.dat"</span>) &#123; imageResource <span class="keyword">in</span></div><div class="line">         decodeImage(dataResource, imageResource) &#123; imageTmp <span class="keyword">in</span></div><div class="line">            dewarpAndCleanupImage(imageTmp) &#123; imageResult <span class="keyword">in</span></div><div class="line">               completionBlock(imageResult)</div><div class="line">             &#125;</div><div class="line">          &#125;</div><div class="line">       &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>引入Async/Await模式后，现在的代码如下：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">loadWebResource</span><span class="params">(<span class="number">_</span> path: String)</span></span> async -&gt; <span class="type">Resource</span></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">decodeImage</span><span class="params">(<span class="number">_</span> r1: Resource, <span class="number">_</span> r2: Resource)</span></span> async -&gt; <span class="type">Image</span></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">dewarpAndCleanupImage</span><span class="params">(<span class="number">_</span> i : Image)</span></span> async -&gt; <span class="type">Image</span></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">processImageData1</span><span class="params">()</span></span> async -&gt; <span class="type">Image</span> &#123;</div><div class="line">    <span class="keyword">let</span> dataResource = await loadWebResource(<span class="string">"dataprofile.txt"</span>)</div><div class="line">    <span class="keyword">let</span> imageResource = await loadWebResource(<span class="string">"imagedata.dat"</span>)</div><div class="line">    <span class="keyword">let</span> imageTmp = await decodeImage(dataResource, imageResource)</div><div class="line">    <span class="keyword">let</span> imageResult = await dewarpAndCleanupImage(imageTmp)</div><div class="line">    <span class="keyword">return</span> imageResult</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>此处应有掌声</p>
+</blockquote>
+<h1 id="Actors"><a href="#Actors" class="headerlink" title="Actors"></a>Actors</h1><ul>
+<li>Actors是一个新概念，它表示现实世界中的一些概念，比如“一个文档”、“一台设备”、“一次网络请求”等。</li>
+<li>它是调度队列、可运行在该队列上并受该队列保护的数据的组合</li>
+<li>可以认为是类似于class和protocol的一种新类型</li>
+<li>允许开发者在其中定义内部变量/函数从而管理数据、进行相关操作</li>
+<li>不能返回值、抛出异常、没有inout参数</li>
+<li>开发者可以与之异步通信，Actor可以保证它所保护的数据只被运行于其上的代码接触到</li>
+<li>UIKit和AppKit可以将主线程建模成MainActor</li>
+<li>和class、protocol一样，开发者可以用extension关键字扩展MainActor</li>
+<li>当引用数变为0时，Actor生命周期完成</li>
+</ul>
+<p>举个例子，假设正在开发一个tableview的应用，内容是一个string数组(受保护数据)，代码看起来应该是这样:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">actor <span class="type">TableModel</span> &#123;</div><div class="line">    <span class="keyword">let</span> mainActor : <span class="type">TheMainActor</span></div><div class="line">    <span class="keyword">var</span> theList : [<span class="type">String</span>] = [] &#123;</div><div class="line">        <span class="keyword">didSet</span> &#123;</div><div class="line">            mainActor.updateTableView(theList)</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">init</span>(mainActor: <span class="type">TheMainActor</span>) &#123; </div><div class="line">        <span class="keyword">self</span>.mainActor = mainActor </div><div class="line">    &#125;</div><div class="line">    actor <span class="function"><span class="keyword">func</span> <span class="title">add</span><span class="params">(entry: String)</span></span> &#123;</div><div class="line">      theList.append(entry)</div><div class="line">    &#125;</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<h1 id="其他提升"><a href="#其他提升" class="headerlink" title="其他提升"></a>其他提升</h1><ul>
+<li>String:对正则表达式<strong>Language级别</strong>的支持、性能提升。</li>
+<li>标准库的改进</li>
+<li>改进Foundation</li>
+<li>增加了新语法</li>
+</ul>
+<p>让我们一起静待WWDC2018的到来！</p>
+<p>参考</p>
 <ol>
-<li>没有logo</li>
-<li>在外部设备(鼠标/Trackpad真正属于的那台Mac)上容易引起误操作</li>
-<li>一个关键的功能，左键拖拽功能，没有实现</li>
+<li><a href="https://www.developerinsider.in/what-will-be-new-in-swift-5/" target="_blank" rel="external">本文主要翻译自：DeveloperInsider</a>.</li>
+<li><a href="https://www.jianshu.com/p/5860f5542f21" target="_blank" rel="external">Swift库二进制接口(ABI)兼容性研究</a></li>
+<li><a href="https://imtx.me/archives/2370.html" target="_blank" rel="external">Swift 5 的蓝图：ABI 稳定</a></li>
 </ol>
-<p>在这篇博客中，我就来写一下对上面提到的三个需求的解决方案。完成上述三个需求后的软件在<a href="https://pan.baidu.com/s/1i5Gee6T" target="_blank" rel="external">网盘</a>可下载到，最新代码依然开源在<a href="https://github.com/zhihaozhang/mouseSync" target="_blank" rel="external">github</a>上。</p>
-<h1 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h1><h2 id="没有logo"><a href="#没有logo" class="headerlink" title="没有logo"></a>没有logo</h2><p>其实这件事挺尴尬的，我不是设计师，因此平时logo的主要来源是<a href="https://www.flaticon.com" target="_blank" rel="external">flaticon</a>，这次没忍心打扰正在熟睡的非著名设计师Joseph，因此还是在flaticon上找的icon，进行了简单的颜色变换与组合。</p>
-<p>icon考虑到了mouseSync具有鼠标和蓝牙的特性，因此还是比较写实的。考虑到蓝牙客户端有外部设备和数据中心(两台Mac)之分，因此两个icon虽然很相似，但仍有细微的不同。不同点在于，数据中心的icon多了一个类似信号指示的标志，表示它是接收蓝牙信号的一端。</p>
-<p>由于本人设计方面实在业余，还请大家轻喷。有空再找非著名设计师Joseph实现一枚漂亮的logo。</p>
-<div align="center"><br><img src="https://ws1.sinaimg.cn/large/006tKfTcgy1fmt1re8nvhj30bs078wez.jpg" alt=""><br>&gt; icons<br></div>
 
-<h2 id="在外部设备端容易引起误操作"><a href="#在外部设备端容易引起误操作" class="headerlink" title="在外部设备端容易引起误操作"></a>在外部设备端容易引起误操作</h2><p>之前的demo视频中，为了让两台电脑看起来一致，我录的是同时打开文件，同时在图标上右击，在现实生活中，在同一时刻同时操作两台Mac的需求很少不存在。通常情况下，用户还是想对某一台Mac进行操作的。<strong>mouseSync的定位应该是：帮助用户用一个鼠标操作两台电脑，且给用户决定什么时候操作哪台，省去两个鼠标之间换来换去的麻烦。</strong></p>
-<p>之前的项目中，我对鼠标事件添加的均是全局监控事件，因此只要mouseSync<strong>生命周期</strong>没有结束，它的操作将实时被发送到另一台mac上。我想过两个解决方案：</p>
-<ol>
-<li>跟其他共享键盘的软件一样，使用全局快捷键对蓝牙通知服务进行开启/关闭</li>
-<li>将全局监控事件变成局部监控事件，蓝牙通知服务仅在应用视图为Keywindow时有效</li>
-</ol>
-<h3 id="为什么选择Plan-B"><a href="#为什么选择Plan-B" class="headerlink" title="为什么选择Plan B"></a>为什么选择Plan B</h3><p>关于方案1，我觉得作为一款软件，快捷键应当由用户自己决定，虽然cocoapod上已经有非常好的项目<a href="https://github.com/Clipy/KeyHolder" target="_blank" rel="external">KeyHolder</a>进行支持,但是考虑到两个因素还是决定使用Plan B。</p>
-<p>先看看Plan B，Plan B是这样的，首先让当前的window全屏，但是里面没有内容，因此无论在当前试图下如何操作，都不会有可能造成误操作。回到Plan A，快捷键的录入放到哪里呢？如果放到当前视图，将会带来一定的误操作风险；如果放到MenuBar，那么用户将不得不退出全屏模式，到菜单栏进行设置，这样的解决方案破坏了用户体验，综合考虑，最终还是选了Plan B。</p>
-<h3 id="实现过程中遇到的问题"><a href="#实现过程中遇到的问题" class="headerlink" title="实现过程中遇到的问题"></a>实现过程中遇到的问题</h3><p>让当前窗口一打开就全屏的方法是在ViewDidLoad方法体中进行控制的:</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">viewDidLoad</span><span class="params">()</span></span> &#123;</div><div class="line">	<span class="keyword">super</span>.viewDidLoad()</div><div class="line">	<span class="keyword">self</span>.view.window?.zoom(<span class="keyword">self</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>但是我很快就发现了问题：<strong>尽管已经将应用全屏了，但是用户依然会有一定几率对dock栏和顶部菜单栏进行误操作。</strong>用户如果在操作另一台电脑的时候，还得注意这台电脑上是不是误操作了，这不符合我们软件开发的初衷。考虑到有些用户将dock放在底部，有些用户将dock放在左边，因此，我加了这样的限制，当用户将鼠标移动到距离屏幕边缘<strong>50px</strong>以内的时候，程序帮助他将鼠标移动至屏幕中央。参照下图，灰色地带就可以作为防止鼠标误操作的缓冲区。</p>
-<div align="center"><br><img src="https://ws2.sinaimg.cn/large/006tKfTcgy1fmt1rf58m6j30vw0j8wff.jpg" alt=""><br>&gt; 防止对dock和菜单栏误操作解决方法示意图<br></div>
-
-<p>阅读过上一篇博客的朋友一定注意到了，我们的程序是记录上一个鼠标点的位置，并将上一个鼠标点的位置与当前位置相减，将位置变动作为特征值进行发送。因此，在鼠标被程序移动到屏幕中央的时候，需要将上一个位置更新为屏幕中央的坐标。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//屏幕宽高的获取方式</span></div><div class="line">    <span class="keyword">let</span> <span class="type">SCREEN_WIDTH</span> = <span class="type">NSScreen</span>.main()!.frame.width</div><div class="line">    <span class="keyword">let</span> <span class="type">SCREEN_HEIGHT</span> = <span class="type">NSScreen</span>.main()!.frame.height</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="左键拖拽功能"><a href="#左键拖拽功能" class="headerlink" title="左键拖拽功能"></a>左键拖拽功能</h2><p>左键拖一个文件或窗口到一个新位置这个功能还是经常被使用到的，我使用的是Trackpad，通常是使用<strong>三支拖移</strong>。想要监听外围设备的这个动作并不难，但是想让计算机模拟这个操作相对比较困难。就像双击不是单纯的模拟单击事件两次一样，这次我又踩到坑了，drag and move事件并不是简单的mousedown-&gt; mousemove -&gt; mouseup这么容易的事情。</p>
-<p>我在<a href="https://stackoverflow.com/questions/1817628/clicking-the-mouse-down-to-drag-objects-on-mac" target="_blank" rel="external">Stack Overflow</a>上找到了正确的方法：有一个叫<strong>kCGEventLeftMouseDragged</strong>的事件，专门来处理这件事。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">mouse_left_drag_to</span><span class="params">(<span class="keyword">float</span> x, <span class="keyword">float</span> y)</span> </span>&#123;</div><div class="line">    CGEventRef left_drag_event = CGEventCreateMouseEvent(<span class="literal">NULL</span>, kCGEventLeftMouseDragged, CGPointMake(x, y), <span class="number">0</span>);</div><div class="line"></div><div class="line">    CGEventPost(kCGHIDEventTap, left_drag_event);</div><div class="line">    CFRelease(left_drag_event);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>和Scroll滚轮事件一样，这里我们采用的是Quartz模拟鼠标事件,因此依然需要C与swift进行混编。模拟总共可分为3步：第一步是创建一个Quartz鼠标事件；第二步是将这个事件放到事件流中，并指定位置；第三步是release这个事件。</p>
-<p>模拟这个事件的时候，随着鼠标拖拽后的不停移动，会不停产生event，而且event中x和y的偏移量始终是相对于第一次鼠标drag按下时的坐标。因此，我们需要记录两件事，第一件事是第一次drag时候的坐标，第二件事是当前是不是开启了新一轮的drag还是仍然在上一轮的drag中。核心代码如下：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">	<span class="keyword">if</span> dragFirst == <span class="literal">true</span>&#123;</div><div class="line">		dragFirst = <span class="literal">false</span></div><div class="line">    mouseLocBeforeDrag = <span class="type">NSEvent</span>.mouseLocation()                 mouseLocBeforeDrag.y = <span class="type">NSHeight</span>(<span class="type">NSScreen</span>.screens()![<span class="number">0</span>].frame) - mouseLocBeforeDrag.y;</div><div class="line">    </div><div class="line">    mouse_left_drag_to(<span class="type">Float</span>(mouseLocBeforeDrag.x)+<span class="type">Float</span>(dx!),<span class="type">Float</span>(mouseLocBeforeDrag.y)-<span class="type">Float</span>(dy!)</div><div class="line">  &#125;<span class="keyword">else</span>&#123;</div><div class="line">    mouse_left_drag_to(<span class="type">Float</span>(mouseLocBeforeDrag.x)+<span class="type">Float</span>(dx!),<span class="type">Float</span>(mouseLocBeforeDrag.y)-<span class="type">Float</span>(dy!))</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>上面的代码有两处需要注意：</p>
-<ol>
-<li>dragFirst初始值为true,在mouseUp之后重新置为true，表示一轮的drag已经完成了；</li>
-<li>y的坐标是-，x的坐标是+，这是由OS X的坐标系决定的。</li>
-</ol>
-<p>最后，我用两台电脑同时在画板上写了一个牛B。mouseSync的开发工作算是告一段落了，希望对大家有所帮助！</p>
-<div align="center"><br><img src="https://ws4.sinaimg.cn/large/006tKfTcgy1fmt1rhcpcag307k0dcx6s.gif" alt=""><br>&gt; drag事件demo<br></div>
-
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol>
-<li><a href="https://stackoverflow.com/questions/1817628/clicking-the-mouse-down-to-drag-objects-on-mac" target="_blank" rel="external">https://stackoverflow.com/questions/1817628/clicking-the-mouse-down-to-drag-objects-on-mac</a></li>
-<li><a href="https://www.flaticon.com" target="_blank" rel="external">https://www.flaticon.com</a></li>
-</ol>
-<h1 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h1><p>试用软件之后如果您对软件有任何的意见与建议，欢迎留言。如果您喜欢这款软件，也欢迎您将它推荐给您的朋友们。让我们一起将mouseSync变得更好！</p>
-<p>我会在订阅号里不定期分享我个人的macOS/ios开发心得和开发笔记，也会在里面发表对于苹果产品/框架/趋势的拙见，希望爱好科技产品或者苹果生态圈的开发者关注。相信本公众号一定能给您带来收获和启发。</p>
-<p>【欢迎扫码关注微信公众号】</p>
-<div align="center"><br><img src="https://ws4.sinaimg.cn/large/006tKfTcgy1fmt1rkdtu2g307k0dcx6s.gif" alt=""><br>&gt; 扫码关注微信公众号 骨灰级果粉 获得最新文章更新<br></div>
 
             <! -- 添加捐赠图标 -->
     <div class ="post-donate">
@@ -207,17 +211,17 @@
     <ul class="post-pager">
         
             <li class="next">
-                <a href= "/2017/10/11/gInSVG/" title= 为SVG中大小可变的<g>元素加上边框和背景色 >
+                <a href= "/2018/05/20/ProtocolOP/" title= 面向协议编程初探 >
                     <span>Next Post</span>
-                    <span>为SVG中大小可变的<g>元素加上边框和背景色</span>
+                    <span>面向协议编程初探</span>
                 </a>
             </li>
         
         
             <li class="previous">
-                <a href= "/2017/09/26/青芒 for Mac客户端开发笔记/" title= 青芒 for Mac客户端开发笔记 >
+                <a href= "/2018/04/17/GoBACKSPACE/" title= GoBACKSPACE————致敬Go2Shell的Finder插件 >
                     <span>Previous Post</span>
-                    <span>青芒 for Mac客户端开发笔记</span>
+                    <span>GoBACKSPACE————致敬Go2Shell的Finder插件</span>
                 </a>
             </li>
         
