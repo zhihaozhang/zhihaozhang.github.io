@@ -1,139 +1,104 @@
 <!DOCTYPE html>
 <html>
-    <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
-    <title>
-        
-        Swift4字典和集合的新特性 · Zhihao&#39;s Studio
-        
-    </title>
-    <link rel="icon" href= /assests/favicon.ico>
-    <!-- 提前加载place holder  -->
-    <style>
-        @font-face {
-            font-family: 'Oswald-Regular';
-            src: url('/font/Oswald-Regular.ttf');
-        }
-        @font-face {
-            font-family: 'Source Sans Pro';
-            src: url('/font/Source Sans Pro.woff'),
-            url('/font/Source Sans Pro.woff2');
-            font-weight: normal;
-            font-style: normal;
-        }
-        @font-face {
-            font-family: 'Source Code Pro';
-            src: url('/font/SourceCodePro-Regular.ttf.woff'),
-            url('/font/SourceCodePro-Regular.ttf.woff2');
-            font-weight: normal;
-            font-style: normal;
-        }
-        
-        
-        .site-intro-placeholder {
-        position: absolute;
-        z-index: -2;
-        top: 0;
-        left: 0px;
-        width: calc(100% + 300px);
-        height: 100%;
-        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
-        background-position: center center;
-        transform: translate3d(-226px, 0, 0);
-        animation: gradient-move 2s ease-out 0s 1;
-        }
-        @keyframes gradient-move {
-        0% {
-            transform: translate3d(-226px, 0, 0);
-        }
-        99% {
-            transform: translate3d(0, 0, 0);
-        }
-        99.1% {
-            transform: translate3d(-226px, 0, 0);
-        }
-        100% {
-            transform: translate3d(-226px, 0, 0);
-        }
-    }
-    </style>
-    <link rel="stylesheet" href = "/css/style.css?v=20170930" />
-    <script src="//cdn.staticfile.org/jquery/3.2.1/jquery.min.js" defer></script>
-    
-    <script src="/scripts/main.js" defer></script>
-    <!-- 百度统计  -->
-    
-    <!-- 谷歌统计  -->
-    
-</head>
-    
-        <body class="post-body">
-    
-    
-<header class="header">
+<head>
+  <meta charset="utf-8">
+  
+  <title>Swift4字典和集合的新特性 | Chih-Hao&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Swift4中的字典和集合在这些方面变得更好写在前面在最新版本的Swift中，dictionaries和sets新增了很多行为方法和初始化方法，让一些常见的任务变得异常简单。诸如组合、过滤和transform值操作可以用一步完成，让使用者可以写出更高效和简洁的代码。 本篇博客将使用杂货铺中的商品作为例子演示这些新功能。GroceryItem结构体，由名字和部门组成，作为本例的数据类型。 12345">
+<meta name="keywords" content="swift">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swift4字典和集合的新特性">
+<meta property="og:url" content="http://zhihaozhang.github.io/2017/10/13/DicAndSetInSwift4/index.html">
+<meta property="og:site_name" content="Chih-Hao&#39;s Blog">
+<meta property="og:description" content="Swift4中的字典和集合在这些方面变得更好写在前面在最新版本的Swift中，dictionaries和sets新增了很多行为方法和初始化方法，让一些常见的任务变得异常简单。诸如组合、过滤和transform值操作可以用一步完成，让使用者可以写出更高效和简洁的代码。 本篇博客将使用杂货铺中的商品作为例子演示这些新功能。GroceryItem结构体，由名字和部门组成，作为本例的数据类型。 12345">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://swift.org/assets/images/dictionary-blog/grouping_2x.png">
+<meta property="og:image" content="https://swift.org/assets/images/dictionary-blog/uniqueKeys_2x.png">
+<meta property="og:image" content="https://swift.org/assets/images/dictionary-blog/merging_2x.png">
+<meta property="og:updated_time" content="2017-12-25T07:30:55.311Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Swift4字典和集合的新特性">
+<meta name="twitter:description" content="Swift4中的字典和集合在这些方面变得更好写在前面在最新版本的Swift中，dictionaries和sets新增了很多行为方法和初始化方法，让一些常见的任务变得异常简单。诸如组合、过滤和transform值操作可以用一步完成，让使用者可以写出更高效和简洁的代码。 本篇博客将使用杂货铺中的商品作为例子演示这些新功能。GroceryItem结构体，由名字和部门组成，作为本例的数据类型。 12345">
+<meta name="twitter:image" content="https://swift.org/assets/images/dictionary-blog/grouping_2x.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Chih-Hao&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
 
-    <div class="header-sidebar-menu">&#xe775;</div>
-    <!-- post页的toggle banner  -->
-    
-    <div class="banner">
-            <div class="blog-title">
-                <a href="/" >Zhihao&#39;s Studio.</a>
-            </div>
-            <div class="post-title">
-                <a href="#" class="post-name">Swift4字典和集合的新特性</a>
-            </div>
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Chih-Hao&#39;s Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">骨灰级果粉</a>
+        </h2>
+      
     </div>
-    
-    <a class="home-link" href=/>Zhihao's Studio.</a>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://zhihaozhang.github.io"></form>
+      </div>
+    </div>
+  </div>
 </header>
-    <div class="wrapper">
-        <div class="site-intro">
+      <div class="outer">
+        <section id="main"><article id="post-DicAndSetInSwift4" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/10/13/DicAndSetInSwift4/" class="article-date">
+  <time datetime="2017-10-13T06:02:20.042Z" itemprop="datePublished">2017-10-13</time>
+</a>
     
-    <!-- 主页  -->
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/苹果开发/">苹果开发</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
     
     
-    <!-- 404页  -->
-            
-    <div class="site-intro-img" style="background-image: url(http://oumn0o088.bkt.clouddn.com/post-bg.jpg)"></div>
-    <div class="site-intro-placeholder"></div>
-    <div class="site-intro-meta">
-        <!-- 标题  -->
-        <h1 class="intro-title">
-            <!-- 主页  -->
-            
-            Swift4字典和集合的新特性
-            <!-- 404 -->
-            
-        </h1>
-        <!-- 副标题 -->
-        <p class="intro-subtitle">
-            <!-- 主页副标题  -->
-            
-            
-        </p>
-        <!-- 404 -->
+      <header class="article-header">
         
-        <!-- 文章页meta -->
-        
-            <!-- 文章页标签  -->
-            
-                <div class= post-intro-tags >
+  
+    <h1 class="article-title" itemprop="name">
+      Swift4字典和集合的新特性
+    </h1>
+  
+
+      </header>
     
-        <a class="post-tag" href="javascript:void(0);" data-href = swift>swift</a>
-    
-</div>
-            
-            <div class="post-intro-meta">
-                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                <span class="post-intro-time">2017/10/13</span>
-            </div>
-        
-    </div>
-</div>
-        <div class="container">
-            <main class="main post-page">
-    <article class="article-entry">
+    <div class="article-entry" itemprop="articleBody">
+      
         <h1 id="Swift4中的字典和集合在这些方面变得更好"><a href="#Swift4中的字典和集合在这些方面变得更好" class="headerlink" title="Swift4中的字典和集合在这些方面变得更好"></a>Swift4中的字典和集合在这些方面变得更好</h1><h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>在最新版本的Swift中，dictionaries和sets新增了很多行为方法和初始化方法，让一些常见的任务变得异常简单。诸如组合、过滤和transform值操作可以用一步完成，让使用者可以写出更高效和简洁的代码。</p>
 <p>本篇博客将使用杂货铺中的商品作为例子演示这些新功能。GroceryItem结构体，由名字和部门组成，作为本例的数据类型。</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">GroceryItem</span>: <span class="title">Hashable</span> </span>&#123;</div><div class="line">    <span class="keyword">var</span> name: <span class="type">String</span></div><div class="line">    <span class="keyword">var</span> department: <span class="type">Department</span></div><div class="line"></div><div class="line">    <span class="class"><span class="keyword">enum</span> <span class="title">Department</span> </span>&#123;</div><div class="line">        <span class="keyword">case</span> bakery, produce, seafood</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> ==<span class="params">(lhs: GroceryItem, rhs: GroceryItem)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">        <span class="keyword">return</span> (lhs.name, lhs.department) == (rhs.name, rhs.department)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">var</span> hashValue: <span class="type">Int</span> &#123;</div><div class="line">        <span class="comment">// Combine the hash values for the name and department</span></div><div class="line">        <span class="keyword">return</span> name.hashValue &lt;&lt; <span class="number">2</span> | department.hashValue</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// Create some groceries for our store:</span></div><div class="line"><span class="keyword">let</span> 🍎 = <span class="type">GroceryItem</span>(name: <span class="string">"Apples"</span>, department: .produce)</div><div class="line"><span class="keyword">let</span> 🍌 = <span class="type">GroceryItem</span>(name: <span class="string">"Bananas"</span>, department: .produce)</div><div class="line"><span class="keyword">let</span> 🥐 = <span class="type">GroceryItem</span>(name: <span class="string">"Croissants"</span>, department: .bakery)</div><div class="line"><span class="keyword">let</span> 🐟 = <span class="type">GroceryItem</span>(name: <span class="string">"Salmon"</span>, department: .seafood)</div><div class="line"><span class="keyword">let</span> 🍇 = <span class="type">GroceryItem</span>(name: <span class="string">"Grapes"</span>, department: .produce)</div><div class="line"><span class="keyword">let</span> 🍞 = <span class="type">GroceryItem</span>(name: <span class="string">"Bread"</span>, department: .bakery)</div><div class="line"><span class="keyword">let</span> 🍤 = <span class="type">GroceryItem</span>(name: <span class="string">"Shrimp"</span>, department: .seafood)</div><div class="line"></div><div class="line"><span class="keyword">let</span> groceries = [🍎, 🍌, 🥐, 🐟, 🍇, 🍞, 🍤]</div></pre></td></tr></table></figure>
@@ -182,918 +147,145 @@
 <p>和字典一样，集合也拥有了新的<strong>filter(_:) </strong>方法，返回的也是集合，而不是早起版本中的数组。字典和集合现在提供了暴漏现在capacity的方法:<strong>reserveCapacity(_:)</strong>，有了该方法，用户可以看到并控制他们的内部存储。</p>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p>本文译自：<a href="https://swift.org/blog/dictionary-and-set-improvements/" target="_blank" rel="external">https://swift.org/blog/dictionary-and-set-improvements/</a></p>
 
-
-            <! -- 添加捐赠图标 -->
-    <div class ="post-donate">
-    <div id="donate_board" class="donate_bar center">
-        <a id="btn_donate" class="btn_donate" href="javascript:;" title="打赏"></a>
-
-        <div style="text-align:center;color:#00F" >
-           
-        </div>
-
-    <script type="text/javascript">
-        document.getElementById('btn_donate').onclick = function(){
-            $('#donate_board').addClass('hidden');
-            $('#donate_guide').removeClass('hidden');
-        }
-    </script>
-</div>
-<! -- 添加捐赠图标 -->
-    </article>
-    <!-- 前后页  -->
-    <ul class="post-pager">
-        
-            <li class="next">
-                <a href= "/2017/10/18/topology/" title= 拓扑图的实现 >
-                    <span>Next Post</span>
-                    <span>拓扑图的实现</span>
-                </a>
-            </li>
-        
-        
-            <li class="previous">
-                <a href= "/2017/10/11/gInSVG/" title= 为SVG中大小可变的<g>元素加上边框和背景色 >
-                    <span>Previous Post</span>
-                    <span>为SVG中大小可变的<g>元素加上边框和背景色</span>
-                </a>
-            </li>
-        
-    </ul>
-
-
-
-    <!-- 来必力City版安装代码 -->
-<div id="lv-container" data-id="city" data-uid="MTAyMC8zMTAyMC83NTY5">
-    <script type="text/javascript">
-   (function(d, s) {
-       var j, e = d.getElementsByTagName(s)[0];
-
-       if (typeof LivereTower === 'function') { return; }
-
-       j = d.createElement(s);
-       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-       j.async = true;
-
-       e.parentNode.insertBefore(j, e);
-   })(document, 'script');
-    </script>
-<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
-</div>
-<!-- City版安装代码已完成 -->
-
-
-    <div style="text-align:center">
-    <span id="busuanzi_container_page_pv" >
-        本文总阅读量<span id="busuanzi_value_page_pv"></span>次
-    </span>
+      
     </div>
-</main>
-            <!-- profile -->
-            
-        </div>
-        <footer class="footer">
-    <!-- social  -->
-    
-    <div class="social">
-        
-    
-        
-            
-                <a href="emailto:zhihaozhang@me.com" class="iconfont-archer email" title=email ></a>
-            
-        
-    
-        
-            
-                <a href="https://github.com/zhihaozhang" class="iconfont-archer github" target="_blank" title="github"></a>
-            
-        
-    
-        
-            
-                <a href="http://weibo.com/2854428840/profile?rightmod=1&wvr=6&mod=personinfo" class="iconfont-archer weibo" target="_blank" title="weibo"></a>
-            
-        
-    
-        
-            
-                <a href="https://www.zhihu.com/people/zhihao-zhang-95/activities" class="iconfont-archer zhihu" target="_blank" title="zhihu"></a>
-            
-        
-    
-        
-            
-                <a href="https://twitter.com/Chih_hao_" class="iconfont-archer twitter" target="_blank" title="twitter"></a>
-            
-        
-    
-        
-            
-                <a href="https://www.instagram.com/izhihao_zhang/" class="iconfont-archer instagram" target="_blank" title="instagram"></a>
-            
-        
-    
+    <footer class="article-footer">
+      <a data-url="http://zhihaozhang.github.io/2017/10/13/DicAndSetInSwift4/" data-id="cjl7xi5xf000508tdtioc98d2" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/swift/">swift</a></li></ul>
 
-    </div>
+    </footer>
+  </div>
+  
     
-    <!-- powered by Hexo  -->
-    <div class="copyright">
-        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span>
-        <span
-            id="theme-info">Theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">archer</a></span>
-    </div>
+<nav id="article-nav">
+  
+    <a href="/2017/10/18/topology/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          拓扑图的实现
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/10/11/gInSVG/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">为SVG中大小可变的&lt;g&gt;元素加上边框和背景色</div>
+    </a>
+  
+</nav>
 
-</footer>
-    </div>
-    <div class="back-top">&#xe639;</div>
-    <div class="sidebar">
-    <div class="sidebar-header">
-        <div class="sidebar-category">
-            <span class="sidebar-archive-link"><span class="iconfont-archer">&#xe67d;</span>Archive</span>
-            <span class="sidebar-tags-link"><span class="iconfont-archer">&#xe610;</span>Tag</span>
-        </div>
-    </div>
-    <div class="sidebar-content sidebar-content-show-archive">
-          <div class="sidebar-archive">
-    <!-- 在ejs中将archive按照时间排序 -->
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <div class="total-archive"> Total : 33 </div>
-    
-    <div class="post-archive">
-    
-    
-    
-    
-    <div class="archive-year"> 2018 </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">08/24</span><a class="archive-post-title" href= "/2018/08/24/invisibilitycloak/" >上架沙盒化应用,重启应用后保持文件持久访问性指南</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">08/02</span><a class="archive-post-title" href= "/2018/08/02/Match3/" >Match for iPhone开发笔记 <三> 测试与上架篇</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">07/30</span><a class="archive-post-title" href= "/2018/07/30/FunctionalPrograming/" >浅谈函数式编程 (Introducing Functional Programming)</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">07/23</span><a class="archive-post-title" href= "/2018/07/23/Match2/" >Match for iPhone开发笔记 <二> 网络请求和数据流篇</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">07/16</span><a class="archive-post-title" href= "/2018/07/16/buy-house/" >魔都买房杂记(上)</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">07/11</span><a class="archive-post-title" href= "/2018/07/11/Match/" >Match for iPhone开发笔记 <一> 开篇杂谈</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">06/01</span><a class="archive-post-title" href= "/2018/06/01/thunderPassby/" >绕开迅雷的利器:thunderPassby开发笔记</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">05/20</span><a class="archive-post-title" href= "/2018/05/20/ProtocolOP/" >面向协议编程初探</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">04/17</span><a class="archive-post-title" href= "/2018/04/17/GoBACKSPACE/" >GoBACKSPACE————致敬Go2Shell的Finder插件</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">01/24</span><a class="archive-post-title" href= "/2018/01/24/DragAndDrop/" >更优雅的文件添加方式Drag & Drop</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">01/16</span><a class="archive-post-title" href= "/2018/01/16/FileHider/" >AVHider for macOS开发笔记</a>
-        </li>
-    
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> 2017 </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/31</span><a class="archive-post-title" href= "/2017/12/31/HAN/" >浅谈可视交互的方法在大数据平台数据产生、前期处理方面的应用</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/17</span><a class="archive-post-title" href= "/2017/12/17/googleDevDay2/" >谷歌开发者大会(GDD2017)见闻 Day2</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2017/12/15/googleDevDay/" >谷歌开发者大会(GDD2017)见闻 Day1</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">10/18</span><a class="archive-post-title" href= "/2017/10/18/topology/" >拓扑图的实现</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">10/13</span><a class="archive-post-title" href= "/2017/10/13/DicAndSetInSwift4/" >Swift4字典和集合的新特性</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">10/11</span><a class="archive-post-title" href= "/2017/10/11/gInSVG/" >为SVG中大小可变的<g>元素加上边框和背景色</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">09/29</span><a class="archive-post-title" href= "/2017/09/29/mouseSyncII/" >mouseSync后续功能完善心得</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">09/26</span><a class="archive-post-title" href= "/2017/09/26/青芒 for Mac客户端开发笔记/" >青芒 for Mac客户端开发笔记</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">09/23</span><a class="archive-post-title" href= "/2017/09/23/让iMac与MacBook高效协同工作——mouseSync开发心得/" >让iMac与MacBook高效协同工作——mouseSync开发心得</a>
-        </li>
-    
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> 2014 </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/drop and drag in d3js/" >drop and drag in d3</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/Build reuseable visualization using d3.js and AngularJS/" >Build reusable visualization using d3.js and AngularJS</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular/" >D3 on Angular</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/浅谈d3.js中的异步文件读取的处理/" >浅谈d3.js中强制异步文件读取同步的四种方法</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/数据可视化之散点图/" >数据可视化之散点图</a>
-        </li>
-    
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> Invalid date </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2018/05/09/swift5/" >Swift5新特性</a>
-        </li>
-    
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> Invalid date </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2018/02/10/turingCalendar/" >极客编程日历桌面版开发笔记</a>
-        </li>
-    
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> 2014 </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
-        </li>
-    
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> Invalid date </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2018/07/18/buy-houseII/" >魔都买房杂记(下)</a>
-        </li>
-    
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> 2014 </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/polybrush in d3/" >polybrush in d3</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">04/24</span><a class="archive-post-title" href= "/2014/04/24/用Java生成Json文件/" >用Java生成Json文件</a>
-        </li>
-    
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/d3/">d3</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/visualization/">visualization</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/苹果开发/">苹果开发</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/购房/">购房</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/随感/">随感</a></li></ul>
     </div>
   </div>
-        <div class="sidebar-tags">
-    <div class="sidebar-tags-name">
+
+
+  
     
-        <span class="sidebar-tag-name"><a href= "#">d3</a></span>
-    
-        <span class="sidebar-tag-name"><a href= "#">swift</a></span>
-    
-        <span class="sidebar-tag-name"><a href= "#">macOS开发</a></span>
-    
-        <span class="sidebar-tag-name"><a href= "#">随感</a></span>
-    
-        <span class="sidebar-tag-name"><a href= "#">iOS开发</a></span>
-    
-        <span class="sidebar-tag-name"><a href= "#">SVG</a></span>
-    
-        <span class="sidebar-tag-name"><a href= "#">Json</a></span>
-    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Json/">Json</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SVG/">SVG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/d3/">d3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS开发/">iOS开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/macOS开发/">macOS开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift/">swift</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随感/">随感</a></li></ul>
     </div>
-    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
-    缺失模块。<br/>
-    1、请确保node版本大于6.2<br/>
-    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
-    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
-    3、在根目录_config.yml里添加配置：
-    <pre style="color: #888; font-size: 0.6rem;">
-jsonContent:
-  meta: false
-  pages: false
-  posts:
-    title: true
-    date: true
-    path: true
-    text: false
-    raw: false
-    content: false
-    slug: false
-    updated: false
-    comments: false
-    link: false
-    permalink: false
-    excerpt: false
-    categories: false
-    tags: true</pre>
-    </div> 
-    <div class="sidebar-tag-list"></div>
-</div>
-    </div>
-</div> 
-    <script>
-    var jsInfo = {
-        root: '/'
-    }
-</script>
-    <!-- 不蒜子  -->
+  </div>
+
+
+  
     
-    <!-- CNZZ统计  -->
-    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Json/" style="font-size: 10px;">Json</a> <a href="/tags/SVG/" style="font-size: 10px;">SVG</a> <a href="/tags/d3/" style="font-size: 20px;">d3</a> <a href="/tags/iOS开发/" style="font-size: 12px;">iOS开发</a> <a href="/tags/macOS开发/" style="font-size: 18px;">macOS开发</a> <a href="/tags/swift/" style="font-size: 14px;">swift</a> <a href="/tags/随感/" style="font-size: 16px;">随感</a>
     </div>
-    </body>
-    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">十一月 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">四月 2014</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/08/24/invisibilitycloak/">上架沙盒化应用,重启应用后保持文件持久访问性指南</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/02/Match3/">Match for iPhone开发笔记 &lt;三&gt; 测试与上架篇</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/30/FunctionalPrograming/">浅谈函数式编程 (Introducing Functional Programming)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/23/Match2/">Match for iPhone开发笔记 &lt;二&gt; 网络请求和数据流篇</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/18/buy-houseII/">魔都买房杂记(下)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Chih-Hao<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
 </html>
-
-
