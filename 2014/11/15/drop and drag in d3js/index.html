@@ -1,174 +1,140 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<!-- Head tag -->
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="keyword" content="">
-    <meta name="theme-color" content="#600090">
-    <meta name="msapplication-navbutton-color" content="#600090">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
-    <link rel="shortcut icon" href="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-128.png">
-    <link rel="alternate" type="application/atom+xml" title="Chih-Hao&#39;s Blog" href="/atom.xml">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+<html>
+    <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
     <title>
         
-        drop and drag in d3｜undefined
+        drop and drag in d3 · Zhihao&#39;s Studio
         
     </title>
-
-    <link rel="canonical" href="http://zhihaozhang.github.io/2014/11/15/drop and drag in d3js/">
-
-    <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/blog-style.css">
-
-    <!-- Pygments Github CSS -->
-    <link rel="stylesheet" href="/css/syntax.css">
-</head>
-
-<style>
-
-    header.intro-header {
-        background-image: url('')
-    }
-</style>
-<!-- hack iOS CSS :active style -->
-<body ontouchstart="" class="animated fadeIn">
-<!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
-" data-ishome = "false" >
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand animated pulse" href="/">
-                <span class="brand-logo">
-                    Chih-Hao&#39;s Blog
-                </span>
-                's Blog
-            </a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <!-- Known Issue, found by Hux:
-            <nav>'s height woule be hold on by its content.
-            so, when navbar scale out, the <nav> will cover tags.
-            also mask any touch event of tags, unfortunately.
-        -->
-        <!-- /.navbar-collapse -->
-        <div id="huxblog_navbar">
-            <div class="navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="/">Home</a>
-                    </li>
-					
-                    
-					
-					
-                </ul>
-            </div>
-        </div>
-    </div>
-    <!-- /.container -->
-</nav>
-<script>
-    // Drop Bootstarp low-performance Navbar
-    // Use customize navbar with high-quality material design animation
-    // in high-perf jank-free CSS3 implementation
-//    var $body   = document.body;
-    var $toggle = document.querySelector('.navbar-toggle');
-    var $navbar = document.querySelector('#huxblog_navbar');
-    var $collapse = document.querySelector('.navbar-collapse');
-
-    $toggle.addEventListener('click', handleMagic)
-    function handleMagic(e){
-        if ($navbar.className.indexOf('in') > 0) {
-        // CLOSE
-            $navbar.className = " ";
-            // wait until animation end.
-            setTimeout(function(){
-                // prevent frequently toggle
-                if($navbar.className.indexOf('in') < 0) {
-                    $collapse.style.height = "0px"
-                }
-            },400)
-        }else{
-        // OPEN
-            $collapse.style.height = "auto"
-            $navbar.className += " in";
+    <link rel="icon" href= /assests/favicon.ico>
+    <!-- 提前加载place holder  -->
+    <style>
+        @font-face {
+            font-family: 'Oswald-Regular';
+            src: url('/font/Oswald-Regular.ttf');
+        }
+        @font-face {
+            font-family: 'Source Sans Pro';
+            src: url('/font/Source Sans Pro.woff'),
+            url('/font/Source Sans Pro.woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Source Code Pro';
+            src: url('/font/SourceCodePro-Regular.ttf.woff'),
+            url('/font/SourceCodePro-Regular.ttf.woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        
+        .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0px;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2s ease-out 0s 1;
+        }
+        @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        99% {
+            transform: translate3d(0, 0, 0);
+        }
+        99.1% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(-226px, 0, 0);
         }
     }
-</script>
-
-<!-- Main Content -->
-
-<!--only post-->
-
-
-<img class="wechat-title-img"
-     src="">
-
-
-<style>
+    </style>
+    <link rel="stylesheet" href = "/css/style.css?v=20170930" />
+    <script src="//cdn.staticfile.org/jquery/3.2.1/jquery.min.js" defer></script>
     
-    header.intro-header {
-        background-image: url('')
-    }
-
+    <script src="/scripts/main.js" defer></script>
+    <!-- 百度统计  -->
     
-</style>
+    <!-- 谷歌统计  -->
+    
+</head>
+    
+        <body class="post-body">
+    
+    
+<header class="header">
 
-<header class="intro-header">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
-                <div class="post-heading">
-                    <h1>drop and drag in d3</h1>
-                    
-                    <span class="meta">
-                         作者 Chih-Hao
-                        <span>
-                          日期 2014-11-15
-                         </span>
-                    </span>
-                    <div class="tags text-center">
-                        
-                        <a class="tag" href="/tags/#d3"
-                           title="d3">d3</a>
-                        
-                    </div>
-                </div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >Zhihao&#39;s Studio.</a>
             </div>
-        </div>
+            <div class="post-title">
+                <a href="#" class="post-name">drop and drag in d3</a>
+            </div>
     </div>
-    <div class="post-title-haojen">
-        <span>
-            drop and drag in d3
-        </span>
-    </div>
+    
+    <a class="home-link" href=/>Zhihao's Studio.</a>
 </header>
-
-<!-- Post Content -->
-<article>
-    <div class="container">
-        <div class="row">
-            <!-- Post Container -->
-            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <h1 id="Behavior-in-d3"><a href="#Behavior-in-d3" class="headerlink" title="Behavior in d3"></a>Behavior in d3</h1><p>在d3中，行为被设计成了一种组件，可以创建一系列的事件，并绑定到调用这些行为的元素上。最常见的行为有拖拽与缩放，使用这些行为可以很方便地在拖拽或者缩放的开始、过程中以及结束时达到想要的效果。</p>
+    <div class="wrapper">
+        <div class="site-intro">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-img" style="background-image: url(http://oumn0o088.bkt.clouddn.com/post-bg.jpg)"></div>
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            drop and drag in d3
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+        </p>
+        <!-- 404 -->
+        
+        <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+                <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = d3>d3</a>
+    
+</div>
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2014/11/15</span>
+            </div>
+        
+    </div>
+</div>
+        <div class="container">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="Behavior-in-d3"><a href="#Behavior-in-d3" class="headerlink" title="Behavior in d3"></a>Behavior in d3</h1><p>在d3中，行为被设计成了一种组件，可以创建一系列的事件，并绑定到调用这些行为的元素上。最常见的行为有拖拽与缩放，使用这些行为可以很方便地在拖拽或者缩放的开始、过程中以及结束时达到想要的效果。</p>
 <p>这篇博客中，就以拖拽为例，并借助之前实现的热力图，实现拖拽dimension的label以达到reoder维度的效果。为了使用三个阶段，我们会让开始拖拽的时候，维度名变成红色、字体变大来表示强调的效果；在拖拽过程中，让label紧跟鼠标的位置；并且判断最终的位置，交换两个维度，并重新绘制整个热力图。</p>
 <p>理想情况下，开始移动的时候的，运行情况应该像下面这样。<br><img src="http://i3.piimg.com/20f52681eff4f677.jpg" alt=""></p>
 <h1 id="drag"><a href="#drag" class="headerlink" title="drag"></a>drag</h1><p>创建一个新的拖拽行为非常简单，var drag = d3.behavior.drag()就创建好了。在这个行为上，可以指定拖拽事件类型的监听器，支持的事件类型有三种，<strong>dragstart/drag/dragend</strong>，分别是上面提到的拖动开始时触发的函数，拖动时触发和拖动结束时触发。<br>对应到上面的要求，维度名变成红色、字体变大来表示强调的效果（开始拖拽时），让label紧跟鼠标的位置（拖拽过程中），并且判断最终的位置，交换两个维度，并重新绘制整个热力图（拖拽结束后）。</p>
@@ -183,166 +149,919 @@
 <p>代码见文末的附录。</p>
 <h1 id="附录（代码）"><a href="#附录（代码）" class="headerlink" title="附录（代码）"></a>附录（代码）</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div><div class="line">265</div><div class="line">266</div><div class="line">267</div><div class="line">268</div><div class="line">269</div><div class="line">270</div><div class="line">271</div><div class="line">272</div><div class="line">273</div><div class="line">274</div><div class="line">275</div><div class="line">276</div><div class="line">277</div><div class="line">278</div><div class="line">279</div><div class="line">280</div><div class="line">281</div><div class="line">282</div><div class="line">283</div><div class="line">284</div><div class="line">285</div><div class="line">286</div><div class="line">287</div><div class="line">288</div><div class="line">289</div><div class="line">290</div><div class="line">291</div><div class="line">292</div><div class="line">293</div><div class="line">294</div><div class="line">295</div><div class="line">296</div><div class="line">297</div><div class="line">298</div><div class="line">299</div><div class="line">300</div><div class="line">301</div><div class="line">302</div><div class="line">303</div><div class="line">304</div><div class="line">305</div><div class="line">306</div><div class="line">307</div><div class="line">308</div><div class="line">309</div><div class="line">310</div><div class="line">311</div><div class="line">312</div><div class="line">313</div><div class="line">314</div><div class="line">315</div><div class="line">316</div><div class="line">317</div><div class="line">318</div><div class="line">319</div><div class="line">320</div><div class="line">321</div><div class="line">322</div><div class="line">323</div><div class="line">324</div><div class="line">325</div><div class="line">326</div><div class="line">327</div><div class="line">328</div><div class="line">329</div><div class="line">330</div><div class="line">331</div><div class="line">332</div><div class="line">333</div><div class="line">334</div><div class="line">335</div><div class="line">336</div><div class="line">337</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">  var colorScales = d3.scale.linear()</div><div class="line">.domain([-1,0,1]())</div><div class="line">.range([&quot;#31a354&quot;,&quot;#ffffff&quot;,&quot;#e6550d&quot;]());</div><div class="line"></div><div class="line">var w = element[0]().offsetWidth;</div><div class="line">var h = element[0]().offsetHeight;</div><div class="line">var width = w - options.margin.left - options.margin.right;</div><div class="line">var height = h - options.margin.top - options.margin.bottom;</div><div class="line"></div><div class="line">d3.select(element[0]()).select(&quot;svg&quot;).remove();</div><div class="line"></div><div class="line">var svg = d3.select(element[0]()).append(&quot;svg&quot;)</div><div class="line">.attr(&quot;width&quot;, width*2 + options.margin.left + options.margin.right)</div><div class="line">.attr(&quot;height&quot;, height + options.margin.top + options.margin.bottom)</div><div class="line">.append(&quot;g&quot;)</div><div class="line">.attr(&apos;class&apos;,&apos;heat&apos;)</div><div class="line">.attr(&quot;transform&quot;, &quot;translate(&quot; + options.margin.left + &quot;,&quot; + options.margin.top + &quot;)&quot;)</div><div class="line">//                        .append(&apos;g&apos;)</div><div class="line">//                        .attr(&apos;class&apos;,&apos;rad&apos;);</div><div class="line"></div><div class="line">var xu = &#123;&#125;;</div><div class="line">var x = []();</div><div class="line">var yu = &#123;&#125;;</div><div class="line">var y = []();</div><div class="line"></div><div class="line">var theLabel = 0;</div><div class="line"></div><div class="line">for (var i in scope.data) &#123;</div><div class="line">if (typeof(xu[scope.data\[i]().x]) == &quot;undefined&quot;) &#123;</div><div class="line">x.push(scope.data[i]().x);</div><div class="line">&#125;</div><div class="line">xu[scope.data\[i]().x] = 0;</div><div class="line">if (typeof(yu[scope.data\[i]().y]) == &quot;undefined&quot;) &#123;</div><div class="line">y.push(scope.data[i]().y);</div><div class="line">&#125;</div><div class="line">yu[scope.data\[i]().y] = 0;</div><div class="line">&#125;</div><div class="line"></div><div class="line">for (d in scope.data) &#123;</div><div class="line">scope.data[d]().xIndex = x.indexOf(scope.data[d]().x);</div><div class="line">scope.data[d]().yIndex = y.indexOf(scope.data[d]().y);</div><div class="line">&#125;</div><div class="line"></div><div class="line">var drag = d3.behavior.drag()</div><div class="line">.on(&apos;drag&apos;,dragText)</div><div class="line">.on(&apos;dragstart&apos;,dragStart)</div><div class="line">.on(&apos;dragend&apos;,dragEnd);</div><div class="line"></div><div class="line">var dragX = d3.behavior.drag()</div><div class="line">.on(&apos;drag&apos;,dragTextX)</div><div class="line">.on(&apos;dragstart&apos;,dragStartX)</div><div class="line">.on(&apos;dragend&apos;,dragEnd);</div><div class="line"></div><div class="line">function dragStartX () &#123;</div><div class="line">d3.select(this).attr(&apos;fill&apos;, &apos;red&apos;).attr(&apos;font-weight&apos;, &apos;900&apos;)</div><div class="line">&#125;</div><div class="line"></div><div class="line">function dragTextX (d,i)&#123;</div><div class="line">//                        console.log(i);</div><div class="line"></div><div class="line">var y=   d3.event.x-i*xGridSize;</div><div class="line">var x=  -d3.event.y;</div><div class="line">//                        console.log(&quot;d3.event.y:&quot;+d3.event.y);</div><div class="line">//                        console.log(&quot;d3.event.x:&quot;+d3.event.x);</div><div class="line">//                        console.log(xGridSize+&quot;  == &quot;+yGridSize);</div><div class="line"></div><div class="line">//                        var tmp=(d3.event.x-xGridSize/2)/xGridSize;</div><div class="line">var tmp = Math.ceil(d3.event.x/xGridSize)-1;</div><div class="line">//                        console.log(tmp+&quot;  tmp&quot;)</div><div class="line"></div><div class="line">if(tmp\&lt;=0)</div><div class="line">&#123;</div><div class="line">theLabel=0;</div><div class="line">&#125;else if(tmp\&gt;=Math.sqrt(data.length))</div><div class="line">&#123;</div><div class="line">theLabel=Math.sqrt(data.length)-1;</div><div class="line">&#125;else</div><div class="line">&#123;</div><div class="line">theLabel=tmp;</div><div class="line">&#125;</div><div class="line"></div><div class="line">d3.select(this)</div><div class="line">.attr(&apos;transform&apos;,function(d)&#123;</div><div class="line">return &quot;rotate(-90) translate(&quot;+x+&apos;,&apos;+y+&apos;)&apos;;</div><div class="line">&#125;)</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">function dragStart ()&#123;</div><div class="line">d3.select(this).attr(&apos;fill&apos;,&apos;red&apos;).attr(&apos;font-weight&apos;,&apos;900&apos;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">function dragText (d,i)&#123;</div><div class="line">//                        console.log(i);</div><div class="line"></div><div class="line">var x=   d3.event.x;</div><div class="line">var y=  d3.event.y-yGridSize*i;</div><div class="line">//                        console.log(&quot;d3.event.y:&quot;+d3.event.y);</div><div class="line"></div><div class="line">var tmp = cal((y-yGridSize)/yGridSize);</div><div class="line">//                        console.log(tmp+&quot;  tmp&quot;);</div><div class="line"></div><div class="line">if(tmp+i\&gt;=Math.sqrt(data.length))</div><div class="line">&#123;</div><div class="line">theLabel=Math.sqrt(data.length);</div><div class="line">&#125;else if(tmp+i\&lt;=0)&#123;</div><div class="line">theLabel=0;</div><div class="line">&#125;else&#123;</div><div class="line">theLabel=tmp+i;</div><div class="line">&#125;</div><div class="line"></div><div class="line">d3.select(this)</div><div class="line">.attr(&apos;transform&apos;,function(d)&#123;</div><div class="line">return &quot;translate(&quot;+x+&apos;,&apos;+y+&apos;)&apos;;</div><div class="line">&#125;)</div><div class="line">&#125;</div><div class="line"></div><div class="line">function dragEnd(d,i)&#123;</div><div class="line">d3.select(this)</div><div class="line">.attr(&apos;fill&apos;,&apos;black&apos;);</div><div class="line"></div><div class="line">if(theLabel!=i)</div><div class="line">changeLabelOrder(data,theLabel,i);</div><div class="line"></div><div class="line">scope.$apply(order); //very import</div><div class="line"></div><div class="line">//                        console.log(order);</div><div class="line"></div><div class="line">render();</div><div class="line">renderRadViz();</div><div class="line">&#125;</div><div class="line"></div><div class="line">var xGridSize = Math.floor(width / x.length);</div><div class="line">var yGridSize = Math.floor(height / y.length);</div><div class="line">var legendElementWidth = Math.floor(width * options.legendWidth / (options.buckets));</div><div class="line">var legendElementHeight = height / 20;</div><div class="line"></div><div class="line">var yLabels = svg.selectAll(&quot;.yLabel&quot;)</div><div class="line">.data(y)</div><div class="line">.enter().append(&quot;text&quot;)</div><div class="line">.text(function (d) &#123; return d; &#125;)</div><div class="line">.attr(&quot;x&quot;, 0)</div><div class="line">.attr(&quot;y&quot;, function (d, i) &#123; return i * yGridSize; &#125;)</div><div class="line">.style(&quot;text-anchor&quot;, &quot;end&quot;)</div><div class="line">.attr(&quot;transform&quot;, &quot;translate(-6,&quot; + yGridSize / 1.5 + &quot;)&quot;)</div><div class="line">.attr(&quot;class&quot;, function (d, i) &#123; return (&quot;yLabel axis&quot;); &#125;)</div><div class="line">.call(drag);</div><div class="line"></div><div class="line">var xLabels = svg.selectAll(&quot;.xLabel&quot;)</div><div class="line">.data(x)</div><div class="line">.enter().append(&quot;text&quot;)</div><div class="line">.text(function(d) &#123; return d; &#125;)</div><div class="line">.attr(&quot;y&quot;, function(d, i) &#123; return i * xGridSize; &#125;)</div><div class="line">.attr(&quot;x&quot;, 0)</div><div class="line">.style(&quot;text-anchor&quot;, &quot;start&quot;)</div><div class="line">.attr(&quot;transform&quot;, &quot;rotate(-90) translate(10, &quot; + xGridSize / 2 + &quot;)&quot;)</div><div class="line">.attr(&quot;class&quot;, function(d, i) &#123; return (&quot;xLabel axis&quot;); &#125;)</div><div class="line">.call(dragX);</div><div class="line"></div><div class="line">//                    var colorScales = []();</div><div class="line">//                    if (options.breaks != null &amp;&amp; options.breaks.length \&gt; 0) &#123;</div><div class="line">//                        for (b in options.colors) &#123;</div><div class="line">//                            colorScales.push(d3.scale.quantile()</div><div class="line">//                                .domain([0, options.buckets - 1, d3.max(scope.data, function(d) &#123; return d.value; &#125;)]())</div><div class="line">//                                .range(options.colors[b]()));</div><div class="line">//                        &#125;</div><div class="line">//                    &#125; else &#123;</div><div class="line">//                        colorScales.push(d3.scale.quantile()</div><div class="line">//                            .domain([0, options.buckets - 1, d3.max(scope.data, function(d) &#123; return d.value; &#125;)]())</div><div class="line">//                            .range(options.colors));</div><div class="line">//                    &#125;</div><div class="line"></div><div class="line">var cards = svg.selectAll(&quot;.square&quot;)</div><div class="line">.data(scope.data);</div><div class="line"></div><div class="line">//                    console.log(scope.data[0]())</div><div class="line"></div><div class="line">cards.enter().append(&quot;rect&quot;)</div><div class="line">.filter(function(d) &#123; return d.value != null &#125;)</div><div class="line">.attr(&quot;x&quot;, function(d) &#123; return d.xIndex * xGridSize; &#125;)</div><div class="line">.attr(&quot;y&quot;, function(d) &#123; return d.yIndex * yGridSize; &#125;)</div><div class="line">.attr(&quot;class&quot;, &quot;square&quot;)</div><div class="line">.attr(&quot;width&quot;, xGridSize)</div><div class="line">.attr(&quot;height&quot;, yGridSize)</div><div class="line">.on(&quot;click&quot;, function(d) &#123; scope.dispatch.click(d); &#125;)</div><div class="line">.on(&quot;mouseover&quot;, function(d) &#123; scope.dispatch.mouseover(d); &#125;)</div><div class="line">.on(&quot;mouseout&quot;, function(d) &#123; scope.dispatch.mouseout(d); &#125;)</div><div class="line">.on(&quot;mousemove&quot;, function(d) &#123; scope.dispatch.mousemove(d); &#125;)</div><div class="line">.style(&quot;fill&quot;, &quot;#ffffff&quot;);</div><div class="line"></div><div class="line">cards.transition().duration(options.duration).style(&quot;fill&quot;, function(d) &#123;</div><div class="line">if (options.customColors &amp;&amp; options.customColors.hasOwnProperty(d.value)) &#123;</div><div class="line">return options.customColors[d.value]();</div><div class="line">&#125; else if (options.breaks != null &amp;&amp; options.breaks.length \&gt; 0) &#123;</div><div class="line">for (b in options.breaks) &#123;</div><div class="line">if (d.xIndex \&lt; options.breaks[b]()) &#123;</div><div class="line">return colorScales[b]()(d.value);</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line">return colorScales[options.breaks.length]()(d.value);</div><div class="line">&#125; else &#123;</div><div class="line">return colorScales(d.value);</div><div class="line">&#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">cards.exit().remove();</div><div class="line"></div><div class="line">if (options.legend) &#123;</div><div class="line"></div><div class="line">var lenendData = []();</div><div class="line">for(var i=0;i\&lt;11;i++)</div><div class="line">&#123;</div><div class="line">lenendData.push(i/5-1);</div><div class="line">&#125;</div><div class="line"></div><div class="line">var legend = svg.selectAll(&quot;.legend&quot;)</div><div class="line">.data(lenendData)</div><div class="line"></div><div class="line">legend.enter().append(&quot;g&quot;).attr(&quot;class&quot;, &quot;legend&quot;);</div><div class="line"></div><div class="line">legend.append(&quot;rect&quot;)</div><div class="line">.attr(&quot;x&quot;, function(d, i) &#123; return legendElementWidth * i; &#125;)</div><div class="line">.attr(&quot;y&quot;, height * 1.05)</div><div class="line">.attr(&quot;width&quot;, legendElementWidth)</div><div class="line">.attr(&quot;height&quot;, legendElementHeight)</div><div class="line">.style(&quot;fill&quot;, function(d, i) &#123; return colorScales(lenendData[i]()); &#125;)</div><div class="line">.style(&quot;visibility&quot;, function(d, i) &#123; return(i \&lt; options.buckets ? &quot;visible&quot; : &quot;hidden&quot;) &#125;);</div><div class="line"></div><div class="line">legend.append(&quot;text&quot;)</div><div class="line">.attr(&quot;class&quot;, &quot;legendLabel&quot;)</div><div class="line">.text(function(d,i) &#123; if(i%2==0) return lenendData[i]().toFixed(1); &#125;)</div><div class="line">.attr(&quot;x&quot;, function(d, i) &#123; return legendElementWidth * i; &#125;)</div><div class="line">.attr(&quot;y&quot;, height * 1.15)</div><div class="line">.style(&quot;text-anchor&quot;, &quot;middle&quot;);</div><div class="line"></div><div class="line">legend.exit().remove();</div><div class="line"></div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">&#125;;</div><div class="line"></div><div class="line"></div><div class="line">scope.$watch(&quot;data&quot;, debounce(function() &#123;</div><div class="line">render();</div><div class="line">&#125;,true),400);</div><div class="line"></div><div class="line">scope.$watch(&quot;order&quot;, debounce(function() &#123;</div><div class="line">render();</div><div class="line">renderRadViz();</div><div class="line">&#125;,true),400);</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">//                d3.select(window).on(&quot;resize&quot;, debounce(function() &#123;</div><div class="line">//                    render();</div><div class="line">//                &#125;, 500));</div><div class="line"></div><div class="line">function cal(x)</div><div class="line">&#123;</div><div class="line">if(x\&gt;0)</div><div class="line">return Math.ceil(x);</div><div class="line">else if (x==0) &#123;</div><div class="line">return 0;</div><div class="line">&#125;else&#123;</div><div class="line">return Math.ceil(x);</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">function changeLabelOrder(data,i,j)</div><div class="line">&#123;</div><div class="line">var tmpLabel = order[i]();</div><div class="line">order[i]()=order[j]();</div><div class="line">order[j]()=tmpLabel;</div><div class="line">//                    console.log(order);</div><div class="line"></div><div class="line">var iLabel = &quot;&quot;;</div><div class="line">var jLabel = &quot;&quot;;</div><div class="line">for(var k=0;k\&lt;data.length;k++)</div><div class="line">&#123;</div><div class="line">if(data[k]().xIndex===i) &#123;</div><div class="line">iLabel = data[k]().x;</div><div class="line"></div><div class="line">&#125;</div><div class="line">//                        console.log(iLabel);</div><div class="line">&#125;</div><div class="line">for(var k=0;k\&lt;data.length;k++)</div><div class="line">&#123;</div><div class="line">if(data[k]().yIndex===j) &#123;</div><div class="line">jLabel = data[k]().y;</div><div class="line"></div><div class="line">&#125;</div><div class="line">//                        console.log(jLabel);</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">for(var k=0;k\&lt; data.length;k++)</div><div class="line">&#123;</div><div class="line">if(data[k]().xIndex===i)&#123;</div><div class="line">data[k]().xIndex=j;</div><div class="line">data[k]().x=jLabel;</div><div class="line">&#125;else if(data[k]().xIndex===j)</div><div class="line">&#123;</div><div class="line">data[k]().xIndex=i;</div><div class="line">data[k]().x=iLabel;</div><div class="line">&#125;</div><div class="line"></div><div class="line">if(data[k]().yIndex===i)&#123;</div><div class="line">data[k]().yIndex=j;</div><div class="line">data[k]().y=jLabel;</div><div class="line">&#125;else if(data[k]().yIndex===j)</div><div class="line">&#123;</div><div class="line">data[k]().yIndex=i;</div><div class="line">data[k]().y=iLabel;</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line">var n = Math.sqrt(data.length);</div><div class="line">for(var k=0;k\&lt;n;k++)</div><div class="line">&#123;</div><div class="line"></div><div class="line">tmp = data[i+k*n]().value;</div><div class="line">data[i+k*n]().value=data[j+k*n]().value;</div><div class="line">data[j+k*n]().value=tmp;</div><div class="line">&#125;</div><div class="line">for(var k=0;k\&lt;n;k++)</div><div class="line">&#123;</div><div class="line"></div><div class="line">tmp = data[i*n+k]().value;</div><div class="line">data[i*n+k]().value=data[j*n+k]().value;</div><div class="line">data[k+j*n]().value=tmp;</div><div class="line">&#125;</div><div class="line"></div></pre></td></tr></table></figure>
 
-                <hr>
-                
 
-                <ul class="pager">
-                    
-                    <li class="previous">
-                        <a href="/2014/11/15/浅谈d3.js中的异步文件读取的处理/" data-toggle="tooltip" data-placement="top"
-                           title="浅谈d3.js中强制异步文件读取同步的四种方法">&larr; Previous Post</a>
-                    </li>
-                    
-                    
-                    <li class="next">
-                        <a href="/2014/04/24/用Java生成Json文件/" data-toggle="tooltip" data-placement="top"
-                           title="用Java生成Json文件">Next Post &rarr;</a>
-                    </li>
-                    
-                </ul>
+            <! -- 添加捐赠图标 -->
+    <div class ="post-donate">
+    <div id="donate_board" class="donate_bar center">
+        <a id="btn_donate" class="btn_donate" href="javascript:;" title="打赏"></a>
 
-                
-
-                
-
-
-                <!--加入新的评论系统-->
-                
-
-                
-
-            </div>
-
-            <div class="hidden-xs col-sm-3 toc-col">
-                <div class="toc-wrap">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Behavior-in-d3"><span class="toc-text">Behavior in d3</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#drag"><span class="toc-text">drag</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实现的细节"><span class="toc-text">实现的细节</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#附录（代码）"><span class="toc-text">附录（代码）</span></a></li></ol>
-                </div>
-            </div>
+        <div style="text-align:center;color:#00F" >
+           
         </div>
 
-        <div class="row">
-            <!-- Sidebar Container -->
+    <script type="text/javascript">
+        document.getElementById('btn_donate').onclick = function(){
+            $('#donate_board').addClass('hidden');
+            $('#donate_guide').removeClass('hidden');
+        }
+    </script>
+</div>
+<! -- 添加捐赠图标 -->
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-pager">
+        
+            <li class="next">
+                <a href= "/2014/11/15/polybrush in d3/" title= polybrush in d3 >
+                    <span>Next Post</span>
+                    <span>polybrush in d3</span>
+                </a>
+            </li>
+        
+        
+            <li class="previous">
+                <a href= "/2014/04/24/用Java生成Json文件/" title= 用Java生成Json文件 >
+                    <span>Previous Post</span>
+                    <span>用Java生成Json文件</span>
+                </a>
+            </li>
+        
+    </ul>
 
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                sidebar-container">
 
-                <!-- Featured Tags -->
-                
 
-                <!-- Friends Blog -->
-                
-            </div>
+    <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMTAyMC83NTY5">
+    <script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+    </script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+
+
+    <div style="text-align:center">
+    <span id="busuanzi_container_page_pv" >
+        本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+    </span>
+    </div>
+</main>
+            <!-- profile -->
+            
         </div>
+        <footer class="footer">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="emailto:zhihaozhang@me.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="https://github.com/zhihaozhang" class="iconfont-archer github" target="_blank" title="github"></a>
+            
+        
+    
+        
+            
+                <a href="http://weibo.com/2854428840/profile?rightmod=1&wvr=6&mod=personinfo" class="iconfont-archer weibo" target="_blank" title="weibo"></a>
+            
+        
+    
+        
+            
+                <a href="https://www.zhihu.com/people/zhihao-zhang-95/activities" class="iconfont-archer zhihu" target="_blank" title="zhihu"></a>
+            
+        
+    
+        
+            
+                <a href="https://twitter.com/Chih_hao_" class="iconfont-archer twitter" target="_blank" title="twitter"></a>
+            
+        
+    
+        
+            
+                <a href="https://www.instagram.com/izhihao_zhang/" class="iconfont-archer instagram" target="_blank" title="instagram"></a>
+            
+        
+    
 
     </div>
-</article>
-
-
-
-
-
-
-
-<!-- Footer -->
-<!-- Footer -->
-<footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
-                <br>
-                <ul class="list-inline text-center">
-                
-                
-                
-
-                
-
-                
-
-                
-
-                
-
-                </ul>
-                <p class="copyright text-muted">
-                    Copyright &copy; Chih-Hao&#39;s Blog 2018
-                    <br>
-                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
-                    <br>
-                    Theme by <a href="https://haojen.github.io/">Haojen Ma</a>
-                </p>
-
-            </div>
-        </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span>
+        <span
+            id="theme-info">Theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">archer</a></span>
     </div>
+
 </footer>
-
-<!-- jQuery -->
-<script src="/js/jquery.min.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="/js/bootstrap.min.js"></script>
-
-<!-- Custom Theme JavaScript -->
-<script src="/js/blog.js"></script>
-
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
+    </div>
+    <div class="back-top">&#xe639;</div>
+    <div class="sidebar">
+    <div class="sidebar-header">
+        <div class="sidebar-category">
+            <span class="sidebar-archive-link"><span class="iconfont-archer">&#xe67d;</span>Archive</span>
+            <span class="sidebar-tags-link"><span class="iconfont-archer">&#xe610;</span>Tag</span>
+        </div>
+    </div>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-archive">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 33 </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/24</span><a class="archive-post-title" href= "/2018/08/24/invisibilitycloak/" >上架沙盒化应用,重启应用后保持文件持久访问性指南</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/02</span><a class="archive-post-title" href= "/2018/08/02/Match3/" >Match for iPhone开发笔记 <三> 测试与上架篇</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/30</span><a class="archive-post-title" href= "/2018/07/30/FunctionalPrograming/" >浅谈函数式编程 (Introducing Functional Programming)</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/23</span><a class="archive-post-title" href= "/2018/07/23/Match2/" >Match for iPhone开发笔记 <二> 网络请求和数据流篇</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/16</span><a class="archive-post-title" href= "/2018/07/16/buy-house/" >魔都买房杂记(上)</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/11</span><a class="archive-post-title" href= "/2018/07/11/Match/" >Match for iPhone开发笔记 <一> 开篇杂谈</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/01</span><a class="archive-post-title" href= "/2018/06/01/thunderPassby/" >绕开迅雷的利器:thunderPassby开发笔记</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/20</span><a class="archive-post-title" href= "/2018/05/20/ProtocolOP/" >面向协议编程初探</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/17</span><a class="archive-post-title" href= "/2018/04/17/GoBACKSPACE/" >GoBACKSPACE————致敬Go2Shell的Finder插件</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/24</span><a class="archive-post-title" href= "/2018/01/24/DragAndDrop/" >更优雅的文件添加方式Drag & Drop</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/16</span><a class="archive-post-title" href= "/2018/01/16/FileHider/" >AVHider for macOS开发笔记</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2017 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/31</span><a class="archive-post-title" href= "/2017/12/31/HAN/" >浅谈可视交互的方法在大数据平台数据产生、前期处理方面的应用</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/17</span><a class="archive-post-title" href= "/2017/12/17/googleDevDay2/" >谷歌开发者大会(GDD2017)见闻 Day2</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2017/12/15/googleDevDay/" >谷歌开发者大会(GDD2017)见闻 Day1</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/18</span><a class="archive-post-title" href= "/2017/10/18/topology/" >拓扑图的实现</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/13</span><a class="archive-post-title" href= "/2017/10/13/DicAndSetInSwift4/" >Swift4字典和集合的新特性</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/11</span><a class="archive-post-title" href= "/2017/10/11/gInSVG/" >为SVG中大小可变的<g>元素加上边框和背景色</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/29</span><a class="archive-post-title" href= "/2017/09/29/mouseSyncII/" >mouseSync后续功能完善心得</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/26</span><a class="archive-post-title" href= "/2017/09/26/青芒 for Mac客户端开发笔记/" >青芒 for Mac客户端开发笔记</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/23</span><a class="archive-post-title" href= "/2017/09/23/让iMac与MacBook高效协同工作——mouseSync开发心得/" >让iMac与MacBook高效协同工作——mouseSync开发心得</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2014 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/drop and drag in d3js/" >drop and drag in d3</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/Build reuseable visualization using d3.js and AngularJS/" >Build reusable visualization using d3.js and AngularJS</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular/" >D3 on Angular</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/浅谈d3.js中的异步文件读取的处理/" >浅谈d3.js中强制异步文件读取同步的四种方法</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/数据可视化之散点图/" >数据可视化之散点图</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/polybrush in d3/" >polybrush in d3</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2018/02/10/turingCalendar/" >极客编程日历桌面版开发笔记</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2014 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/24</span><a class="archive-post-title" href= "/2014/04/24/用Java生成Json文件/" >用Java生成Json文件</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2018/07/18/buy-houseII/" >魔都买房杂记(下)</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2018/05/09/swift5/" >Swift5新特性</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name"><a href= "#">d3</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">swift</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">macOS开发</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">随感</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">iOS开发</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">SVG</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">Json</a></span>
+    
+    </div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #888; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: false
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tag-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var jsInfo = {
+        root: '/'
     }
 </script>
-
-<!-- jquery.tagcloud.js -->
-<script>
-    // only load tagcloud.js in tag.html
-    if($('#tag_cloud').length !== 0){
-        async("http://zhihaozhang.github.io/js/jquery.tagcloud.js",function(){
-            $.fn.tagcloud.defaults = {
-                //size: {start: 1, end: 1, unit: 'em'},
-                color: {start: '#bbbbee', end: '#0085a1'},
-            };
-            $('#tag_cloud a').tagcloud();
-        })
-    }
-</script>
-
-<!--fastClick.js -->
-<script>
-    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
-        var $nav = document.querySelector("nav");
-        if($nav) FastClick.attach($nav);
-    })
-</script>
-
-<!-- Google Analytics -->
-
-
-
-<!-- Baidu Tongji -->
-
-
-<!-- swiftype -->
-<script type="text/javascript">
-  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
-  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
-  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
-  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
-
-  _st('install','','2.0.0');
-</script>
-
-<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-<!--wechat title img-->
-<img class="wechat-title-img" src="">
-</body>
-
+    <!-- 不蒜子  -->
+    
+    <!-- CNZZ统计  -->
+    
+    </div>
+    </body>
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 </html>
+
+
