@@ -341,13 +341,15 @@
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2014/11/15/Build reuseable visualization using d3.js and AngularJS/" >
+        <a class="abstract-title" href = "/2014/11/15/polybrush in d3/" >
             
-                <span>Build reusable visualization using d3.js and AngularJS</span>
+                <span>polybrush in d3</span>
         </a>
         <div class="abstract-content">
-            背景前面两篇博客介绍了如何借助angular，让我们的可视化图能够更有模块化、方便复用、具有交互性，不过前面的博客只介绍了基本的原理以及最简单的图，在这篇博客中，我们来一起绘制一个相对复杂一些的热力图，最终的效果如下图。这个热力图主要是用来展现维度与维度之间的相关性的，而相关性在0-1之间。千万不要小看这个热力图，图中的每一个元素，甚至每一个字都是绘制出来的，完成这个看似简单的热力图大概需要350行代码。
-具体实现目标我们想要用热力图的时候呢，希望能像内置的html DOM元素一样使用，比如12345\&lt;heatmap\&gt;\&lt;/heatmap\&gt;//如果我们能指定...
+            
+前言你是否也像我一样，厌倦了d3默认的矩形的brush，或者你发现矩形的brush已经不能满足你的需要了;又或者你只是单纯的被上面的图片所吸引。不管怎样，我们将介绍一下polybrush。
+这篇博客的名字叫polybrush in d3，现在想来，好像有点错误，因为polybrush并不是d3内置的，它是由Geoffrey T. Bell在2012年开发的d3插件，因其方便、好用，所以广受好评。
+但无奈目前中文的相关资料和博客几乎没有，因此我来试着写一下如何使用它，以及它的原理，还会包含源码粗略解读，polybrush.js的github参考项目下载地址是：https://gist.g...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -371,13 +373,14 @@
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2014/11/15/D3 on Angular/" >
+        <a class="abstract-title" href = "/2014/11/15/associate brush/" >
             
-                <span>D3 on Angular</span>
+                <span>associate brush</span>
         </a>
         <div class="abstract-content">
-            Angular与D3前面写了几篇分别介绍AngularJS和D3的博客，他们各司其职，都在各自的一亩三分地里备受好评，那么，他们之间能否完成合作，实现共赢呢？这篇博客就来介绍如何将它们结合起来使用，使得我们的可视化能够更具有模块化、方便复用、具有交互性。
-Why Angular使用Angular做可视化有很多原因，但其中最主要的原因还是directives(指令)。 指令使得做可复用的可视化更容易，可以使得我们做的可视化的时候就像使用内置的HTML那么简单，比如我需要一个热力图（后面写博客怎么做），那么我仅仅需要用\\就可以了，想想这种酸爽的滋味吧。即使你不知道热力图是怎么做的，但是你用...
+            这篇博客记录了在上一篇博客加入scatterplot matrix的基础上，实现了associate brush的操作，即，从RadViz中brush一块区域，右边16个scatterplot里对应的点都会高亮出来，其他的点将暗淡下去；同样的，从右边16个scatterplot matrix里任一scatterplot cell里brush一些点，另外15个cell以及左边的RadViz里相应的点都会被highlight出来。具体的效果如下图：
+代码如下：
+123456789101112131415161718192021222324252627282930313233343536373...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -432,14 +435,13 @@ Why Angular使用Angular做可视化有很多原因，但其中最主要的原�
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2014/11/15/associate brush/" >
+        <a class="abstract-title" href = "/2014/11/15/D3 on Angular/" >
             
-                <span>associate brush</span>
+                <span>D3 on Angular</span>
         </a>
         <div class="abstract-content">
-            这篇博客记录了在上一篇博客加入scatterplot matrix的基础上，实现了associate brush的操作，即，从RadViz中brush一块区域，右边16个scatterplot里对应的点都会高亮出来，其他的点将暗淡下去；同样的，从右边16个scatterplot matrix里任一scatterplot cell里brush一些点，另外15个cell以及左边的RadViz里相应的点都会被highlight出来。具体的效果如下图：
-代码如下：
-123456789101112131415161718192021222324252627282930313233343536373...
+            Angular与D3前面写了几篇分别介绍AngularJS和D3的博客，他们各司其职，都在各自的一亩三分地里备受好评，那么，他们之间能否完成合作，实现共赢呢？这篇博客就来介绍如何将它们结合起来使用，使得我们的可视化能够更具有模块化、方便复用、具有交互性。
+Why Angular使用Angular做可视化有很多原因，但其中最主要的原因还是directives(指令)。 指令使得做可复用的可视化更容易，可以使得我们做的可视化的时候就像使用内置的HTML那么简单，比如我需要一个热力图（后面写博客怎么做），那么我仅仅需要用\\就可以了，想想这种酸爽的滋味吧。即使你不知道热力图是怎么做的，但是你用...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -553,15 +555,13 @@ selection.classed(name,【value】)value参数可选，如果没有指定，则�
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2014/11/15/polybrush in d3/" >
+        <a class="abstract-title" href = "/2014/11/15/Build reuseable visualization using d3.js and AngularJS/" >
             
-                <span>polybrush in d3</span>
+                <span>Build reusable visualization using d3.js and AngularJS</span>
         </a>
         <div class="abstract-content">
-            
-前言你是否也像我一样，厌倦了d3默认的矩形的brush，或者你发现矩形的brush已经不能满足你的需要了;又或者你只是单纯的被上面的图片所吸引。不管怎样，我们将介绍一下polybrush。
-这篇博客的名字叫polybrush in d3，现在想来，好像有点错误，因为polybrush并不是d3内置的，它是由Geoffrey T. Bell在2012年开发的d3插件，因其方便、好用，所以广受好评。
-但无奈目前中文的相关资料和博客几乎没有，因此我来试着写一下如何使用它，以及它的原理，还会包含源码粗略解读，polybrush.js的github参考项目下载地址是：https://gist.g...
+            背景前面两篇博客介绍了如何借助angular，让我们的可视化图能够更有模块化、方便复用、具有交互性，不过前面的博客只介绍了基本的原理以及最简单的图，在这篇博客中，我们来一起绘制一个相对复杂一些的热力图，最终的效果如下图。这个热力图主要是用来展现维度与维度之间的相关性的，而相关性在0-1之间。千万不要小看这个热力图，图中的每一个元素，甚至每一个字都是绘制出来的，完成这个看似简单的热力图大概需要350行代码。
+具体实现目标我们想要用热力图的时候呢，希望能像内置的html DOM元素一样使用，比如12345\&lt;heatmap\&gt;\&lt;/heatmap\&gt;//如果我们能指定...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -690,10 +690,6 @@ drag创建一个...
     <div class="sidebar-content sidebar-content-show-archive">
           <div class="sidebar-panel-archives">
     <!-- 在ejs中将archive按照时间排序 -->
-    
-    
-    
-    
     
     
     
@@ -1333,8 +1329,17 @@ drag创建一个...
         </li>
     
     
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/polybrush in d3/" >polybrush in d3</a>
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2018/05/09/swift5/" >Swift5新特性</a>
         </li>
     
     
@@ -1366,11 +1371,6 @@ drag创建一个...
         </li>
     
     
-        <li class="archive-post-item">
-            <span class="archive-post-date">04/24</span><a class="archive-post-title" href= "/2014/04/24/用Java生成Json文件/" >用Java生成Json文件</a>
-        </li>
-    
-    
     
     
     
@@ -1390,12 +1390,17 @@ drag创建一个...
     
         </ul>
     
-    <div class="archive-year"> Invalid date </div>
+    <div class="archive-year"> 2014 </div>
     <ul class="year-list">
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2018/05/09/swift5/" >Swift5新特性</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/polybrush in d3/" >polybrush in d3</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/24</span><a class="archive-post-title" href= "/2014/04/24/用Java生成Json文件/" >用Java生成Json文件</a>
         </li>
     
     </div>
