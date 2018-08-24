@@ -1,101 +1,174 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  <title>数据可视化之散点图 | Chih-Hao&#39;s Blog</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="D3.js是当下最火的可视化库之一，这篇博客记录了如何实现一个最基本的散点图，并用三角形表示数据点。 代码如下： 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576">
-<meta name="keywords" content="d3">
-<meta property="og:type" content="article">
-<meta property="og:title" content="数据可视化之散点图">
-<meta property="og:url" content="http://zhihaozhang.github.io/2014/11/15/数据可视化之散点图/index.html">
-<meta property="og:site_name" content="Chih-Hao&#39;s Blog">
-<meta property="og:description" content="D3.js是当下最火的可视化库之一，这篇博客记录了如何实现一个最基本的散点图，并用三角形表示数据点。 代码如下： 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-12-25T07:30:55.314Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="数据可视化之散点图">
-<meta name="twitter:description" content="D3.js是当下最火的可视化库之一，这篇博客记录了如何实现一个最基本的散点图，并用三角形表示数据点。 代码如下： 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576">
-  
-    <link rel="alternate" href="/atom.xml" title="Chih-Hao&#39;s Blog" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <link rel="stylesheet" href="/css/style.css">
-  
+<html lang="en">
 
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-128.png">
+    <link rel="alternate" type="application/atom+xml" title="Chih-Hao&#39;s Blog" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        数据可视化之散点图｜undefined
+        
+    </title>
+
+    <link rel="canonical" href="http://zhihaozhang.github.io/2014/11/15/数据可视化之散点图/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
 </head>
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Chih-Hao&#39;s Blog</a>
-      </h1>
-      
-        <h2 id="subtitle-wrap">
-          <a href="/" id="subtitle">骨灰级果粉</a>
-        </h2>
-      
+<style>
+
+    header.intro-header {
+        background-image: url('')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Chih-Hao&#39;s Blog
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
     </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://zhihaozhang.github.io"></form>
-      </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>数据可视化之散点图</h1>
+                    
+                    <span class="meta">
+                         作者 Chih-Hao
+                        <span>
+                          日期 2014-11-15
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#d3"
+                           title="d3">d3</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
+    <div class="post-title-haojen">
+        <span>
+            数据可视化之散点图
+        </span>
+    </div>
 </header>
-      <div class="outer">
-        <section id="main"><article id="post-数据可视化之散点图" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2014/11/15/数据可视化之散点图/" class="article-date">
-  <time datetime="2014-11-15T05:54:57.000Z" itemprop="datePublished">2014-11-15</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/visualization/">visualization</a>
-  </div>
 
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      数据可视化之散点图
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>D3.js是当下最火的可视化库之一，这篇博客记录了如何实现一个最基本的散点图，并用三角形表示数据点。</p>
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <p>D3.js是当下最火的可视化库之一，这篇博客记录了如何实现一个最基本的散点图，并用三角形表示数据点。</p>
 <p>代码如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">\&lt;!DOCTYPE html\&gt;</div><div class="line">\&lt;html\&gt;</div><div class="line">\&lt;head lang=&quot;en&quot;\&gt;</div><div class="line">\&lt;meta charset=&quot;UTF-8&quot;\&gt;</div><div class="line">\&lt;title\&gt;\&lt;/title\&gt;</div><div class="line">\&lt;script type=&quot;text/javascript&quot; src=&quot;script/d3.v3.js&quot;\&gt; \&lt;/script\&gt;</div><div class="line">\&lt;/head\&gt;</div><div class="line">\&lt;style\&gt;</div><div class="line">body &#123;</div><div class="line">font: 10px sans-serif;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.axis path,</div><div class="line">.axis line &#123;</div><div class="line">fill: none;</div><div class="line">stroke: #000;</div><div class="line">shape-rendering: crispEdges;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.point &#123;</div><div class="line">fill: steelblue;</div><div class="line">stroke: #000;</div><div class="line">&#125;</div><div class="line"></div><div class="line">\&lt;/style\&gt;</div><div class="line">\&lt;body\&gt;</div><div class="line"></div><div class="line">\&lt;script\&gt;</div><div class="line"></div><div class="line">var margin = &#123;top:20,right:20,bottom:30,left:40&#125;,</div><div class="line">width = 960-margin.left-margin.right,</div><div class="line">height = 500-margin.top-margin.bottom;</div><div class="line"></div><div class="line">var x = d3.scale.linear().range([0,width]());</div><div class="line">var y = d3.scale.linear().range([height,0]());</div><div class="line"></div><div class="line">var svg = d3.select(&apos;body&apos;).append(&apos;svg&apos;).attr(&apos;width&apos;,width+margin.left+margin.right)</div><div class="line">.attr(&apos;height&apos;,height+margin.top+margin.bottom)</div><div class="line">.append(&apos;g&apos;)</div><div class="line">.attr(&apos;transform&apos;,&quot;translate(&quot;+margin.left+&quot;,&quot;+margin.top+&apos;)&apos;);</div><div class="line"></div><div class="line">d3.csv(&apos;tmp.csv&apos;,function(error,data)&#123;</div><div class="line">if(error) throw error;</div><div class="line"></div><div class="line">data.forEach(function(d)&#123;</div><div class="line">d.x=+d.x;</div><div class="line">d.y=+d.y;</div><div class="line">&#125;)</div><div class="line">//        console.log(data);</div><div class="line"></div><div class="line">x.domain(d3.extent(data,function(d)&#123;return d.x&#125;)).nice();</div><div class="line">y.domain(d3.extent(data,function(d)&#123;return d.y&#125;)).nice();</div><div class="line"></div><div class="line">svg.append(&apos;g&apos;)</div><div class="line">.attr(&apos;class&apos;,&apos;x axis&apos;)</div><div class="line">.attr(&apos;transform&apos;,&apos;translate(0,&apos;+height+&quot;)&quot;)</div><div class="line">.call(d3.svg.axis().scale(x).orient(&apos;bottom&apos;));</div><div class="line"></div><div class="line">svg.append(&apos;g&apos;)</div><div class="line">.attr(&apos;class&apos;,&apos;y axis&apos;)</div><div class="line">.call(d3.svg.axis().scale(y).orient(&apos;left&apos;));</div><div class="line"></div><div class="line">svg.selectAll(&apos;.point&apos;)</div><div class="line">.data(data).enter()</div><div class="line">.append(&apos;path&apos;)</div><div class="line">.attr(&apos;class&apos;,&apos;point&apos;)</div><div class="line">.attr(&apos;d&apos;,d3.svg.symbol().type(&apos;triangle-up&apos;))</div><div class="line">.attr(&apos;transform&apos;,function(d)&#123;return &quot;translate(&quot;+x(d.x)+&quot;,&quot;+y(d.y)+&quot;)&quot;&#125;);</div><div class="line"></div><div class="line"></div><div class="line">&#125;)</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">\&lt;/script\&gt;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">\&lt;/body\&gt;</div><div class="line">\&lt;/html\&gt;</div><div class="line"></div></pre></td></tr></table></figure>
 <p>代码本身是很基本的，不过代码里面有一些可以学习的好习惯，比如：</p>
@@ -109,145 +182,166 @@
 <li>svg.append(‘g’).attr(‘class’,’y axis’).call(d3.svg.axis().scale(y).orient(‘left’));<br>  一句话里指定要绘制坐标轴需要的所有东西。</li>
 </ol>
 
-      
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2014/11/15/冷门但实用的d3.js内置函数/" data-toggle="tooltip" data-placement="top"
+                           title="冷门但实用的d3.js内置函数">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2014/11/15/polybrush in d3/" data-toggle="tooltip" data-placement="top"
+                           title="polybrush in d3">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
     </div>
-    <footer class="article-footer">
-      <a data-url="http://zhihaozhang.github.io/2014/11/15/数据可视化之散点图/" data-id="cjl7xi5zy002k08td37id35mb" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/d3/">d3</a></li></ul>
-
-    </footer>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2014/11/15/drop and drag in d3js/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          drop and drag in d3
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2014/11/15/浅谈d3.js中的异步文件读取的处理/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">浅谈d3.js中强制异步文件读取同步的四种方法</div>
-    </a>
-  
-</nav>
-
-  
 </article>
 
-</section>
-        
-          <aside id="sidebar">
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">分类</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/d3/">d3</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/visualization/">visualization</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/苹果开发/">苹果开发</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/购房/">购房</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/随感/">随感</a></li></ul>
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Chih-Hao&#39;s Blog 2018
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme by <a href="https://haojen.github.io/">Haojen Ma</a>
+                </p>
+
+            </div>
+        </div>
     </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签</h3>
-    <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Json/">Json</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SVG/">SVG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/d3/">d3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS开发/">iOS开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/macOS开发/">macOS开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift/">swift</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随感/">随感</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签云</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/Json/" style="font-size: 10px;">Json</a> <a href="/tags/SVG/" style="font-size: 10px;">SVG</a> <a href="/tags/d3/" style="font-size: 20px;">d3</a> <a href="/tags/iOS开发/" style="font-size: 12px;">iOS开发</a> <a href="/tags/macOS开发/" style="font-size: 18px;">macOS开发</a> <a href="/tags/swift/" style="font-size: 14px;">swift</a> <a href="/tags/随感/" style="font-size: 16px;">随感</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">十一月 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">四月 2014</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">最新文章</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2018/08/24/invisibilitycloak/">上架沙盒化应用,重启应用后保持文件持久访问性指南</a>
-          </li>
-        
-          <li>
-            <a href="/2018/08/02/Match3/">Match for iPhone开发笔记 &lt;三&gt; 测试与上架篇</a>
-          </li>
-        
-          <li>
-            <a href="/2018/07/30/FunctionalPrograming/">浅谈函数式编程 (Introducing Functional Programming)</a>
-          </li>
-        
-          <li>
-            <a href="/2018/07/23/Match2/">Match for iPhone开发笔记 &lt;二&gt; 网络请求和数据流篇</a>
-          </li>
-        
-          <li>
-            <a href="/2018/07/18/buy-houseII/">魔都买房杂记(下)</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2018 Chih-Hao<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
 </footer>
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://zhihaozhang.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
 
 
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+<!-- Baidu Tongji -->
 
 
-<script src="/js/script.js"></script>
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
 
-  </div>
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="">
 </body>
+
 </html>

@@ -1,101 +1,174 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  <title>冷门但实用的d3.js内置函数 | Chih-Hao&#39;s Blog</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前言在d3.js的API文档中，提供了很多内置的函数，但是有些很有用的内置函数却被无情的忽略了，这篇博客就来整理整理这些被遗忘却很实用的函数。希望整理过后，他们不再被遗忘。 selection.classed(name,【value】)value参数可选，如果没有指定，则返回与name参数匹配的第一个非空元素是否绑定了指定的CSS类，true表示绑定，false表示未绑定。如果value指定了的话">
-<meta name="keywords" content="d3">
-<meta property="og:type" content="article">
-<meta property="og:title" content="冷门但实用的d3.js内置函数">
-<meta property="og:url" content="http://zhihaozhang.github.io/2014/11/15/冷门但实用的d3.js内置函数/index.html">
-<meta property="og:site_name" content="Chih-Hao&#39;s Blog">
-<meta property="og:description" content="前言在d3.js的API文档中，提供了很多内置的函数，但是有些很有用的内置函数却被无情的忽略了，这篇博客就来整理整理这些被遗忘却很实用的函数。希望整理过后，他们不再被遗忘。 selection.classed(name,【value】)value参数可选，如果没有指定，则返回与name参数匹配的第一个非空元素是否绑定了指定的CSS类，true表示绑定，false表示未绑定。如果value指定了的话">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-12-25T07:30:55.315Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="冷门但实用的d3.js内置函数">
-<meta name="twitter:description" content="前言在d3.js的API文档中，提供了很多内置的函数，但是有些很有用的内置函数却被无情的忽略了，这篇博客就来整理整理这些被遗忘却很实用的函数。希望整理过后，他们不再被遗忘。 selection.classed(name,【value】)value参数可选，如果没有指定，则返回与name参数匹配的第一个非空元素是否绑定了指定的CSS类，true表示绑定，false表示未绑定。如果value指定了的话">
-  
-    <link rel="alternate" href="/atom.xml" title="Chih-Hao&#39;s Blog" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <link rel="stylesheet" href="/css/style.css">
-  
+<html lang="en">
 
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-128.png">
+    <link rel="alternate" type="application/atom+xml" title="Chih-Hao&#39;s Blog" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        冷门但实用的d3.js内置函数｜undefined
+        
+    </title>
+
+    <link rel="canonical" href="http://zhihaozhang.github.io/2014/11/15/冷门但实用的d3.js内置函数/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
 </head>
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Chih-Hao&#39;s Blog</a>
-      </h1>
-      
-        <h2 id="subtitle-wrap">
-          <a href="/" id="subtitle">骨灰级果粉</a>
-        </h2>
-      
+<style>
+
+    header.intro-header {
+        background-image: url('')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Chih-Hao&#39;s Blog
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
     </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://zhihaozhang.github.io"></form>
-      </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>冷门但实用的d3.js内置函数</h1>
+                    
+                    <span class="meta">
+                         作者 Chih-Hao
+                        <span>
+                          日期 2014-11-15
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#d3"
+                           title="d3">d3</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
+    <div class="post-title-haojen">
+        <span>
+            冷门但实用的d3.js内置函数
+        </span>
+    </div>
 </header>
-      <div class="outer">
-        <section id="main"><article id="post-冷门但实用的d3.js内置函数" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2014/11/15/冷门但实用的d3.js内置函数/" class="article-date">
-  <time datetime="2014-11-15T05:54:57.000Z" itemprop="datePublished">2014-11-15</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/visualization/">visualization</a>
-  </div>
 
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      冷门但实用的d3.js内置函数
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在d3.js的API文档中，提供了很多内置的函数，但是有些很有用的内置函数却被无情的忽略了，这篇博客就来整理整理这些被遗忘却很实用的函数。希望整理过后，他们不再被遗忘。</p>
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在d3.js的API文档中，提供了很多内置的函数，但是有些很有用的内置函数却被无情的忽略了，这篇博客就来整理整理这些被遗忘却很实用的函数。希望整理过后，他们不再被遗忘。</p>
 <h1 id="selection-classed-name-【value】"><a href="#selection-classed-name-【value】" class="headerlink" title="selection.classed(name,【value】)"></a>selection.classed(name,【value】)</h1><p>value参数可选，如果没有指定，则返回与name参数匹配的第一个非空元素是否绑定了指定的CSS类，true表示绑定，false表示未绑定。如果value指定了的话，就是为selection添加/删除CSS类。<br>这点与selection.attr(name,【value】)非常类似，但是相比而言，就冷门的多，恐怕没有多少人不知道selection.attr(name,【value】)，但是有很多人真的不知道selection.classed(name,【value】)。<br>这个函数很实用，比如鼠标进入某些点，让这些点高亮以表示强调，但是移出去之后，让他们回复原来的样式就可以用这个函数，免去了重新设置样式的麻烦，甚至有时候恢复原来样式的时候，还需要判断，就更麻烦了。</p>
 <h1 id="transition-filter-selector"><a href="#transition-filter-selector" class="headerlink" title="transition.filter(selector)"></a>transition.filter(selector)</h1><p>过滤也有过渡，这点可能很多人都忽略了，比如设置动画结束时，索引为奇数的元素旋转30度。甚至可以自己定义规则，如第5、10、15个元素改变，其他的不变。</p>
 <h1 id="d3-interpolate-a-b"><a href="#d3-interpolate-a-b" class="headerlink" title="d3.interpolate(a,b)"></a>d3.interpolate(a,b)</h1><p>返回一个介于a,b之间的默认插值器，插值器的类型取决于b的类型。<br>1）如果b是颜色类型，那么返回的是interpolateRgb插值器<br>2）如果是字符串类型，则返回interpolateString插值器<br>3）如果是数组类型，则返回interpolateArray插值器<br>4）如果是对象类型，且不能强制转换成字符串类型，则返回interpolateObject插值器<br>5）否则，返回interpolateNumber插值器</p>
@@ -116,145 +189,166 @@
 <h1 id="几何"><a href="#几何" class="headerlink" title="几何"></a>几何</h1><p>同样陌生的还有几何这部分的内容,比如四叉树/凸包/多边形/泰森多边形,记住这部分有就可以了,后面用过之后再来补充.</p>
 <h1 id="行为"><a href="#行为" class="headerlink" title="行为"></a>行为</h1><p>由zoom和drag两部分组成，很重要却很简单的内容，希望好好掌握。</p>
 
-      
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2014/11/15/D3 on Angular/" data-toggle="tooltip" data-placement="top"
+                           title="D3 on Angular">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2014/11/15/数据可视化之散点图/" data-toggle="tooltip" data-placement="top"
+                           title="数据可视化之散点图">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#selection-classed-name-【value】"><span class="toc-text">selection.classed(name,【value】)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#transition-filter-selector"><span class="toc-text">transition.filter(selector)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#d3-interpolate-a-b"><span class="toc-text">d3.interpolate(a,b)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数组相关API"><span class="toc-text">数组相关API</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#d3-ascending-a-b"><span class="toc-text">d3.ascending(a,b)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#d3-min-d3-max-d3-extent"><span class="toc-text">d3.min(),d3.max(),d3.extent()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#d3-sum-d3-mean-d3-median-d3-quantile"><span class="toc-text">d3.sum(),d3.mean(),d3.median(),d3.quantile()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#d3-shuffle-array"><span class="toc-text">d3.shuffle(array)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#d3-keys-object-d3-values-object"><span class="toc-text">d3.keys(object),d3.values(object)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#d3-map-d3-set"><span class="toc-text">d3.map(),d3.set()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#d3-merge（arrays）"><span class="toc-text">d3.merge（arrays）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#d3-zip-arrays-，d3-pairs-arrays"><span class="toc-text">d3.zip(arrays)，d3.pairs(arrays)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#d3-transpose-matrix"><span class="toc-text">d3.transpose(matrix)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#brush"><span class="toc-text">brush</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#时间的计数"><span class="toc-text">时间的计数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#布局"><span class="toc-text">布局</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#地理"><span class="toc-text">地理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#几何"><span class="toc-text">几何</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#行为"><span class="toc-text">行为</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
     </div>
-    <footer class="article-footer">
-      <a data-url="http://zhihaozhang.github.io/2014/11/15/冷门但实用的d3.js内置函数/" data-id="cjl7xi5zs002f08tdd8j4m4pa" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/d3/">d3</a></li></ul>
-
-    </footer>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2017/09/23/让iMac与MacBook高效协同工作——mouseSync开发心得/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          让iMac与MacBook高效协同工作——mouseSync开发心得
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2014/11/15/D3 on Angular(2)/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">D3 on Angular(2)</div>
-    </a>
-  
-</nav>
-
-  
 </article>
 
-</section>
-        
-          <aside id="sidebar">
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">分类</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/d3/">d3</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/visualization/">visualization</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/苹果开发/">苹果开发</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/购房/">购房</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/随感/">随感</a></li></ul>
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Chih-Hao&#39;s Blog 2018
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme by <a href="https://haojen.github.io/">Haojen Ma</a>
+                </p>
+
+            </div>
+        </div>
     </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签</h3>
-    <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Json/">Json</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SVG/">SVG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/d3/">d3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS开发/">iOS开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/macOS开发/">macOS开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift/">swift</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随感/">随感</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签云</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/Json/" style="font-size: 10px;">Json</a> <a href="/tags/SVG/" style="font-size: 10px;">SVG</a> <a href="/tags/d3/" style="font-size: 20px;">d3</a> <a href="/tags/iOS开发/" style="font-size: 12px;">iOS开发</a> <a href="/tags/macOS开发/" style="font-size: 18px;">macOS开发</a> <a href="/tags/swift/" style="font-size: 14px;">swift</a> <a href="/tags/随感/" style="font-size: 16px;">随感</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">十一月 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">四月 2014</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">最新文章</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2018/08/24/invisibilitycloak/">上架沙盒化应用,重启应用后保持文件持久访问性指南</a>
-          </li>
-        
-          <li>
-            <a href="/2018/08/02/Match3/">Match for iPhone开发笔记 &lt;三&gt; 测试与上架篇</a>
-          </li>
-        
-          <li>
-            <a href="/2018/07/30/FunctionalPrograming/">浅谈函数式编程 (Introducing Functional Programming)</a>
-          </li>
-        
-          <li>
-            <a href="/2018/07/23/Match2/">Match for iPhone开发笔记 &lt;二&gt; 网络请求和数据流篇</a>
-          </li>
-        
-          <li>
-            <a href="/2018/07/18/buy-houseII/">魔都买房杂记(下)</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2018 Chih-Hao<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
 </footer>
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://zhihaozhang.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
 
 
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+<!-- Baidu Tongji -->
 
 
-<script src="/js/script.js"></script>
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
 
-  </div>
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="">
 </body>
+
 </html>

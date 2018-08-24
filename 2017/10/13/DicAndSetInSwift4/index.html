@@ -1,105 +1,174 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  <title>Swift4字典和集合的新特性 | Chih-Hao&#39;s Blog</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Swift4中的字典和集合在这些方面变得更好写在前面在最新版本的Swift中，dictionaries和sets新增了很多行为方法和初始化方法，让一些常见的任务变得异常简单。诸如组合、过滤和transform值操作可以用一步完成，让使用者可以写出更高效和简洁的代码。 本篇博客将使用杂货铺中的商品作为例子演示这些新功能。GroceryItem结构体，由名字和部门组成，作为本例的数据类型。 12345">
-<meta name="keywords" content="swift">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Swift4字典和集合的新特性">
-<meta property="og:url" content="http://zhihaozhang.github.io/2017/10/13/DicAndSetInSwift4/index.html">
-<meta property="og:site_name" content="Chih-Hao&#39;s Blog">
-<meta property="og:description" content="Swift4中的字典和集合在这些方面变得更好写在前面在最新版本的Swift中，dictionaries和sets新增了很多行为方法和初始化方法，让一些常见的任务变得异常简单。诸如组合、过滤和transform值操作可以用一步完成，让使用者可以写出更高效和简洁的代码。 本篇博客将使用杂货铺中的商品作为例子演示这些新功能。GroceryItem结构体，由名字和部门组成，作为本例的数据类型。 12345">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://swift.org/assets/images/dictionary-blog/grouping_2x.png">
-<meta property="og:image" content="https://swift.org/assets/images/dictionary-blog/uniqueKeys_2x.png">
-<meta property="og:image" content="https://swift.org/assets/images/dictionary-blog/merging_2x.png">
-<meta property="og:updated_time" content="2017-12-25T07:30:55.311Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Swift4字典和集合的新特性">
-<meta name="twitter:description" content="Swift4中的字典和集合在这些方面变得更好写在前面在最新版本的Swift中，dictionaries和sets新增了很多行为方法和初始化方法，让一些常见的任务变得异常简单。诸如组合、过滤和transform值操作可以用一步完成，让使用者可以写出更高效和简洁的代码。 本篇博客将使用杂货铺中的商品作为例子演示这些新功能。GroceryItem结构体，由名字和部门组成，作为本例的数据类型。 12345">
-<meta name="twitter:image" content="https://swift.org/assets/images/dictionary-blog/grouping_2x.png">
-  
-    <link rel="alternate" href="/atom.xml" title="Chih-Hao&#39;s Blog" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <link rel="stylesheet" href="/css/style.css">
-  
+<html lang="en">
 
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-128.png">
+    <link rel="alternate" type="application/atom+xml" title="Chih-Hao&#39;s Blog" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        Swift4字典和集合的新特性｜undefined
+        
+    </title>
+
+    <link rel="canonical" href="http://zhihaozhang.github.io/2017/10/13/DicAndSetInSwift4/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
 </head>
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Chih-Hao&#39;s Blog</a>
-      </h1>
-      
-        <h2 id="subtitle-wrap">
-          <a href="/" id="subtitle">骨灰级果粉</a>
-        </h2>
-      
+<style>
+
+    header.intro-header {
+        background-image: url('')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Chih-Hao&#39;s Blog
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
     </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://zhihaozhang.github.io"></form>
-      </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>Swift4字典和集合的新特性</h1>
+                    
+                    <span class="meta">
+                         作者 Chih-Hao
+                        <span>
+                          日期 2017-10-13
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#swift"
+                           title="swift">swift</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
+    <div class="post-title-haojen">
+        <span>
+            Swift4字典和集合的新特性
+        </span>
+    </div>
 </header>
-      <div class="outer">
-        <section id="main"><article id="post-DicAndSetInSwift4" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/10/13/DicAndSetInSwift4/" class="article-date">
-  <time datetime="2017-10-13T06:02:20.042Z" itemprop="datePublished">2017-10-13</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/苹果开发/">苹果开发</a>
-  </div>
 
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      Swift4字典和集合的新特性
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Swift4中的字典和集合在这些方面变得更好"><a href="#Swift4中的字典和集合在这些方面变得更好" class="headerlink" title="Swift4中的字典和集合在这些方面变得更好"></a>Swift4中的字典和集合在这些方面变得更好</h1><h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>在最新版本的Swift中，dictionaries和sets新增了很多行为方法和初始化方法，让一些常见的任务变得异常简单。诸如组合、过滤和transform值操作可以用一步完成，让使用者可以写出更高效和简洁的代码。</p>
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h1 id="Swift4中的字典和集合在这些方面变得更好"><a href="#Swift4中的字典和集合在这些方面变得更好" class="headerlink" title="Swift4中的字典和集合在这些方面变得更好"></a>Swift4中的字典和集合在这些方面变得更好</h1><h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>在最新版本的Swift中，dictionaries和sets新增了很多行为方法和初始化方法，让一些常见的任务变得异常简单。诸如组合、过滤和transform值操作可以用一步完成，让使用者可以写出更高效和简洁的代码。</p>
 <p>本篇博客将使用杂货铺中的商品作为例子演示这些新功能。GroceryItem结构体，由名字和部门组成，作为本例的数据类型。</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">GroceryItem</span>: <span class="title">Hashable</span> </span>&#123;</div><div class="line">    <span class="keyword">var</span> name: <span class="type">String</span></div><div class="line">    <span class="keyword">var</span> department: <span class="type">Department</span></div><div class="line"></div><div class="line">    <span class="class"><span class="keyword">enum</span> <span class="title">Department</span> </span>&#123;</div><div class="line">        <span class="keyword">case</span> bakery, produce, seafood</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> ==<span class="params">(lhs: GroceryItem, rhs: GroceryItem)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">        <span class="keyword">return</span> (lhs.name, lhs.department) == (rhs.name, rhs.department)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">var</span> hashValue: <span class="type">Int</span> &#123;</div><div class="line">        <span class="comment">// Combine the hash values for the name and department</span></div><div class="line">        <span class="keyword">return</span> name.hashValue &lt;&lt; <span class="number">2</span> | department.hashValue</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// Create some groceries for our store:</span></div><div class="line"><span class="keyword">let</span> 🍎 = <span class="type">GroceryItem</span>(name: <span class="string">"Apples"</span>, department: .produce)</div><div class="line"><span class="keyword">let</span> 🍌 = <span class="type">GroceryItem</span>(name: <span class="string">"Bananas"</span>, department: .produce)</div><div class="line"><span class="keyword">let</span> 🥐 = <span class="type">GroceryItem</span>(name: <span class="string">"Croissants"</span>, department: .bakery)</div><div class="line"><span class="keyword">let</span> 🐟 = <span class="type">GroceryItem</span>(name: <span class="string">"Salmon"</span>, department: .seafood)</div><div class="line"><span class="keyword">let</span> 🍇 = <span class="type">GroceryItem</span>(name: <span class="string">"Grapes"</span>, department: .produce)</div><div class="line"><span class="keyword">let</span> 🍞 = <span class="type">GroceryItem</span>(name: <span class="string">"Bread"</span>, department: .bakery)</div><div class="line"><span class="keyword">let</span> 🍤 = <span class="type">GroceryItem</span>(name: <span class="string">"Shrimp"</span>, department: .seafood)</div><div class="line"></div><div class="line"><span class="keyword">let</span> groceries = [🍎, 🍌, 🥐, 🐟, 🍇, 🍞, 🍤]</div></pre></td></tr></table></figure>
 <p>后面的例子将围绕着groceries数组展示。</p>
@@ -147,145 +216,166 @@
 <p>和字典一样，集合也拥有了新的<strong>filter(_:) </strong>方法，返回的也是集合，而不是早起版本中的数组。字典和集合现在提供了暴漏现在capacity的方法:<strong>reserveCapacity(_:)</strong>，有了该方法，用户可以看到并控制他们的内部存储。</p>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p>本文译自：<a href="https://swift.org/blog/dictionary-and-set-improvements/" target="_blank" rel="external">https://swift.org/blog/dictionary-and-set-improvements/</a></p>
 
-      
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/10/18/topology/" data-toggle="tooltip" data-placement="top"
+                           title="拓扑图的实现">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/10/11/gInSVG/" data-toggle="tooltip" data-placement="top"
+                           title="为SVG中大小可变的<g>元素加上边框和背景色">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Swift4中的字典和集合在这些方面变得更好"><span class="toc-text">Swift4中的字典和集合在这些方面变得更好</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#写在前面"><span class="toc-text">写在前面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#用Key值对原数组进行分组"><span class="toc-text">用Key值对原数组进行分组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#获得字典值的数量"><span class="toc-text">获得字典值的数量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#从键值对建立字典"><span class="toc-text">从键值对建立字典</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#筛选出特定的项"><span class="toc-text">筛选出特定的项</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用默认值"><span class="toc-text">使用默认值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#合并两个字典到一个字典中"><span class="toc-text">合并两个字典到一个字典中</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#And-That’s-Not-All…"><span class="toc-text">And That’s Not All…</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
     </div>
-    <footer class="article-footer">
-      <a data-url="http://zhihaozhang.github.io/2017/10/13/DicAndSetInSwift4/" data-id="cjl7xi5xf000508tdtioc98d2" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/swift/">swift</a></li></ul>
-
-    </footer>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2017/10/18/topology/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          拓扑图的实现
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2017/10/11/gInSVG/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">为SVG中大小可变的&lt;g&gt;元素加上边框和背景色</div>
-    </a>
-  
-</nav>
-
-  
 </article>
 
-</section>
-        
-          <aside id="sidebar">
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">分类</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/d3/">d3</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/visualization/">visualization</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/苹果开发/">苹果开发</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/购房/">购房</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/随感/">随感</a></li></ul>
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Chih-Hao&#39;s Blog 2018
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme by <a href="https://haojen.github.io/">Haojen Ma</a>
+                </p>
+
+            </div>
+        </div>
     </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签</h3>
-    <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Json/">Json</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SVG/">SVG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/d3/">d3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS开发/">iOS开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/macOS开发/">macOS开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift/">swift</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随感/">随感</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签云</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/Json/" style="font-size: 10px;">Json</a> <a href="/tags/SVG/" style="font-size: 10px;">SVG</a> <a href="/tags/d3/" style="font-size: 20px;">d3</a> <a href="/tags/iOS开发/" style="font-size: 12px;">iOS开发</a> <a href="/tags/macOS开发/" style="font-size: 18px;">macOS开发</a> <a href="/tags/swift/" style="font-size: 14px;">swift</a> <a href="/tags/随感/" style="font-size: 16px;">随感</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">十一月 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">四月 2014</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">最新文章</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2018/08/24/invisibilitycloak/">上架沙盒化应用,重启应用后保持文件持久访问性指南</a>
-          </li>
-        
-          <li>
-            <a href="/2018/08/02/Match3/">Match for iPhone开发笔记 &lt;三&gt; 测试与上架篇</a>
-          </li>
-        
-          <li>
-            <a href="/2018/07/30/FunctionalPrograming/">浅谈函数式编程 (Introducing Functional Programming)</a>
-          </li>
-        
-          <li>
-            <a href="/2018/07/23/Match2/">Match for iPhone开发笔记 &lt;二&gt; 网络请求和数据流篇</a>
-          </li>
-        
-          <li>
-            <a href="/2018/07/18/buy-houseII/">魔都买房杂记(下)</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2018 Chih-Hao<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
 </footer>
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://zhihaozhang.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
 
 
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+<!-- Baidu Tongji -->
 
 
-<script src="/js/script.js"></script>
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
 
-  </div>
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="">
 </body>
+
 </html>
