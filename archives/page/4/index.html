@@ -341,15 +341,14 @@
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2014/11/15/polybrush in d3/" >
+        <a class="abstract-title" href = "/2014/11/15/D3 on Angular(2)/" >
             
-                <span>polybrush in d3</span>
+                <span>D3 on Angular(2)</span>
         </a>
         <div class="abstract-content">
-            
-前言你是否也像我一样，厌倦了d3默认的矩形的brush，或者你发现矩形的brush已经不能满足你的需要了;又或者你只是单纯的被上面的图片所吸引。不管怎样，我们将介绍一下polybrush。
-这篇博客的名字叫polybrush in d3，现在想来，好像有点错误，因为polybrush并不是d3内置的，它是由Geoffrey T. Bell在2012年开发的d3插件，因其方便、好用，所以广受好评。
-但无奈目前中文的相关资料和博客几乎没有，因此我来试着写一下如何使用它，以及它的原理，还会包含源码粗略解读，polybrush.js的github参考项目下载地址是：https://gist.g...
+            More Dynamic visualizations上一篇博客介绍了如何借助Angular来完成一个指令，达到可复用目的，但是似乎依然不够动态，我们不得不提前输入想要展示的数组。Angular的最大的特点是双向数据绑定，我们能否借助这个特性来完成更动态的可视化图呢？让Angular帮我们盯着数据，一旦数据改变了，就更新DOM元素。这一切都是Angular帮我们完成的，我们唯一需要做的是指定数据和DOM元素之间的关系，不需要写很多的代码。
+双向数据绑定先来用一个简单的例子来展示一下Angular帮我们完成的双向数据绑定，这里用一个简单的例子来展示一下。
+12345678//\&lt;bo...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -373,13 +372,15 @@
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2014/11/15/Build reuseable visualization using d3.js and AngularJS/" >
+        <a class="abstract-title" href = "/2014/11/15/drop and drag in d3js/" >
             
-                <span>Build reusable visualization using d3.js and AngularJS</span>
+                <span>drop and drag in d3</span>
         </a>
         <div class="abstract-content">
-            背景前面两篇博客介绍了如何借助angular，让我们的可视化图能够更有模块化、方便复用、具有交互性，不过前面的博客只介绍了基本的原理以及最简单的图，在这篇博客中，我们来一起绘制一个相对复杂一些的热力图，最终的效果如下图。这个热力图主要是用来展现维度与维度之间的相关性的，而相关性在0-1之间。千万不要小看这个热力图，图中的每一个元素，甚至每一个字都是绘制出来的，完成这个看似简单的热力图大概需要350行代码。
-具体实现目标我们想要用热力图的时候呢，希望能像内置的html DOM元素一样使用，比如12345\&lt;heatmap\&gt;\&lt;/heatmap\&gt;//如果我们能指定...
+            Behavior in d3在d3中，行为被设计成了一种组件，可以创建一系列的事件，并绑定到调用这些行为的元素上。最常见的行为有拖拽与缩放，使用这些行为可以很方便地在拖拽或者缩放的开始、过程中以及结束时达到想要的效果。
+这篇博客中，就以拖拽为例，并借助之前实现的热力图，实现拖拽dimension的label以达到reoder维度的效果。为了使用三个阶段，我们会让开始拖拽的时候，维度名变成红色、字体变大来表示强调的效果；在拖拽过程中，让label紧跟鼠标的位置；并且判断最终的位置，交换两个维度，并重新绘制整个热力图。
+理想情况下，开始移动的时候的，运行情况应该像下面这样。
+drag创建一个...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -512,6 +513,24 @@ Json语法规则JSON 语法是 JavaScript 对象表示语法的子集。1.数据
     <div class="sidebar-content sidebar-content-show-archive">
           <div class="sidebar-panel-archives">
     <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -1101,7 +1120,12 @@ Json语法规则JSON 语法是 JavaScript 对象表示语法的子集。1.数据
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular/" >D3 on Angular</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/drop and drag in d3js/" >drop and drag in d3</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
         </li>
     
     
@@ -1111,17 +1135,17 @@ Json语法规则JSON 语法是 JavaScript 对象表示语法的子集。1.数据
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/drop and drag in d3js/" >drop and drag in d3</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
             <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/polybrush in d3/" >polybrush in d3</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/浅谈d3.js中的异步文件读取的处理/" >浅谈d3.js中强制异步文件读取同步的四种方法</a>
         </li>
     
     
@@ -1135,26 +1159,7 @@ Json语法规则JSON 语法是 JavaScript 对象表示语法的子集。1.数据
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2018/07/18/buy-houseII/" >魔都买房杂记(下)</a>
-        </li>
-    
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> 2014 </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/浅谈d3.js中的异步文件读取的处理/" >浅谈d3.js中强制异步文件读取同步的四种方法</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/数据可视化之散点图/" >数据可视化之散点图</a>
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2018/02/10/turingCalendar/" >极客编程日历桌面版开发笔记</a>
         </li>
     
     
@@ -1182,7 +1187,12 @@ Json语法规则JSON 语法是 JavaScript 对象表示语法的子集。1.数据
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/数据可视化之散点图/" >数据可视化之散点图</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
         </li>
     
     
@@ -1196,7 +1206,7 @@ Json语法规则JSON 语法是 JavaScript 对象表示语法的子集。1.数据
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2018/02/10/turingCalendar/" >极客编程日历桌面版开发笔记</a>
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2018/07/18/buy-houseII/" >魔都买房杂记(下)</a>
         </li>
     
     
@@ -1210,7 +1220,7 @@ Json语法规则JSON 语法是 JavaScript 对象表示语法的子集。1.数据
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular/" >D3 on Angular</a>
         </li>
     
     
