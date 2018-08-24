@@ -1,88 +1,226 @@
 <!DOCTYPE html>
 <html>
-    <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
-    <title>
-        
-        Zhihao&#39;s Studio
-        
-    </title>
-    <link rel="icon" href= /assests/favicon.ico>
-    <!-- 提前加载place holder  -->
-    <style>
-        @font-face {
-            font-family: 'Oswald-Regular';
-            src: url('/font/Oswald-Regular.ttf');
-        }
-        @font-face {
-            font-family: 'Source Sans Pro';
-            src: url('/font/Source Sans Pro.woff'),
-            url('/font/Source Sans Pro.woff2');
-            font-weight: normal;
-            font-style: normal;
-        }
-        @font-face {
-            font-family: 'Source Code Pro';
-            src: url('/font/SourceCodePro-Regular.ttf.woff'),
-            url('/font/SourceCodePro-Regular.ttf.woff2');
-            font-weight: normal;
-            font-style: normal;
-        }
-        
-        
-        .site-intro-placeholder {
+    <!-- title -->
+
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
+    <meta name="author" content="Chih-Hao">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="Chih-Hao">
+    <meta name="keywords" content="Chih-Hao's Blog | Chih-Hao">
+    <meta name="description" content="">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>Zhihao&#39;s Studio</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
         position: absolute;
         z-index: -2;
         top: 0;
-        left: 0px;
+        left: 0;
         width: calc(100% + 300px);
         height: 100%;
         background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
         background-position: center center;
         transform: translate3d(-226px, 0, 0);
-        animation: gradient-move 2s ease-out 0s 1;
-        }
-        @keyframes gradient-move {
+        animation: gradient-move 2.5s ease-out 0s 1;
+    }
+
+    @keyframes gradient-move {
         0% {
             transform: translate3d(-226px, 0, 0);
         }
-        99% {
+        100% {
             transform: translate3d(0, 0, 0);
         }
-        99.1% {
-            transform: translate3d(-226px, 0, 0);
-        }
-        100% {
-            transform: translate3d(-226px, 0, 0);
-        }
     }
-    </style>
-    <link rel="stylesheet" href = "/css/style.css?v=20170930" />
-    <script src="//cdn.staticfile.org/jquery/3.2.1/jquery.min.js" defer></script>
+
+</style>
+
+    <link rel="preload" href= /css/style.css?v=20180824 as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <link rel="stylesheet" href= /css/mobile.css?v=20180824 media="(max-width: 980px)">
     
-    <script src="/scripts/main.js" defer></script>
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href= "/assets/favicon.ico" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script" />
+    <link rel="preload" href="/scripts/main.js" as="script" />
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin>
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
     <!-- 百度统计  -->
     
     <!-- 谷歌统计  -->
     
 </head>
+
     
     
 <header class="header">
 
+    <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
     
     <a class="home-link" href=/>Zhihao's Studio.</a>
 </header>
     <div class="wrapper">
-        <div class="site-intro">
+        <div class="site-intro" style=
+
+
+
+
+
+
+
+
+>
     
     <!-- 主页  -->
             
-    <div class="site-intro-img" style="background-image: url(/)"></div>
     <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
@@ -93,23 +231,122 @@
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+        </p>
         <!-- 文章页meta -->
         
     </div>
 </div>
-        <div class="container">
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
             <main class="main index-page">
     
     
     
-        <article class="index-post">
-            <a class="content-show-full" href = "/2018/07/30/FunctionalPrograming/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>浅谈函数式编程 (Introducing Functional Programming)</span>
-                    </h2>
-                <div class="abstract-content">
-                    前言最近两周利用空余时间艰难“啃完”了objc.io出版的《函数式Swift》这本书，感觉有些摸到了函数式编程的门道;在函数式编程思维的影响下，将之前的项目代码进行了改造。关于函数式编程，也算是有了一点心得，遂写成此文，虽然行文主要是以Swift为载体，但并不影响函数式思想的介绍。由于本人才疏学浅，而函数式编程本身博大精深，故谬误在所难免，如发现，还请指出。
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2018/07/30/FunctionalPrograming/" >
+            
+                <span>浅谈函数式编程 (Introducing Functional Programming)</span>
+        </a>
+        <div class="abstract-content">
+            前言最近两周利用空余时间艰难“啃完”了objc.io出版的《函数式Swift》这本书，感觉有些摸到了函数式编程的门道;在函数式编程思维的影响下，将之前的项目代码进行了改造。关于函数式编程，也算是有了一点心得，遂写成此文，虽然行文主要是以Swift为载体，但并不影响函数式思想的介绍。由于本人才疏学浅，而函数式编程本身博大精深，故谬误在所难免，如发现，还请指出。
 
 
 《函数式Swift》
@@ -117,115 +354,117 @@
 函数式编程WHAT is 函数式编程wiki对于函数式编程的定义如下:
 
 In computer science, functional programming is a programming para...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/07/30</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-href = swift>swift</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "swift">swift</a>
     
 </div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2018/07/30</span>
-                </div>
-            </div>
-        </article>
+            
+        </div>
+    </article>
     
     
     
-        <article class="index-post">
-            <a class="content-show-full" href = "/2018/05/20/ProtocolOP/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>面向协议编程初探</span>
-                    </h2>
-                <div class="abstract-content">
-                    从编程范式讲起或许你经常听到诸如面向对象编程、面向过程编程、面向协议编程、函数式编程这些词，心中也不免疑惑，这些词都是些啥？
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2018/05/20/ProtocolOP/" >
+            
+                <span>面向协议编程初探</span>
+        </a>
+        <div class="abstract-content">
+            从编程范式讲起或许你经常听到诸如面向对象编程、面向过程编程、面向协议编程、函数式编程这些词，心中也不免疑惑，这些词都是些啥？
 编程范式 on wiki相比于本文要介绍的面向协议编程，面向对象编程的名声似乎更响。面向对象由于C++和java的流行，成为近二十年来最为流行的编程范式。其他编程范式还有比面向对象更早的面向过程编程、指令编程，以及以Haskell为代表的*函数式编程和苹果提出的面向协议编程。
 编程范式是一类典型的编程风格，是指从事软件工程的一类典型的风格（可以对照方法学）。编程范型提供了（同时决定了）程序员对程序执行的看法。             ——wiki
 我理解的编程范式...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/05/20</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-href = swift>swift</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "swift">swift</a>
     
 </div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2018/05/20</span>
-                </div>
-            </div>
-        </article>
+            
+        </div>
+    </article>
     
     
     
-        <article class="index-post">
-            <a class="content-show-full" href = "/2018/05/09/swift5/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>Swift5新特性</span>
-                    </h2>
-                <div class="abstract-content">
-                    前言话说这两天好像是Google IO召开的日子，借机蹭一波热度，唱个反调，浅析一下Swift5可能会出现的新特性，也算是为下个月即将举办的WWDC预热预热吧。
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2018/05/09/swift5/" >
+            
+                <span>Swift5新特性</span>
+        </a>
+        <div class="abstract-content">
+            前言话说这两天好像是Google IO召开的日子，借机蹭一波热度，唱个反调，浅析一下Swift5可能会出现的新特性，也算是为下个月即将举办的WWDC预热预热吧。
 ABI稳定性ABI稳定性这个话题是一个历史遗留任务，最初是Swift3的目标，苹果的拖延症一直拖到了Swift5，还不一定可以实现。这也是国内很多公司不敢全面拥抱Swift的重要原因之一。
 ABI是啥ABI是Application Binary Interfaces（应用二进制接口）的缩写，它描述了应用程序和操作系统或其他应用程序的低级接口。
 在应用程序运行时，Swift二进制需要和其他库或组件通过ABI进行接触，因此ABI定义...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/05/09</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-href = swift>swift</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "swift">swift</a>
     
 </div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2018/05/09</span>
-                </div>
-            </div>
-        </article>
+            
+        </div>
+    </article>
     
     
     
-        <article class="index-post">
-            <a class="content-show-full" href = "/2017/10/13/DicAndSetInSwift4/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>Swift4字典和集合的新特性</span>
-                    </h2>
-                <div class="abstract-content">
-                    Swift4中的字典和集合在这些方面变得更好写在前面在最新版本的Swift中，dictionaries和sets新增了很多行为方法和初始化方法，让一些常见的任务变得异常简单。诸如组合、过滤和transform值操作可以用一步完成，让使用者可以写出更高效和简洁的代码。
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2017/10/13/DicAndSetInSwift4/" >
+            
+                <span>Swift4字典和集合的新特性</span>
+        </a>
+        <div class="abstract-content">
+            Swift4中的字典和集合在这些方面变得更好写在前面在最新版本的Swift中，dictionaries和sets新增了很多行为方法和初始化方法，让一些常见的任务变得异常简单。诸如组合、过滤和transform值操作可以用一步完成，让使用者可以写出更高效和简洁的代码。
 本篇博客将使用杂货铺中的商品作为例子演示这些新功能。GroceryItem结构体，由名字和部门组成，作为本例的数据类型。
 12345678910111213141516171819202122232425262728struct GroceryItem: Hashable &#123;    var name: String...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/10/13</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-href = swift>swift</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "swift">swift</a>
     
 </div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/10/13</span>
-                </div>
-            </div>
-        </article>
+            
+        </div>
+    </article>
     
     <!-- paginator  -->
     
@@ -233,7 +472,7 @@ ABI是啥ABI是Application Binary Interfaces（应用二进制接口）的缩写
             <!-- profile -->
             
         </div>
-        <footer class="footer">
+        <footer class="footer footer-unloaded">
     <!-- social  -->
     
     <div class="social">
@@ -241,37 +480,46 @@ ABI是啥ABI是Application Binary Interfaces（应用二进制接口）的缩写
     
         
             
-                <a href="emailto:zhihaozhang@me.com" class="iconfont-archer email" title=email ></a>
+                <a href="mailto:zhihaozhang@me.com" class="iconfont-archer email" title=email ></a>
             
         
     
         
             
-                <a href="https://github.com/zhihaozhang" class="iconfont-archer github" target="_blank" title="github"></a>
+                <a href="https://github.com/zhihaozhang" class="iconfont-archer github" target="_blank" title=github></a>
             
         
     
         
             
-                <a href="http://weibo.com/2854428840/profile?rightmod=1&wvr=6&mod=personinfo" class="iconfont-archer weibo" target="_blank" title="weibo"></a>
+                <a href="http://weibo.com/2854428840/profile?rightmod=1&wvr=6&mod=personinfo" class="iconfont-archer weibo" target="_blank" title=weibo></a>
             
         
     
         
             
-                <a href="https://www.zhihu.com/people/zhihao-zhang-95/activities" class="iconfont-archer zhihu" target="_blank" title="zhihu"></a>
+                <a href="https://www.zhihu.com/people/zhihao-zhang-95/activities" class="iconfont-archer zhihu" target="_blank" title=zhihu></a>
             
         
     
         
             
-                <a href="https://twitter.com/Chih_hao_" class="iconfont-archer twitter" target="_blank" title="twitter"></a>
+                <a href="https://twitter.com/Chih_hao_" class="iconfont-archer twitter" target="_blank" title=twitter></a>
             
         
     
         
             
-                <a href="https://www.instagram.com/izhihao_zhang/" class="iconfont-archer instagram" target="_blank" title="instagram"></a>
+                <a href="https://www.instagram.com/izhihao_zhang/" class="iconfont-archer instagram" target="_blank" title=instagram></a>
+            
+        
+    
+        
+            
+                <span class="iconfont-archer wechat" title=wechat>
+                  
+                  <img class="profile-qr" src="/assets/example_qr.png" />
+                </span>
             
         
     
@@ -280,23 +528,31 @@ ABI是啥ABI是Application Binary Interfaces（应用二进制接口）的缩写
     
     <!-- powered by Hexo  -->
     <div class="copyright">
-        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span>
-        <span
-            id="theme-info">Theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">archer</a></span>
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
     </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+     
+    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+    
+    </div>
+    
 
 </footer>
     </div>
-    <div class="back-top">&#xe639;</div>
-    <div class="sidebar">
-    <div class="sidebar-header">
-        <div class="sidebar-category">
-            <span class="sidebar-archive-link"><span class="iconfont-archer">&#xe67d;</span>Archive</span>
-            <span class="sidebar-tags-link"><span class="iconfont-archer">&#xe610;</span>Tag</span>
-        </div>
-    </div>
+    <!-- toc -->
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
     <div class="sidebar-content sidebar-content-show-archive">
-          <div class="sidebar-archive">
+          <div class="sidebar-panel-archives">
     <!-- 在ejs中将archive按照时间排序 -->
     
     
@@ -785,7 +1041,15 @@ ABI是啥ABI是Application Binary Interfaces（应用二进制接口）的缩写
     
     
     
-    <div class="total-archive"> Total : 33 </div>
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 33
+        </div>
+        <!-- search  -->
+        
+    </div>
     
     <div class="post-archive">
     
@@ -954,6 +1218,16 @@ ABI是啥ABI是Application Binary Interfaces（应用二进制接口）的缩写
         </li>
     
     
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/24</span><a class="archive-post-title" href= "/2014/04/24/用Java生成Json文件/" >用Java生成Json文件</a>
+        </li>
+    
+    
     
     
     
@@ -965,25 +1239,6 @@ ABI是啥ABI是Application Binary Interfaces（应用二进制接口）的缩写
     
         <li class="archive-post-item">
             <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2018/02/10/turingCalendar/" >极客编程日历桌面版开发笔记</a>
-        </li>
-    
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> 2014 </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">04/24</span><a class="archive-post-title" href= "/2014/04/24/用Java生成Json文件/" >用Java生成Json文件</a>
         </li>
     
     
@@ -1016,31 +1271,32 @@ ABI是啥ABI是Application Binary Interfaces（应用二进制接口）的缩写
     
     </div>
   </div>
-        <div class="sidebar-tags">
+        <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
-        <span class="sidebar-tag-name"><a href= "#">d3</a></span>
+        <span class="sidebar-tag-name" data-tags="d3"><span class="iconfont-archer">&#xe606;</span>d3</span>
     
-        <span class="sidebar-tag-name"><a href= "#">swift</a></span>
+        <span class="sidebar-tag-name" data-tags="swift"><span class="iconfont-archer">&#xe606;</span>swift</span>
     
-        <span class="sidebar-tag-name"><a href= "#">macOS开发</a></span>
+        <span class="sidebar-tag-name" data-tags="macOS开发"><span class="iconfont-archer">&#xe606;</span>macOS开发</span>
     
-        <span class="sidebar-tag-name"><a href= "#">随感</a></span>
+        <span class="sidebar-tag-name" data-tags="随感"><span class="iconfont-archer">&#xe606;</span>随感</span>
     
-        <span class="sidebar-tag-name"><a href= "#">iOS开发</a></span>
+        <span class="sidebar-tag-name" data-tags="iOS开发"><span class="iconfont-archer">&#xe606;</span>iOS开发</span>
     
-        <span class="sidebar-tag-name"><a href= "#">SVG</a></span>
+        <span class="sidebar-tag-name" data-tags="SVG"><span class="iconfont-archer">&#xe606;</span>SVG</span>
     
-        <span class="sidebar-tag-name"><a href= "#">Json</a></span>
+        <span class="sidebar-tag-name" data-tags="Json"><span class="iconfont-archer">&#xe606;</span>Json</span>
     
     </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
     <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
     缺失模块。<br/>
     1、请确保node版本大于6.2<br/>
     2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
     <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
     3、在根目录_config.yml里添加配置：
-    <pre style="color: #888; font-size: 0.6rem;">
+    <pre style="color: #787878; font-size: 0.6rem;">
 jsonContent:
   meta: false
   pages: false
@@ -1057,23 +1313,59 @@ jsonContent:
     link: false
     permalink: false
     excerpt: false
-    categories: false
+    categories: true
     tags: true</pre>
     </div> 
-    <div class="sidebar-tag-list"></div>
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+        <span class="sidebar-category-name" data-categories="visualization"><span class="iconfont-archer">&#xe60a;</span>visualization</span>
+    
+        <span class="sidebar-category-name" data-categories="苹果开发"><span class="iconfont-archer">&#xe60a;</span>苹果开发</span>
+    
+        <span class="sidebar-category-name" data-categories="d3"><span class="iconfont-archer">&#xe60a;</span>d3</span>
+    
+        <span class="sidebar-category-name" data-categories="购房"><span class="iconfont-archer">&#xe60a;</span>购房</span>
+    
+        <span class="sidebar-category-name" data-categories="随感"><span class="iconfont-archer">&#xe60a;</span>随感</span>
+    
+        <span class="sidebar-category-name" data-categories="Java"><span class="iconfont-archer">&#xe60a;</span>Java</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
 </div>
     </div>
 </div> 
     <script>
-    var jsInfo = {
-        root: '/'
+    var siteMeta = {
+        root: "/",
+        author: "Chih-Hao"
     }
 </script>
-    <!-- 不蒜子  -->
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
     
-    <!-- CNZZ统计  -->
+    <!-- busuanzi  -->
+    
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
     
     </div>
+    <!-- async load share.js -->
+     
     </body>
     <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 </html>

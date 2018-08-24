@@ -1,88 +1,226 @@
 <!DOCTYPE html>
 <html>
-    <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
-    <title>
-        
-        Zhihao&#39;s Studio
-        
-    </title>
-    <link rel="icon" href= /assests/favicon.ico>
-    <!-- 提前加载place holder  -->
-    <style>
-        @font-face {
-            font-family: 'Oswald-Regular';
-            src: url('/font/Oswald-Regular.ttf');
-        }
-        @font-face {
-            font-family: 'Source Sans Pro';
-            src: url('/font/Source Sans Pro.woff'),
-            url('/font/Source Sans Pro.woff2');
-            font-weight: normal;
-            font-style: normal;
-        }
-        @font-face {
-            font-family: 'Source Code Pro';
-            src: url('/font/SourceCodePro-Regular.ttf.woff'),
-            url('/font/SourceCodePro-Regular.ttf.woff2');
-            font-weight: normal;
-            font-style: normal;
-        }
-        
-        
-        .site-intro-placeholder {
+    <!-- title -->
+
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
+    <meta name="author" content="Chih-Hao">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="Chih-Hao">
+    <meta name="keywords" content="Chih-Hao's Blog | Chih-Hao">
+    <meta name="description" content="">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>Zhihao&#39;s Studio</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
         position: absolute;
         z-index: -2;
         top: 0;
-        left: 0px;
+        left: 0;
         width: calc(100% + 300px);
         height: 100%;
         background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
         background-position: center center;
         transform: translate3d(-226px, 0, 0);
-        animation: gradient-move 2s ease-out 0s 1;
-        }
-        @keyframes gradient-move {
+        animation: gradient-move 2.5s ease-out 0s 1;
+    }
+
+    @keyframes gradient-move {
         0% {
             transform: translate3d(-226px, 0, 0);
         }
-        99% {
+        100% {
             transform: translate3d(0, 0, 0);
         }
-        99.1% {
-            transform: translate3d(-226px, 0, 0);
-        }
-        100% {
-            transform: translate3d(-226px, 0, 0);
-        }
     }
-    </style>
-    <link rel="stylesheet" href = "/css/style.css?v=20170930" />
-    <script src="//cdn.staticfile.org/jquery/3.2.1/jquery.min.js" defer></script>
+
+</style>
+
+    <link rel="preload" href= /css/style.css?v=20180824 as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <link rel="stylesheet" href= /css/mobile.css?v=20180824 media="(max-width: 980px)">
     
-    <script src="/scripts/main.js" defer></script>
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href= "/assets/favicon.ico" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script" />
+    <link rel="preload" href="/scripts/main.js" as="script" />
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin>
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
     <!-- 百度统计  -->
     
     <!-- 谷歌统计  -->
     
 </head>
+
     
     
 <header class="header">
 
+    <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
     
     <a class="home-link" href=/>Zhihao's Studio.</a>
 </header>
     <div class="wrapper">
-        <div class="site-intro">
+        <div class="site-intro" style=
+
+
+
+
+
+
+
+
+>
     
     <!-- 主页  -->
             
-    <div class="site-intro-img" style="background-image: url(/)"></div>
     <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
@@ -93,311 +231,418 @@
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+        </p>
         <!-- 文章页meta -->
         
     </div>
 </div>
-        <div class="container">
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
             <main class="main index-page">
     
     
     
-        <article class="index-post">
-            <a class="content-show-full" href = "/2017/10/18/topology/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>拓扑图的实现</span>
-                    </h2>
-                <div class="abstract-content">
-                    背景拓扑图是Console界面中一个重要的组成部分，它的愿景是我公司Console平台相比于其他公司相同平台的创新之处。这个部分一直是由我来负责，从开始的高度抽象派图形化图，到后面创新性的引入Radial-layout，到这轮迭代返璞归真的Tree-layout信息展示，几经迭代，感慨良多。很多时候都要跟设计师死磕，在他的想法与技术之间找到一个权衡点。本文作为本轮迭代的一个小小总结，也作为API文档的供其他同事参考。也因为要作为API文档，因此本文会深入到代码级讲述每段代码甚至函数和关键变量的作用。
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2017/10/18/topology/" >
+            
+                <span>拓扑图的实现</span>
+        </a>
+        <div class="abstract-content">
+            背景拓扑图是Console界面中一个重要的组成部分，它的愿景是我公司Console平台相比于其他公司相同平台的创新之处。这个部分一直是由我来负责，从开始的高度抽象派图形化图，到后面创新性的引入Radial-layout，到这轮迭代返璞归真的Tree-layout信息展示，几经迭代，感慨良多。很多时候都要跟设计师死磕，在他的想法与技术之间找到一个权衡点。本文作为本轮迭代的一个小小总结，也作为API文档的供其他同事参考。也因为要作为API文档，因此本文会深入到代码级讲述每段代码甚至函数和关键变量的作用。
 早期版本的拓扑图
 
 
 目标拓扑图的目标是利用图形化的方式清晰地展示集群内App、Serv...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/10/18</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-href = d3>d3</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "d3">d3</a>
     
 </div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/10/18</span>
-                </div>
-            </div>
-        </article>
+            
+        </div>
+    </article>
     
     
     
-        <article class="index-post">
-            <a class="content-show-full" href = "/2014/11/15/Build reuseable visualization using d3.js and AngularJS/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>Build reusable visualization using d3.js and AngularJS</span>
-                    </h2>
-                <div class="abstract-content">
-                    背景前面两篇博客介绍了如何借助angular，让我们的可视化图能够更有模块化、方便复用、具有交互性，不过前面的博客只介绍了基本的原理以及最简单的图，在这篇博客中，我们来一起绘制一个相对复杂一些的热力图，最终的效果如下图。这个热力图主要是用来展现维度与维度之间的相关性的，而相关性在0-1之间。千万不要小看这个热力图，图中的每一个元素，甚至每一个字都是绘制出来的，完成这个看似简单的热力图大概需要350行代码。
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2014/11/15/Build reuseable visualization using d3.js and AngularJS/" >
+            
+                <span>Build reusable visualization using d3.js and AngularJS</span>
+        </a>
+        <div class="abstract-content">
+            背景前面两篇博客介绍了如何借助angular，让我们的可视化图能够更有模块化、方便复用、具有交互性，不过前面的博客只介绍了基本的原理以及最简单的图，在这篇博客中，我们来一起绘制一个相对复杂一些的热力图，最终的效果如下图。这个热力图主要是用来展现维度与维度之间的相关性的，而相关性在0-1之间。千万不要小看这个热力图，图中的每一个元素，甚至每一个字都是绘制出来的，完成这个看似简单的热力图大概需要350行代码。
 具体实现目标我们想要用热力图的时候呢，希望能像内置的html DOM元素一样使用，比如12345\&lt;heatmap\&gt;\&lt;/heatmap\&gt;//如果我们能指定...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2014/11/15</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-href = d3>d3</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "d3">d3</a>
     
 </div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2014/11/15</span>
-                </div>
-            </div>
-        </article>
+            
+        </div>
+    </article>
     
     
     
-        <article class="index-post">
-            <a class="content-show-full" href = "/2014/11/15/D3 on Angular/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>D3 on Angular</span>
-                    </h2>
-                <div class="abstract-content">
-                    Angular与D3前面写了几篇分别介绍AngularJS和D3的博客，他们各司其职，都在各自的一亩三分地里备受好评，那么，他们之间能否完成合作，实现共赢呢？这篇博客就来介绍如何将它们结合起来使用，使得我们的可视化能够更具有模块化、方便复用、具有交互性。
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2014/11/15/D3 on Angular/" >
+            
+                <span>D3 on Angular</span>
+        </a>
+        <div class="abstract-content">
+            Angular与D3前面写了几篇分别介绍AngularJS和D3的博客，他们各司其职，都在各自的一亩三分地里备受好评，那么，他们之间能否完成合作，实现共赢呢？这篇博客就来介绍如何将它们结合起来使用，使得我们的可视化能够更具有模块化、方便复用、具有交互性。
 Why Angular使用Angular做可视化有很多原因，但其中最主要的原因还是directives(指令)。 指令使得做可复用的可视化更容易，可以使得我们做的可视化的时候就像使用内置的HTML那么简单，比如我需要一个热力图（后面写博客怎么做），那么我仅仅需要用\\就可以了，想想这种酸爽的滋味吧。即使你不知道热力图是怎么做的，但是你用...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2014/11/15</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-href = d3>d3</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "d3">d3</a>
     
 </div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2014/11/15</span>
-                </div>
-            </div>
-        </article>
+            
+        </div>
+    </article>
     
     
     
-        <article class="index-post">
-            <a class="content-show-full" href = "/2014/11/15/D3 on Angular(2)/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>D3 on Angular(2)</span>
-                    </h2>
-                <div class="abstract-content">
-                    More Dynamic visualizations上一篇博客介绍了如何借助Angular来完成一个指令，达到可复用目的，但是似乎依然不够动态，我们不得不提前输入想要展示的数组。Angular的最大的特点是双向数据绑定，我们能否借助这个特性来完成更动态的可视化图呢？让Angular帮我们盯着数据，一旦数据改变了，就更新DOM元素。这一切都是Angular帮我们完成的，我们唯一需要做的是指定数据和DOM元素之间的关系，不需要写很多的代码。
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2014/11/15/D3 on Angular(2)/" >
+            
+                <span>D3 on Angular(2)</span>
+        </a>
+        <div class="abstract-content">
+            More Dynamic visualizations上一篇博客介绍了如何借助Angular来完成一个指令，达到可复用目的，但是似乎依然不够动态，我们不得不提前输入想要展示的数组。Angular的最大的特点是双向数据绑定，我们能否借助这个特性来完成更动态的可视化图呢？让Angular帮我们盯着数据，一旦数据改变了，就更新DOM元素。这一切都是Angular帮我们完成的，我们唯一需要做的是指定数据和DOM元素之间的关系，不需要写很多的代码。
 双向数据绑定先来用一个简单的例子来展示一下Angular帮我们完成的双向数据绑定，这里用一个简单的例子来展示一下。
 12345678//\&lt;bo...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2014/11/15</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-href = d3>d3</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "d3">d3</a>
     
 </div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2014/11/15</span>
-                </div>
-            </div>
-        </article>
+            
+        </div>
+    </article>
     
     
     
-        <article class="index-post">
-            <a class="content-show-full" href = "/2014/11/15/associate brush/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>associate brush</span>
-                    </h2>
-                <div class="abstract-content">
-                    这篇博客记录了在上一篇博客加入scatterplot matrix的基础上，实现了associate brush的操作，即，从RadViz中brush一块区域，右边16个scatterplot里对应的点都会高亮出来，其他的点将暗淡下去；同样的，从右边16个scatterplot matrix里任一scatterplot cell里brush一些点，另外15个cell以及左边的RadViz里相应的点都会被highlight出来。具体的效果如下图：
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2014/11/15/associate brush/" >
+            
+                <span>associate brush</span>
+        </a>
+        <div class="abstract-content">
+            这篇博客记录了在上一篇博客加入scatterplot matrix的基础上，实现了associate brush的操作，即，从RadViz中brush一块区域，右边16个scatterplot里对应的点都会高亮出来，其他的点将暗淡下去；同样的，从右边16个scatterplot matrix里任一scatterplot cell里brush一些点，另外15个cell以及左边的RadViz里相应的点都会被highlight出来。具体的效果如下图：
 代码如下：
 123456789101112131415161718192021222324252627282930313233343536373...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2014/11/15</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-href = d3>d3</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "d3">d3</a>
     
 </div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2014/11/15</span>
-                </div>
-            </div>
-        </article>
+            
+        </div>
+    </article>
     
     
     
-        <article class="index-post">
-            <a class="content-show-full" href = "/2014/11/15/drop and drag in d3js/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>drop and drag in d3</span>
-                    </h2>
-                <div class="abstract-content">
-                    Behavior in d3在d3中，行为被设计成了一种组件，可以创建一系列的事件，并绑定到调用这些行为的元素上。最常见的行为有拖拽与缩放，使用这些行为可以很方便地在拖拽或者缩放的开始、过程中以及结束时达到想要的效果。
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2014/11/15/drop and drag in d3js/" >
+            
+                <span>drop and drag in d3</span>
+        </a>
+        <div class="abstract-content">
+            Behavior in d3在d3中，行为被设计成了一种组件，可以创建一系列的事件，并绑定到调用这些行为的元素上。最常见的行为有拖拽与缩放，使用这些行为可以很方便地在拖拽或者缩放的开始、过程中以及结束时达到想要的效果。
 这篇博客中，就以拖拽为例，并借助之前实现的热力图，实现拖拽dimension的label以达到reoder维度的效果。为了使用三个阶段，我们会让开始拖拽的时候，维度名变成红色、字体变大来表示强调的效果；在拖拽过程中，让label紧跟鼠标的位置；并且判断最终的位置，交换两个维度，并重新绘制整个热力图。
 理想情况下，开始移动的时候的，运行情况应该像下面这样。
 drag创建一个...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2014/11/15</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-href = d3>d3</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "d3">d3</a>
     
 </div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2014/11/15</span>
-                </div>
-            </div>
-        </article>
+            
+        </div>
+    </article>
     
     
     
-        <article class="index-post">
-            <a class="content-show-full" href = "/2014/11/15/polybrush in d3/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>polybrush in d3</span>
-                    </h2>
-                <div class="abstract-content">
-                    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2014/11/15/polybrush in d3/" >
+            
+                <span>polybrush in d3</span>
+        </a>
+        <div class="abstract-content">
+            
 前言你是否也像我一样，厌倦了d3默认的矩形的brush，或者你发现矩形的brush已经不能满足你的需要了;又或者你只是单纯的被上面的图片所吸引。不管怎样，我们将介绍一下polybrush。
 这篇博客的名字叫polybrush in d3，现在想来，好像有点错误，因为polybrush并不是d3内置的，它是由Geoffrey T. Bell在2012年开发的d3插件，因其方便、好用，所以广受好评。
 但无奈目前中文的相关资料和博客几乎没有，因此我来试着写一下如何使用它，以及它的原理，还会包含源码粗略解读，polybrush.js的github参考项目下载地址是：https://gist.g...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2014/11/15</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-href = d3>d3</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "d3">d3</a>
     
 </div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2014/11/15</span>
-                </div>
-            </div>
-        </article>
+            
+        </div>
+    </article>
     
     
     
-        <article class="index-post">
-            <a class="content-show-full" href = "/2014/11/15/冷门但实用的d3.js内置函数/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>冷门但实用的d3.js内置函数</span>
-                    </h2>
-                <div class="abstract-content">
-                    前言在d3.js的API文档中，提供了很多内置的函数，但是有些很有用的内置函数却被无情的忽略了，这篇博客就来整理整理这些被遗忘却很实用的函数。希望整理过后，他们不再被遗忘。
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2014/11/15/冷门但实用的d3.js内置函数/" >
+            
+                <span>冷门但实用的d3.js内置函数</span>
+        </a>
+        <div class="abstract-content">
+            前言在d3.js的API文档中，提供了很多内置的函数，但是有些很有用的内置函数却被无情的忽略了，这篇博客就来整理整理这些被遗忘却很实用的函数。希望整理过后，他们不再被遗忘。
 selection.classed(name,【value】)value参数可选，如果没有指定，则返回与name参数匹配的第一个非空元素是否绑定了指定的CSS类，true表示绑定，false表示未绑定。如果value指定了的话，就是为selection添加/删除CSS类。这点与selection.attr(name,【value】)非常类似，但是相比而言，就冷门的多，恐怕没有多少人不知道selection.attr(...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2014/11/15</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-href = d3>d3</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "d3">d3</a>
     
 </div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2014/11/15</span>
-                </div>
-            </div>
-        </article>
+            
+        </div>
+    </article>
     
     
     
-        <article class="index-post">
-            <a class="content-show-full" href = "/2014/11/15/数据可视化之散点图/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>数据可视化之散点图</span>
-                    </h2>
-                <div class="abstract-content">
-                    D3.js是当下最火的可视化库之一，这篇博客记录了如何实现一个最基本的散点图，并用三角形表示数据点。
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2014/11/15/数据可视化之散点图/" >
+            
+                <span>数据可视化之散点图</span>
+        </a>
+        <div class="abstract-content">
+            D3.js是当下最火的可视化库之一，这篇博客记录了如何实现一个最基本的散点图，并用三角形表示数据点。
 代码如下：
 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283\&lt;!DOCTYPE html\&gt;\&lt;html\&gt;\&lt;head lang=&quot;en&quot;\&gt;\&lt;meta ch...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2014/11/15</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-href = d3>d3</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "d3">d3</a>
     
 </div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2014/11/15</span>
-                </div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2014/11/15/浅谈d3.js中的异步文件读取的处理/" >
+            
+                <span>浅谈d3.js中强制异步文件读取同步的四种方法</span>
+        </a>
+        <div class="abstract-content">
+            问题提出在使用d3.js时，我们经常会使用d3.csv()或者d3.json()函数来从文件中读取出数据，不幸的是，偶尔代码的结果并不是我们预料的那样。习惯了过程式编程的我开始的时候也是这样，最让人头疼的是javascript并不会告诉你问题出在哪里了。我第一次遇到这个问题的时候，找了半天bug，确定代码主体部分没有问题之后，我只能开始使用console.log()将变量一个一个的输出到控制台里。第一次遇到这个问题时的图片是这样的：问题出在第72行和第75行，中间几行完全没有对ordertxt进行操作，但是最后的结果就是和预想的输出不吻合，后来找了个其他方法把这个问题给解决了，今天又遇到...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2014/11/15</span>
             </div>
-        </article>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
     
-    
-    
-        <article class="index-post">
-            <a class="content-show-full" href = "/2014/11/15/浅谈d3.js中的异步文件读取的处理/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>浅谈d3.js中强制异步文件读取同步的四种方法</span>
-                    </h2>
-                <div class="abstract-content">
-                    问题提出在使用d3.js时，我们经常会使用d3.csv()或者d3.json()函数来从文件中读取出数据，不幸的是，偶尔代码的结果并不是我们预料的那样。习惯了过程式编程的我开始的时候也是这样，最让人头疼的是javascript并不会告诉你问题出在哪里了。我第一次遇到这个问题的时候，找了半天bug，确定代码主体部分没有问题之后，我只能开始使用console.log()将变量一个一个的输出到控制台里。第一次遇到这个问题时的图片是这样的：问题出在第72行和第75行，中间几行完全没有对ordertxt进行操作，但是最后的结果就是和预想的输出不吻合，后来找了个其他方法把这个问题给解决了，今天又遇到...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = d3>d3</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "d3">d3</a>
     
 </div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2014/11/15</span>
-                </div>
-            </div>
-        </article>
+            
+        </div>
+    </article>
     
     <!-- paginator  -->
     
@@ -405,7 +650,7 @@ selection.classed(name,【value】)value参数可选，如果没有指定，则�
             <!-- profile -->
             
         </div>
-        <footer class="footer">
+        <footer class="footer footer-unloaded">
     <!-- social  -->
     
     <div class="social">
@@ -413,37 +658,46 @@ selection.classed(name,【value】)value参数可选，如果没有指定，则�
     
         
             
-                <a href="emailto:zhihaozhang@me.com" class="iconfont-archer email" title=email ></a>
+                <a href="mailto:zhihaozhang@me.com" class="iconfont-archer email" title=email ></a>
             
         
     
         
             
-                <a href="https://github.com/zhihaozhang" class="iconfont-archer github" target="_blank" title="github"></a>
+                <a href="https://github.com/zhihaozhang" class="iconfont-archer github" target="_blank" title=github></a>
             
         
     
         
             
-                <a href="http://weibo.com/2854428840/profile?rightmod=1&wvr=6&mod=personinfo" class="iconfont-archer weibo" target="_blank" title="weibo"></a>
+                <a href="http://weibo.com/2854428840/profile?rightmod=1&wvr=6&mod=personinfo" class="iconfont-archer weibo" target="_blank" title=weibo></a>
             
         
     
         
             
-                <a href="https://www.zhihu.com/people/zhihao-zhang-95/activities" class="iconfont-archer zhihu" target="_blank" title="zhihu"></a>
+                <a href="https://www.zhihu.com/people/zhihao-zhang-95/activities" class="iconfont-archer zhihu" target="_blank" title=zhihu></a>
             
         
     
         
             
-                <a href="https://twitter.com/Chih_hao_" class="iconfont-archer twitter" target="_blank" title="twitter"></a>
+                <a href="https://twitter.com/Chih_hao_" class="iconfont-archer twitter" target="_blank" title=twitter></a>
             
         
     
         
             
-                <a href="https://www.instagram.com/izhihao_zhang/" class="iconfont-archer instagram" target="_blank" title="instagram"></a>
+                <a href="https://www.instagram.com/izhihao_zhang/" class="iconfont-archer instagram" target="_blank" title=instagram></a>
+            
+        
+    
+        
+            
+                <span class="iconfont-archer wechat" title=wechat>
+                  
+                  <img class="profile-qr" src="/assets/example_qr.png" />
+                </span>
             
         
     
@@ -452,23 +706,31 @@ selection.classed(name,【value】)value参数可选，如果没有指定，则�
     
     <!-- powered by Hexo  -->
     <div class="copyright">
-        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span>
-        <span
-            id="theme-info">Theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">archer</a></span>
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
     </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+     
+    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+    
+    </div>
+    
 
 </footer>
     </div>
-    <div class="back-top">&#xe639;</div>
-    <div class="sidebar">
-    <div class="sidebar-header">
-        <div class="sidebar-category">
-            <span class="sidebar-archive-link"><span class="iconfont-archer">&#xe67d;</span>Archive</span>
-            <span class="sidebar-tags-link"><span class="iconfont-archer">&#xe610;</span>Tag</span>
-        </div>
-    </div>
+    <!-- toc -->
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
     <div class="sidebar-content sidebar-content-show-archive">
-          <div class="sidebar-archive">
+          <div class="sidebar-panel-archives">
     <!-- 在ejs中将archive按照时间排序 -->
     
     
@@ -957,7 +1219,15 @@ selection.classed(name,【value】)value参数可选，如果没有指定，则�
     
     
     
-    <div class="total-archive"> Total : 33 </div>
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 33
+        </div>
+        <!-- search  -->
+        
+    </div>
     
     <div class="post-archive">
     
@@ -1126,6 +1396,16 @@ selection.classed(name,【value】)value参数可选，如果没有指定，则�
         </li>
     
     
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/24</span><a class="archive-post-title" href= "/2014/04/24/用Java生成Json文件/" >用Java生成Json文件</a>
+        </li>
+    
+    
     
     
     
@@ -1137,25 +1417,6 @@ selection.classed(name,【value】)value参数可选，如果没有指定，则�
     
         <li class="archive-post-item">
             <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2018/02/10/turingCalendar/" >极客编程日历桌面版开发笔记</a>
-        </li>
-    
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> 2014 </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">04/24</span><a class="archive-post-title" href= "/2014/04/24/用Java生成Json文件/" >用Java生成Json文件</a>
         </li>
     
     
@@ -1188,31 +1449,32 @@ selection.classed(name,【value】)value参数可选，如果没有指定，则�
     
     </div>
   </div>
-        <div class="sidebar-tags">
+        <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
-        <span class="sidebar-tag-name"><a href= "#">d3</a></span>
+        <span class="sidebar-tag-name" data-tags="d3"><span class="iconfont-archer">&#xe606;</span>d3</span>
     
-        <span class="sidebar-tag-name"><a href= "#">swift</a></span>
+        <span class="sidebar-tag-name" data-tags="swift"><span class="iconfont-archer">&#xe606;</span>swift</span>
     
-        <span class="sidebar-tag-name"><a href= "#">macOS开发</a></span>
+        <span class="sidebar-tag-name" data-tags="macOS开发"><span class="iconfont-archer">&#xe606;</span>macOS开发</span>
     
-        <span class="sidebar-tag-name"><a href= "#">随感</a></span>
+        <span class="sidebar-tag-name" data-tags="随感"><span class="iconfont-archer">&#xe606;</span>随感</span>
     
-        <span class="sidebar-tag-name"><a href= "#">iOS开发</a></span>
+        <span class="sidebar-tag-name" data-tags="iOS开发"><span class="iconfont-archer">&#xe606;</span>iOS开发</span>
     
-        <span class="sidebar-tag-name"><a href= "#">SVG</a></span>
+        <span class="sidebar-tag-name" data-tags="SVG"><span class="iconfont-archer">&#xe606;</span>SVG</span>
     
-        <span class="sidebar-tag-name"><a href= "#">Json</a></span>
+        <span class="sidebar-tag-name" data-tags="Json"><span class="iconfont-archer">&#xe606;</span>Json</span>
     
     </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
     <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
     缺失模块。<br/>
     1、请确保node版本大于6.2<br/>
     2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
     <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
     3、在根目录_config.yml里添加配置：
-    <pre style="color: #888; font-size: 0.6rem;">
+    <pre style="color: #787878; font-size: 0.6rem;">
 jsonContent:
   meta: false
   pages: false
@@ -1229,23 +1491,59 @@ jsonContent:
     link: false
     permalink: false
     excerpt: false
-    categories: false
+    categories: true
     tags: true</pre>
     </div> 
-    <div class="sidebar-tag-list"></div>
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+        <span class="sidebar-category-name" data-categories="visualization"><span class="iconfont-archer">&#xe60a;</span>visualization</span>
+    
+        <span class="sidebar-category-name" data-categories="苹果开发"><span class="iconfont-archer">&#xe60a;</span>苹果开发</span>
+    
+        <span class="sidebar-category-name" data-categories="d3"><span class="iconfont-archer">&#xe60a;</span>d3</span>
+    
+        <span class="sidebar-category-name" data-categories="购房"><span class="iconfont-archer">&#xe60a;</span>购房</span>
+    
+        <span class="sidebar-category-name" data-categories="随感"><span class="iconfont-archer">&#xe60a;</span>随感</span>
+    
+        <span class="sidebar-category-name" data-categories="Java"><span class="iconfont-archer">&#xe60a;</span>Java</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
 </div>
     </div>
 </div> 
     <script>
-    var jsInfo = {
-        root: '/'
+    var siteMeta = {
+        root: "/",
+        author: "Chih-Hao"
     }
 </script>
-    <!-- 不蒜子  -->
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
     
-    <!-- CNZZ统计  -->
+    <!-- busuanzi  -->
+    
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
     
     </div>
+    <!-- async load share.js -->
+     
     </body>
     <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 </html>
