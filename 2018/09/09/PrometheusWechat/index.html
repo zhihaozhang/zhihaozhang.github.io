@@ -15,7 +15,7 @@
     <meta name="description" content="">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>Zhihao&#39;s Studio</title>
+    <title>Prometheus+微信实时报警模块的实现与Docker部署 · Zhihao&#39;s Studio</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -196,12 +196,23 @@
 </head>
 
     
+        <body class="post-body">
+    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >Zhihao&#39;s Studio.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">Prometheus+微信实时报警模块的实现与Docker部署</a>
+            </div>
+    </div>
     
     <a class="home-link" href=/>Zhihao's Studio.</a>
 </header>
@@ -215,24 +226,74 @@
 
 
 
+height:50vh;
+
 >
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
+            
+            Prometheus+微信实时报警模块的实现与Docker部署
+            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "效率">效率</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count">1,517</span> / Reading time: <span class="post-count">6 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2018/09/09</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
         
     </div>
 </div>
@@ -333,77 +394,120 @@
 </script>        
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2017/12/17/googleDevDay2/" >
-            
-                <span>谷歌开发者大会(GDD2017)见闻 Day2</span>
-        </a>
-        <div class="abstract-content">
-            
-写在前面上一篇博客写了挺多开发者大会期间的花絮(虽然花絮本身就是开发者大会重要的组成部分)，而在这篇博客里将更专注于session本身，对场外的花絮和花边新闻尽量少的提及。话不多说，我们开始吧。
-Android things安卓things是一种支持世界各地计算需求的新平台，其出现的初衷是简化IoT设备的开发和生成。安卓things运行的仍然是安卓系统，因此对安卓开发比较熟悉的朋友可以很快的上手来完成一些应用。
-在现场，演讲者详细演示了如何在大会赠送的Android things设备上进行程序开发。他利用温度传感器和气压传感器开发了一个温度计和气压计的应用。开发共分为三个步骤：
+            <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>对很多公司而言，保证服务可用，在服务不可用时报警到相关服务负责人提醒其及时修复，是非常重要的一件事。在我司，看服务可不可用，是分配给员工们还停留在人眼观察阶段。由行政人员安排轮流值班，每个人负责两周。</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNbRwly1fv3bsl5dfvj30u00m6jvk.jpg" alt=""></p>
+<blockquote>
+<p>每人两周的值班表</p>
+</blockquote>
+<p>我觉得这个事情由人来看有三个缺点：</p>
+<ol>
+<li>浪费了人力，值班的人不能全心全意把心思放到工作上。</li>
+<li>报警不够及时，值班人员不可能时刻将注意力放在这上面。</li>
+<li>值班人员只是将异常的服务截图发到群里，有可能不知道通知谁来处理，且真实的责任人看到这个截图又需要一定时间。</li>
+</ol>
+<p>这眼看着很快就要轮到我了，我比较<strong>懒</strong>，于是就找<strong>旁门左道</strong>来替我处理这件事了。</p>
+<h1 id="Prometheus"><a href="#Prometheus" class="headerlink" title="Prometheus"></a>Prometheus</h1><h2 id="普罗米修斯介绍"><a href="#普罗米修斯介绍" class="headerlink" title="普罗米修斯介绍"></a>普罗米修斯介绍</h2><p><a href="https://github.com/prometheus" target="_blank" rel="external">Prometheus（普罗米修斯）</a>是一套开源的<strong>监控/报警/时间序列</strong>数据库的组合,由<strong>SoundCloud</strong>公司开发。</p>
+<p>Prometheus基本原理是通过HTTP协议周期性抓取被监控组件的状态，这样做的好处是任意组件只要提供HTTP接口就可以接入监控系统，不需要任何SDK或者其他的集成过程。这样做非常适合虚拟化环境比如VM或者Docker。</p>
+<p>Prometheus应该是为数不多的适合Docker、Mesos、Kubernetes环境的监控系统之一。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1814710-bb27d75d61b730a1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/796" alt=""></p>
+<blockquote>
+<p>普罗米修斯架构图</p>
+</blockquote>
+<h2 id="Alertmanager模块的扩展-Email-VS-Wechat"><a href="#Alertmanager模块的扩展-Email-VS-Wechat" class="headerlink" title="Alertmanager模块的扩展 Email VS Wechat"></a>Alertmanager模块的扩展 Email VS Wechat</h2><p>普罗米修斯<em>Alertmanager模块</em>提供了<strong>Email</strong>通知，但是用户查Email不频繁，而且很容易将用户邮箱塞满，以至于后面被邮箱系统判为垃圾邮件，失去了通知的意义。</p>
+<p>和<strong>邮件</strong>形成对比的是<strong>微信</strong>，微信似乎已经成了大部分人手机里使用最频繁的软件了，而且有桌面客户端，即使不看手机，在电脑上工作也能收到消息。一收到消息，特别是@到自己的消息，好奇心会趋势用户打开，看到了自己的服务出现了错误，在群聊里丢了脸，会尽力尽快修复，这也达到了及时通知的目的。</p>
+<h2 id="wechaty"><a href="#wechaty" class="headerlink" title="wechaty"></a>wechaty</h2><p>之前美团和饿了么红包在微信里抢大红包，我那时候第一次知道微信有自动分组、回复和对消息的监听的框架。我在GitHub里搜到了一个叫<a href="https://github.com/wechaty/wechaty" target="_blank" rel="external">wechaty</a>的开源微信SDK，它基于微信公开的API，对接口进行了一系列的封装，提供一系列简单的接口，然后开发者可以在其之上进行微信机器人的开发。</p>
+<blockquote>
+<p>最终促使我使用这个库的原因很简单，是一个墙外用户的评价:**”太好用，好用的想哭”。没想到我后面在墙内部署的时候，真的哭了。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">Wechaty.instance()</div><div class="line">.on(<span class="string">'scan'</span>, (url, code) =&gt; &#123;</div><div class="line">    <span class="built_in">console</span>.log(url)</div><div class="line">    <span class="keyword">let</span> loginUrl = url.replace(<span class="string">'qrcode'</span>, <span class="string">'l'</span>)</div><div class="line">    QrcodeTerminal.generate(loginUrl)</div><div class="line">  &#125;)</div><div class="line">.on(<span class="string">'login'</span>,user =&gt; &#123;<span class="built_in">console</span>.log(<span class="string">`User <span class="subst">$&#123;user&#125;</span> logined`</span>)&#125;)</div><div class="line">.on(<span class="string">'message'</span>, <span class="keyword">async</span> (message) =&gt; &#123;</div><div class="line">    <span class="keyword">const</span> contact = message.from()</div><div class="line">    <span class="keyword">const</span> content = message.text()</div><div class="line">    <span class="keyword">const</span> room = message.room()</div><div class="line"></div><div class="line">    <span class="keyword">if</span>(room.toString() == <span class="string">"Room&lt;群聊名&gt;"</span>)&#123;</div><div class="line">        heliumMessage = message</div><div class="line">        heliumRoom = room</div><div class="line">    &#125;</div><div class="line">&#125;).start()</div><div class="line"></div><div class="line">server.post(<span class="string">'/sendMsg'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">req,res</span>)</span>&#123;</div><div class="line"></div><div class="line">  <span class="keyword">if</span>(heliumMessage)&#123;</div><div class="line">    heliumMessage.say(req.body.msg)</div><div class="line">  &#125;</div><div class="line">    </div><div class="line">&#125;).listen(<span class="number">3000</span>)</div></pre></td></tr></table></figure>
+<p>配合node.js用起来真挺方便的，如果起在本地，已经可以正常的工作了。虽然有个小瑕疵，就是需要在群聊里先说一句话，才能找到这个群聊，因为群聊跟联系人还不同。</p>
+<h2 id="部署在docker端"><a href="#部署在docker端" class="headerlink" title="部署在docker端"></a>部署在docker端</h2><p>因为本地机器的IP地址是会发生变化的，因此需要将这个服务部署到docker端，且wechaty宣称支持docker端部署，于是就进行了一番尝试。</p>
+<p>部署到docker，首先遇到的问题的是无法将二维码或url实时传出来，除非通过查询log文件。于是就在代码里集成了邮件模块，将二维码的url以邮件的形式发出来。url里有个坑，刚开始发出来的url是经过替换的，需要将/r/换成/qrcode/。</p>
+<p>wechaty是需要<em>红芯浏览器(chromium)内核</em>的，需要科学的上网方式，整个Image build完之后居然有2G。node的版本也需要v8，v10检查会严格一些，跑不通。</p>
+<p><em>(dockerfile附录于文末)</em></p>
+<h1 id="反响和未来工作"><a href="#反响和未来工作" class="headerlink" title="反响和未来工作"></a>反响和未来工作</h1><p>服务投入使用第一天，值班人员觉得没他什么事了，我就觉得我做这项工作是值得的，减轻了所有人值班的压力。</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNbRwly1fv3ew40jicj31kw0ysqf9.jpg" alt=""></p>
+<blockquote>
+<p>报警样例与值班人员的反响</p>
+</blockquote>
+<p>现在遇到的问题是报警给很多人，后面想实现一个基于订阅的点对点推送应用。</p>
+<p>#附录 Dockerfile</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div></pre></td><td class="code"><pre><div class="line">FROM ubuntu:18.04</div><div class="line"></div><div class="line">ENV DEBIAN_FRONTEND     noninteractive</div><div class="line">ENV WECHATY_DOCKER      1</div><div class="line">ENV LC_ALL              C.UTF-8</div><div class="line">ENV NODE_ENV            $NODE_ENV</div><div class="line">ENV NPM_CONFIG_LOGLEVEL warn</div><div class="line"></div><div class="line"># Installing the &apos;apt-utils&apos; package gets rid of the &apos;debconf: delaying package configuration, since apt-utils is not installed&apos;</div><div class="line"># error message when installing any other package with the apt-get package manager.</div><div class="line"># https://peteris.rocks/blog/quiet-and-unattended-installation-with-apt-get/</div><div class="line">RUN apt-get update &amp;&amp; apt-get install -y --no-install-recommends \</div><div class="line">    apt-utils \</div><div class="line">    bash \</div><div class="line">    build-essential \</div><div class="line">    ca-certificates \</div><div class="line">    curl \</div><div class="line">    coreutils \</div><div class="line">    ffmpeg \</div><div class="line">    figlet \</div><div class="line">    git \</div><div class="line">    gnupg2 \</div><div class="line">    jq \</div><div class="line">    libgconf-2-4 \</div><div class="line">    moreutils \</div><div class="line">    python-dev \</div><div class="line">    shellcheck \</div><div class="line">    sudo \</div><div class="line">    tzdata \</div><div class="line">    vim \</div><div class="line">    wget \</div><div class="line">  &amp;&amp; apt-get purge --auto-remove \</div><div class="line">  &amp;&amp; rm -rf /tmp/* /var/lib/apt/lists/*</div><div class="line"></div><div class="line">RUN curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash - \</div><div class="line">    &amp;&amp; apt-get update &amp;&amp; apt-get install -y --no-install-recommends nodejs \</div><div class="line">    &amp;&amp; apt-get purge --auto-remove \</div><div class="line">    &amp;&amp; rm -rf /tmp/* /var/lib/apt/lists/*</div><div class="line"></div><div class="line"># https://github.com/GoogleChrome/puppeteer/blob/master/docs/troubleshooting.md</div><div class="line"># https://github.com/ebidel/try-puppeteer/blob/master/backend/Dockerfile</div><div class="line"># Install latest chrome dev package.</div><div class="line"># Note: this also installs the necessary libs so we don&apos;t need the previous RUN command.</div><div class="line"></div><div class="line">RUN apt-get update -q </div><div class="line">RUN sudo apt-get install -y chromium-browser  xvfb libpango1.0-0 fonts-liberation libappindicator1 libdbusmenu-glib4 libdbusmenu-gtk4   libindicator7 indicator-application</div><div class="line">RUN apt-get install -f -y gconf-service gconf2-common  libgconf-2-4 gconf-service-backend</div><div class="line"></div><div class="line">RUN wget -c https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb</div><div class="line">RUN sudo dpkg -i google-chrome-stable_current_amd64.deb</div><div class="line">RUN nohup Xvfb :0 -ac -screen 0 1024x768x24 &amp;</div><div class="line">RUN export DISPLAY=0:0</div><div class="line"></div><div class="line">RUN	echo Asia/Shanghai &gt; /etc/timezone									&amp;&amp;	\</div><div class="line">	ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</div><div class="line"></div><div class="line">RUN apt-get update &amp;&amp; apt-get install -y tar</div><div class="line"></div><div class="line">WORKDIR /opt</div><div class="line"></div><div class="line">RUN mkdir -p /opt/wechat_robot</div><div class="line">COPY package.json /opt/wechat_robot/</div><div class="line">COPY wechat.js /opt/wechat_robot</div><div class="line">COPY start.sh /opt/wechat_robot</div><div class="line">RUN mkdir -p /opt/wechat_robot/node_modules</div><div class="line">COPY node_modules/ /opt/wechat_robot/node_modules/</div><div class="line"></div><div class="line">RUN chmod +x /opt/wechat_robot/start.sh</div><div class="line"></div><div class="line">ENTRYPOINT  [ &quot;/bin/bash&quot;, &quot;/opt/wechat_robot/start.sh&quot; ]</div></pre></td></tr></table></figure>
 
-拼装...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/12/17</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "随感">随感</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2017/12/15/googleDevDay/" >
-            
-                <span>谷歌开发者大会(GDD2017)见闻 Day1</span>
-        </a>
-        <div class="abstract-content">
-            
-Day 0双12晚上，我一改之前晚睡的习惯，罕见的在晚上12点之前入睡了。为了第二天早上8：30的谷歌开发者大会。
-出发到达会场、注册第二天早上7点15就洗漱完毕出门了。7点多的地铁并没有想象中那么空荡，依然挤满了人，真庆幸自己住的离公司很近，不需要经历上班早高峰的洗礼。一出地铁站，就看到了举着牌子的GDD工作人员，要知道这里离会场还有1.5km左右的距离。解锁了一辆小黄车，几乎在每个路口都能看到指路的工作人员，真的很贴心。
 
-来到会场的时候,注册的开发者已经排起了长队，时间为早上8：30。注册完领取了印有日程和场地介绍的胸牌、一个供开发者DIY的纸盒音箱和很多人喜欢的谷歌信仰贴纸。随...
+            <! -- 添加捐赠图标 -->
+    <div class ="post-donate">
+    <div id="donate_board" class="donate_bar center">
+        <a id="btn_donate" class="btn_donate" href="javascript:;" title="打赏"></a>
+
+        <div style="text-align:center;color:#00F" >
+           
         </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/12/15</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "随感">随感</a>
-    
+
+    <script type="text/javascript">
+        document.getElementById('btn_donate').onclick = function(){
+            $('#donate_board').addClass('hidden');
+            $('#donate_guide').removeClass('hidden');
+        }
+    </script>
 </div>
-            
-        </div>
+<! -- 添加捐赠图标 -->
     </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>原文作者: <a href="http://zhihaozhang.github.io">Chih-Hao</a>
+            <p>原文链接: <a href="http://zhihaozhang.github.io/2018/09/09/PrometheusWechat/">http://zhihaozhang.github.io/2018/09/09/PrometheusWechat/</a>
+            <p>发表日期: <a href="http://zhihaozhang.github.io/2018/09/09/PrometheusWechat/">九月 9日 2018, 5:27:18 下午</a>
+            <p>版权声明: 本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
     
     <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2018/08/24/invisibilitycloak/" title= 上架沙盒化应用,重启应用后保持文件持久访问性指南 >
+                    <div class="prevTitle">上架沙盒化应用,重启应用后保持文件持久访问性指南</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMTAyMC83NTY5">
+    <script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+    </script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
     
+    
+    <!--PC和WAP自适应版-->
+
+    <!--PC版-->
+
+
+    
+    
+
+
 </main>
             <!-- profile -->
             
@@ -470,6 +574,24 @@ Day 0双12晚上，我一改之前晚睡的习惯，罕见的在晚上12点之�
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#背景"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Prometheus"><span class="toc-number">2.</span> <span class="toc-text">Prometheus</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#普罗米修斯介绍"><span class="toc-number">2.1.</span> <span class="toc-text">普罗米修斯介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Alertmanager模块的扩展-Email-VS-Wechat"><span class="toc-number">2.2.</span> <span class="toc-text">Alertmanager模块的扩展 Email VS Wechat</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#wechaty"><span class="toc-number">2.3.</span> <span class="toc-text">wechaty</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#部署在docker端"><span class="toc-number">2.4.</span> <span class="toc-text">部署在docker端</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#反响和未来工作"><span class="toc-number">3.</span> <span class="toc-text">反响和未来工作</span></a></li></ol>
+    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -1265,6 +1387,8 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
      
     </body>
     <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>

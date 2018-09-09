@@ -354,6 +354,39 @@ height:50vh;
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2017/10/11/gInSVG/" >
+            
+                <span>为SVG中大小可变的&lt;g&gt;元素加上边框和背景色</span>
+        </a>
+        <div class="abstract-content">
+            问题的出现我在使用d3js开发项目过程中，遇到了这样的需求，将鼠标hover到某些元素上时，将该元素的detail信息逐条展示出来，而且为了将detail框与其他元素区别开来，需要给detail展示区域添加边框或增加底色，想要的效果大概是下面的图那样的。
+预期效果图
+
+问题解决思路普通的HTML元素有很多方法来获得其宽高等其他位置属性的方法。如果是一组元素，可以用div标签将他们组合起来，指定div的border颜色和宽度，div的边框会根据元素的宽高动态改变大小。
+SVG中，将元素成组的标签是g元素，之前使用它是将元素进行分组，然后统一进行平移和旋转之类的功能变换。毫无意外的，普通DO...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/10/11</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "SVG">SVG</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2017/09/29/mouseSyncII/" >
             
                 <span>mouseSync后续功能完善心得</span>
@@ -455,13 +488,14 @@ height:50vh;
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2014/11/15/冷门但实用的d3.js内置函数/" >
+        <a class="abstract-title" href = "/2014/11/15/数据可视化之散点图/" >
             
-                <span>冷门但实用的d3.js内置函数</span>
+                <span>数据可视化之散点图</span>
         </a>
         <div class="abstract-content">
-            前言在d3.js的API文档中，提供了很多内置的函数，但是有些很有用的内置函数却被无情的忽略了，这篇博客就来整理整理这些被遗忘却很实用的函数。希望整理过后，他们不再被遗忘。
-selection.classed(name,【value】)value参数可选，如果没有指定，则返回与name参数匹配的第一个非空元素是否绑定了指定的CSS类，true表示绑定，false表示未绑定。如果value指定了的话，就是为selection添加/删除CSS类。这点与selection.attr(name,【value】)非常类似，但是相比而言，就冷门的多，恐怕没有多少人不知道selection.attr(...
+            D3.js是当下最火的可视化库之一，这篇博客记录了如何实现一个最基本的散点图，并用三角形表示数据点。
+代码如下：
+1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283\&lt;!DOCTYPE html\&gt;\&lt;html\&gt;\&lt;head lang=&quot;en&quot;\&gt;\&lt;meta ch...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -485,15 +519,13 @@ selection.classed(name,【value】)value参数可选，如果没有指定，则�
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2014/11/15/polybrush in d3/" >
+        <a class="abstract-title" href = "/2014/11/15/冷门但实用的d3.js内置函数/" >
             
-                <span>polybrush in d3</span>
+                <span>冷门但实用的d3.js内置函数</span>
         </a>
         <div class="abstract-content">
-            
-前言你是否也像我一样，厌倦了d3默认的矩形的brush，或者你发现矩形的brush已经不能满足你的需要了;又或者你只是单纯的被上面的图片所吸引。不管怎样，我们将介绍一下polybrush。
-这篇博客的名字叫polybrush in d3，现在想来，好像有点错误，因为polybrush并不是d3内置的，它是由Geoffrey T. Bell在2012年开发的d3插件，因其方便、好用，所以广受好评。
-但无奈目前中文的相关资料和博客几乎没有，因此我来试着写一下如何使用它，以及它的原理，还会包含源码粗略解读，polybrush.js的github参考项目下载地址是：https://gist.g...
+            前言在d3.js的API文档中，提供了很多内置的函数，但是有些很有用的内置函数却被无情的忽略了，这篇博客就来整理整理这些被遗忘却很实用的函数。希望整理过后，他们不再被遗忘。
+selection.classed(name,【value】)value参数可选，如果没有指定，则返回与name参数匹配的第一个非空元素是否绑定了指定的CSS类，true表示绑定，false表示未绑定。如果value指定了的话，就是为selection添加/删除CSS类。这点与selection.attr(name,【value】)非常类似，但是相比而言，就冷门的多，恐怕没有多少人不知道selection.attr(...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -579,46 +611,15 @@ selection.classed(name,【value】)value参数可选，如果没有指定，则�
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2014/11/15/drop and drag in d3js/" >
+        <a class="abstract-title" href = "/2014/11/15/polybrush in d3/" >
             
-                <span>drop and drag in d3</span>
+                <span>polybrush in d3</span>
         </a>
         <div class="abstract-content">
-            Behavior in d3在d3中，行为被设计成了一种组件，可以创建一系列的事件，并绑定到调用这些行为的元素上。最常见的行为有拖拽与缩放，使用这些行为可以很方便地在拖拽或者缩放的开始、过程中以及结束时达到想要的效果。
-这篇博客中，就以拖拽为例，并借助之前实现的热力图，实现拖拽dimension的label以达到reoder维度的效果。为了使用三个阶段，我们会让开始拖拽的时候，维度名变成红色、字体变大来表示强调的效果；在拖拽过程中，让label紧跟鼠标的位置；并且判断最终的位置，交换两个维度，并重新绘制整个热力图。
-理想情况下，开始移动的时候的，运行情况应该像下面这样。
-drag创建一个...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2014/11/15</span>
-            </div>
-            <!-- tags  -->
             
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "d3">d3</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2014/11/15/数据可视化之散点图/" >
-            
-                <span>数据可视化之散点图</span>
-        </a>
-        <div class="abstract-content">
-            D3.js是当下最火的可视化库之一，这篇博客记录了如何实现一个最基本的散点图，并用三角形表示数据点。
-代码如下：
-1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283\&lt;!DOCTYPE html\&gt;\&lt;html\&gt;\&lt;head lang=&quot;en&quot;\&gt;\&lt;meta ch...
+前言你是否也像我一样，厌倦了d3默认的矩形的brush，或者你发现矩形的brush已经不能满足你的需要了;又或者你只是单纯的被上面的图片所吸引。不管怎样，我们将介绍一下polybrush。
+这篇博客的名字叫polybrush in d3，现在想来，好像有点错误，因为polybrush并不是d3内置的，它是由Geoffrey T. Bell在2012年开发的d3插件，因其方便、好用，所以广受好评。
+但无奈目前中文的相关资料和博客几乎没有，因此我来试着写一下如何使用它，以及它的原理，还会包含源码粗略解读，polybrush.js的github参考项目下载地址是：https://gist.g...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -1285,10 +1286,9 @@ drag创建一个...
     
     
     
-    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 33
+        Total : 34
         </div>
         <!-- search  -->
         
@@ -1437,7 +1437,7 @@ drag创建一个...
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/数据可视化之散点图/" >数据可视化之散点图</a>
         </li>
     
     
@@ -1452,22 +1452,7 @@ drag创建一个...
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/浅谈d3.js中的异步文件读取的处理/" >浅谈d3.js中强制异步文件读取同步的四种方法</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/polybrush in d3/" >polybrush in d3</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/数据可视化之散点图/" >数据可视化之散点图</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/drop and drag in d3js/" >drop and drag in d3</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
         </li>
     
     
@@ -1477,7 +1462,45 @@ drag创建一个...
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/浅谈d3.js中的异步文件读取的处理/" >浅谈d3.js中强制异步文件读取同步的四种方法</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/polybrush in d3/" >polybrush in d3</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2018/09/09/PrometheusWechat/" >Prometheus+微信实时报警模块的实现与Docker部署</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2014 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/drop and drag in d3js/" >drop and drag in d3</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
         </li>
     
     
@@ -1492,13 +1515,15 @@ drag创建一个...
     
         <span class="sidebar-tag-name" data-tags="d3"><span class="iconfont-archer">&#xe606;</span>d3</span>
     
-        <span class="sidebar-tag-name" data-tags="macOS开发"><span class="iconfont-archer">&#xe606;</span>macOS开发</span>
-    
         <span class="sidebar-tag-name" data-tags="swift"><span class="iconfont-archer">&#xe606;</span>swift</span>
+    
+        <span class="sidebar-tag-name" data-tags="macOS开发"><span class="iconfont-archer">&#xe606;</span>macOS开发</span>
     
         <span class="sidebar-tag-name" data-tags="随感"><span class="iconfont-archer">&#xe606;</span>随感</span>
     
         <span class="sidebar-tag-name" data-tags="iOS开发"><span class="iconfont-archer">&#xe606;</span>iOS开发</span>
+    
+        <span class="sidebar-tag-name" data-tags="效率"><span class="iconfont-archer">&#xe606;</span>效率</span>
     
         <span class="sidebar-tag-name" data-tags="SVG"><span class="iconfont-archer">&#xe606;</span>SVG</span>
     
@@ -1542,6 +1567,8 @@ jsonContent:
         <span class="sidebar-category-name" data-categories="苹果开发"><span class="iconfont-archer">&#xe60a;</span>苹果开发</span>
     
         <span class="sidebar-category-name" data-categories="d3"><span class="iconfont-archer">&#xe60a;</span>d3</span>
+    
+        <span class="sidebar-category-name" data-categories="监控"><span class="iconfont-archer">&#xe60a;</span>监控</span>
     
         <span class="sidebar-category-name" data-categories="购房"><span class="iconfont-archer">&#xe60a;</span>购房</span>
     
