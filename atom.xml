@@ -18,8 +18,8 @@
   
   <entry>
     <title>Prometheus+微信实时报警模块的实现与Docker部署</title>
-    <link href="http://zhihaozhang.github.io/2018/09/09/prometheusWechat/"/>
-    <id>http://zhihaozhang.github.io/2018/09/09/prometheusWechat/</id>
+    <link href="http://zhihaozhang.github.io/2018/09/09/prometheusPlusWechat/"/>
+    <id>http://zhihaozhang.github.io/2018/09/09/prometheusPlusWechat/</id>
     <published>2018-09-09T14:13:06.130Z</published>
     <updated>2018-09-09T14:13:22.313Z</updated>
     
