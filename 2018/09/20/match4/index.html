@@ -267,7 +267,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count">1,533</span> / Reading time: <span class="post-count">6 min</span></span>
+                        <span>Word count: <span class="post-count">1,509</span> / Reading time: <span class="post-count">6 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -413,12 +413,12 @@ height:50vh;
 <p>iOS相比于安卓比较特殊，分为生产环境(上架版)和测试环境(开发版)，最后导出极光所需要的.p12文件。导出.p12文件的坑也不少，推荐<a href="https://www.jianshu.com/p/7d4bba2f1dcb" target="_blank" rel="external">这篇博文</a>，供参考。</p>
 <p>最终在极光控制台上，分别将生产环境和开发环境的两个.p12文件上传，通过验证后，会出现下面截图的样子。</p>
 <p><img src="https://ws4.sinaimg.cn/large/006tNbRwly1fvg33e6zfyj30yg0i2weu.jpg" alt=""></p>
-<h2 id="极光平台注册"><a href="#极光平台注册" class="headerlink" title="极光平台注册"></a>极光平台注册</h2><p>在极光平台注册你的app,主要需要Bundle ID和开发者认证(企业营业执照)。注册完成后，获得两个重要信息，<strong>AppKey</strong>，这两个码是后面一直需要使用的。</p>
+<h2 id="极光平台注册"><a href="#极光平台注册" class="headerlink" title="极光平台注册"></a>极光平台注册</h2><p>在极光平台注册你的app,主要需要Bundle ID和开发者认证(企业营业执照)。注册完成后，获得重要信息:<strong>AppKey</strong>，这个码是后面一直需要使用的。</p>
 <h2 id="极光SDK的导入"><a href="#极光SDK的导入" class="headerlink" title="极光SDK的导入"></a>极光SDK的导入</h2><p>导入极光SDK，既可以选择手动，也可以选择使用cocoapods。我使用的是cocoapods，原因很简单，因为如果不想要推送功能了，只需要在podfile里删掉pod ‘JPush’那行就行了。</p>
 <p>导入后，一定记得要在XCode里勾上Application Target 的 Capabilities-&gt;Push Notifications 选项，否则将无法接受推送。</p>
 <p><img src="https://docs.jiguang.cn/jpush/client/image/capabilities_intro.jpg" alt=""></p>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h2 id="添加bridge文件"><a href="#添加bridge文件" class="headerlink" title="添加bridge文件"></a>添加bridge文件</h2><p>因为极光推送是由OC写成，因此swift的项目里不能直接使用，需要借助桥接文件。只要在项目里新建一个OC文件，XCode就会创建一个xxx-Bridging-Header.h文件，在该文件中加入d代码，就可以使用极光推送SDK了，啊真香！</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"> #<span class="keyword">import</span> "JPUSHService.h"</div><div class="line">#ifdef <span class="type">NSFoundationVersionNumber_iOS_9_x_Max</span></div><div class="line">#<span class="keyword">import</span> &lt;UserNotifications/UserNotifications.h&gt;</div><div class="line">#endif</div><div class="line"><span class="comment">// 如果需要使用idfa功能所需要引入的头文件（可选）</span></div><div class="line">#<span class="keyword">import</span> &lt;AdSupport/AdSupport.h&gt;</div></pre></td></tr></table></figure>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h2 id="添加bridge文件"><a href="#添加bridge文件" class="headerlink" title="添加bridge文件"></a>添加bridge文件</h2><p>因为极光推送是由OC写成，因此swift的项目里不能直接使用，需要借助桥接文件。只要在项目里新建一个OC文件，XCode就会创建一个xxx-Bridging-Header.h文件，在该文件中加入代码，就可以使用极光推送SDK了，啊真香！</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"> #<span class="keyword">import</span> "JPUSHService.h"</div><div class="line">#ifdef <span class="type">NSFoundationVersionNumber_iOS_9_x_Max</span></div><div class="line">#<span class="keyword">import</span> &lt;UserNotifications/UserNotifications.h&gt;</div><div class="line">#endif</div><div class="line">#<span class="keyword">import</span> &lt;AdSupport/AdSupport.h&gt;</div></pre></td></tr></table></figure>
 <h2 id="添加Delegate"><a href="#添加Delegate" class="headerlink" title="添加Delegate"></a>添加Delegate</h2><p>在AppDelegate.swift文件中，让AppDelegate遵从JPUSHRegisterDelegate，后面就可以使用相关代理方法了。</p>
 <h2 id="初始化相关代码"><a href="#初始化相关代码" class="headerlink" title="初始化相关代码"></a>初始化相关代码</h2><h3 id="初始化APNs和JPush"><a href="#初始化APNs和JPush" class="headerlink" title="初始化APNs和JPush"></a>初始化APNs和JPush</h3><p>初始化代码如下<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">application</span><span class="params">(<span class="number">_</span> application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">	<span class="keyword">let</span> entity = <span class="type">JPUSHRegisterEntity</span>()</div><div class="line">	entity.types = <span class="number">1</span> &lt;&lt; <span class="number">0</span> | <span class="number">1</span> &lt;&lt; <span class="number">1</span> | <span class="number">1</span> &lt;&lt; <span class="number">2</span></div><div class="line">	<span class="type">JPUSHService</span>.register(forRemoteNotificationConfig: entity, delegate: <span class="keyword">self</span>)</div><div class="line">	</div><div class="line">	<span class="keyword">let</span> advertisingId = <span class="type">ASIdentifierManager</span>.shared().advertisingIdentifier.uuidString</div><div class="line">        <span class="type">JPUSHService</span>.setup(withOption: launchOptions, appKey: <span class="string">"极光平台给分配的"</span>, channel: <span class="string">"App Store"</span>, apsForProduction: <span class="literal">true</span>, advertisingIdentifier: advertisingId)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <h3 id="上报device-token"><a href="#上报device-token" class="headerlink" title="上报device_token"></a>上报device_token</h3><p>实现JPUSHRegisterDelegate的代理方法，上报device_token。device_token主要是用来帮助推送定位到特定的设备使用的。</p>
@@ -461,7 +461,7 @@ height:50vh;
         <div class="license-wrapper">
             <p>原文作者: <a href="http://zhihaozhang.github.io">Chih-Hao</a>
             <p>原文链接: <a href="http://zhihaozhang.github.io/2018/09/20/match4/">http://zhihaozhang.github.io/2018/09/20/match4/</a>
-            <p>发表日期: <a href="http://zhihaozhang.github.io/2018/09/20/match4/">September 20th 2018, 6:01:51 pm</a>
+            <p>发表日期: <a href="http://zhihaozhang.github.io/2018/09/20/match4/">九月 20日 2018, 6:01:51 晚上</a>
             <p>版权声明: 本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -604,6 +604,34 @@ top:50vh;
     <div class="sidebar-content sidebar-content-show-archive">
           <div class="sidebar-panel-archives">
     <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -1245,7 +1273,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/数据可视化之散点图/" >数据可视化之散点图</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
         </li>
     
     
@@ -1255,7 +1288,22 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/polybrush in d3/" >polybrush in d3</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/浅谈d3.js中的异步文件读取的处理/" >浅谈d3.js中强制异步文件读取同步的四种方法</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/数据可视化之散点图/" >数据可视化之散点图</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular/" >D3 on Angular</a>
         </li>
     
     
@@ -1265,7 +1313,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/浅谈d3.js中的异步文件读取的处理/" >浅谈d3.js中强制异步文件读取同步的四种方法</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/polybrush in d3/" >polybrush in d3</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/24</span><a class="archive-post-title" href= "/2014/04/24/用Java生成Json文件/" >用Java生成Json文件</a>
         </li>
     
     
@@ -1280,40 +1333,6 @@ top:50vh;
     
         <li class="archive-post-item">
             <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2018/09/20/match4/" >Match开发笔记 肆 极光推送接入指南(Swift版)</a>
-        </li>
-    
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> 2014 </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular/" >D3 on Angular</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">04/24</span><a class="archive-post-title" href= "/2014/04/24/用Java生成Json文件/" >用Java生成Json文件</a>
         </li>
     
     </div>
