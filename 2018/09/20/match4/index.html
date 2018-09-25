@@ -267,7 +267,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count">1,509</span> / Reading time: <span class="post-count">6 min</span></span>
+                        <span>Word count: <span class="post-count">1,620</span> / Reading time: <span class="post-count">6 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -431,11 +431,18 @@ height:50vh;
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">applicationWillEnterForeground</span><span class="params">(<span class="number">_</span> application: UIApplication)</span></span> &#123;</div><div class="line">        application.applicationIconBadgeNumber = <span class="number">0</span></div><div class="line">        application.cancelAllLocalNotifications()</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
 <h3 id="设置Tags和alias"><a href="#设置Tags和alias" class="headerlink" title="设置Tags和alias"></a>设置Tags和alias</h3><p>Tags是区分通知类型的，可以给不同的推送类型打Tag，比如我想接受新题目通知，不想接收点赞通知。而alias一般是有唯一性的，需要根据用户名或手机号这种好区分的东西来分辨。</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">var</span> outAlias:<span class="type">NSString</span>?</div><div class="line">            <span class="keyword">var</span> outTags:<span class="type">NSSet</span>?</div><div class="line">            (outAlias, outTags) = <span class="keyword">self</span>.analyseInput(alias <span class="keyword">as</span> <span class="type">NSString</span>!, tags: tags)</div><div class="line"></div><div class="line"><span class="type">JPUSHService</span>.setTags(outTags <span class="keyword">as</span>! <span class="type">Set</span>&lt;<span class="type">String</span>&gt;, completion: &#123; (a, b, <span class="built_in">c</span>) <span class="keyword">in</span></div><div class="line"></div><div class="line">            &#125;, seq: <span class="number">1</span>)</div><div class="line">            </div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">analyseInput</span><span class="params">(<span class="number">_</span> alias:NSString!, tags:NSSet!)</span></span>-&gt;(<span class="type">NSString</span>?,<span class="type">NSSet</span>?) &#123;</div><div class="line">        <span class="keyword">var</span> outAlias:<span class="type">NSString</span>?</div><div class="line">        <span class="keyword">var</span> outTags:<span class="type">NSSet</span>?</div><div class="line">        </div><div class="line">        <span class="keyword">if</span> alias.length == <span class="number">0</span> &#123;</div><div class="line">            outAlias = <span class="literal">nil</span></div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            outAlias = alias</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">if</span> tags.<span class="built_in">count</span> == <span class="number">0</span> &#123;</div><div class="line">            outTags = <span class="literal">nil</span></div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            outTags = tags</div><div class="line">            <span class="keyword">var</span> emptyStringCount = <span class="number">0</span></div><div class="line">            tags.enumerateObjects(&#123; (tag:<span class="type">Any</span>, stop:<span class="type">UnsafeMutablePointer</span>&lt;<span class="type">ObjCBool</span>&gt;) -&gt; <span class="type">Void</span> <span class="keyword">in</span></div><div class="line">                <span class="keyword">if</span> (tag <span class="keyword">as</span> <span class="type">AnyObject</span>).isEqual(to: <span class="string">""</span>) &#123;</div><div class="line">                    emptyStringCount += <span class="number">1</span></div><div class="line">                &#125; <span class="keyword">else</span> &#123;</div><div class="line">                    emptyStringCount = <span class="number">0</span></div><div class="line">                    stop.pointee = <span class="literal">true</span></div><div class="line">                &#125;</div><div class="line">                &#125; <span class="keyword">as</span>! (<span class="type">Any</span>, <span class="type">UnsafeMutablePointer</span>&lt;<span class="type">ObjCBool</span>&gt;) -&gt; <span class="type">Void</span>)</div><div class="line">            <span class="keyword">if</span> emptyStringCount == tags.<span class="built_in">count</span> &#123;</div><div class="line">                outAlias = <span class="literal">nil</span></div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> (outAlias,outTags)</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h1 id="上架前的提醒"><a href="#上架前的提醒" class="headerlink" title="上架前的提醒"></a>上架前的提醒</h1><p>提交新版本或者初次上架之前，最后会遇到一个关于IDFA的选项。</p>
+<blockquote>
+<p>您的 App 正在使用广告标识符 (IDFA)。您必须先提供关于 IDFA 的使用信息或将其从 App 中移除，然后再上传您的二进制文件。</p>
+</blockquote>
+<p><strong>记得要勾上是</strong>。否则会遇到麻烦。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1088461-31b95b90500c3cb2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" alt=""></p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
 <li><a href="http://blog.jiguang.cn/apns/" target="_blank" rel="external">APNs 推送原理及问题</a></li>
 <li><a href="https://docs.jiguang.cn/jpush/client/iOS/ios_guide_new/" target="_blank" rel="external">iOS SDK 集成指南</a></li>
 <li><a href="https://www.jianshu.com/p/fc962db539e6" target="_blank" rel="external">ios 消息推送证书设置和整理(备忘)</a></li>
 <li><a href="https://www.jianshu.com/p/7d4bba2f1dcb" target="_blank" rel="external">p12证书导出按钮为灰色的处理办法</a></li>
+<li><a href="https://blog.csdn.net/WiKi_Su/article/details/78647307" target="_blank" rel="external">iOS提交审核：您的 App 正在使用广告标识符 (IDFA)</a></li>
 </ol>
 
 
@@ -592,7 +599,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#iOS推送机制和JPush的意义"><span class="toc-number">2.</span> <span class="toc-text">iOS推送机制和JPush的意义</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#APNs"><span class="toc-number">2.1.</span> <span class="toc-text">APNs</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#极光推送的意义"><span class="toc-number">2.2.</span> <span class="toc-text">极光推送的意义</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#接入前期准备"><span class="toc-number">3.</span> <span class="toc-text">接入前期准备</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#设置iOS消息推送证书"><span class="toc-number">3.1.</span> <span class="toc-text">设置iOS消息推送证书</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#极光平台注册"><span class="toc-number">3.2.</span> <span class="toc-text">极光平台注册</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#极光SDK的导入"><span class="toc-number">3.3.</span> <span class="toc-text">极光SDK的导入</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#代码"><span class="toc-number">4.</span> <span class="toc-text">代码</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#添加bridge文件"><span class="toc-number">4.1.</span> <span class="toc-text">添加bridge文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#添加Delegate"><span class="toc-number">4.2.</span> <span class="toc-text">添加Delegate</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#初始化相关代码"><span class="toc-number">4.3.</span> <span class="toc-text">初始化相关代码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化APNs和JPush"><span class="toc-number">4.3.1.</span> <span class="toc-text">初始化APNs和JPush</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#上报device-token"><span class="toc-number">4.3.2.</span> <span class="toc-text">上报device_token</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#接收到消息的处理"><span class="toc-number">4.3.3.</span> <span class="toc-text">接收到消息的处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#清楚应用ICON角标"><span class="toc-number">4.3.4.</span> <span class="toc-text">清楚应用ICON角标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置Tags和alias"><span class="toc-number">4.3.5.</span> <span class="toc-text">设置Tags和alias</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考"><span class="toc-number">5.</span> <span class="toc-text">参考</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#iOS推送机制和JPush的意义"><span class="toc-number">2.</span> <span class="toc-text">iOS推送机制和JPush的意义</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#APNs"><span class="toc-number">2.1.</span> <span class="toc-text">APNs</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#极光推送的意义"><span class="toc-number">2.2.</span> <span class="toc-text">极光推送的意义</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#接入前期准备"><span class="toc-number">3.</span> <span class="toc-text">接入前期准备</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#设置iOS消息推送证书"><span class="toc-number">3.1.</span> <span class="toc-text">设置iOS消息推送证书</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#极光平台注册"><span class="toc-number">3.2.</span> <span class="toc-text">极光平台注册</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#极光SDK的导入"><span class="toc-number">3.3.</span> <span class="toc-text">极光SDK的导入</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#代码"><span class="toc-number">4.</span> <span class="toc-text">代码</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#添加bridge文件"><span class="toc-number">4.1.</span> <span class="toc-text">添加bridge文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#添加Delegate"><span class="toc-number">4.2.</span> <span class="toc-text">添加Delegate</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#初始化相关代码"><span class="toc-number">4.3.</span> <span class="toc-text">初始化相关代码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化APNs和JPush"><span class="toc-number">4.3.1.</span> <span class="toc-text">初始化APNs和JPush</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#上报device-token"><span class="toc-number">4.3.2.</span> <span class="toc-text">上报device_token</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#接收到消息的处理"><span class="toc-number">4.3.3.</span> <span class="toc-text">接收到消息的处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#清楚应用ICON角标"><span class="toc-number">4.3.4.</span> <span class="toc-text">清楚应用ICON角标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置Tags和alias"><span class="toc-number">4.3.5.</span> <span class="toc-text">设置Tags和alias</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#上架前的提醒"><span class="toc-number">5.</span> <span class="toc-text">上架前的提醒</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考"><span class="toc-number">6.</span> <span class="toc-text">参考</span></a></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
@@ -605,6 +612,32 @@ top:50vh;
     <div class="sidebar-content sidebar-content-show-archive">
           <div class="sidebar-panel-archives">
     <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -1274,12 +1307,17 @@ top:50vh;
     
     
         <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/数据可视化之散点图/" >数据可视化之散点图</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
             <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/drop and drag in d3js/" >drop and drag in d3</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/polybrush in d3/" >polybrush in d3</a>
         </li>
     
     
@@ -1295,16 +1333,6 @@ top:50vh;
     
         <li class="archive-post-item">
             <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/Build reuseable visualization using d3.js and AngularJS/" >Build reusable visualization using d3.js and AngularJS</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/数据可视化之散点图/" >数据可视化之散点图</a>
         </li>
     
     
@@ -1337,7 +1365,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/polybrush in d3/" >polybrush in d3</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/drop and drag in d3js/" >drop and drag in d3</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/Build reuseable visualization using d3.js and AngularJS/" >Build reusable visualization using d3.js and AngularJS</a>
         </li>
     
     
@@ -1350,9 +1383,9 @@ top:50vh;
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
-        <span class="sidebar-tag-name" data-tags="swift"><span class="iconfont-archer">&#xe606;</span>swift</span>
-    
         <span class="sidebar-tag-name" data-tags="d3"><span class="iconfont-archer">&#xe606;</span>d3</span>
+    
+        <span class="sidebar-tag-name" data-tags="swift"><span class="iconfont-archer">&#xe606;</span>swift</span>
     
         <span class="sidebar-tag-name" data-tags="macOS开发"><span class="iconfont-archer">&#xe606;</span>macOS开发</span>
     
@@ -1399,9 +1432,9 @@ jsonContent:
         <div class="sidebar-panel-categories">
     <div class="sidebar-categories-name">
     
-        <span class="sidebar-category-name" data-categories="苹果开发"><span class="iconfont-archer">&#xe60a;</span>苹果开发</span>
-    
         <span class="sidebar-category-name" data-categories="visualization"><span class="iconfont-archer">&#xe60a;</span>visualization</span>
+    
+        <span class="sidebar-category-name" data-categories="苹果开发"><span class="iconfont-archer">&#xe60a;</span>苹果开发</span>
     
         <span class="sidebar-category-name" data-categories="d3"><span class="iconfont-archer">&#xe60a;</span>d3</span>
     
