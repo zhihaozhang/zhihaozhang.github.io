@@ -341,6 +341,39 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2017/10/18/topology/" >
+            
+                <span>拓扑图的实现</span>
+        </a>
+        <div class="abstract-content">
+            背景拓扑图是Console界面中一个重要的组成部分，它的愿景是我公司Console平台相比于其他公司相同平台的创新之处。这个部分一直是由我来负责，从开始的高度抽象派图形化图，到后面创新性的引入Radial-layout，到这轮迭代返璞归真的Tree-layout信息展示，几经迭代，感慨良多。很多时候都要跟设计师死磕，在他的想法与技术之间找到一个权衡点。本文作为本轮迭代的一个小小总结，也作为API文档的供其他同事参考。也因为要作为API文档，因此本文会深入到代码级讲述每段代码甚至函数和关键变量的作用。
+早期版本的拓扑图
+
+
+目标拓扑图的目标是利用图形化的方式清晰地展示集群内App、Serv...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/10/18</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "d3">d3</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2017/10/13/DicAndSetInSwift4/" >
             
                 <span>Swift4字典和集合的新特性</span>
@@ -506,36 +539,6 @@ SVG中，将元素成组的标签是g元素，之前使用它是将元素进行�
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2014/11/15/D3 on Angular/" >
-            
-                <span>D3 on Angular</span>
-        </a>
-        <div class="abstract-content">
-            Angular与D3前面写了几篇分别介绍AngularJS和D3的博客，他们各司其职，都在各自的一亩三分地里备受好评，那么，他们之间能否完成合作，实现共赢呢？这篇博客就来介绍如何将它们结合起来使用，使得我们的可视化能够更具有模块化、方便复用、具有交互性。
-Why Angular使用Angular做可视化有很多原因，但其中最主要的原因还是directives(指令)。 指令使得做可复用的可视化更容易，可以使得我们做的可视化的时候就像使用内置的HTML那么简单，比如我需要一个热力图（后面写博客怎么做），那么我仅仅需要用\\就可以了，想想这种酸爽的滋味吧。即使你不知道热力图是怎么做的，但是你用...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2014/11/15</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "d3">d3</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
         <a class="abstract-title" href = "/2014/11/15/associate brush/" >
             
                 <span>associate brush</span>
@@ -567,15 +570,45 @@ Why Angular使用Angular做可视化有很多原因，但其中最主要的原�
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2014/11/15/drop and drag in d3js/" >
+        <a class="abstract-title" href = "/2014/11/15/数据可视化之散点图/" >
             
-                <span>drop and drag in d3</span>
+                <span>数据可视化之散点图</span>
         </a>
         <div class="abstract-content">
-            Behavior in d3在d3中，行为被设计成了一种组件，可以创建一系列的事件，并绑定到调用这些行为的元素上。最常见的行为有拖拽与缩放，使用这些行为可以很方便地在拖拽或者缩放的开始、过程中以及结束时达到想要的效果。
-这篇博客中，就以拖拽为例，并借助之前实现的热力图，实现拖拽dimension的label以达到reoder维度的效果。为了使用三个阶段，我们会让开始拖拽的时候，维度名变成红色、字体变大来表示强调的效果；在拖拽过程中，让label紧跟鼠标的位置；并且判断最终的位置，交换两个维度，并重新绘制整个热力图。
-理想情况下，开始移动的时候的，运行情况应该像下面这样。
-drag创建一个...
+            D3.js是当下最火的可视化库之一，这篇博客记录了如何实现一个最基本的散点图，并用三角形表示数据点。
+代码如下：
+1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283\&lt;!DOCTYPE html\&gt;\&lt;html\&gt;\&lt;head lang=&quot;en&quot;\&gt;\&lt;meta ch...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2014/11/15</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "d3">d3</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2014/11/15/D3 on Angular(2)/" >
+            
+                <span>D3 on Angular(2)</span>
+        </a>
+        <div class="abstract-content">
+            More Dynamic visualizations上一篇博客介绍了如何借助Angular来完成一个指令，达到可复用目的，但是似乎依然不够动态，我们不得不提前输入想要展示的数组。Angular的最大的特点是双向数据绑定，我们能否借助这个特性来完成更动态的可视化图呢？让Angular帮我们盯着数据，一旦数据改变了，就更新DOM元素。这一切都是Angular帮我们完成的，我们唯一需要做的是指定数据和DOM元素之间的关系，不需要写很多的代码。
+双向数据绑定先来用一个简单的例子来展示一下Angular帮我们完成的双向数据绑定，这里用一个简单的例子来展示一下。
+12345678//\&lt;bo...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -606,36 +639,6 @@ drag创建一个...
         <div class="abstract-content">
             前言在d3.js的API文档中，提供了很多内置的函数，但是有些很有用的内置函数却被无情的忽略了，这篇博客就来整理整理这些被遗忘却很实用的函数。希望整理过后，他们不再被遗忘。
 selection.classed(name,【value】)value参数可选，如果没有指定，则返回与name参数匹配的第一个非空元素是否绑定了指定的CSS类，true表示绑定，false表示未绑定。如果value指定了的话，就是为selection添加/删除CSS类。这点与selection.attr(name,【value】)非常类似，但是相比而言，就冷门的多，恐怕没有多少人不知道selection.attr(...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2014/11/15</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "d3">d3</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2014/11/15/Build reuseable visualization using d3.js and AngularJS/" >
-            
-                <span>Build reusable visualization using d3.js and AngularJS</span>
-        </a>
-        <div class="abstract-content">
-            背景前面两篇博客介绍了如何借助angular，让我们的可视化图能够更有模块化、方便复用、具有交互性，不过前面的博客只介绍了基本的原理以及最简单的图，在这篇博客中，我们来一起绘制一个相对复杂一些的热力图，最终的效果如下图。这个热力图主要是用来展现维度与维度之间的相关性的，而相关性在0-1之间。千万不要小看这个热力图，图中的每一个元素，甚至每一个字都是绘制出来的，完成这个看似简单的热力图大概需要350行代码。
-具体实现目标我们想要用热力图的时候呢，希望能像内置的html DOM元素一样使用，比如12345\&lt;heatmap\&gt;\&lt;/heatmap\&gt;//如果我们能指定...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -1246,34 +1249,9 @@ selection.classed(name,【value】)value参数可选，如果没有指定，则�
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 35
+        Total : 36
         </div>
         <!-- search  -->
         
@@ -1427,12 +1405,55 @@ selection.classed(name,【value】)value参数可选，如果没有指定，则�
     
     
         <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/Build reuseable visualization using d3.js and AngularJS/" >Build reusable visualization using d3.js and AngularJS</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/drop and drag in d3js/" >drop and drag in d3</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2018/10/31/match5/" >Match开发笔记 伍 3.0版的新功能与上架</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2014 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/浅谈d3.js中的异步文件读取的处理/" >浅谈d3.js中强制异步文件读取同步的四种方法</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
             <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular/" >D3 on Angular</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
         </li>
     
     
@@ -1460,12 +1481,7 @@ selection.classed(name,【value】)value参数可选，如果没有指定，则�
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/Build reuseable visualization using d3.js and AngularJS/" >Build reusable visualization using d3.js and AngularJS</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/浅谈d3.js中的异步文件读取的处理/" >浅谈d3.js中强制异步文件读取同步的四种方法</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
         </li>
     
     
@@ -1476,21 +1492,6 @@ selection.classed(name,【value】)value参数可选，如果没有指定，则�
     
         <li class="archive-post-item">
             <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/polybrush in d3/" >polybrush in d3</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/drop and drag in d3js/" >drop and drag in d3</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
         </li>
     
     
@@ -1509,9 +1510,9 @@ selection.classed(name,【value】)value参数可选，如果没有指定，则�
     
         <span class="sidebar-tag-name" data-tags="macOS开发"><span class="iconfont-archer">&#xe606;</span>macOS开发</span>
     
-        <span class="sidebar-tag-name" data-tags="iOS开发"><span class="iconfont-archer">&#xe606;</span>iOS开发</span>
-    
         <span class="sidebar-tag-name" data-tags="随感"><span class="iconfont-archer">&#xe606;</span>随感</span>
+    
+        <span class="sidebar-tag-name" data-tags="iOS开发"><span class="iconfont-archer">&#xe606;</span>iOS开发</span>
     
         <span class="sidebar-tag-name" data-tags="SVG"><span class="iconfont-archer">&#xe606;</span>SVG</span>
     
