@@ -71,6 +71,8 @@
     <link rel="preload" href= /css/style.css?v=20180824 as="style" onload="this.onload=null;this.rel='stylesheet'" />
     <link rel="stylesheet" href= /css/mobile.css?v=20180824 media="(max-width: 980px)">
     
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    
     <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
 /* This file is meant as a standalone workflow for
 - testing support for link[rel=preload]
@@ -194,10 +196,8 @@
 </head>
 
     
-        <body class="home-body">
     
-    
-<header class="header index-header">
+<header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
@@ -215,34 +215,21 @@
 
 
 
-height:50vh;
-
 >
     
     <!-- 主页  -->
-    
-    
-    <!-- 文章页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/intro/about-page1.jpg)"></div>
+    <div class="site-intro-img" style="background-image: url(/)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            Zhihao's Studio.
-            <!-- 文章页  -->
-            
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
-            
-            
-                每天进步一点点
-            
-            <!-- 文章页  -->
             
         </p>
         <!-- 文章页meta -->
@@ -354,327 +341,35 @@ height:50vh;
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2018/07/11/Match/" >
+        <a class="abstract-title" href = "/2018/11/25/BigScreen/" >
             
-                <span>Match for iPhone开发笔记 壹 开篇杂谈</span>
+                <span>两个大屏可视化案例的布局与实现</span>
         </a>
         <div class="abstract-content">
-            开发Match的初衷大约一个月前的某天，一个很久未曾联系的同学突然给我发微信，问我有没有时间帮他做一个iOS App。此人从小学开始就与我是同学，一直是传说中的别人家的孩子，中考、高考都是全市第二名，后进入了南京大学数学系读本科，然后去了复旦读研，跟我又成了校友…
-跟他见面后，他给我讲起了故事，在大学，有一棵树，叫高树，很多人挂在了上面多年，甚至无法毕业。因此，他想做一款叫做Match的产品，来帮助高数方面有困难的同学…
-Match代表什么Match，里面包含了MATH(数学)这个单词，而且有匹配的意思，寓意与答题系统中的求助者寻求匹配的答题者吻合。
-我接手Match前在找到我之前，他一...
+            前言近期分别使用了React和Vue完成了两个大屏可视化案例，经历了设计师和产品经理的各种“指指点点”，也算是对可视化大屏项目有了一点点小的经验，对于两个技术栈写组件也有一点小心得，趁着周末总结一下。
+
+
+大屏效果图1
+
+
+
+大屏效果图2
+
+可视化大屏无论是在科幻电影还是在真实世界里，可视化大屏都是非常常见的一种表现手法。之前在昆明公安局出差，也亲眼看到了湄公河惨案的真实指挥中心和他的大屏，屏幕的宽度大约有两层楼高。
+可视化大屏的特性可视化大屏，归根到底还是运用的可视化技术，只不过展现的屏幕比起笔记本和显示器大了很多。相比于传统的桌面级可视化运用，大屏可视化的特性有:
+
+屏幕巨大，用户通...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/07/11</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/11/25</span>
             </div>
             <!-- tags  -->
             
             <div class= abstract-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "iOS开发">iOS开发</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/06/01/thunderPassby/" >
-            
-                <span>绕开迅雷的利器:thunderPassby开发笔记</span>
-        </a>
-        <div class="abstract-content">
-            thunder-Bypass for macOS 开发初衷前天无意中看到了Thunder Real Url的限免信息，觉得这款软件有点意思，而且对于我这种非迅雷vip来说好像挺有用。不过点进去后发现是windows的客户端，于是我就萌生了做一个功能类似，但体验更好的macOS客户端。
-软件开源/下载链接开源地址
-想下载直接使用的朋友请移步：下载地址
-软件用途icon -&gt; 软件用途
-
-icon和迅雷icon对比
-
-icon很有趣，是围绕着迅雷的图标展开的。迅雷的图标是一只鸟，thunder-Bypass旨在绕开(Bypass)*迅雷(thunder)，因此，我用迅雷icon那只鸟飞...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/06/01</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "macOS开发">macOS开发</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/05/20/ProtocolOP/" >
-            
-                <span>面向协议编程初探</span>
-        </a>
-        <div class="abstract-content">
-            从编程范式讲起或许你经常听到诸如面向对象编程、面向过程编程、面向协议编程、函数式编程这些词，心中也不免疑惑，这些词都是些啥？
-编程范式 on wiki相比于本文要介绍的面向协议编程，面向对象编程的名声似乎更响。面向对象由于C++和java的流行，成为近二十年来最为流行的编程范式。其他编程范式还有比面向对象更早的面向过程编程、指令编程，以及以Haskell为代表的*函数式编程和苹果提出的面向协议编程。
-编程范式是一类典型的编程风格，是指从事软件工程的一类典型的风格（可以对照方法学）。编程范型提供了（同时决定了）程序员对程序执行的看法。             ——wiki
-我理解的编程范式...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/05/20</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "swift">swift</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/05/09/swiftfive/" >
-            
-                <span>Swift5新特性</span>
-        </a>
-        <div class="abstract-content">
-            前言话说这两天好像是Google IO召开的日子，借机蹭一波热度，唱个反调，浅析一下Swift5可能会出现的新特性，也算是为下个月即将举办的WWDC预热预热吧。
-ABI稳定性ABI稳定性这个话题是一个历史遗留任务，最初是Swift3的目标，苹果的拖延症一直拖到了Swift5，还不一定可以实现。这也是国内很多公司不敢全面拥抱Swift的重要原因之一。
-ABI是啥ABI是Application Binary Interfaces（应用二进制接口）的缩写，它描述了应用程序和操作系统或其他应用程序的低级接口。
-在应用程序运行时，Swift二进制需要和其他库或组件通过ABI进行接触，因此ABI定义...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/05/09</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "swift">swift</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/04/17/GoBACKSPACE/" >
-            
-                <span>GoBACKSPACE————致敬Go2Shell的Finder插件</span>
-        </a>
-        <div class="abstract-content">
-            仅以此项目向Go2Shell致敬、也庆祝Github10周年生日快乐，整个项目开源于Github，直接想用的朋友可以去百度网盘下载。
-背景在macOS系统中，Finder(中文被官方译为访达)扮演着文件管理器的角色。在大多数场景下，Finder还是挺好用的，但是有一点让我很抓狂，那就是我在Finder视图中发现了一个文件或文件夹，想去它的父级目录时比较麻烦，因为Finder工具栏左边的&lt; &gt;按钮经常是灰色的，而且也只是能记录着你之前访问过的文件路径历史，有点类似于safari里访问过网页的历史。
-
-
-Finder(访达)的工具栏截图 (&lt; &gt;为灰色)，蓝色指南针为...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/04/17</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "macOS开发">macOS开发</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/02/10/TuringCal/" >
-            
-                <span>极客编程日历桌面版开发笔记</span>
-        </a>
-        <div class="abstract-content">
-            #背景介绍图灵教育推出的限量款编程日历2018，因为简约大气的设计和每周一个编程语言的介绍，在程序员中广受欢迎。
-
-
-图灵教育推出的编程日历实体版
-
-不幸的是由于限量1000款，除去赠品的300多套，真正在售的只有600多套，很快就被抢购一空。值得欣慰的是，前天下午作者将pdf版本的日历公开下载。
-在简书中也无意间看到有人用python片段将壁纸与当周的日历进行了融合，这个想法让我受到了启发，从该文章下面的评论看到很多用户(特别是mac用户)反映在 macOS 下，Wand 库有点小问题，GitHub 有人提到了这个 issue。
-我一直在使用的一款软件Blotter，吸附在桌面上的日历...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/02/10</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "macOS开发">macOS开发</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/01/24/DragAndDrop/" >
-            
-                <span>更优雅的文件添加方式Drag &amp; Drop</span>
-        </a>
-        <div class="abstract-content">
-            前言前面基本完成了FileHider主要功能的开发工作，开源地址，该软件在百度网盘下载次数近100次，获得了一些人的认可，但也有一些人提出了不同的意见。感谢认可这款软件价值的人，同时也需要虚心听取不同意见。
-不同意见主要集中在三点:
-
-FileHider实现的功能完全可以由命令行代替。关于这点，我不想否认，但是话说回来，并不是每个人都是程序员，都会使用terminal，顶级的程序员甚至可以不用GUI界面在terminal里完成所有的工作，但是有GUI界面大部分情况下还是能够提升普通人的工作效率的。况且，假设你今天隐藏了一个文件，也许你明天还记得，后天还记得，但是一个星期后呢？一个月后呢？...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/01/24</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "macOS开发">macOS开发</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/01/16/FileHider/" >
-            
-                <span>AVHider for macOS开发笔记</span>
-        </a>
-        <div class="abstract-content">
-            软件介绍AVHider （oh NO） FileHider是一款将你的文件夹或文件隐藏起来的效率软件，适用于macOS X 10.10及以后的macOS版本。百度网盘下载地址,欢迎大家试用，并提出改进建议！有开发能力的朋友也可以去Github将项目fork后contribute您的code。
-
-
-Specially thanks to unfamous Designer Joseph, who designed the exquisite logo for this Application!
-
-软件的使用也非常简单，基本可以实现文件/文件夹的可见/不可见一键切换，录了一个gif动画。
-
-...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/01/16</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "macOS开发">macOS开发</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2017/12/31/HAN/" >
-            
-                <span>浅谈可视交互的方法在大数据平台数据产生、前期处理方面的应用</span>
-        </a>
-        <div class="abstract-content">
-            背景作为一个一本正经的大数据公司，Helium亟需一个平台HAN(Helium Analytical Network)，它涵盖数据完整的生命周期（产生 – 处理 – 使用 – 销毁）。用户通过低学习成本的方式（如SQL， JSON）来定义这个生命周期，即数据从哪来，怎么计算，怎么使用，何时销毁。在平台上，希望用户能用JSON的方式部分覆盖OLAP的功能，即用户从数据的建立到完成OLAP查询的完整过程。
-本文的工作主要集中在第一二个阶段，即数据的产生和部分的处理上。相比于传统的前端配置方式，我们的创新点在于将数据集的流向与产生以图形化的方式进行展现，使得用户清晰地看到每一个数据集产生的过程...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/12/31</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "随感">随感</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2017/12/17/googleDevDay2/" >
-            
-                <span>谷歌开发者大会(GDD2017)见闻 Day2</span>
-        </a>
-        <div class="abstract-content">
-            
-写在前面上一篇博客写了挺多开发者大会期间的花絮(虽然花絮本身就是开发者大会重要的组成部分)，而在这篇博客里将更专注于session本身，对场外的花絮和花边新闻尽量少的提及。话不多说，我们开始吧。
-Android things安卓things是一种支持世界各地计算需求的新平台，其出现的初衷是简化IoT设备的开发和生成。安卓things运行的仍然是安卓系统，因此对安卓开发比较熟悉的朋友可以很快的上手来完成一些应用。
-在现场，演讲者详细演示了如何在大会赠送的Android things设备上进行程序开发。他利用温度传感器和气压传感器开发了一个温度计和气压计的应用。开发共分为三个步骤：
-
-拼装...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/12/17</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "随感">随感</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "大屏可视化">大屏可视化</a>
     
 </div>
             
@@ -683,86 +378,8 @@ Android things安卓things是一种支持世界各地计算需求的新平台，
     
     <!-- paginator  -->
     
-    <nav class="page-nav">
-        <a class="extend prev" rel="prev" href="/">&#60; PREV</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">NEXT &#62;</a>
-    </nav>
-    
 </main>
             <!-- profile -->
-            
-            <div class="profile">
-    <img class="profile-avatar" src= /avatar/Misaka.jpg >
-    <div class="profile-name">Zhihao Zhang</div>
-    
-    <div class="profile-signature">
-        Happy Hacking
-    </div>
-    
-    
-    <div class="profile-social">
-        
-    
-        
-            
-                <a href="mailto:zhihaozhang@me.com" class="iconfont-archer email" title=email ></a>
-            
-        
-    
-        
-            
-                <a href="https://github.com/zhihaozhang" class="iconfont-archer github" target="_blank" title=github></a>
-            
-        
-    
-        
-            
-                <a href="http://weibo.com/2854428840/profile?rightmod=1&wvr=6&mod=personinfo" class="iconfont-archer weibo" target="_blank" title=weibo></a>
-            
-        
-    
-        
-            
-                <a href="https://www.zhihu.com/people/zhihao-zhang-95/activities" class="iconfont-archer zhihu" target="_blank" title=zhihu></a>
-            
-        
-    
-        
-            
-                <a href="https://www.instagram.com/izhihao_zhang/" class="iconfont-archer instagram" target="_blank" title=instagram></a>
-            
-        
-    
-        
-            
-                <a href="/atom.xml" class="iconfont-archer rss" target="_blank" title=rss></a>
-            
-        
-    
-
-    </div>
-    
-    
-        <div class="friends">
-            <div>FRIENDS</div>
-            
-                
-                    <span>
-                        <a href= https://io-meter.com target="_black">Chase.Zhang</a>
-                    </span>
-                
-            
-        </div>
-    
-    
-        <div class="about-me">
-            <a href = "/about" >ABOUT ME</a>
-            
-        </div>
-
-        <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
-
-    
-</div>
             
         </div>
         <footer class="footer footer-unloaded">
