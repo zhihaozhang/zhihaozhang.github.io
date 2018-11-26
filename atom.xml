@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zhihaozhang.github.io/"/>
-  <updated>2018-11-25T08:00:58.271Z</updated>
+  <updated>2018-11-26T02:19:26.773Z</updated>
   <id>http://zhihaozhang.github.io/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>两个大屏可视化案例的布局与实现</title>
+    <title>两个大屏可视化案例的实现</title>
     <link href="http://zhihaozhang.github.io/2018/11/25/BigScreen/"/>
     <id>http://zhihaozhang.github.io/2018/11/25/BigScreen/</id>
     <published>2018-11-25T06:42:28.720Z</published>
-    <updated>2018-11-25T08:00:58.271Z</updated>
+    <updated>2018-11-26T02:19:26.773Z</updated>
     
     <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>近期分别使用了<strong>React</strong>和<strong>Vue</strong>完成了两个大屏可视化案例，经历了设计师和产品经理的各种<strong>“指指点点”</strong>，也算是对可视化大屏项目有了一点点小的经验，对于两个技术栈写组件也有一点小心得，趁着周末总结一下。</p><p><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fxkbayd3qjj317x0u0h6r.jpg" alt=""></p><blockquote><p>大屏效果图1</p></blockquote><p><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fxkbblzzmzj317w0u0gyo.jpg" alt=""></p><blockquote><p>大屏效果图2</p></blockquote><h1 id="可视化大屏"><a href="#可视化大屏" class="headerlink" title="可视化大屏"></a>可视化大屏</h1><p>无论是在科幻电影还是在真实世界里，可视化大屏都是非常常见的一种表现手法。之前在昆明公安局出差，也亲眼看到了<em>湄公河惨案</em>的真实指挥中心和他的大屏，屏幕的宽度大约有两层楼高。</p><h2 id="可视化大屏的特性"><a href="#可视化大屏的特性" class="headerlink" title="可视化大屏的特性"></a>可视化大屏的特性</h2><p>可视化大屏，<em>归根到底还是运用的可视化技术</em>，只不过展现的屏幕比起笔记本和显示器大了很多。相比于传统的桌面级可视化运用，大屏可视化的特性有:</p><ol><li>屏幕巨大，用户通常离屏幕比较远，文字表达出来的信息需要足够清楚，通常要在字体和颜色上做文章。</li><li>弱化交互，基于键盘和鼠标的交互方式很少，更多时候系统自己做出响应，而不是让人工介入。</li><li>视觉冲击力强，设计一般都是以深色为底色，一来科技感十足，二来可以配合突出的主体动画和强设计感的元素。</li><li>场景化，一块大屏通常用来展示一类场景，场景主要由图表构成，后台管理系统那套表单通常不会出现在大屏。</li><li>动画更重要了，用动画表现出来的数据，通常是大屏项目中<strong>最迷人</strong>的地方。说动画是大屏项目的<strong>灵魂</strong>也不为过。案例一的那条红线被设计师称为<strong>“画龙点睛”之笔</strong>。</li></ol><h2 id="Vue和React可视化组件的实现"><a href="#Vue和React可视化组件的实现" class="headerlink" title="Vue和React可视化组件的实现"></a>Vue和React可视化组件的实现</h2><p>不作为一个整体看大屏项目，其实还是一个个小的组件。在实现两个项目的过程中，由于上海和南京两地团队的<strong>技术栈差异</strong>，使用了Vue和React两种框架。于是我只能看了一晚上Vue之后就上手去写Vue的组件。两个大屏案例之间有共同的组件，不需要整个重写，只需要改写即可；改写的过程中，我也比较深刻体会到了两者的不同。</p><p>由于宽高的不确定性，做组件的第一步是<em>获取组件在大屏上的宽高</em>。</p><ul><li>React获取宽高的方式<br>React获取宽高的方式比较标准，分为三步:在render的时候ref，在did的时候取值，在构造方法create。在生命周期函数的钩子里实现相应方法即可。</li><li>Vue获取宽高的方式<br>Vue似乎<strong>更自由</strong>一些，直接在mouted钩子里就可以拿到相应组件的clientWidth。</li></ul><p>宽高确定了，组件内部的元素和字体大小要进行相应比例的放缩，达到自适应的效果。在我的案例里使用的是d3和bizchart来完成图的绘制，d3中我大量使用了linearScale进行插值计算，而bizChart就更为简单，框架帮你完成了自适应。</p><p>动画部分通常会涉及一些元素的增加，有增加就不能缺少释放，这是内存管理的一个铁律。在完成第一个大屏的过程中，为了完成粒子放射的效果，我增加了很多粒子，起先没有将他们释放掉，只是从视觉上藏了起来，这造成了系统一段时间后会很卡。</p><p>在做组件的过程中，还需注意组件内部的样式<em>不能影响外部</em>。由于粗心，我就出现了这样的一个小错误，楠哥说如果在其他公司是要扣KPI的。</p><h2 id="大屏的自动布局和宽高自适应"><a href="#大屏的自动布局和宽高自适应" class="headerlink" title="大屏的自动布局和宽高自适应"></a>大屏的自动布局和宽高自适应</h2><p>可视化大屏的布局部分也是一个重要的部分。在我们的案例中，使用了纯css3的<strong>vw、vh</strong>实现自适应。</p><h3 id="视口单位"><a href="#视口单位" class="headerlink" title="视口单位"></a>视口单位</h3><h4 id="视口"><a href="#视口" class="headerlink" title="视口"></a>视口</h4><p>在业界，极为推崇的一种理论是 Peter-Paul Koch (江湖人称“PPK大神”)提出的关于视口的解释——在桌面端，视口指的是在桌面端，指的是浏览器的可视区域；而在移动端较为复杂，它涉及到三个视口：分别是 Layout Viewport（布局视口）、 Visual Viewport（视觉视口）、Ideal Viewport。(<strong>大屏一般是桌面端</strong>)</p><h4 id="视口单位-1"><a href="#视口单位-1" class="headerlink" title="视口单位"></a>视口单位</h4><p>根据CSS3规范，视口单位主要包括4个：</p><ol><li>vw : 1vw 等于视口宽度的1%</li><li>vh : 1vh 等于视口高度的1%</li><li>vmin : 选取 vw 和 vh 中最小的那个</li><li>vmax : 选取 vw 和 vh 中最大的那个</li></ol><p>视口单位区别于%单位，视口单位是依赖于视口的尺寸，根据视口尺寸的百分比来定义的；而%单位则是依赖于元素的祖先元素。</p><p>用视口单位度量，视口宽度为100vw，高度为100vh，相当于将宽高分别分成了100份。</p><h3 id="利用视口单位适配页面"><a href="#利用视口单位适配页面" class="headerlink" title="利用视口单位适配页面"></a>利用视口单位适配页面</h3><p>利用视口单位适配页面通常有两种方法，做法一仅使用vw作为CSS单位，使用Sass函数编译。做法二搭配vw和rem，布局更优化。做法二是更为优秀的做法，我们也采用了这种方法，两点原因：</p><ol><li>用户视觉体验更好，增加了最大最小宽度的限制；</li><li>如果选择主流的rem弹性布局方式作为项目开发的适配页面方法，那么做法二更适合于后期项目从 rem 单位过渡到 vw 单位。</li></ol><h1 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h1><p>由于是公司的项目，不同于我个人的项目可以开源，本文更多的讲的是<em>道</em>上的东西，术上的东西并没有过多涉及，甚至没有一行样例代码。</p><p><img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fxkd6bwxirj31n50u0gyp.jpg" alt=""></p><blockquote><p>真实的效果图</p></blockquote><p>最后还是希望本文能给大家带来一些启发和收获。</p>]]></content>
     
