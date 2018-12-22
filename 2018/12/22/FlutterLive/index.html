@@ -15,7 +15,7 @@
     <meta name="description" content="">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>Zhihao&#39;s Studio</title>
+    <title>Flutter live 18之后的移动开发技术综述(上) · Zhihao&#39;s Studio</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -196,12 +196,23 @@
 </head>
 
     
+        <body class="post-body">
+    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >Zhihao&#39;s Studio.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">Flutter live 18之后的移动开发技术综述(上)</a>
+            </div>
+    </div>
     
     <a class="home-link" href=/>Zhihao's Studio.</a>
 </header>
@@ -215,24 +226,74 @@
 
 
 
+height:50vh;
+
 >
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
+            
+            Flutter live 18之后的移动开发技术综述(上)
+            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Flutter live">Flutter live</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count">1,646</span> / Reading time: <span class="post-count">6 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2018/12/22</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
         
     </div>
 </div>
@@ -333,77 +394,143 @@
 </script>        
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/08/24/invisibilitycloak/" >
-            
-                <span>上架沙盒化应用,重启应用后保持文件持久访问性指南</span>
-        </a>
-        <div class="abstract-content">
-            前言Invisibility Cloak上架Mac App Store了，在此过程中，遇到了一些困难，在这里记录一下又一次与苹果审核团队撕逼的过程。
-开发这款软件的初衷是将xxx.mp4/xxx.avi/xxx.mkv在白天藏起来，免得被别人发现。 在Apple store上发现了一款类似的文件隐藏软件Secret Folder，售价128元，而且卖的不错。我觉得这个应用蛮有用(坏笑)，而且实现起来难度不是特别大，于是就做了一个相同功能的软件，并将它上架了。
-功能上，我额外支持了drag&amp;drop添加文件的操作，比Secret Folder的体验更丝滑一些。定价上，仅为Secre...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/08/24</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "macOS开发">macOS开发</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/08/02/Match3/" >
-            
-                <span>Match for iPhone开发笔记 叁 测试与上架篇</span>
-        </a>
-        <div class="abstract-content">
-            前言“Match问答”App今天终于通过了苹果的审核，在App Store上架了，苹果商店下载地址，不得不说，苹果的审核还是很严格的。因此今天想写一下从提交审核到被拒(若干回合)再到最终上架这段时间里的故事，其他技术方面的难点总结放到后面写。
-上架前的必经之路————测试在上架之前有一个关键的步骤其实很容易被忽略，特别是个人开发者，没法像公司那样聘请专业的测试团队进行完备的测试。大体上讲，iOS的测试可以分为3类:
+            <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="移动开发技术"><a href="#移动开发技术" class="headerlink" title="移动开发技术"></a>移动开发技术</h1><p>移动开发技术泛指手机端的应用开发，平台主要有iOS和Android。移动开发技术大体目前可分为两类，一类是<strong>原生开发</strong>，一类是<strong>跨平台开发</strong>。</p>
+<p>两者各有优缺点，先给出大佬的观点:</p>
+<blockquote>
+<p>移动端Web开发就像用店里买的锅炒菜，稳定快捷，做家常菜足够了。而native开发就好像不但要做菜，还要亲自打一口最合适自己的锅。虽然速度不快，虽然成本很高，但是想要做出最好吃的拿手菜，用店里的锅就是做不出那个味道。 ​​​​    ———即刻iOS leader JasonYuh</p>
+</blockquote>
+<p><img src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1545461964211&amp;di=1038f58e9d429567c6485c62a6226e38&amp;imgtype=0&amp;src=http%3A%2F%2Fwww.swootech.com%2FUploadFiles%2F2018%2F2%2F2018061110010414053.jpg" alt=""></p>
+<h2 id="原生开发"><a href="#原生开发" class="headerlink" title="原生开发"></a>原生开发</h2><p>原生开发是指使用特定语言(如<strong>Kotlin</strong>与<strong>Swift</strong>)调用系统SDK开发的应用。在接触Flutter之前，我属于这类开发人员。对于原生开发，我总结出如下的优缺点:</p>
+<h3 id="原生开发的优点"><a href="#原生开发的优点" class="headerlink" title="原生开发的优点"></a>原生开发的优点</h3><ul>
+<li>速度快，性能好，用户体验佳，原汁原味</li>
+<li>开发人员多，社区比较完善，可用的第三方库健全</li>
+<li>可访问平台的所有功能，如iPhone X的前置深度相机进行面部识别、蓝牙、GPS等</li>
+<li>有谷歌和苹果的工程师每年召开开发者大会WWDC/Google IO，更新SDK，演讲介绍best practice</li>
+</ul>
+<h3 id="原生开发的缺点"><a href="#原生开发的缺点" class="headerlink" title="原生开发的缺点"></a>原生开发的缺点</h3><ul>
+<li>开发成本高，人力成本大，需要两班人马</li>
+<li>功能更新或内容更新需要发布新版本，有审核周期</li>
+<li>Swift ABI不稳定，Swift版本升级维护工作量大，因此保守的国内公司大部分代码还是用OC</li>
+</ul>
+<p>上面两点是我在开发<a href="https://itunes.apple.com/cn/app/match问答/id1414728016?mt=8" target="_blank" rel="external">Match问答</a>的过程中深有体会的两点。我与朋友分别开发和维护iOS和Android客户端，版本迭代的人力成本是翻倍的。任何的修改都要提交审核，通常第一次审核遇到的麻烦比较多，后面审核相对比较顺利，但也要平均两天的时间，这对于高速变化的互联网时代一定是不可接受的。</p>
+<h1 id="跨平台技术"><a href="#跨平台技术" class="headerlink" title="跨平台技术"></a>跨平台技术</h1><p>针对原生开发人力成本和动态化不足的缺点，诞生了一些跨平台的动态化框架。根据原理可大体分为三类:</p>
+<ul>
+<li>Html5+Webview渲染的Hybrid APP</li>
+<li>以ReactNative为代表的JS开发+原生渲染</li>
+<li>以Flutter为代表的自绘UI+Native</li>
+</ul>
+<p><img src="https://pic3.zhimg.com/v2-0722d24ec3cdf01b0879193c34ac782e_b.jpg" alt=""></p>
+<blockquote>
+<p>跨平台技术与原生技术示意图 (图片来源:知乎用户 @易旭昕)</p>
+</blockquote>
+<h2 id="Flutter之外的跨平台技术"><a href="#Flutter之外的跨平台技术" class="headerlink" title="Flutter之外的跨平台技术"></a>Flutter之外的跨平台技术</h2><h3 id="Html5-Webview渲染的Hybrid-APP"><a href="#Html5-Webview渲染的Hybrid-APP" class="headerlink" title="Html5+Webview渲染的Hybrid APP"></a>Html5+Webview渲染的Hybrid APP</h3><p>第一类技术主要是利用原生控件<strong>Webview</strong>渲染网页，加载前端工程师开发好的已适配手机端的网页，这类应用也被称为<strong>Hybrid APP</strong>。它确实解决了原生开发带来的人力成本与动态性不够的问题。</p>
+<p>它最大的缺点是性能问题，Webview可以理解为一个浏览器内核，上文提到的蓝牙、前置摄像头这些资源是无权访问到的。若使用到这些功能，需要用JS与原生API通信，这个部分是由<strong>JSBridge</strong>完成的。涉及到<strong>通信</strong>事情就复杂起来了，需要指定协议(规定消息的格式含义等)，性能也随之降低。</p>
+<h3 id="以ReactNative为代表的JS开发-原生渲染"><a href="#以ReactNative为代表的JS开发-原生渲染" class="headerlink" title="以ReactNative为代表的JS开发+原生渲染"></a>以ReactNative为代表的JS开发+原生渲染</h3><p>第二类技术在第一类技术的基础上进行了改进，将不堪重负的Webview替换为了原生渲染。以React Native为例，它借助React的<strong>Virtual DOM</strong>技术，在RN中将其渲染为原生控件树，从而大幅提升了渲染效率。</p>
+<p>响应式编程也是React提出的一个重要思想，状态(State)改变，则UI随之改变。这样开发者只需要处理和关注状态的变化，剩下的交给框架完成，得益于Diff算法，框架可以高效的完成DOM更新操作。</p>
+<p>如此看来，React真是非常<strong>伟大</strong>。Vue的作者也在一个讨论React与Vue的帖子下大方承认，再过若干年，React的历史功绩肯定在Vue之上。Flutter中也从中大量借鉴了宝贵经验。关于两者的<em>布局、构建、渲染、更新机制</em>，后面可以展开单写一篇博客。</p>
+<p><img src="https://pic3.zhimg.com/v2-9cb3914b32ce08e4c80bd66d5aa8fefc_1200x500.jpg" alt=""></p>
+<blockquote>
+<p>Flutter的渲染、绘制机制示意图(图片来源:知乎用户 @JoeyChi<br>​)</p>
+</blockquote>
+<p>国内厂商也进行了尝试，比如阿里的<strong><a href="http://weex.apache.org/cn/guide/" target="_blank" rel="external">Weex</a></strong>和华为小米等国内厂商制定的<strong><a href="https://www.quickapp.cn" target="_blank" rel="external">快应用</a></strong>。</p>
+<p>相比于第一类解决方案，第二类解决方案性能已经提升蛮多的了，但还是无法避开Javascript与原生的通信。而且作为<strong>解释性</strong>的语言，Javascript的性能好不到哪里去。</p>
+<p>另外，当iOS/Android系统更新后，控件可能会更新，也就是虚拟DOM渲染的目标就更新了，因此不可避免的会有一段时间的空档期，等待社区控件的更新。</p>
+<h2 id="Flutter"><a href="#Flutter" class="headerlink" title="Flutter"></a>Flutter</h2><h3 id="Flutter的改进与性能"><a href="#Flutter的改进与性能" class="headerlink" title="Flutter的改进与性能"></a>Flutter的改进与性能</h3><p>Flutter抛弃了JS，使用了可编译为机器码的Dart作为编程语言，底层Engine层包含了 Skia渲染引擎以及文字处理引擎，自绘了UI，同时支持iOS的<strong>Cupertino</strong>风格与Android的<strong>Material</strong>风格。</p>
+<p>正是因为较好的解决了上面的问题，<em>Flutter</em>声称可以达到<strong>媲美原生</strong>的效果。关于原生与Flutter的性能对比，可以参考<a href="https://juejin.im/post/5b85e9f86fb9a01a175dc986" target="_blank" rel="external">Flutter和原生应用性能对比</a>。</p>
+<blockquote>
+<p>在假设他能够做到独立、第三方的前提下，结论是:android 原生在内存、CPU 资源占用方面要低于 flutter，并且安装包的体积也要小于 flutter，所以，不考虑其他因素，单纯从性能角度来说，android 原生肯定是要优于 flutter 的。但 flutter 也有它的优点，比如跨平台的开发、毫秒级的热重载等等，另外跨端开发也逐渐的流行起来，所以，我们在学好android原生的基础上，对跨端开发也要抱有积极的心态。</p>
+</blockquote>
+<h3 id="Flutter的历史"><a href="#Flutter的历史" class="headerlink" title="Flutter的历史"></a>Flutter的历史</h3><p>##Flutter##是谷歌最早于2017年5月推出的一套#跨平台、开源UI框架#，初衷是支持##iOS、Android##开发，并且是传说中的操作系统##Fuchsia##的默认开发套件，使用<strong>Dart</strong>语言编写。</p>
+<h3 id="Flutter的特点"><a href="#Flutter的特点" class="headerlink" title="Flutter的特点"></a>Flutter的特点</h3><ul>
+<li>界面精美</li>
+<li>快</li>
+<li>支持热重载</li>
+<li>开放</li>
+</ul>
+<p>先开个头，下篇继续详解Flutter live 18和 Flutter 1.0…</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/rFWVXwibLGtwbphsGqpQLNYkjrHdFlLnXaKBibOic8dibZ0GGya5kRQq6mpBDic9Z2FHL848bb7Ju3M61CWhR6TB0vg/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt=""></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li><a href="https://juejin.im/post/5b85e9f86fb9a01a175dc986" target="_blank" rel="external">Flutter和原生应用性能对比</a></li>
+<li><a href="https://www.weibo.com/jasonyuh?is_all=1#_rnd1545449174555" target="_blank" rel="external">JasonYuh的微博</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/52723705" target="_blank" rel="external">Joey的Flutter之旅</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/37894353" target="_blank" rel="external">关于 Flutter 的一些想法</a></li>
+<li><a href="https://flutterchina.club" target="_blank" rel="external">Flutter中文网</a></li>
+</ol>
 
-单元测试、UI测试、性能测试、集成测试，通常在模拟器上进行
-真机测试
-Testflight内测
 
-模拟器测试第一类测试通常可以发现App里所有可能的逻辑错误、排版问题和用户...
+            <! -- 添加捐赠图标 -->
+    <div class ="post-donate">
+    <div id="donate_board" class="donate_bar center">
+        <a id="btn_donate" class="btn_donate" href="javascript:;" title="打赏"></a>
+
+        <div style="text-align:center;color:#00F" >
+           
         </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/08/02</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "iOS开发">iOS开发</a>
-    
+
+    <script type="text/javascript">
+        document.getElementById('btn_donate').onclick = function(){
+            $('#donate_board').addClass('hidden');
+            $('#donate_guide').removeClass('hidden');
+        }
+    </script>
 </div>
-            
-        </div>
+<! -- 添加捐赠图标 -->
     </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>原文作者: <a href="http://zhihaozhang.github.io">Chih-Hao</a>
+            <p>原文链接: <a href="http://zhihaozhang.github.io/2018/12/22/FlutterLive/">http://zhihaozhang.github.io/2018/12/22/FlutterLive/</a>
+            <p>发表日期: <a href="http://zhihaozhang.github.io/2018/12/22/FlutterLive/">十二月 22日 2018, 10:55:04 上午</a>
+            <p>版权声明: 本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
     
     <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2018/11/25/BigScreen/" title= 两个大屏可视化案例的实现 >
+                    <div class="prevTitle">两个大屏可视化案例的实现</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMTAyMC83NTY5">
+    <script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+    </script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
     
+    
+    <!--PC和WAP自适应版-->
+
+    <!--PC版-->
+
+
+    
+    
+
+
 </main>
             <!-- profile -->
             
@@ -470,6 +597,24 @@ Testflight内测
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#移动开发技术"><span class="toc-number">1.</span> <span class="toc-text">移动开发技术</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#原生开发"><span class="toc-number">1.1.</span> <span class="toc-text">原生开发</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#原生开发的优点"><span class="toc-number">1.1.1.</span> <span class="toc-text">原生开发的优点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原生开发的缺点"><span class="toc-number">1.1.2.</span> <span class="toc-text">原生开发的缺点</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#跨平台技术"><span class="toc-number">2.</span> <span class="toc-text">跨平台技术</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Flutter之外的跨平台技术"><span class="toc-number">2.1.</span> <span class="toc-text">Flutter之外的跨平台技术</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Html5-Webview渲染的Hybrid-APP"><span class="toc-number">2.1.1.</span> <span class="toc-text">Html5+Webview渲染的Hybrid APP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#以ReactNative为代表的JS开发-原生渲染"><span class="toc-number">2.1.2.</span> <span class="toc-text">以ReactNative为代表的JS开发+原生渲染</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Flutter"><span class="toc-number">2.2.</span> <span class="toc-text">Flutter</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Flutter的改进与性能"><span class="toc-number">2.2.1.</span> <span class="toc-text">Flutter的改进与性能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Flutter的历史"><span class="toc-number">2.2.2.</span> <span class="toc-text">Flutter的历史</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Flutter的特点"><span class="toc-number">2.2.3.</span> <span class="toc-text">Flutter的特点</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考"><span class="toc-number">3.</span> <span class="toc-text">参考</span></a></li></ol>
+    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -1444,6 +1589,8 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
      
     </body>
     <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
