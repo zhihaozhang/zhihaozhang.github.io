@@ -15,7 +15,7 @@
     <meta name="description" content="">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>Flutter live 18之后的移动开发技术综述(上) · Zhihao&#39;s Studio</title>
+    <title>Flutter live 18之后的移动开发技术综述 · Zhihao&#39;s Studio</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -210,7 +210,7 @@
                 <a href="/" >Zhihao&#39;s Studio.</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">Flutter live 18之后的移动开发技术综述(上)</a>
+                <a href="#" class="post-name">Flutter live 18之后的移动开发技术综述</a>
             </div>
     </div>
     
@@ -242,7 +242,7 @@ height:50vh;
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            Flutter live 18之后的移动开发技术综述(上)
+            Flutter live 18之后的移动开发技术综述
             <!-- 404 -->
             
         </h1>
@@ -267,7 +267,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count">1,646</span> / Reading time: <span class="post-count">6 min</span></span>
+                        <span>Word count: <span class="post-count">2,146</span> / Reading time: <span class="post-count">8 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -421,7 +421,7 @@ height:50vh;
 <li>以ReactNative为代表的JS开发+原生渲染</li>
 <li>以Flutter为代表的自绘UI+Native</li>
 </ul>
-<p><img src="https://pic3.zhimg.com/v2-0722d24ec3cdf01b0879193c34ac782e_b.jpg" alt=""></p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fyffdnnxq3j30dy07dglk.jpg" alt=""></p>
 <blockquote>
 <p>跨平台技术与原生技术示意图 (图片来源:知乎用户 @易旭昕)</p>
 </blockquote>
@@ -432,7 +432,7 @@ height:50vh;
 <p>如此看来，React真是非常<strong>伟大</strong>。Vue的作者也在一个讨论React与Vue的帖子下大方承认，再过若干年，React的历史功绩肯定在Vue之上。Flutter中也从中大量借鉴了宝贵经验。关于两者的<em>布局、构建、渲染、更新机制</em>，后面可以展开单写一篇博客。</p>
 <p><img src="https://pic3.zhimg.com/v2-9cb3914b32ce08e4c80bd66d5aa8fefc_1200x500.jpg" alt=""></p>
 <blockquote>
-<p>Flutter的渲染、绘制机制示意图(图片来源:知乎用户 @JoeyChi<br>​)</p>
+<p>Flutter的渲染、绘制机制示意图(图片来源:知乎用户 @JoeyChi)</p>
 </blockquote>
 <p>国内厂商也进行了尝试，比如阿里的<strong><a href="http://weex.apache.org/cn/guide/" target="_blank" rel="external">Weex</a></strong>和华为小米等国内厂商制定的<strong><a href="https://www.quickapp.cn" target="_blank" rel="external">快应用</a></strong>。</p>
 <p>相比于第一类解决方案，第二类解决方案性能已经提升蛮多的了，但还是无法避开Javascript与原生的通信。而且作为<strong>解释性</strong>的语言，Javascript的性能好不到哪里去。</p>
@@ -443,20 +443,36 @@ height:50vh;
 <p>在假设他能够做到独立、第三方的前提下，结论是:android 原生在内存、CPU 资源占用方面要低于 flutter，并且安装包的体积也要小于 flutter，所以，不考虑其他因素，单纯从性能角度来说，android 原生肯定是要优于 flutter 的。但 flutter 也有它的优点，比如跨平台的开发、毫秒级的热重载等等，另外跨端开发也逐渐的流行起来，所以，我们在学好android原生的基础上，对跨端开发也要抱有积极的心态。</p>
 </blockquote>
 <h3 id="Flutter的历史"><a href="#Flutter的历史" class="headerlink" title="Flutter的历史"></a>Flutter的历史</h3><p>##Flutter##是谷歌最早于2017年5月推出的一套#跨平台、开源UI框架#，初衷是支持##iOS、Android##开发，并且是传说中的操作系统##Fuchsia##的默认开发套件，使用<strong>Dart</strong>语言编写。</p>
-<h3 id="Flutter的特点"><a href="#Flutter的特点" class="headerlink" title="Flutter的特点"></a>Flutter的特点</h3><ul>
+<p><img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fyffezmcv5j30u007taad.jpg" alt=""></p>
+<h3 id="Flutter的特点"><a href="#Flutter的特点" class="headerlink" title="Flutter的特点"></a>Flutter的特点</h3><p>其实学习Flutter有一段时间了，他的优点挺多，官方总结如下：</p>
+<ul>
 <li>界面精美</li>
-<li>快</li>
+<li>速度快</li>
 <li>支持热重载</li>
 <li>开放</li>
 </ul>
-<p>先开个头，下篇继续详解Flutter live 18和 Flutter 1.0…</p>
+<p>就我自己使用Flutter一段时间以来的实际体验，展开介绍一下。Flutter一直强调对屏幕的像素级掌控，让开发者不受限的堆叠任何图形、视频、文本和控件。Flutter内置的<strong>Widgets</strong>非常精美，最大程度的实现了Material Desig，因此应用的外观<strong>下限</strong>是有保证的(^_^)。</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fyffmoe4hoj31bc0r6wgu.jpg" alt=""></p>
+<blockquote>
+<p>Flutter官方给出界面样例</p>
+</blockquote>
+<p><em>速度快是Flutter 时的初心，媲美原生应用的速度是他的口号。</em> 性能方面无需多言，相比于其他跨平台方案是有优势的，但比原生还是有一些差距。特别是iOS平台，由于没有内置Skia 2D加速图形引擎，会使IPA包的大小多出一截。</p>
+<p>支持热重载这点对于开发者来说是非常爽的，开发者做出一点点修改，不用重启整个应用，经历漫长的等待了，在亚秒级别的等待后就能看到更新，非常方便。另外，即使出错了，也可以记住Context，在开发者修复代码后，恢复之前的Context，不用担心typo或者测试过程中，错误很难复现的问题。综合以上两点，Flutter称之为<strong>Stateful Hot Reload</strong>。</p>
 <p><img src="https://mmbiz.qpic.cn/mmbiz_png/rFWVXwibLGtwbphsGqpQLNYkjrHdFlLnXaKBibOic8dibZ0GGya5kRQq6mpBDic9Z2FHL848bb7Ju3M61CWhR6TB0vg/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt=""></p>
+<blockquote>
+<p>Flutter开发界面，支持热重载</p>
+</blockquote>
+<p>Flutter是开源的，插件也丰富，有类似于cocoa pod和npm的<a href="https://pub.flutter-io.cn" target="_blank" rel="external">社区</a>，不需要重复造轮子了，开发者也可以发布自己的轮子给别人使用。同事，也可以像使用React一样，仅仅将Flutter作为view层的解决方案，逻辑使用Kotlin或Swift进行开发。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>本文介绍了目前市面上针对移动开发的主流技术，并比较了他们的优缺点，并引出了Flutter。在下一篇文章中，我们详细介绍Flutter live 18这次大会发布了什么，以及引入的新特性。</p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
 <li><a href="https://juejin.im/post/5b85e9f86fb9a01a175dc986" target="_blank" rel="external">Flutter和原生应用性能对比</a></li>
 <li><a href="https://www.weibo.com/jasonyuh?is_all=1#_rnd1545449174555" target="_blank" rel="external">JasonYuh的微博</a></li>
 <li><a href="https://zhuanlan.zhihu.com/p/52723705" target="_blank" rel="external">Joey的Flutter之旅</a></li>
 <li><a href="https://zhuanlan.zhihu.com/p/37894353" target="_blank" rel="external">关于 Flutter 的一些想法</a></li>
 <li><a href="https://flutterchina.club" target="_blank" rel="external">Flutter中文网</a></li>
+<li><a href="https://pub.flutter-io.cn" target="_blank" rel="external">Dart Packages</a></li>
+<li><a href="https://flutterchina.club/flutter-for-ios/" target="_blank" rel="external">Flutter for iOS 开发者</a></li>
+<li><a href="https://flutterchina.club/web-analogs/" target="_blank" rel="external">Flutter for Web开发者</a></li>
 </ol>
 
 
@@ -483,7 +499,7 @@ height:50vh;
         <div class="license-wrapper">
             <p>原文作者: <a href="http://zhihaozhang.github.io">Chih-Hao</a>
             <p>原文链接: <a href="http://zhihaozhang.github.io/2018/12/22/FlutterLive/">http://zhihaozhang.github.io/2018/12/22/FlutterLive/</a>
-            <p>发表日期: <a href="http://zhihaozhang.github.io/2018/12/22/FlutterLive/">十二月 22日 2018, 10:55:04 上午</a>
+            <p>发表日期: <a href="http://zhihaozhang.github.io/2018/12/22/FlutterLive/">December 22nd 2018, 10:55:04 am</a>
             <p>版权声明: 本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -613,7 +629,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#移动开发技术"><span class="toc-number">1.</span> <span class="toc-text">移动开发技术</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#原生开发"><span class="toc-number">1.1.</span> <span class="toc-text">原生开发</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#原生开发的优点"><span class="toc-number">1.1.1.</span> <span class="toc-text">原生开发的优点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原生开发的缺点"><span class="toc-number">1.1.2.</span> <span class="toc-text">原生开发的缺点</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#跨平台技术"><span class="toc-number">2.</span> <span class="toc-text">跨平台技术</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Flutter之外的跨平台技术"><span class="toc-number">2.1.</span> <span class="toc-text">Flutter之外的跨平台技术</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Html5-Webview渲染的Hybrid-APP"><span class="toc-number">2.1.1.</span> <span class="toc-text">Html5+Webview渲染的Hybrid APP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#以ReactNative为代表的JS开发-原生渲染"><span class="toc-number">2.1.2.</span> <span class="toc-text">以ReactNative为代表的JS开发+原生渲染</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Flutter"><span class="toc-number">2.2.</span> <span class="toc-text">Flutter</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Flutter的改进与性能"><span class="toc-number">2.2.1.</span> <span class="toc-text">Flutter的改进与性能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Flutter的历史"><span class="toc-number">2.2.2.</span> <span class="toc-text">Flutter的历史</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Flutter的特点"><span class="toc-number">2.2.3.</span> <span class="toc-text">Flutter的特点</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考"><span class="toc-number">3.</span> <span class="toc-text">参考</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#移动开发技术"><span class="toc-number">1.</span> <span class="toc-text">移动开发技术</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#原生开发"><span class="toc-number">1.1.</span> <span class="toc-text">原生开发</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#原生开发的优点"><span class="toc-number">1.1.1.</span> <span class="toc-text">原生开发的优点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原生开发的缺点"><span class="toc-number">1.1.2.</span> <span class="toc-text">原生开发的缺点</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#跨平台技术"><span class="toc-number">2.</span> <span class="toc-text">跨平台技术</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Flutter之外的跨平台技术"><span class="toc-number">2.1.</span> <span class="toc-text">Flutter之外的跨平台技术</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Html5-Webview渲染的Hybrid-APP"><span class="toc-number">2.1.1.</span> <span class="toc-text">Html5+Webview渲染的Hybrid APP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#以ReactNative为代表的JS开发-原生渲染"><span class="toc-number">2.1.2.</span> <span class="toc-text">以ReactNative为代表的JS开发+原生渲染</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Flutter"><span class="toc-number">2.2.</span> <span class="toc-text">Flutter</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Flutter的改进与性能"><span class="toc-number">2.2.1.</span> <span class="toc-text">Flutter的改进与性能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Flutter的历史"><span class="toc-number">2.2.2.</span> <span class="toc-text">Flutter的历史</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Flutter的特点"><span class="toc-number">2.2.3.</span> <span class="toc-text">Flutter的特点</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考"><span class="toc-number">4.</span> <span class="toc-text">参考</span></a></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
@@ -626,6 +642,8 @@ top:50vh;
     <div class="sidebar-content sidebar-content-show-archive">
           <div class="sidebar-panel-archives">
     <!-- 在ejs中将archive按照时间排序 -->
+    
+    
     
     
     
@@ -1214,7 +1232,7 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">12/22</span><a class="archive-post-title" href= "/2018/12/22/FlutterLive/" >Flutter live 18之后的移动开发技术综述(上)</a>
+            <span class="archive-post-date">12/22</span><a class="archive-post-title" href= "/2018/12/22/FlutterLive/" >Flutter live 18之后的移动开发技术综述</a>
         </li>
     
     
@@ -1352,7 +1370,7 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
         </li>
     
     
@@ -1380,7 +1398,7 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/Build reuseable visualization using d3.js and AngularJS/" >Build reusable visualization using d3.js and AngularJS</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
         </li>
     
     
@@ -1475,7 +1493,7 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/Build reuseable visualization using d3.js and AngularJS/" >Build reusable visualization using d3.js and AngularJS</a>
         </li>
     
     
@@ -1492,11 +1510,11 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="d3"><span class="iconfont-archer">&#xe606;</span>d3</span>
     
+        <span class="sidebar-tag-name" data-tags="swift"><span class="iconfont-archer">&#xe606;</span>swift</span>
+    
         <span class="sidebar-tag-name" data-tags="macOS开发"><span class="iconfont-archer">&#xe606;</span>macOS开发</span>
     
         <span class="sidebar-tag-name" data-tags="Flutter live"><span class="iconfont-archer">&#xe606;</span>Flutter live</span>
-    
-        <span class="sidebar-tag-name" data-tags="swift"><span class="iconfont-archer">&#xe606;</span>swift</span>
     
         <span class="sidebar-tag-name" data-tags="随感"><span class="iconfont-archer">&#xe606;</span>随感</span>
     
