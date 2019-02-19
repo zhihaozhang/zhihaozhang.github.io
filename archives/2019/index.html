@@ -341,147 +341,22 @@
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2018/07/30/FunctionalPrograming/" >
+        <a class="abstract-title" href = "/2019/02/19/wechatMoment/" >
             
-                <span>浅谈函数式编程 (Introducing Functional Programming)</span>
+                <span>仿微信朋友圈/抖音个人主页的设计与实现</span>
         </a>
         <div class="abstract-content">
-            前言最近两周利用空余时间艰难“啃完”了objc.io出版的《函数式Swift》这本书，感觉有些摸到了函数式编程的门道;在函数式编程思维的影响下，将之前的项目代码进行了改造。关于函数式编程，也算是有了一点心得，遂写成此文，虽然行文主要是以Swift为载体，但并不影响函数式思想的介绍。由于本人才疏学浅，而函数式编程本身博大精深，故谬误在所难免，如发现，还请指出。
+            背景因业务发展需要，在新版本的Match问答中，我们决定加入更多的社交元素，方便大家互相勾搭和交流，更多地展现自己的学习日常和个性，在原有版本的基础上计入了动态和个人主页两个模块，其中个人主页又分为第一人称视图和第三人称视图。本文是我在春节假期期间实现这两个模块的一点小心得。
+期间参考了大量开源项目的已有代码，进行了借鉴和向Swift 4.2的改写，在此表示感谢，开源项目不完整列表见文末附录。
+用户自己的个人主页视图布局个人主页视图借鉴了最右这款非常受欢迎的应用，只不过上方的布局稍有不同。其实不止是最右，抖音、微博、知乎等App都有着非常类似的个人主页。
 
 
-《函数式Swift》
-
-函数式编程WHAT is 函数式编程wiki对于函数式编程的定义如下:
-
-In computer science, functional programming is a programming para...
+Match与最右的个人主页对...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/07/30</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "swift">swift</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/07/23/Match2/" >
-            
-                <span>Match for iPhone开发笔记 贰 网络请求和数据流篇</span>
-        </a>
-        <div class="abstract-content">
-            前言书接上文,作为一个数据驱动(Data driven)类的APP,如何从服务器端获取到数据并发送尽量少的请求次数是一个非常重要的点，甚至被定为最重要的点也不为过。这篇博客将介绍我在做Match这个应用过程中使用到的技术以及优化的方法。
-网络请求库Alamofire、Moya和Just现有的网络请求库非常多，从OC时代大名鼎鼎的AFNetworking到Swift时代的Alamofire及它的进一步封装Moya,都是对苹果网络层URLSession的封装，且有着相似的目的：将网络请求从ViewController中解耦出去。ViewController中如果混杂了太多的网络请求的构建、发...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/07/23</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "iOS开发">iOS开发</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/07/18/buyhousetwo/" >
-            
-                <span>魔都买房杂记(下)</span>
-        </a>
-        <div class="abstract-content">
-            写在前面上一篇博客魔都买房杂记(上)写完分享以来，我只在朋友圈进行了分享，便得到了近300次的阅读，我微信好友一共才400人。虽然可能存在某些好友多次阅读了这个文章的现象，但还是不难看出楼市的受关注度，毕竟它挑动着每一个人的神经，每个人都迟早是有一块地方要安定下来的。
-在写这篇博客的时候，我已经走完了剩下的几乎所有流程，完成了草签(合同与正式网签一样)，只剩下网签这最后一步了。这篇博客，我准备书接上文，将后续的流程写出来，方便读者就看到完整的新房购买过程;同时，将重点放在二手房的看房、选购和谈价技巧，和上文一样，由于我的不专业性，所提意见有强烈的个人主观色彩，也不接受任何质疑和撕逼，仅供...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/07/18</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "随感">随感</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/07/16/buy-house/" >
-            
-                <span>魔都买房杂记(上)</span>
-        </a>
-        <div class="abstract-content">
-            为什么要写这篇博客近期终于在魔都上海买到了一个属于自己的三房，在一线城市有了一个稳定的安身立命场所。经历了大半年的看二手房、和房东谈价格，到最终选择新房、认筹、摇号、选房。一来记录一下这段经历，二来也为想买房的人提供一些参考吧，也仅仅是参考了，毕竟我不是专业的。
-购买新房决定购买新房是在一次和二手房房东谈价谈崩之后，加上刚刚过去，印象比较深刻，有必要先行记录一下。
-购买新房的好处众所周知，由于zf限价，新楼盘一般售价是低于周边二手房的，因为二手房需要支付约2%的中介费、个税(与是否满五唯一相关)、增值税(5.37%)和契税(新房也需要)，大部分的房子加起来也要9%，即使是满五唯一的房子，...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/07/16</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "随感">随感</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/07/11/Match/" >
-            
-                <span>Match for iPhone开发笔记 壹 开篇杂谈</span>
-        </a>
-        <div class="abstract-content">
-            开发Match的初衷大约一个月前的某天，一个很久未曾联系的同学突然给我发微信，问我有没有时间帮他做一个iOS App。此人从小学开始就与我是同学，一直是传说中的别人家的孩子，中考、高考都是全市第二名，后进入了南京大学数学系读本科，然后去了复旦读研，跟我又成了校友…
-跟他见面后，他给我讲起了故事，在大学，有一棵树，叫高树，很多人挂在了上面多年，甚至无法毕业。因此，他想做一款叫做Match的产品，来帮助高数方面有困难的同学…
-Match代表什么Match，里面包含了MATH(数学)这个单词，而且有匹配的意思，寓意与答题系统中的求助者寻求匹配的答题者吻合。
-我接手Match前在找到我之前，他一...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/07/11</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/02/19</span>
             </div>
             <!-- tags  -->
             

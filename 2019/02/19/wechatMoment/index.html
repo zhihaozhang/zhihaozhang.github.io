@@ -15,7 +15,7 @@
     <meta name="description" content="">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>Zhihao&#39;s Studio</title>
+    <title>仿微信朋友圈/抖音个人主页的设计与实现 · Zhihao&#39;s Studio</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -196,12 +196,23 @@
 </head>
 
     
+        <body class="post-body">
+    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >Zhihao&#39;s Studio.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">仿微信朋友圈/抖音个人主页的设计与实现</a>
+            </div>
+    </div>
     
     <a class="home-link" href=/>Zhihao's Studio.</a>
 </header>
@@ -215,24 +226,74 @@
 
 
 
+height:50vh;
+
 >
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
+            
+            仿微信朋友圈/抖音个人主页的设计与实现
+            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "iOS开发">iOS开发</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count">1,987</span> / Reading time: <span class="post-count">7 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2019/02/19</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
         
     </div>
 </div>
@@ -333,169 +394,148 @@
 </script>        
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/07/30/FunctionalPrograming/" >
-            
-                <span>浅谈函数式编程 (Introducing Functional Programming)</span>
-        </a>
-        <div class="abstract-content">
-            前言最近两周利用空余时间艰难“啃完”了objc.io出版的《函数式Swift》这本书，感觉有些摸到了函数式编程的门道;在函数式编程思维的影响下，将之前的项目代码进行了改造。关于函数式编程，也算是有了一点心得，遂写成此文，虽然行文主要是以Swift为载体，但并不影响函数式思想的介绍。由于本人才疏学浅，而函数式编程本身博大精深，故谬误在所难免，如发现，还请指出。
+            <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>因业务发展需要，在新版本的<a href="https://itunes.apple.com/cn/app/match问答/id1414728016?mt=8" target="_blank" rel="external">Match问答</a>中，我们决定加入更多的社交元素，方便大家互相勾搭和交流，更多地展现自己的学习日常和个性，在原有版本的基础上计入了<em>动态</em>和<em>个人主页</em>两个模块，其中个人主页又分为<em>第一人称视图</em>和<em>第三人称视图</em>。本文是我在<em>春节假期期间</em>实现这两个模块的<strong>一点小心得</strong>。</p>
+<p>期间参考了大量开源项目的已有代码，进行了借鉴和向Swift 4.2的改写，在此表示感谢，开源项目<em>不完整列表</em>见文末附录。</p>
+<h1 id="用户自己的个人主页视图"><a href="#用户自己的个人主页视图" class="headerlink" title="用户自己的个人主页视图"></a>用户自己的个人主页视图</h1><h2 id="布局"><a href="#布局" class="headerlink" title="布局"></a>布局</h2><p>个人主页视图借鉴了最右这款非常受欢迎的应用，只不过上方的布局稍有不同。其实不止是最右，抖音、微博、知乎等App都有着非常类似的个人主页。</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tKfTcgy1g0bjpqiltvj30ye0u0acz.jpg" alt=""></p>
+<blockquote>
+<p>Match与最右的个人主页对比</p>
+</blockquote>
+<p>整个个人主页可分为两部分，第一部分是上方的头像、昵称、性别、个性签名、背景图片的区域；第二部分是下方的配置项，定制化的TableView。</p>
+<p>头像外面加了一圈白色的圆，可以更突出头像部分，实现也比较简单，<strong>显式指定</strong>头像所属imageView的layer的borderWidth和borderColor即可，<strong>当然前提是已经将头像裁剪为圆形</strong>。</p>
+<p>Tableview的分割线起始位置的定制:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">tableView</span><span class="params">(<span class="number">_</span> tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)</span></span> &#123;</div><div class="line">        tableView.tableFooterView = <span class="type">UIView</span>(frame: <span class="type">CGRect</span>(x: <span class="number">0</span>, y: <span class="number">0</span>, width: <span class="number">0</span>, height: <span class="number">0</span>))</div><div class="line">        tableView.separatorInset = <span class="type">UIEdgeInsets</span>(top: <span class="number">0</span>, <span class="keyword">left</span>: <span class="number">50</span>, bottom: <span class="number">0</span>, <span class="keyword">right</span>: <span class="number">0</span>)</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>比起其他应用，我还有一个功能没实现，那就是下拉的时候背景图片的放大。研究过OC代码后，发现这个功能也不难，主要实现方式是didscroll代理方法中监听滑动的偏移量，作为控制image的zoom倍率依据。</p>
+<p><img src="https://raw.githubusercontent.com/QuintGao/GKPageScrollView/master/GKPageScrollViewDemo/gif/wy.gif" alt=""></p>
+<blockquote>
+<p>头图下拉放大效果</p>
+</blockquote>
+<h2 id="更换背景和头像事件"><a href="#更换背景和头像事件" class="headerlink" title="更换背景和头像事件"></a>更换背景和头像事件</h2><p>更换头像和背景思路是类似的，都是给一个图片增加手势事件的识别，通常有两种实现方式。第一种是比较土味的方法，给图片覆盖上一层透明的button，将button设为与图片形状一样；第二种方式是给imageView加上UITapGestureRecognizer，比较简单就不再赘述。</p>
+<p>添加或更改图片涉及到图片拉伸的问题，因此需要进行裁剪，头像的比例是1：1，而背景图片比较复杂，为了适应各种手机型号的屏幕，宽度拉到与屏幕等宽，高度和宽度维持一个固定的宽高比，当然这对用户应该是透明的，将裁剪方式的选择权还给用户。</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tKfTcgy1g0bkwkb6rcj30u01szq45.jpg" alt=""></p>
+<blockquote>
+<p>图片裁剪页</p>
+</blockquote>
+<h1 id="他人个人主页的实现"><a href="#他人个人主页的实现" class="headerlink" title="他人个人主页的实现"></a>他人个人主页的实现</h1><h2 id="布局-1"><a href="#布局-1" class="headerlink" title="布局"></a>布局</h2><p>社交的重要一部分是去其他人的个人主页看看，其他人的个人主页和用户自己看自己的个人主页肯定是有区别的。用户自己的主页主要是一个去各种设置的中转站，用户看别人的主页主要是看他人的<em>头像、签名、背景、收入、问答、动态等内容</em>。</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tKfTcgy1g0bprodsijg30om1hcb2h.gif" alt=""></p>
+<blockquote>
+<p>他人个人主页视图</p>
+</blockquote>
+<p>上半部分和个人主页是一样的设计，下半部分有不同，是一个在其他应用中很受欢迎的左右滑动的Tab，暂且将其命名为swipe view。</p>
+<h2 id="实现的关键点与细节"><a href="#实现的关键点与细节" class="headerlink" title="实现的关键点与细节"></a>实现的关键点与细节</h2><p>为了让用户可以右滑退出这个页面，我将下方的swipe view的左边距设为了10px，这样方便用户用手势进行退出，保留着navigation ViewController的退出方式。</p>
+<p>这个页面的难点是<strong>嵌套scrollview的冲突处理</strong>，整个页面是被一个scrollview包裹起来的，而swipe view中也是scrollview，这里设定了上方有view的时候，使得滑动相应外层滑动事件，而当swipe view滑动至顶部的时候，将swipe view头固定于信号栏下方，此时的滑动事件相应者为swipe view中的scrollview。</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tKfTcgy1g0bqfoepukj31kw0qe3zs.jpg" alt=""></p>
+<blockquote>
+<p>去除了业务逻辑的关键代码片段 (made with Carbonize)</p>
+</blockquote>
+<p>固定住外层scrollview的主要实现方式是设置<strong>scrollview.contentOffset.y</strong>变量，当swipe view在scrollview中的坐标位置小于某个值的时候，设定scrollview.contentOffset.y为一个定值，这样就固定住了swipe view的表头部分。注意，开始的时候我设定的是isUserInteractionEnabled属性，这样swipe内的所有内容都不能交互了，比如正常的图片也不能点开看大图了。后面改成了isScrollEnabled，这样就不影响除了滑动外的其他操作了。</p>
+<h2 id="不足"><a href="#不足" class="headerlink" title="不足"></a>不足</h2><p>其实现在实现这个功能还有点美中不足，那就是固定住scrollview是一个滑动操作，而要想接着对swipe view中的scrollview进行滑动，必须再滑动一次，也就是中间必须中断一次。目前还不知道如何将一次滑动操作发给两个响应者进行处理。</p>
+<h1 id="朋友圈的设计与实现"><a href="#朋友圈的设计与实现" class="headerlink" title="朋友圈的设计与实现"></a>朋友圈的设计与实现</h1><p>微信朋友圈的<strong>点赞、留言、回复功能</strong>是很多应用都需要的功能，在实现这个功能的时候，我参考了不少优秀的blog和开源代码，并最终选中了【附录4】的OC实现进行了向Swift 4.2的改写，后面根据自己的需求进行了一些定制，主要是点击点赞和评论用户名跳转到他的个人主页。</p>
+<h2 id="朋友圈的两种实现方式"><a href="#朋友圈的两种实现方式" class="headerlink" title="朋友圈的两种实现方式"></a>朋友圈的两种实现方式</h2><p>【附录6】里介绍了朋友圈有两种主要实现方式，第一种是将每条动态作为TableView的一个cell，然后cell内部的点赞、评论又作为一个TableView，其中点赞作为Header view，每条评论作为二级cell。布局依赖Masonry，是自动布局autolayout技术，并且依赖第三方缓存cell高度进行优化，这种实现方式作者认为代价比较高。<strong>主要是页面结构复杂，依赖第三方库Masonry，集成难度较大。</strong></p>
+<p><img src="https://ws2.sinaimg.cn/large/006tKfTcgy1g0bqzhdnqaj30xh0u07c9.jpg" alt=""></p>
+<blockquote>
+<p>微信朋友圈的两种实现思路</p>
+</blockquote>
+<p>方式二是一个tableView，cell用来展示评论数据，headerView用来展示头像、发布文字和时间等等，主要优化策略也是缓存cell高度，保证后续滑动tableview不会重复计算，提升流畅度，我改写的库也答题是这种思路。</p>
+<h2 id="点赞超链接的实现"><a href="#点赞超链接的实现" class="headerlink" title="点赞超链接的实现"></a>点赞超链接的实现</h2><p>点赞超链接主要是借助<strong>NSAttributedString/NSMutableAttributedString</strong>，让用户名高亮为蓝色，并附带上User_id的信息，统一跳转到上文实现的第三人称视图中。</p>
+<h2 id="一个优化过的点"><a href="#一个优化过的点" class="headerlink" title="一个优化过的点"></a>一个优化过的点</h2><p>朋友圈里有个点我觉得对于用户体验的提升还蛮有优化意义的，那就是防止弹出的键盘遮挡住原动态和评论，下面给出参考的实现方式，主要思路是得到当前的cell，使其滑动。</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tKfTcgy1g0brs0e0gbj31bw0tedh3.jpg" alt=""></p>
+<blockquote>
+<p>使得tableview上滑的代码(made with Carbonize)</p>
+</blockquote>
+<h2 id="可优化的点"><a href="#可优化的点" class="headerlink" title="可优化的点"></a>可优化的点</h2><p>可优化的点还有很多，作者也列出了一些供大家参考。</p>
+<ol>
+<li>cell复用机制+sectionView复用机制 </li>
+<li>将cell的高度和cell里控件的frame存在model里</li>
+<li>减少cell内部控件的层级，层级不易太深</li>
+<li>缩略图和大图URL（拿起大刀让后台兄弟去完成，因为后台不提供缩略图功能，朋友圈很容易内存警告） </li>
+<li>图片圆角cornerRadius,缓存圆角等等</li>
+<li>高度缓存（cell评论区高度+section区头高度）</li>
+<li>异步加载渲染(图片+文本+view)（利用SDWebImage异步下载图片，文本和view没完成异步处理）</li>
+</ol>
+<h1 id="参考-amp-致谢"><a href="#参考-amp-致谢" class="headerlink" title="参考&amp;致谢"></a>参考&amp;致谢</h1><ol>
+<li><a href="https://github.com/sprint84/PhotoCropEditor" target="_blank" rel="external">PhotoCropEditor</a></li>
+<li><a href="https://github.com/QuintGao/GKPageScrollView" target="_blank" rel="external">GKPageScrollView</a></li>
+<li><a href="https://github.com/yysskk/SwipeMenuViewController" target="_blank" rel="external">SwipeMenuViewController</a></li>
+<li><a href="https://github.com/ChellyLau/MomentKit" target="_blank" rel="external">MomentKit</a></li>
+<li><a href="https://www.jianshu.com/p/395bac3648a7" target="_blank" rel="external">iOS 实现微信朋友圈评论回复功能</a></li>
+<li><a href="https://blog.csdn.net/wenmingzheng/article/details/78081127" target="_blank" rel="external">朋友圈评论回复的两种实现方式</a></li>
+</ol>
 
 
-《函数式Swift》
+            <! -- 添加捐赠图标 -->
+    <div class ="post-donate">
+    <div id="donate_board" class="donate_bar center">
+        <a id="btn_donate" class="btn_donate" href="javascript:;" title="打赏"></a>
 
-函数式编程WHAT is 函数式编程wiki对于函数式编程的定义如下:
+        <div style="text-align:center;color:#00F" >
+           
+        </div>
 
-In computer science, functional programming is a programming para...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/07/30</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "swift">swift</a>
-    
+    <script type="text/javascript">
+        document.getElementById('btn_donate').onclick = function(){
+            $('#donate_board').addClass('hidden');
+            $('#donate_guide').removeClass('hidden');
+        }
+    </script>
 </div>
-            
-        </div>
+<! -- 添加捐赠图标 -->
     </article>
+    <!-- license  -->
     
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/07/23/Match2/" >
-            
-                <span>Match for iPhone开发笔记 贰 网络请求和数据流篇</span>
-        </a>
-        <div class="abstract-content">
-            前言书接上文,作为一个数据驱动(Data driven)类的APP,如何从服务器端获取到数据并发送尽量少的请求次数是一个非常重要的点，甚至被定为最重要的点也不为过。这篇博客将介绍我在做Match这个应用过程中使用到的技术以及优化的方法。
-网络请求库Alamofire、Moya和Just现有的网络请求库非常多，从OC时代大名鼎鼎的AFNetworking到Swift时代的Alamofire及它的进一步封装Moya,都是对苹果网络层URLSession的封装，且有着相似的目的：将网络请求从ViewController中解耦出去。ViewController中如果混杂了太多的网络请求的构建、发...
+        <div class="license-wrapper">
+            <p>原文作者: <a href="http://zhihaozhang.github.io">Chih-Hao</a>
+            <p>原文链接: <a href="http://zhihaozhang.github.io/2019/02/19/wechatMoment/">http://zhihaozhang.github.io/2019/02/19/wechatMoment/</a>
+            <p>发表日期: <a href="http://zhihaozhang.github.io/2019/02/19/wechatMoment/">二月 19日 2019, 10:37:12 上午</a>
+            <p>版权声明: 本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/07/23</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "iOS开发">iOS开发</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/07/18/buyhousetwo/" >
-            
-                <span>魔都买房杂记(下)</span>
-        </a>
-        <div class="abstract-content">
-            写在前面上一篇博客魔都买房杂记(上)写完分享以来，我只在朋友圈进行了分享，便得到了近300次的阅读，我微信好友一共才400人。虽然可能存在某些好友多次阅读了这个文章的现象，但还是不难看出楼市的受关注度，毕竟它挑动着每一个人的神经，每个人都迟早是有一块地方要安定下来的。
-在写这篇博客的时候，我已经走完了剩下的几乎所有流程，完成了草签(合同与正式网签一样)，只剩下网签这最后一步了。这篇博客，我准备书接上文，将后续的流程写出来，方便读者就看到完整的新房购买过程;同时，将重点放在二手房的看房、选购和谈价技巧，和上文一样，由于我的不专业性，所提意见有强烈的个人主观色彩，也不接受任何质疑和撕逼，仅供...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/07/18</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "随感">随感</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/07/16/buy-house/" >
-            
-                <span>魔都买房杂记(上)</span>
-        </a>
-        <div class="abstract-content">
-            为什么要写这篇博客近期终于在魔都上海买到了一个属于自己的三房，在一线城市有了一个稳定的安身立命场所。经历了大半年的看二手房、和房东谈价格，到最终选择新房、认筹、摇号、选房。一来记录一下这段经历，二来也为想买房的人提供一些参考吧，也仅仅是参考了，毕竟我不是专业的。
-购买新房决定购买新房是在一次和二手房房东谈价谈崩之后，加上刚刚过去，印象比较深刻，有必要先行记录一下。
-购买新房的好处众所周知，由于zf限价，新楼盘一般售价是低于周边二手房的，因为二手房需要支付约2%的中介费、个税(与是否满五唯一相关)、增值税(5.37%)和契税(新房也需要)，大部分的房子加起来也要9%，即使是满五唯一的房子，...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/07/16</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "随感">随感</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/07/11/Match/" >
-            
-                <span>Match for iPhone开发笔记 壹 开篇杂谈</span>
-        </a>
-        <div class="abstract-content">
-            开发Match的初衷大约一个月前的某天，一个很久未曾联系的同学突然给我发微信，问我有没有时间帮他做一个iOS App。此人从小学开始就与我是同学，一直是传说中的别人家的孩子，中考、高考都是全市第二名，后进入了南京大学数学系读本科，然后去了复旦读研，跟我又成了校友…
-跟他见面后，他给我讲起了故事，在大学，有一棵树，叫高树，很多人挂在了上面多年，甚至无法毕业。因此，他想做一款叫做Match的产品，来帮助高数方面有困难的同学…
-Match代表什么Match，里面包含了MATH(数学)这个单词，而且有匹配的意思，寓意与答题系统中的求助者寻求匹配的答题者吻合。
-我接手Match前在找到我之前，他一...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/07/11</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "iOS开发">iOS开发</a>
-    
-</div>
-            
-        </div>
-    </article>
     
     <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2018/12/23/ABitOfFlutter/" title= Google Flutter Live 18笔记与观后感 >
+                    <div class="prevTitle">Google Flutter Live 18笔记与观后感</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMTAyMC83NTY5">
+    <script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+    </script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
     
+    
+    <!--PC和WAP自适应版-->
+
+    <!--PC版-->
+
+
+    
+    
+
+
 </main>
             <!-- profile -->
             
@@ -562,6 +602,24 @@ Match代表什么Match，里面包含了MATH(数学)这个单词，而且有匹�
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#背景"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#用户自己的个人主页视图"><span class="toc-number">2.</span> <span class="toc-text">用户自己的个人主页视图</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#布局"><span class="toc-number">2.1.</span> <span class="toc-text">布局</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#更换背景和头像事件"><span class="toc-number">2.2.</span> <span class="toc-text">更换背景和头像事件</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#他人个人主页的实现"><span class="toc-number">3.</span> <span class="toc-text">他人个人主页的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#布局-1"><span class="toc-number">3.1.</span> <span class="toc-text">布局</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现的关键点与细节"><span class="toc-number">3.2.</span> <span class="toc-text">实现的关键点与细节</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#不足"><span class="toc-number">3.3.</span> <span class="toc-text">不足</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#朋友圈的设计与实现"><span class="toc-number">4.</span> <span class="toc-text">朋友圈的设计与实现</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#朋友圈的两种实现方式"><span class="toc-number">4.1.</span> <span class="toc-text">朋友圈的两种实现方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#点赞超链接的实现"><span class="toc-number">4.2.</span> <span class="toc-text">点赞超链接的实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一个优化过的点"><span class="toc-number">4.3.</span> <span class="toc-text">一个优化过的点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#可优化的点"><span class="toc-number">4.4.</span> <span class="toc-text">可优化的点</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考-amp-致谢"><span class="toc-number">5.</span> <span class="toc-text">参考&致谢</span></a></li></ol>
+    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -1575,6 +1633,8 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
      
     </body>
     <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
