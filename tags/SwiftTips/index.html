@@ -71,6 +71,8 @@
     <link rel="preload" href= /css/style.css?v=20180824 as="style" onload="this.onload=null;this.rel='stylesheet'" />
     <link rel="stylesheet" href= /css/mobile.css?v=20180824 media="(max-width: 980px)">
     
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    
     <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
 /* This file is meant as a standalone workflow for
 - testing support for link[rel=preload]
@@ -194,10 +196,8 @@
 </head>
 
     
-        <body class="home-body">
     
-    
-<header class="header index-header">
+<header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
@@ -215,34 +215,21 @@
 
 
 
-height:50vh;
-
 >
     
     <!-- 主页  -->
-    
-    
-    <!-- 文章页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/intro/about-page1.jpg)"></div>
+    <div class="site-intro-img" style="background-image: url(/)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            Zhihao's Studio.
-            <!-- 文章页  -->
-            
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
-            
-            
-                每天进步一点点
-            
-            <!-- 文章页  -->
             
         </p>
         <!-- 文章页meta -->
@@ -380,413 +367,10 @@ static和class 关键字异同点相同点：static和class都是表示“类型
         </div>
     </article>
     
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2019/02/19/wechatMoment/" >
-            
-                <span>仿微信朋友圈/抖音个人主页的设计与实现</span>
-        </a>
-        <div class="abstract-content">
-            背景因业务发展需要，在新版本的Match问答中，我们决定加入更多的社交元素，方便大家互相勾搭和交流，更多地展现自己的学习日常和个性，在原有版本的基础上计入了动态和个人主页两个模块，其中个人主页又分为第一人称视图和第三人称视图。本文是我在春节假期期间实现这两个模块的一点小心得。
-期间参考了大量开源项目的已有代码，进行了借鉴和向Swift 4.2的改写，在此表示感谢，开源项目不完整列表见文末附录。
-用户自己的个人主页视图布局个人主页视图借鉴了最右这款非常受欢迎的应用，只不过上方的布局稍有不同。其实不止是最右，抖音、微博、知乎等App都有着非常类似的个人主页。
-
-
-Match与最右的个人主页对...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/02/19</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "iOS开发">iOS开发</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/12/23/ABitOfFlutter/" >
-            
-                <span>Google Flutter Live 18笔记与观后感</span>
-        </a>
-        <div class="abstract-content">
-            背景在上一篇博客Flutter live 18之后的移动开发技术综述中，我基于自己比较肤浅的认知，对比了原生开发和跨平台开发，以及各大主流跨平台开发的优缺点，并引出了本文的主角Flutter。恰逢Flutter Live 18刚结束不久，Google中国在B站上也给出了Flutter Live ‘18 视频合集，而且是中英文双字幕的良心资源。
-本文可以理解为我看该视频合集过程中的一些笔记和一些观(流)后(水)感(账)。
-Flutter live 18发布会
-
-主持人Tim Sneath
-
-刚登台，主持人就激动了，难掩满面的笑意，足以见得他是对今天的发布会多么的有信心。
-这次发布会被分割为...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/12/23</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Flutter">Flutter</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/12/22/FlutterLive/" >
-            
-                <span>Flutter live 18之后的移动开发技术综述</span>
-        </a>
-        <div class="abstract-content">
-            移动开发技术移动开发技术泛指手机端的应用开发，平台主要有iOS和Android。移动开发技术大体目前可分为两类，一类是原生开发，一类是跨平台开发。
-两者各有优缺点，先给出大佬的观点:
-
-移动端Web开发就像用店里买的锅炒菜，稳定快捷，做家常菜足够了。而native开发就好像不但要做菜，还要亲自打一口最合适自己的锅。虽然速度不快，虽然成本很高，但是想要做出最好吃的拿手菜，用店里的锅就是做不出那个味道。 ​​​​    ———即刻iOS leader JasonYuh
-
-
-原生开发原生开发是指使用特定语言(如Kotlin与Swift)调用系统SDK开发的应用。在接触Flutter之前，我属于...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/12/22</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Flutter">Flutter</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/11/25/BigScreen/" >
-            
-                <span>两个大屏可视化案例的实现</span>
-        </a>
-        <div class="abstract-content">
-            前言近期分别使用了React和Vue完成了两个大屏可视化案例，经历了设计师和产品经理的各种“指指点点”，也算是对可视化大屏项目有了一点点小的经验，对于两个技术栈写组件也有一点小心得，趁着周末总结一下。
-
-
-大屏效果图1
-
-
-
-大屏效果图2
-
-可视化大屏无论是在科幻电影还是在真实世界里，可视化大屏都是非常常见的一种表现手法。之前在昆明公安局出差，也亲眼看到了湄公河惨案的真实指挥中心和他的大屏，屏幕的宽度大约有两层楼高。
-可视化大屏的特性可视化大屏，归根到底还是运用的可视化技术，只不过展现的屏幕比起笔记本和显示器大了很多。相比于传统的桌面级可视化运用，大屏可视化的特性有:
-
-屏幕巨大，用户通...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/11/25</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "大屏可视化">大屏可视化</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/10/31/match5/" >
-            
-                <span>Match开发笔记 伍 3.0版的新功能与上架</span>
-        </a>
-        <div class="abstract-content">
-            前言Match问答3.0版本近期在App Store和各大安卓市场上架了，此次更新，我们让应用进一步完善。主要新功能有：
-
-增加图片放缩、移动和本地保存的功能；
-增加对图文混排的支持;
-增加对问题关键词和问题难度的系统评判，并基于问题难度提升问题的奖励；
-增加对问题的重新编辑功能；
-修改赞/踩按钮点击延迟的bug；
-优化部分界面UI
-
-先放张主页预览图。
-图文混排富文本图文混排是本次升级的主要工作，也让我比较深入了学习了TextKit相关的知识。富文本在Github上可用的轮子不多，我试用了接近10个自带富文本的应用，发现基本都不可用，大部分是基于Webview的包装。
-其实富文本是历史...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/10/31</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "iOS开发">iOS开发</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/09/20/match4/" >
-            
-                <span>Match开发笔记 肆 极光推送接入指南(Swift版)</span>
-        </a>
-        <div class="abstract-content">
-            前言在接入极光推送过程中，发现官网文档比较老旧了，而且使用的是OC版本，在上架Match 2.0的过程中，需要增加推送功能。于是就花了一些精力去研究，并最终改写得到了Swift版本的代码，这里写一个总结，希望能对想使用Swift接入极光推送的朋友们提供一些启发。
-iOS推送机制和JPush的意义APNsiOS推送，最终只有一条官方渠道，那就是APNs。APNs通知是指通过向Apple APNs服务器发送通知，到达iOS设备，由iOS系统提供展现的推送。
-极光推送的意义一般开发者都是自己部署服务器，向APNs Server推送。极光推送，是在这中间增加了一步，即开发者自己部署的服务器向极光...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/09/20</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "iOS开发">iOS开发</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/09/09/prometheusPlusWechat/" >
-            
-                <span>Prometheus+微信实时报警模块的实现与Docker部署</span>
-        </a>
-        <div class="abstract-content">
-            背景对很多公司而言，保证服务可用，在服务不可用时报警到相关服务负责人提醒其及时修复，是非常重要的一件事。在我司，看服务可不可用，是分配给员工们还停留在人眼观察阶段。由行政人员安排轮流值班，每个人负责两周。
-
-
-每人两周的值班表
-
-我觉得这个事情由人来看有三个缺点：
-
-浪费了人力，值班的人不能全心全意把心思放到工作上。
-报警不够及时，值班人员不可能时刻将注意力放在这上面。
-值班人员只是将异常的服务截图发到群里，有可能不知道通知谁来处理，且真实的责任人看到这个截图又需要一定时间。
-
-这眼看着很快就要轮到我了，我比较懒，于是就找旁门左道来替我处理这件事了。
-Prometheus普罗米修斯介绍P...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/09/09</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "效率">效率</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/08/24/invisibilitycloak/" >
-            
-                <span>上架沙盒化应用,重启应用后保持文件持久访问性指南</span>
-        </a>
-        <div class="abstract-content">
-            前言Invisibility Cloak上架Mac App Store了，在此过程中，遇到了一些困难，在这里记录一下又一次与苹果审核团队撕逼的过程。
-开发这款软件的初衷是将xxx.mp4/xxx.avi/xxx.mkv在白天藏起来，免得被别人发现。 在Apple store上发现了一款类似的文件隐藏软件Secret Folder，售价128元，而且卖的不错。我觉得这个应用蛮有用(坏笑)，而且实现起来难度不是特别大，于是就做了一个相同功能的软件，并将它上架了。
-功能上，我额外支持了drag&amp;drop添加文件的操作，比Secret Folder的体验更丝滑一些。定价上，仅为Secre...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/08/24</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "macOS开发">macOS开发</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/08/02/Match3/" >
-            
-                <span>Match for iPhone开发笔记 叁 测试与上架篇</span>
-        </a>
-        <div class="abstract-content">
-            前言“Match问答”App今天终于通过了苹果的审核，在App Store上架了，苹果商店下载地址，不得不说，苹果的审核还是很严格的。因此今天想写一下从提交审核到被拒(若干回合)再到最终上架这段时间里的故事，其他技术方面的难点总结放到后面写。
-上架前的必经之路————测试在上架之前有一个关键的步骤其实很容易被忽略，特别是个人开发者，没法像公司那样聘请专业的测试团队进行完备的测试。大体上讲，iOS的测试可以分为3类:
-
-单元测试、UI测试、性能测试、集成测试，通常在模拟器上进行
-真机测试
-Testflight内测
-
-模拟器测试第一类测试通常可以发现App里所有可能的逻辑错误、排版问题和用户...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/08/02</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "iOS开发">iOS开发</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
     <!-- paginator  -->
-    
-    <nav class="page-nav">
-        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">NEXT &#62;</a>
-    </nav>
     
 </main>
             <!-- profile -->
-            
-            <div class="profile">
-    <img class="profile-avatar" src= /avatar/Misaka.jpg >
-    <div class="profile-name">Zhihao Zhang</div>
-    
-    <div class="profile-signature">
-        Happy Hacking
-    </div>
-    
-    
-    <div class="profile-social">
-        
-    
-        
-            
-                <a href="mailto:zhihaozhang@me.com" class="iconfont-archer email" title=email ></a>
-            
-        
-    
-        
-            
-                <a href="https://github.com/zhihaozhang" class="iconfont-archer github" target="_blank" title=github></a>
-            
-        
-    
-        
-            
-                <a href="http://weibo.com/2854428840/profile?rightmod=1&wvr=6&mod=personinfo" class="iconfont-archer weibo" target="_blank" title=weibo></a>
-            
-        
-    
-        
-            
-                <a href="https://www.zhihu.com/people/zhihao-zhang-95/activities" class="iconfont-archer zhihu" target="_blank" title=zhihu></a>
-            
-        
-    
-        
-            
-                <a href="https://www.instagram.com/izhihao_zhang/" class="iconfont-archer instagram" target="_blank" title=instagram></a>
-            
-        
-    
-        
-            
-                <a href="/atom.xml" class="iconfont-archer rss" target="_blank" title=rss></a>
-            
-        
-    
-
-    </div>
-    
-    
-        <div class="friends">
-            <div>FRIENDS</div>
-            
-                
-                    <span>
-                        <a href= https://io-meter.com target="_black">Chase.Zhang</a>
-                    </span>
-                
-            
-        </div>
-    
-    
-        <div class="about-me">
-            <a href = "/about" >ABOUT ME</a>
-            
-        </div>
-
-        <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
-
-    
-</div>
             
         </div>
         <footer class="footer footer-unloaded">
