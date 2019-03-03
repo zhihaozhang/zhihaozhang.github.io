@@ -267,7 +267,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count">2,570</span> / Reading time: <span class="post-count">10 min</span></span>
+                        <span>Word count: <span class="post-count">3,152</span> / Reading time: <span class="post-count">12 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -441,12 +441,28 @@ height:50vh;
 <li>设置delegate。作者举了一个异步网络请求的例子，这种情况下无法保证在拿到返回时作为delegate的对象一定还存活，所以需要用<strong>weak</strong>关键字。</li>
 <li>在self属性存储为闭包时，其中拥有对self的引用。闭包的例子非常经典，因为闭包中对任何其他元素的引用都是会被闭包自动持有的。如果我们在闭包中写了self，其实闭包内也持有了当前对象，如果当前实例直接或间接的有引用，就形成了self-&gt;闭包-&gt;self的循环引用。这种情况下使用哪个关键字的策略同上。</li>
 </ol>
+<h1 id="delegate"><a href="#delegate" class="headerlink" title="delegate"></a>delegate</h1><p>协议-委托(protocol-delegate)模式贯穿于整个Cocoa框架中，为代码之间的关系清理和解耦合做出了贡献。</p>
+<p>上面已经提到了，在ARC中，对于一般的delegate，我们会在声明中将其指定为weak，这样实际对象被释放时，会被重置为nil。一种常见的错误是:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">MyClassDelegate</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">method</span><span class="params">()</span></span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass</span> </span>&#123;</div><div class="line">    <span class="keyword">weak</span> <span class="keyword">var</span> delegate: <span class="type">MyClassDelegate</span>?</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ViewController</span>: <span class="title">UIViewController</span>, <span class="title">MyClassDelegate</span> </span>&#123;</div><div class="line">    <span class="comment">// ...</span></div><div class="line">    <span class="keyword">var</span> someInstance: <span class="type">MyClass</span>!</div><div class="line"></div><div class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">viewDidLoad</span><span class="params">()</span></span> &#123;</div><div class="line">	    <span class="keyword">super</span>.viewDidLoad()</div><div class="line"></div><div class="line">        someInstance = <span class="type">MyClass</span>()</div><div class="line">        someInstance.delegate = <span class="keyword">self</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">method</span><span class="params">()</span></span> &#123;</div><div class="line">        <span class="built_in">print</span>(<span class="string">"Do something"</span>)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>原因是Swift的Protocol不仅可以被class所遵守，也可以被struct和enum遵守，本身就不通过<strong>引用计数(ARC)</strong>来管理内存，所以也不可能用weak这样的ARC概念进行修饰。</p>
+</blockquote>
+<p>在Swift中使用weak delegate，有两种解决方式，主要思路都是将protocol限制在class内。</p>
+<ol>
+<li>在MyClassDelegate后面增加:class，使得只允许class遵守它；</li>
+<li>在protocol前加上@objc,OC中只有类能实现protocol。</li>
+</ol>
 <h1 id="String和NSString"><a href="#String和NSString" class="headerlink" title="String和NSString"></a>String和NSString</h1><p>首先他们是可以无缝转换的，作者推荐尽可能使用String，原因有三：</p>
 <ol>
 <li>现在Cocoa所有的API都接受和返回String类型</li>
 <li>String是struct，NSString是Object，String更符合字符串<strong>“不变”</strong>这一特性，在多线程编程时非常重要。另外，在不触及NSString特有操作和动态特性时，使用String的性能也更好。</li>
 <li>String实现了Collection协议，而NSString没有，所以有些Swift语法特性只有String可以用。比如for…in枚举。String和Range配合没有NSString和NSRange配合方便。</li>
 </ol>
+<h1 id="GCD和延时调用、取消的封装"><a href="#GCD和延时调用、取消的封装" class="headerlink" title="GCD和延时调用、取消的封装"></a>GCD和延时调用、取消的封装</h1><p>GCD是一种非常方便的使用多线程的方式，在<em>“复杂必死”</em>的多线程编程中，保持简单就是避免错误的金科玉律。</p>
+<p>作者给出的延时调用策略有两种，第一种不太推荐，是创建一个<strong>selector</strong>，因为它并不安全(需要通过字符串创建，改动代码比较危险)。第二种是使用<strong>asyncAfter</strong>。</p>
+<p>另外作者将其进行了<strong>封装</strong>，并提供了取消的功能，调用起来非常方便。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typealias</span> <span class="type">Task</span> = (<span class="number">_</span> cancel : <span class="type">Bool</span>) -&gt; <span class="type">Void</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">delay</span><span class="params">(<span class="number">_</span> time: TimeInterval, task: @escaping <span class="params">()</span></span></span>-&gt;()) -&gt;  <span class="type">Task</span>? &#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">dispatch_later</span><span class="params">(block: @escaping <span class="params">()</span></span></span>-&gt;()) &#123;</div><div class="line">        <span class="keyword">let</span> t = <span class="type">DispatchTime</span>.now() + time</div><div class="line">        <span class="type">DispatchQueue</span>.main.asyncAfter(deadline: t, execute: block)</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">    <span class="keyword">var</span> closure: (()-&gt;<span class="type">Void</span>)? = task</div><div class="line">    <span class="keyword">var</span> result: <span class="type">Task</span>?</div><div class="line"></div><div class="line">    <span class="keyword">let</span> delayedClosure: <span class="type">Task</span> = &#123;</div><div class="line">        cancel <span class="keyword">in</span></div><div class="line">        <span class="keyword">if</span> <span class="keyword">let</span> internalClosure = closure &#123;</div><div class="line">            <span class="keyword">if</span> (cancel == <span class="literal">false</span>) &#123;</div><div class="line">                <span class="type">DispatchQueue</span>.main.async(execute: internalClosure)</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        closure = <span class="literal">nil</span></div><div class="line">        result = <span class="literal">nil</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    result = delayedClosure</div><div class="line"></div><div class="line">    dispatch_later &#123;</div><div class="line">        <span class="keyword">if</span> <span class="keyword">let</span> delayedClosure = result &#123;</div><div class="line">            delayedClosure(<span class="literal">false</span>)</div><div class="line">       &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> result;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">cancel</span><span class="params">(<span class="number">_</span> task: Task?)</span></span> &#123;</div><div class="line">    task?(<span class="literal">true</span>)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 使用方法</span></div><div class="line"><span class="keyword">let</span> task = delay(<span class="number">2</span>) &#123;<span class="built_in">print</span>(<span class="string">"2秒后输出"</span>)&#125;</div><div class="line"></div><div class="line">cancel(task)</div></pre></td></tr></table></figure></p>
+<h1 id="Lock的封装"><a href="#Lock的封装" class="headerlink" title="Lock的封装"></a>Lock的封装</h1><p>OC中的@synchronized关键字在Swift中已经不存在了，因此不得不帮助编译器实现这个关键字。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">synchronized</span><span class="params">(<span class="number">_</span> lock: AnyObject, closure: <span class="params">()</span></span></span> -&gt; ()) &#123;</div><div class="line">    objc_sync_enter(lock)</div><div class="line">    closure()</div><div class="line">    objc_sync_exit(lock)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">myMethodLocked</span><span class="params">(anObj: AnyObject!)</span></span> &#123;</div><div class="line">    synchronized(anObj) &#123;</div><div class="line">        <span class="comment">// 在括号内持有 anObj 锁</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 一个实际的线程安全的 setter 例子</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Obj</span> </span>&#123;</div><div class="line">    <span class="keyword">var</span> _str = <span class="string">"123"</span></div><div class="line">    <span class="keyword">var</span> str: <span class="type">String</span> &#123;</div><div class="line">        <span class="keyword">get</span> &#123;</div><div class="line">            <span class="keyword">return</span> _str</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">set</span> &#123;</div><div class="line">            synchronized(<span class="keyword">self</span>) &#123;</div><div class="line">                _str = newValue</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    <span class="comment">// 下略</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>结合swift尾随闭包的语言特性，使用起来就跟OC很像了。</p>
 
 
             <! -- 添加捐赠图标 -->
@@ -602,7 +618,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#写在前面"><span class="toc-number">1.</span> <span class="toc-text">写在前面</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#将protocol的方法声明为mutating"><span class="toc-number">2.</span> <span class="toc-text">将protocol的方法声明为mutating</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#static和class-关键字"><span class="toc-number">3.</span> <span class="toc-text">static和class 关键字</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#异同点"><span class="toc-number">3.1.</span> <span class="toc-text">异同点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结论"><span class="toc-number">3.2.</span> <span class="toc-text">结论</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#多类型和容器使用Any-AnyObject的技巧"><span class="toc-number">4.</span> <span class="toc-text">多类型和容器使用Any/AnyObject的技巧</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#改善方法一"><span class="toc-number">4.1.</span> <span class="toc-text">改善方法一</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#改善方法二"><span class="toc-number">4.2.</span> <span class="toc-text">改善方法二</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#AnyClass"><span class="toc-number">5.</span> <span class="toc-text">AnyClass</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Self"><span class="toc-number">6.</span> <span class="toc-text">Self</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#动态类型和多方法-amp-protocol-extension"><span class="toc-number">7.</span> <span class="toc-text">动态类型和多方法 & protocol extension</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#final-关键字"><span class="toc-number">8.</span> <span class="toc-text">final 关键字</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#lazy-关键字"><span class="toc-number">9.</span> <span class="toc-text">lazy 关键字</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#weak和unowned"><span class="toc-number">10.</span> <span class="toc-text">weak和unowned</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#String和NSString"><span class="toc-number">11.</span> <span class="toc-text">String和NSString</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#写在前面"><span class="toc-number">1.</span> <span class="toc-text">写在前面</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#将protocol的方法声明为mutating"><span class="toc-number">2.</span> <span class="toc-text">将protocol的方法声明为mutating</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#static和class-关键字"><span class="toc-number">3.</span> <span class="toc-text">static和class 关键字</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#异同点"><span class="toc-number">3.1.</span> <span class="toc-text">异同点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结论"><span class="toc-number">3.2.</span> <span class="toc-text">结论</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#多类型和容器使用Any-AnyObject的技巧"><span class="toc-number">4.</span> <span class="toc-text">多类型和容器使用Any/AnyObject的技巧</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#改善方法一"><span class="toc-number">4.1.</span> <span class="toc-text">改善方法一</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#改善方法二"><span class="toc-number">4.2.</span> <span class="toc-text">改善方法二</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#AnyClass"><span class="toc-number">5.</span> <span class="toc-text">AnyClass</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Self"><span class="toc-number">6.</span> <span class="toc-text">Self</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#动态类型和多方法-amp-protocol-extension"><span class="toc-number">7.</span> <span class="toc-text">动态类型和多方法 & protocol extension</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#final-关键字"><span class="toc-number">8.</span> <span class="toc-text">final 关键字</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#lazy-关键字"><span class="toc-number">9.</span> <span class="toc-text">lazy 关键字</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#weak和unowned"><span class="toc-number">10.</span> <span class="toc-text">weak和unowned</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#delegate"><span class="toc-number">11.</span> <span class="toc-text">delegate</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#String和NSString"><span class="toc-number">12.</span> <span class="toc-text">String和NSString</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#GCD和延时调用、取消的封装"><span class="toc-number">13.</span> <span class="toc-text">GCD和延时调用、取消的封装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Lock的封装"><span class="toc-number">14.</span> <span class="toc-text">Lock的封装</span></a></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
@@ -615,6 +631,18 @@ top:50vh;
     <div class="sidebar-content sidebar-content-show-archive">
           <div class="sidebar-panel-archives">
     <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -1374,29 +1402,6 @@ top:50vh;
         </li>
     
     
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> Invalid date </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2018/11/25/BigScreen/" >两个大屏可视化案例的实现</a>
-        </li>
-    
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> 2017 </div>
-    <ul class="year-list">
-    
-    
         <li class="archive-post-item">
             <span class="archive-post-date">10/13</span><a class="archive-post-title" href= "/2017/10/13/DicAndSetInSwift4/" >Swift4字典和集合的新特性</a>
         </li>
@@ -1432,55 +1437,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
-        </li>
-    
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> Invalid date </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2018/10/31/match5/" >Match开发笔记 伍 3.0版的新功能与上架</a>
-        </li>
-    
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> 2014 </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/Build reuseable visualization using d3.js and AngularJS/" >Build reusable visualization using d3.js and AngularJS</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/polybrush in d3/" >polybrush in d3</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular/" >D3 on Angular</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
             <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/数据可视化之散点图/" >数据可视化之散点图</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/浅谈d3.js中的异步文件读取的处理/" >浅谈d3.js中强制异步文件读取同步的四种方法</a>
         </li>
     
     
@@ -1508,7 +1470,40 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/浅谈d3.js中的异步文件读取的处理/" >浅谈d3.js中强制异步文件读取同步的四种方法</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/polybrush in d3/" >polybrush in d3</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2018/10/31/match5/" >Match开发笔记 伍 3.0版的新功能与上架</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2014 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
         </li>
     
     
@@ -1517,8 +1512,41 @@ top:50vh;
         </li>
     
     
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2018/11/25/BigScreen/" >两个大屏可视化案例的实现</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2014 </div>
+    <ul class="year-list">
+    
+    
         <li class="archive-post-item">
             <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular/" >D3 on Angular</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/Build reuseable visualization using d3.js and AngularJS/" >Build reusable visualization using d3.js and AngularJS</a>
         </li>
     
     
@@ -1531,15 +1559,15 @@ top:50vh;
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
-        <span class="sidebar-tag-name" data-tags="大屏可视化"><span class="iconfont-archer">&#xe606;</span>大屏可视化</span>
-    
         <span class="sidebar-tag-name" data-tags="Flutter"><span class="iconfont-archer">&#xe606;</span>Flutter</span>
     
         <span class="sidebar-tag-name" data-tags="d3"><span class="iconfont-archer">&#xe606;</span>d3</span>
     
-        <span class="sidebar-tag-name" data-tags="macOS开发"><span class="iconfont-archer">&#xe606;</span>macOS开发</span>
+        <span class="sidebar-tag-name" data-tags="大屏可视化"><span class="iconfont-archer">&#xe606;</span>大屏可视化</span>
     
         <span class="sidebar-tag-name" data-tags="swift"><span class="iconfont-archer">&#xe606;</span>swift</span>
+    
+        <span class="sidebar-tag-name" data-tags="macOS开发"><span class="iconfont-archer">&#xe606;</span>macOS开发</span>
     
         <span class="sidebar-tag-name" data-tags="随感"><span class="iconfont-archer">&#xe606;</span>随感</span>
     
@@ -1547,9 +1575,9 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="SVG"><span class="iconfont-archer">&#xe606;</span>SVG</span>
     
-        <span class="sidebar-tag-name" data-tags="SwiftTips"><span class="iconfont-archer">&#xe606;</span>SwiftTips</span>
-    
         <span class="sidebar-tag-name" data-tags="效率"><span class="iconfont-archer">&#xe606;</span>效率</span>
+    
+        <span class="sidebar-tag-name" data-tags="SwiftTips"><span class="iconfont-archer">&#xe606;</span>SwiftTips</span>
     
         <span class="sidebar-tag-name" data-tags="Json"><span class="iconfont-archer">&#xe606;</span>Json</span>
     
@@ -1586,9 +1614,9 @@ jsonContent:
         <div class="sidebar-panel-categories">
     <div class="sidebar-categories-name">
     
-        <span class="sidebar-category-name" data-categories="visualization"><span class="iconfont-archer">&#xe60a;</span>visualization</span>
-    
         <span class="sidebar-category-name" data-categories="Flutter"><span class="iconfont-archer">&#xe60a;</span>Flutter</span>
+    
+        <span class="sidebar-category-name" data-categories="visualization"><span class="iconfont-archer">&#xe60a;</span>visualization</span>
     
         <span class="sidebar-category-name" data-categories="苹果开发"><span class="iconfont-archer">&#xe60a;</span>苹果开发</span>
     
