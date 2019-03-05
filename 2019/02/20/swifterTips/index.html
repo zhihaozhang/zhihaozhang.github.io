@@ -398,24 +398,24 @@ height:50vh;
     <article class="article-entry">
         <h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1><p>本文是对<a href="https://onevcat.com" target="_blank" rel="external">喵神</a>编写的<a href="https://onev.cat/publication/swifter/" target="_blank" rel="external">《Swift必备Tips(第四版)》</a>的读书笔记，内容是我不太熟悉或觉得有用的Swift使用技巧,需要注意的是tips按照我的理解进行了一些<strong>合并和拆分</strong>。</p>
 <p>不断更新中~</p>
-<h1 id="将protocol的方法声明为mutating"><a href="#将protocol的方法声明为mutating" class="headerlink" title="将protocol的方法声明为mutating"></a>将protocol的方法声明为mutating</h1><p><strong>mutating</strong>关键字是用来在方法中修改struct或enum变量的，若不声明会报错。</p>
+<h1 id="将protocol的方法声明为mutating"><a href="#将protocol的方法声明为mutating" class="headerlink" title="将protocol的方法声明为mutating"></a>将protocol的方法声明为mutating</h1><p><code>mutating</code>关键字是用来在方法中修改struct或enum变量的，若不声明会报错。</p>
 <h1 id="多元组Tuple"><a href="#多元组Tuple" class="headerlink" title="多元组Tuple"></a>多元组Tuple</h1><p>一个js中也有类似功能的东西，不适用额外空间完成交换的方式也和js中类似。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">swapMe2</span>&lt;T&gt;<span class="params">( a: <span class="keyword">inout</span> T, b: <span class="keyword">inout</span> T)</span></span> &#123;</div><div class="line">    (a,b) = (b,a)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <h1 id="autoclosure和？？、-escaping关键字"><a href="#autoclosure和？？、-escaping关键字" class="headerlink" title="@autoclosure和？？、@escaping关键字"></a>@autoclosure和？？、@escaping关键字</h1><h2 id="autoclosure"><a href="#autoclosure" class="headerlink" title="@autoclosure"></a>@autoclosure</h2><p>@autoclosure是把一句表达式自动封装成一个闭包，在语法上看起来会很漂亮。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">logIfTrue</span><span class="params">(<span class="number">_</span> predicate: @autoclosure <span class="params">()</span></span></span> -&gt; <span class="type">Bool</span>) &#123;</div><div class="line">    <span class="keyword">if</span> predicate() &#123;</div><div class="line">        <span class="built_in">print</span>(<span class="string">"True"</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">logIfTrue(<span class="number">2</span> &gt; <span class="number">1</span>) <span class="comment">// 2 &gt; 1会被自动封装为一个闭包</span></div></pre></td></tr></table></figure></p>
 <h2 id="？？"><a href="#？？" class="headerlink" title="？？"></a>？？</h2><p>??关键字可以快速地对nil进行条件判断，左侧值是不为nil的Optional值时返回其value，等于nil的时候返回右侧值。</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> ??&lt;T&gt;<span class="params">(<span class="keyword">optional</span>: T?, defaultValue: @autoclosure <span class="params">()</span></span></span> -&gt; <span class="type">T</span>?) -&gt; <span class="type">T</span>?</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> ??&lt;T&gt;<span class="params">(<span class="keyword">optional</span>: T?, defaultValue: @autoclosure <span class="params">()</span></span></span> -&gt; <span class="type">T</span>) -&gt; <span class="type">T</span></div></pre></td></tr></table></figure>
 <p>??的两种实现都用到了@autoclosure关键字，主要是类似于短路表达式，左边不为nil时右边才有计算的需要，否则会造成浪费。从这里衍生出一条面试题，让你设计 || 或 &amp;&amp; 的实现，也是右边设计成一个闭包，右侧有计算必要的时候再进行计算。</p>
 <p>最后要注意，@autoclosure不支持带输入参数的写法，只有形如()-&gt;T的参数才能使用这个特性进行简化。</p>
-<h2 id="escaping"><a href="#escaping" class="headerlink" title="@escaping"></a>@escaping</h2><p>@escaping是用来表明某个闭包是可以“<strong>逃逸</strong>”的。</p>
+<h2 id="escaping"><a href="#escaping" class="headerlink" title="@escaping"></a>@escaping</h2><p>@escaping是用来表明某个闭包是可以“<code>逃逸</code>”的。</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">doWork</span><span class="params">(block: <span class="params">()</span></span></span>-&gt;()) &#123;</div><div class="line">        block()</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">doWorkAsync</span><span class="params">(block: @escaping <span class="params">()</span></span></span>-&gt;()) &#123;</div><div class="line">    <span class="type">DispatchQueue</span>.main.async &#123;</div><div class="line">        block()</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">S</span> </span>&#123;</div><div class="line">    <span class="keyword">var</span> foo = <span class="string">"foo"</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">method1</span><span class="params">()</span></span> &#123;</div><div class="line">        doWork &#123;</div><div class="line">            <span class="built_in">print</span>(foo)</div><div class="line">        &#125;</div><div class="line">        foo = <span class="string">"bar"</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">method2</span><span class="params">()</span></span> &#123;</div><div class="line">        doWorkAsync &#123;</div><div class="line">            <span class="built_in">print</span>(<span class="keyword">self</span>.foo)</div><div class="line">        &#125;</div><div class="line">        foo = <span class="string">"bar"</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="type">S</span>().method1() <span class="comment">// foo</span></div><div class="line"><span class="type">S</span>().method2() <span class="comment">// bar</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">method3</span><span class="params">()</span></span> &#123;</div><div class="line">    doWorkAsync &#123;</div><div class="line">        [<span class="keyword">weak</span> <span class="keyword">self</span>] <span class="keyword">in</span></div><div class="line">        <span class="built_in">print</span>(<span class="keyword">self</span>?.foo ?? <span class="string">"nil"</span>)</div><div class="line">    &#125;</div><div class="line">    foo = <span class="string">"bar"</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="type">S</span>().method3() <span class="comment">// nil</span></div></pre></td></tr></table></figure>
 <p>doWork不会”<strong>逃逸</strong>“，因此闭包的作用域不会超过函数本身，所以不需要担心闭包内持有self。而doWorkAsync则不同，由于需要确保闭包内成员有效性，如果在闭包内引用了self及其成员的话，需要强制明确的写出self。method3中，由于self已经被是否，因此输出nil。</p>
 <h1 id="static和class-关键字"><a href="#static和class-关键字" class="headerlink" title="static和class 关键字"></a>static和class 关键字</h1><h2 id="异同点"><a href="#异同点" class="headerlink" title="异同点"></a>异同点</h2><p><strong>相同点</strong>：static和class都是表示“类型范围作用域”这一概念的。<br><strong>不同点</strong>：class是专门用在class类型的上下文中的，可以用来<em>修饰类方法和类属性。</em><br>class中现在是不能出现在class的存储属性的。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass</span></span>&#123;</div><div class="line">	<span class="class"><span class="keyword">class</span> <span class="title">var</span> <span class="title">bar</span>: <span class="title">Bar</span>?</span></div><div class="line"><span class="class">&#125;</span></div></pre></td></tr></table></figure></p>
 <p>会得到一个编译错误，class variables not yet supported，改成static就可以通过编译了。</p>
 <h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>任何时候使用static都是没问题的。</p>
-<h1 id="多类型和容器使用Any-AnyObject的技巧"><a href="#多类型和容器使用Any-AnyObject的技巧" class="headerlink" title="多类型和容器使用Any/AnyObject的技巧"></a>多类型和容器使用Any/AnyObject的技巧</h1><p>Swift中常用的原生容器类型有<strong>Array/Dictionay/Set</strong>，他们都是范型的，也就是说放在一个集合中的类型要一致。</p>
+<h1 id="多类型和容器使用Any-AnyObject的技巧"><a href="#多类型和容器使用Any-AnyObject的技巧" class="headerlink" title="多类型和容器使用Any/AnyObject的技巧"></a>多类型和容器使用Any/AnyObject的技巧</h1><p>Swift中常用的原生容器类型有<code>Array/Dictionay/Set</code>，他们都是范型的，也就是说放在一个集合中的类型要一致。</p>
 <p>但是Any可以让我们在容器中放各种类型的元素，但也不可避免的带来了<strong>部分信息损失</strong>，从容器中取出后还需要进行一次类型转换。</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Any 类型可以隐式转换</span></div><div class="line"><span class="keyword">let</span> mixed: [<span class="type">Any</span>] = [<span class="number">1</span>, <span class="string">"two"</span>, <span class="number">3</span>]</div><div class="line"></div><div class="line"><span class="comment">// 转换为 [NSObject]</span></div><div class="line"><span class="keyword">let</span> objectArray = [<span class="number">1</span> <span class="keyword">as</span> <span class="type">NSObject</span>, <span class="string">"two"</span> <span class="keyword">as</span> <span class="type">NSObject</span>, <span class="number">3</span> <span class="keyword">as</span> <span class="type">NSObject</span>]</div><div class="line"></div><div class="line"><span class="comment">//建议的使用方式</span></div><div class="line"><span class="keyword">let</span> mixed: [<span class="type">CustomStringConvertible</span>] = [<span class="number">1</span>, <span class="string">"two"</span>, <span class="number">3</span>]</div><div class="line"></div><div class="line"><span class="keyword">for</span> obj <span class="keyword">in</span> mixed &#123;</div><div class="line">    <span class="built_in">print</span>(obj.description)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h2 id="改善方法一"><a href="#改善方法一" class="headerlink" title="改善方法一"></a>改善方法一</h2><p>作者认为，把这些不同类型的元素放到一个容器中，肯定是由于他们有<strong>共性</strong>，也就是这些元素服从某个共同的协议，这样虽有一定损失，但相对于Any或AnyObject还是改善了不少。</p>
-<h2 id="改善方法二"><a href="#改善方法二" class="headerlink" title="改善方法二"></a>改善方法二</h2><p>另一种做法是用enum可以带有值的特点，将类型信息<strong>封装到enum中</strong>。</p>
+<h2 id="改善方法二"><a href="#改善方法二" class="headerlink" title="改善方法二"></a>改善方法二</h2><p>另一种做法是用enum可以带有值的特点，将类型信息<code>封装到enum中</code>。</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">enum</span> <span class="title">IntOrString</span> </span>&#123;</div><div class="line">    <span class="keyword">case</span> <span class="type">IntValue</span>(<span class="type">Int</span>)</div><div class="line">    <span class="keyword">case</span> <span class="type">StringValue</span>(<span class="type">String</span>)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">let</span> mixed = [<span class="type">IntOrString</span>.<span class="type">IntValue</span>(<span class="number">1</span>),</div><div class="line">             <span class="type">IntOrString</span>.<span class="type">StringValue</span>(<span class="string">"two"</span>),</div><div class="line">             <span class="type">IntOrString</span>.<span class="type">IntValue</span>(<span class="number">3</span>)]</div><div class="line"></div><div class="line"><span class="keyword">for</span> value <span class="keyword">in</span> mixed &#123;</div><div class="line">    <span class="keyword">switch</span> value &#123;</div><div class="line">    <span class="keyword">case</span> <span class="keyword">let</span> .<span class="type">IntValue</span>(i):</div><div class="line">        <span class="built_in">print</span>(i * <span class="number">2</span>)</div><div class="line">    <span class="keyword">case</span> <span class="keyword">let</span> .<span class="type">StringValue</span>(s):</div><div class="line">        <span class="built_in">print</span>(s.capitalized)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h1 id="AnyClass"><a href="#AnyClass" class="headerlink" title="AnyClass"></a>AnyClass</h1><p>除了上面提到的Any和AnyObject，还有一个表示<strong>任意</strong>这个概念的东西<strong>AnyClass</strong>。在Swift中的定义方式:</p>
 <blockquote>
@@ -499,7 +499,7 @@ height:50vh;
         <div class="license-wrapper">
             <p>原文作者: <a href="http://zhihaozhang.github.io">Chih-Hao</a>
             <p>原文链接: <a href="http://zhihaozhang.github.io/2019/02/20/swifterTips/">http://zhihaozhang.github.io/2019/02/20/swifterTips/</a>
-            <p>发表日期: <a href="http://zhihaozhang.github.io/2019/02/20/swifterTips/">February 20th 2019, 6:51:15 pm</a>
+            <p>发表日期: <a href="http://zhihaozhang.github.io/2019/02/20/swifterTips/">二月 20日 2019, 6:51:15 晚上</a>
             <p>版权声明: 本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -642,40 +642,6 @@ top:50vh;
     <div class="sidebar-content sidebar-content-show-archive">
           <div class="sidebar-panel-archives">
     <!-- 在ejs中将archive按照时间排序 -->
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     
@@ -1431,8 +1397,31 @@ top:50vh;
         </li>
     
     
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2014 </div>
+    <ul class="year-list">
+    
+    
         <li class="archive-post-item">
-            <span class="archive-post-date">09/23</span><a class="archive-post-title" href= "/2017/09/23/让iMac与MacBook高效协同工作——mouseSync开发心得/" >让iMac与MacBook高效协同工作——mouseSync开发心得</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/Build reuseable visualization using d3.js and AngularJS/" >Build reusable visualization using d3.js and AngularJS</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2018/11/25/BigScreen/" >两个大屏可视化案例的实现</a>
         </li>
     
     
@@ -1446,7 +1435,7 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
         </li>
     
     
@@ -1469,6 +1458,20 @@ top:50vh;
     
         </ul>
     
+    <div class="archive-year"> 2017 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/23</span><a class="archive-post-title" href= "/2017/09/23/让iMac与MacBook高效协同工作——mouseSync开发心得/" >让iMac与MacBook高效协同工作——mouseSync开发心得</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
     <div class="archive-year"> 2014 </div>
     <ul class="year-list">
     
@@ -1479,7 +1482,17 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular/" >D3 on Angular</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/浅谈d3.js中的异步文件读取的处理/" >浅谈d3.js中强制异步文件读取同步的四种方法</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/数据可视化之散点图/" >数据可视化之散点图</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
         </li>
     
     
@@ -1507,27 +1520,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/浅谈d3.js中的异步文件读取的处理/" >浅谈d3.js中强制异步文件读取同步的四种方法</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular/" >D3 on Angular</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/数据可视化之散点图/" >数据可视化之散点图</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/Build reuseable visualization using d3.js and AngularJS/" >Build reusable visualization using d3.js and AngularJS</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
         </li>
     
     
@@ -1540,32 +1538,18 @@ top:50vh;
             <span class="archive-post-date">04/24</span><a class="archive-post-title" href= "/2014/04/24/用Java生成Json文件/" >用Java生成Json文件</a>
         </li>
     
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> Invalid date </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2018/11/25/BigScreen/" >两个大屏可视化案例的实现</a>
-        </li>
-    
     </div>
   </div>
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
-        <span class="sidebar-tag-name" data-tags="Flutter"><span class="iconfont-archer">&#xe606;</span>Flutter</span>
-    
         <span class="sidebar-tag-name" data-tags="大屏可视化"><span class="iconfont-archer">&#xe606;</span>大屏可视化</span>
     
-        <span class="sidebar-tag-name" data-tags="swift"><span class="iconfont-archer">&#xe606;</span>swift</span>
+        <span class="sidebar-tag-name" data-tags="Flutter"><span class="iconfont-archer">&#xe606;</span>Flutter</span>
     
         <span class="sidebar-tag-name" data-tags="d3"><span class="iconfont-archer">&#xe606;</span>d3</span>
+    
+        <span class="sidebar-tag-name" data-tags="swift"><span class="iconfont-archer">&#xe606;</span>swift</span>
     
         <span class="sidebar-tag-name" data-tags="macOS开发"><span class="iconfont-archer">&#xe606;</span>macOS开发</span>
     
@@ -1614,9 +1598,9 @@ jsonContent:
         <div class="sidebar-panel-categories">
     <div class="sidebar-categories-name">
     
-        <span class="sidebar-category-name" data-categories="Flutter"><span class="iconfont-archer">&#xe60a;</span>Flutter</span>
-    
         <span class="sidebar-category-name" data-categories="visualization"><span class="iconfont-archer">&#xe60a;</span>visualization</span>
+    
+        <span class="sidebar-category-name" data-categories="Flutter"><span class="iconfont-archer">&#xe60a;</span>Flutter</span>
     
         <span class="sidebar-category-name" data-categories="苹果开发"><span class="iconfont-archer">&#xe60a;</span>苹果开发</span>
     
