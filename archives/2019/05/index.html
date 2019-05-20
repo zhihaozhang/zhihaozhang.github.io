@@ -15,7 +15,7 @@
     <meta name="description" content="">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>《重学前端》学习笔记 · Zhihao&#39;s Studio</title>
+    <title>Zhihao&#39;s Studio</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -196,23 +196,12 @@
 </head>
 
     
-        <body class="post-body">
-    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
-    
-    <div class="banner">
-            <div class="blog-title">
-                <a href="/" >Zhihao&#39;s Studio.</a>
-            </div>
-            <div class="post-title">
-                <a href="#" class="post-name">《重学前端》学习笔记</a>
-            </div>
-    </div>
     
     <a class="home-link" href=/>Zhihao's Studio.</a>
 </header>
@@ -226,74 +215,24 @@
 
 
 
-height:50vh;
-
 >
     
     <!-- 主页  -->
-    
-    
-    <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-img" style="background-image: url(/)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
-            
-            《重学前端》学习笔记
-            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
-            
-            <!-- 404 -->
-            
         </p>
         <!-- 文章页meta -->
-        
-            <div class="post-intros">
-                <!-- 文章页标签  -->
-                
-                    <div class= post-intro-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "前端学习笔记">前端学习笔记</a>
-    
-</div>
-                
-                
-                    <div class="post-intro-read">
-                        <span>Word count: <span class="post-count">756</span> / Reading time: <span class="post-count">3 min</span></span>
-                    </div>
-                
-                <div class="post-intro-meta">
-                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                    <span class="post-intro-time">2019/03/07</span>
-                    
-                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
-                        <span class="iconfont-archer">&#xe602;</span>
-                        <span id="busuanzi_value_page_pv"></span>
-                    </span>
-                    
-                    <span class="shareWrapper">
-                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
-                        <span class="shareText">Share</span>
-                        <ul class="shareList">
-                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
-                                <div class="share-qrcode"></div>
-                            </li>
-                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
-                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
-                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
-                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
-                        </ul>
-                    </span>
-                </div>
-            </div>
         
     </div>
 </div>
@@ -394,124 +333,46 @@ height:50vh;
 </script>        
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
-            <main class="main post-page">
-    <article class="article-entry">
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>工作一年多，做了不少数据可视化相关的工作，也用过<em>React、Vue、Angular</em>之类的框架，所以也算是半个前端工程师吧。一次偶然的机会，在极客时间看到了<strong>winter</strong>老师的课程<code>《重学前端》</code>，就预购进行了学习，本文可看做是该课程的一个学习笔记，希望能帮自己形成一定的知识体系，<strong>沉淀沉淀</strong>。</p>
-<h1 id="01-明确前端学习路线与方法"><a href="#01-明确前端学习路线与方法" class="headerlink" title="01 明确前端学习路线与方法"></a>01 明确前端学习路线与方法</h1><p>作者给出了两个学习前端的建议。第一个方法是：<code>建立知识架构</code>，在这个架构上不断进行优化。他认为架构可以理解为只是的<strong>目录</strong>或<strong>索引</strong>，能帮助我们将零散的知识<strong>组织</strong>起来，帮助我们发现知识上的盲区。</p>
-<p>知识架构有好坏，比如说到js，可能会想到一些词:<em>类型转换、this、闭包、作用域链、原型链</em>等等，这就是一种不好的架构，因为这些关键词的关系之间没有逻辑关系。</p>
-<p>作者给出的架构体系是:</p>
-<ul>
-<li>文法</li>
-<li>语义</li>
-<li>运行时</li>
-</ul>
-<blockquote>
-<p>对于任何计算机语言来说，必定是“用规定的文法，去表达特定语义，最终操作运行时的”一个过程。</p>
-</blockquote>
-<p>文法可以分成词法和语法，来自编译原理的划分，是完备的。语义则跟语法具有一一对应关系，这里暂时不区分。对于运行时部分，这个划分保持了完备性，我们都知道：<code>程序 = 算法 + 数据结构</code>，<strong>那么，对运行时来说，类型就是数据结构，执行过程就是算法。</strong></p>
-<p>建立知识架构，同样有利于面试，没人能够记住所有的知识，当不可避免地谈到一个记不住的知识，如果你能快速定位到它在知识架构中的位置，把一些相关的点讲出来，我想，这也能捞回不少分。</p>
-<p>第二个方法是<code>追本溯源</code>。追本溯源，其实就是关注技术提出的背景，关注原始的论文或者文章，关注作者说的话。操作起来也非常简单：翻翻资料（一般wiki上就有）找找历史上的文章和人物，再顺藤摸瓜翻出来历史资料就可以了。这可以帮助我们理解为什么JS是现在这个样子了。</p>
-<p>举例说明:有一些知识，涉及的概念本身经历了各种变迁，变得非常复杂和有争议性，比如<strong>MVC</strong>，从1979年至今，概念变化非常大，MVC的定义几乎已经成了一段公案，作者曾经截取了MVC原始论文、MVP原始论文、微软MSDN、Apple开发者文档，这些内容里面，MVC画的图、箭头和解释都完全不同。</p>
-<h1 id="02-列一份前端知识架构图"><a href="#02-列一份前端知识架构图" class="headerlink" title="02 列一份前端知识架构图"></a>02 列一份前端知识架构图</h1><p>第二节就给出了第一节提出的知识架构图。<br><img src="https://static001.geekbang.org/resource/image/d1/a8/d1cb4040d91207075e0591abffe1b9a8.jpg" alt=""></p>
+            <main class="main index-page">
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2019/05/20/BMapOffline/" >
+            
+                <span>基于百度离线地图时空可视分析系统的实现与性能优化</span>
+        </a>
+        <div class="abstract-content">
+            前言近期实现了一个时空可视分析系统的前端部分，帮助警方看到特定地区(主要为昆明)、特定时间段【时】、特定分局、派出所、街道【空】的各种类型警情统计；并提供对未来一段时间的警情预测，对警情高发区域进行重点部署和管控。整体界面如下图所示。
 
 
-            <! -- 添加捐赠图标 -->
-    <div class ="post-donate">
-    <div id="donate_board" class="donate_bar center">
-        <a id="btn_donate" class="btn_donate" href="javascript:;" title="打赏"></a>
+界面截图
 
-        <div style="text-align:center;color:#00F" >
-           
+实现这个系统和优化性能的过程中有了一些感悟和心得，在这篇博客中进行记录。
+百度地图和离线离线地图其实在2015年飞利浦实习时开发一款iOS跑步软件过程中有用过百度地图进行跑步路径绘制，但在web开发过程中还是第一次遇到地图开发相关的任务，好在团队中有一个会写代码的宠物店老板，有丰富的离线地图开发经验，指导我完成了这次的开发任务。
+可能大家对...
         </div>
-
-    <script type="text/javascript">
-        document.getElementById('btn_donate').onclick = function(){
-            $('#donate_board').addClass('hidden');
-            $('#donate_guide').removeClass('hidden');
-        }
-    </script>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/20</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "前端学习笔记">前端学习笔记</a>
+    
 </div>
-<! -- 添加捐赠图标 -->
+            
+        </div>
     </article>
-
-
-
-    <!-- license  -->
     
-        <div class="license-wrapper">
-            <p>原文作者: <a href="http://zhihaozhang.github.io">Chih-Hao</a>
-            <p>原文链接: <a href="http://zhihaozhang.github.io/2019/03/07/RelarnFrontend/">http://zhihaozhang.github.io/2019/03/07/RelarnFrontend/</a>
-            <p>发表日期: <a href="http://zhihaozhang.github.io/2019/03/07/RelarnFrontend/">March 7th 2019, 3:20:06 pm</a>
-            <p>版权声明: 本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
-        </div>
-    
-
-    <div class ="post-donate">
-    <p>~~如果我的博客内容帮助到了您，您可以使用支付宝/微信扫码请我喝一听可乐;如果您对我文章的内容有疑惑，欢迎留言或发email至zhihaozhang@me.com与我进一步交流~~</p>
-
-    <div id="donate_guide" class="donate_bar center hidden" >
-        <!-- 支付宝打赏图案 -->
-        <img src="https://ws1.sinaimg.cn/large/aa2320a8ly1fmz23st4psj20fr0nomz1" height="300" width="200" alt="支付宝打赏"> 
-        <!-- 微信打赏图案 -->
-        <img src="https://ws1.sinaimg.cn/large/aa2320a8ly1fmz23siwjyj20p00xw77e" height="300" width="200" alt="微信打赏">  
-    </div>
-    <script type="text/javascript">
-        document.getElementById('btn_donate').onclick = function(){
-            $('#donate_board').addClass('hidden');
-            $('#donate_guide').removeClass('hidden');
-        }
-    </script>
-</div>
-
     <!-- paginator  -->
-    <ul class="post-paginator">
-        <li class="next">
-            
-                <div class="nextSlogan">Next Post</div>
-                <a href= "/2019/05/20/BMapOffline/" title= 基于百度离线地图时空可视分析系统的实现与性能优化 >
-                    <div class="nextTitle">基于百度离线地图时空可视分析系统的实现与性能优化</div>
-                </a>
-            
-        </li>
-        <li class="previous">
-            
-                <div class="prevSlogan">Previous Post</div>
-                <a href= "/2019/02/20/swifterTips/" title= 《Swift必备Tips》读书笔记 >
-                    <div class="prevTitle">《Swift必备Tips》读书笔记</div>
-                </a>
-            
-        </li>
-    </ul>
-    <!-- 评论插件 -->
-    <!-- 来必力City版安装代码 -->
-<div id="lv-container" data-id="city" data-uid="MTAyMC8zMTAyMC83NTY5">
-    <script type="text/javascript">
-   (function(d, s) {
-       var j, e = d.getElementsByTagName(s)[0];
-
-       if (typeof LivereTower === 'function') { return; }
-
-       j = d.createElement(s);
-       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-       j.async = true;
-
-       e.parentNode.insertBefore(j, e);
-   })(document, 'script');
-    </script>
-<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
-</div>
-<!-- City版安装代码已完成 -->
     
-    
-    <!--PC和WAP自适应版-->
-
-    <!--PC版-->
-
-
-    
-    
-
-
 </main>
             <!-- profile -->
             
@@ -580,24 +441,6 @@ height:50vh;
 </footer>
     </div>
     <!-- toc -->
-    
-    <div class="toc-wrapper" style=
-    
-
-
-
-
-
-
-
-top:50vh;
-
-    >
-        <div class="toc-catalog">
-            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
-        </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#01-明确前端学习路线与方法"><span class="toc-number">2.</span> <span class="toc-text">01 明确前端学习路线与方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#02-列一份前端知识架构图"><span class="toc-number">3.</span> <span class="toc-text">02 列一份前端知识架构图</span></a></li></ol>
-    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -1679,8 +1522,6 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
-    
-        <script src="/scripts/share.js" async></script>    
      
     </body>
     <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
