@@ -397,7 +397,7 @@ height:50vh;
             <main class="main post-page">
     <article class="article-entry">
         <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>近期实现了一个<code>时空可视分析系统</code>的前端部分，帮助警方看到特定地区(主要为昆明)、特定时间段<strong>【时】</strong>、特定分局、派出所、街道<strong>【空】</strong>的各种类型警情统计；并提供对未来一段时间的警情预测，对警情高发区域进行重点<strong>部署</strong>和<strong>管控</strong>。整体界面如下图所示。</p>
-<p><img src="https://ws4.sinaimg.cn/large/006tNc79gy1g38qj5smomj31fm0smtdd.jpg" alt=""></p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79gy1g38wtioljej31fm0sm78r.jpg" alt=""></p>
 <blockquote>
 <p>界面截图(概念图)</p>
 </blockquote>
@@ -405,7 +405,7 @@ height:50vh;
 <h1 id="百度地图和百度离线地图"><a href="#百度地图和百度离线地图" class="headerlink" title="百度地图和百度离线地图"></a>百度地图和百度离线地图</h1><p>其实在2015年飞利浦实习时开发一款<em>iOS跑步软件</em>过程中有用过百度地图进行<strong>跑步路径</strong>绘制，但在web开发过程中还是第一次遇到<strong>GIS开发</strong>相关的任务，好在团队中有一个会写代码的宠物店老板，有丰富的离线地图开发经验，指导我完成了这次的开发任务。</p>
 <p>可能大家对百度地图都不陌生，他可以支持地图样式定制化，各种风格的样式都可以进行配置，而且现在已经强大到你上传一幅图片，可以自动识别出你的风格进行<strong>识图配色</strong>，并导出为JSON文件。主要可配置的有：<strong>陆地、水系、陆地、文字描边、道路</strong>，这个功能可以让设计师也直接参与到地图风格的定型，减少工程师的工作量。</p>
 <h2 id="百度地图底层技术"><a href="#百度地图底层技术" class="headerlink" title="百度地图底层技术"></a>百度地图底层技术</h2><p>大家可能注意到了，百度地图可以缩放到不同<strong>层级</strong>的，比如最大的层级是可以看到街道一级的，最小的层级是洲级别的，就百度地图而言，层级大约是0-18级。</p>
-<p>地图的每一层又是可以左右挪动的，每一层都是由一张张底图组成的，他们的专业名称叫做<code>瓦片</code>。例如下图就是有9张<strong>瓦片</strong>组成的。<br><img src="https://ws4.sinaimg.cn/large/006tNc79gy1g38qkdd5b7j30ld0e7t9o.jpg" alt=""></p>
+<p>地图的每一层又是可以左右挪动的，每一层都是由一张张底图组成的，他们的专业名称叫做<code>瓦片</code>。例如下图就是有9张<strong>瓦片</strong>组成的。<br><img src="https://ws4.sinaimg.cn/large/006tNc79gy1g38wx8r6r4j30ld0e7gml.jpg" alt=""></p>
 <p>明白了上面两点，我们就可以用三个变量：<strong>瓦片等级（level）</strong>和瓦片坐标编号（X，Y）唯一确定瓦片，这也是离线抓取相应图片并放置到正确文件夹路径的<strong>关键</strong>所在，比如第一层级的最左上角的瓦片路径就是/0(level)/1(x)/1.png(y)。</p>
 <p>当然，层级越高，我们看到的细节也就越多，例如用谷歌地图放大到最大层级就是可以看到你家的。这也意味着我们需要更多的瓦片来描述更高层级的地图，通常下一级的瓦片，是由上一级瓦片切割为<strong>4片</strong>组成的，就形成了下图的<strong>瓦片金字塔</strong>。</p>
 <p><img src="http://cntchen.github.io/img/国内主要地图瓦片坐标系定义及计算原理/瓦片切割（瓦片金字塔）.jpg" alt=""></p>
@@ -418,7 +418,7 @@ height:50vh;
 <h2 id="性能优化策略2：地图层级的防抖"><a href="#性能优化策略2：地图层级的防抖" class="headerlink" title="性能优化策略2：地图层级的防抖"></a>性能优化策略2：地图层级的防抖</h2><p>在监听地图Zoom的过程中，我发现会经常会发生<strong>抖动</strong>，造成了界面非常卡的现象。其实与防抖相对的还有节流，具体实现细节可以看<a href="https://www.cnblogs.com/walls/p/6399837.html" target="_blank" rel="external">JavaScript函数节流和函数防抖之间的区别</a>。</p>
 <p>通过加入<strong>防抖</strong>机制，控制<em>只有足够多空闲时间</em>才会触发进入特定层级的事件，让界面流畅了许多。</p>
 <h2 id="性能优化策略3：预渲染栅格线"><a href="#性能优化策略3：预渲染栅格线" class="headerlink" title="性能优化策略3：预渲染栅格线"></a>性能优化策略3：预渲染栅格线</h2><p>在我们的业务需求中，有个特殊的需求是要将地图切分为边长为500米的方格，用绿橙黄红四色展示这块区域内的警情发生频率。</p>
-<p><img src="https://ws2.sinaimg.cn/large/006tNc79gy1g38ql7hqzlj31s00u0n1d.jpg" alt=""></p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79gy1g38ww5fun5j31s00u0n1d.jpg" alt=""></p>
 <p>由于这个需求是后面加的，我前面并没有绘制栅格线，因此选用了对百度地图更为友好的mapV。兄弟公司实现这个需求的时候选用的是<strong>高德地图+openLayer</strong>。后期又接到了任务让加上栅格，于是我进行了调研，想出了两种备选方案。</p>
 <p>方案1是让后台将所有格子都返回，即使这里面没有警情，我们这边让他不填充，但是边界线也是会有的，这样实现需要的时间比较短，考虑到实际出现警情的区域比较稀疏，因此为了减少网络流量和后台工作量，由我这边产生，时间复杂度大约是<strong>O(NM)</strong>；</p>
 <p>方案二是引入<strong>openlayer</strong>，进行绘制，但是这样的话需要上手一下openlayer，而且配合百度地图离线版也是有一定的难度的，很可能会有坑(网上已经看到了不少人提问)，但是时间复杂度可以优化到<strong>O(N+M)</strong>。</p>
@@ -1249,18 +1249,6 @@ top:50vh;
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <div class="total-and-search">
         <div class="total-archive">
         Total : 43
@@ -1451,27 +1439,8 @@ top:50vh;
     
         </ul>
     
-    <div class="archive-year"> Invalid date </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2018/11/25/BigScreen/" >两个大屏可视化案例的实现</a>
-        </li>
-    
-    
-    
-    
-    
-        </ul>
-    
     <div class="archive-year"> 2014 </div>
     <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
-        </li>
     
     
         <li class="archive-post-item">
@@ -1479,27 +1448,19 @@ top:50vh;
         </li>
     
     
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> Invalid date </div>
-    <ul class="year-list">
-    
-    
         <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2018/10/31/match5/" >Match开发笔记 伍 3.0版的新功能与上架</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
         </li>
     
     
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/数据可视化之散点图/" >数据可视化之散点图</a>
+        </li>
     
     
-    
-        </ul>
-    
-    <div class="archive-year"> 2014 </div>
-    <ul class="year-list">
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1535,19 +1496,27 @@ top:50vh;
         </li>
     
     
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/数据可视化之散点图/" >数据可视化之散点图</a>
-        </li>
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/Build reuseable visualization using d3.js and AngularJS/" >Build reusable visualization using d3.js and AngularJS</a>
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2018/11/25/BigScreen/" >两个大屏可视化案例的实现</a>
         </li>
     
     
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/polybrush in d3/" >polybrush in d3</a>
-        </li>
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2014 </div>
+    <ul class="year-list">
     
     
         <li class="archive-post-item">
@@ -1556,7 +1525,35 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/polybrush in d3/" >polybrush in d3</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2018/10/31/match5/" >Match开发笔记 伍 3.0版的新功能与上架</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2014 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/Build reuseable visualization using d3.js and AngularJS/" >Build reusable visualization using d3.js and AngularJS</a>
         </li>
     
     
@@ -1569,21 +1566,21 @@ top:50vh;
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
-        <span class="sidebar-tag-name" data-tags="前端学习笔记"><span class="iconfont-archer">&#xe606;</span>前端学习笔记</span>
-    
         <span class="sidebar-tag-name" data-tags="Flutter"><span class="iconfont-archer">&#xe606;</span>Flutter</span>
     
         <span class="sidebar-tag-name" data-tags="大屏可视化"><span class="iconfont-archer">&#xe606;</span>大屏可视化</span>
     
-        <span class="sidebar-tag-name" data-tags="d3"><span class="iconfont-archer">&#xe606;</span>d3</span>
+        <span class="sidebar-tag-name" data-tags="前端学习笔记"><span class="iconfont-archer">&#xe606;</span>前端学习笔记</span>
     
         <span class="sidebar-tag-name" data-tags="swift"><span class="iconfont-archer">&#xe606;</span>swift</span>
     
+        <span class="sidebar-tag-name" data-tags="d3"><span class="iconfont-archer">&#xe606;</span>d3</span>
+    
         <span class="sidebar-tag-name" data-tags="macOS开发"><span class="iconfont-archer">&#xe606;</span>macOS开发</span>
     
-        <span class="sidebar-tag-name" data-tags="随感"><span class="iconfont-archer">&#xe606;</span>随感</span>
-    
         <span class="sidebar-tag-name" data-tags="iOS开发"><span class="iconfont-archer">&#xe606;</span>iOS开发</span>
+    
+        <span class="sidebar-tag-name" data-tags="随感"><span class="iconfont-archer">&#xe606;</span>随感</span>
     
         <span class="sidebar-tag-name" data-tags="SVG"><span class="iconfont-archer">&#xe606;</span>SVG</span>
     
@@ -1626,19 +1623,19 @@ jsonContent:
         <div class="sidebar-panel-categories">
     <div class="sidebar-categories-name">
     
-        <span class="sidebar-category-name" data-categories="前端"><span class="iconfont-archer">&#xe60a;</span>前端</span>
-    
         <span class="sidebar-category-name" data-categories="Flutter"><span class="iconfont-archer">&#xe60a;</span>Flutter</span>
     
         <span class="sidebar-category-name" data-categories="visualization"><span class="iconfont-archer">&#xe60a;</span>visualization</span>
+    
+        <span class="sidebar-category-name" data-categories="前端"><span class="iconfont-archer">&#xe60a;</span>前端</span>
     
         <span class="sidebar-category-name" data-categories="苹果开发"><span class="iconfont-archer">&#xe60a;</span>苹果开发</span>
     
         <span class="sidebar-category-name" data-categories="d3"><span class="iconfont-archer">&#xe60a;</span>d3</span>
     
-        <span class="sidebar-category-name" data-categories="购房"><span class="iconfont-archer">&#xe60a;</span>购房</span>
-    
         <span class="sidebar-category-name" data-categories="随感"><span class="iconfont-archer">&#xe60a;</span>随感</span>
+    
+        <span class="sidebar-category-name" data-categories="购房"><span class="iconfont-archer">&#xe60a;</span>购房</span>
     
         <span class="sidebar-category-name" data-categories="监控"><span class="iconfont-archer">&#xe60a;</span>监控</span>
     
