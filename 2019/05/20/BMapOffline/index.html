@@ -267,7 +267,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count">3,174</span> / Reading time: <span class="post-count">13 min</span></span>
+                        <span>Word count: <span class="post-count">3,298</span> / Reading time: <span class="post-count">13 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -411,6 +411,8 @@ height:50vh;
 <p><img src="http://cntchen.github.io/img/国内主要地图瓦片坐标系定义及计算原理/瓦片切割（瓦片金字塔）.jpg" alt=""></p>
 <h2 id="百度离线地图瓦片的获取"><a href="#百度离线地图瓦片的获取" class="headerlink" title="百度离线地图瓦片的获取"></a>百度离线地图瓦片的获取</h2><p>由于我们系统需要部署在公安网内，不能访问外网，所以我们并不能实时获取百度地图的瓦片，只能提前将百度地图瓦片缓存下来，以上一节提到的方式进行保存。爬取百度离线地图，已经有很多人提供了代码甚至是exe文件，这里就不展开说了。这个过程是比较慢的，下载到16级，通常就需要<strong>三四天</strong>，因为<em>碎片文件</em>太多了，仅昆明周边，到15级大约有<strong>400万张</strong>图片了。</p>
 <p>跟前线部署人员交流过程中发现，在文件传输和拷贝的过程中，也有文件碎片引起的速度慢的问题，这个问题后面想通过插external盘解决，毕竟让大家现场等三四天成本还是比较高的。</p>
+<p>后面优化了爬虫的逻辑，每秒大概能下10M的图片，但很快百度就打电话过来问责了，说严重影响到了他们的服务了，然后就发现号和ip都被百度封了。到了第二天，百度直接加密了，获取的图片都是错误符EOF。</p>
+<p>也就是说，自此之后，这种爬虫获取的方式将<strong>永久行不通了。</strong>百度离线地图获取的路被永远堵死了。</p>
 <h2 id="其他地图"><a href="#其他地图" class="headerlink" title="其他地图"></a>其他地图</h2><p>其实不局限于百度地图，有很多其他选择，比如高德地图、谷歌地图等都是不错的选择，需要<strong>注意</strong>的是地图直接的经纬度标准不同，需要转换，否则会发生<strong>偏移</strong>甚至不可用。</p>
 <p>例如我在做项目的时候拿到的是高德地图的数据，放到百度地图上，发生了明显的偏移。我使用<code>nodejs</code>写了一个读文件然后转换的逻辑，并写回文件。</p>
 <p><img src="https://ws1.sinaimg.cn/large/006tNc79gy1g397e9gqttj319v0u0jve.jpg" alt=""></p>
@@ -1264,40 +1266,6 @@ top:50vh;
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <div class="total-and-search">
         <div class="total-archive">
         Total : 43
@@ -1493,12 +1461,17 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/数据可视化之散点图/" >数据可视化之散点图</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular/" >D3 on Angular</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/drop and drag in d3js/" >drop and drag in d3</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/Build reuseable visualization using d3.js and AngularJS/" >Build reusable visualization using d3.js and AngularJS</a>
         </li>
     
     
@@ -1512,7 +1485,21 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2018/11/25/BigScreen/" >两个大屏可视化案例的实现</a>
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2018/09/20/match4/" >Match开发笔记 肆 极光推送接入指南(Swift版)</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2014 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
         </li>
     
     
@@ -1540,32 +1527,7 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular/" >D3 on Angular</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/polybrush in d3/" >polybrush in d3</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/Build reuseable visualization using d3.js and AngularJS/" >Build reusable visualization using d3.js and AngularJS</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
             <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/浅谈d3.js中的异步文件读取的处理/" >浅谈d3.js中强制异步文件读取同步的四种方法</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/drop and drag in d3js/" >drop and drag in d3</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
         </li>
     
     
@@ -1575,7 +1537,7 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">04/24</span><a class="archive-post-title" href= "/2014/04/24/用Java生成Json文件/" >用Java生成Json文件</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
         </li>
     
     
@@ -1589,7 +1551,31 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2018/09/20/match4/" >Match开发笔记 肆 极光推送接入指南(Swift版)</a>
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2018/11/25/BigScreen/" >两个大屏可视化案例的实现</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2014 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/polybrush in d3/" >polybrush in d3</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/数据可视化之散点图/" >数据可视化之散点图</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/24</span><a class="archive-post-title" href= "/2014/04/24/用Java生成Json文件/" >用Java生成Json文件</a>
         </li>
     
     </div>
@@ -1597,15 +1583,15 @@ top:50vh;
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
-        <span class="sidebar-tag-name" data-tags="前端学习笔记"><span class="iconfont-archer">&#xe606;</span>前端学习笔记</span>
-    
-        <span class="sidebar-tag-name" data-tags="d3"><span class="iconfont-archer">&#xe606;</span>d3</span>
+        <span class="sidebar-tag-name" data-tags="Flutter"><span class="iconfont-archer">&#xe606;</span>Flutter</span>
     
         <span class="sidebar-tag-name" data-tags="大屏可视化"><span class="iconfont-archer">&#xe606;</span>大屏可视化</span>
     
-        <span class="sidebar-tag-name" data-tags="Flutter"><span class="iconfont-archer">&#xe606;</span>Flutter</span>
+        <span class="sidebar-tag-name" data-tags="前端学习笔记"><span class="iconfont-archer">&#xe606;</span>前端学习笔记</span>
     
         <span class="sidebar-tag-name" data-tags="swift"><span class="iconfont-archer">&#xe606;</span>swift</span>
+    
+        <span class="sidebar-tag-name" data-tags="d3"><span class="iconfont-archer">&#xe606;</span>d3</span>
     
         <span class="sidebar-tag-name" data-tags="macOS开发"><span class="iconfont-archer">&#xe606;</span>macOS开发</span>
     
@@ -1615,9 +1601,9 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="SVG"><span class="iconfont-archer">&#xe606;</span>SVG</span>
     
-        <span class="sidebar-tag-name" data-tags="效率"><span class="iconfont-archer">&#xe606;</span>效率</span>
-    
         <span class="sidebar-tag-name" data-tags="SwiftTips"><span class="iconfont-archer">&#xe606;</span>SwiftTips</span>
+    
+        <span class="sidebar-tag-name" data-tags="效率"><span class="iconfont-archer">&#xe606;</span>效率</span>
     
         <span class="sidebar-tag-name" data-tags="Json"><span class="iconfont-archer">&#xe606;</span>Json</span>
     
@@ -1654,11 +1640,11 @@ jsonContent:
         <div class="sidebar-panel-categories">
     <div class="sidebar-categories-name">
     
-        <span class="sidebar-category-name" data-categories="前端"><span class="iconfont-archer">&#xe60a;</span>前端</span>
+        <span class="sidebar-category-name" data-categories="Flutter"><span class="iconfont-archer">&#xe60a;</span>Flutter</span>
     
         <span class="sidebar-category-name" data-categories="visualization"><span class="iconfont-archer">&#xe60a;</span>visualization</span>
     
-        <span class="sidebar-category-name" data-categories="Flutter"><span class="iconfont-archer">&#xe60a;</span>Flutter</span>
+        <span class="sidebar-category-name" data-categories="前端"><span class="iconfont-archer">&#xe60a;</span>前端</span>
     
         <span class="sidebar-category-name" data-categories="苹果开发"><span class="iconfont-archer">&#xe60a;</span>苹果开发</span>
     
