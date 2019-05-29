@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zhihaozhang.github.io/"/>
-  <updated>2019-05-24T14:19:24.004Z</updated>
+  <updated>2019-05-29T13:15:27.971Z</updated>
   <id>http://zhihaozhang.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>百度离线地图之死</title>
+    <link href="http://zhihaozhang.github.io/2019/05/29/BMapOfflineDeath/"/>
+    <id>http://zhihaozhang.github.io/2019/05/29/BMapOfflineDeath/</id>
+    <published>2019-05-29T12:59:00.824Z</published>
+    <updated>2019-05-29T13:15:27.971Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>首先得承认有点标题党，但是还是不得不向大家宣布一个坏消息，百度离线地图的获取规则变了。可以说一定程度上宣布了自己抓取百度离线地图这条路<strong>行不通</strong>了。</p><p>之前接到了百度的电话，我们10M/s的下载速度<code>（大约每秒下1000多张图片）</code>抓取地图的爬虫严重影响了他们的服务质量，让我们停止抓取。</p><p>当晚，他们就改变了<strong>地图加载</strong>规则。以下是我们猜测的新规则。</p><h1 id="猜测"><a href="#猜测" class="headerlink" title="猜测"></a>猜测</h1><p>基于一些实验，我们猜测:</p><blockquote><p>百度地图应该改了底图加载的规则，通过地图拖拽事件，回调了某个<em>callback function</em>，创建了<strong>session</strong>。每一次底图如果刷新，session就会刷新。已下载的图片不会受影响，但是新的url没有新建的session就会redirect到百度的error页面。</p></blockquote><p>每次刷新页面，session就重建了，因此获取到的数据都是<strong>error.html</strong>文件。</p><p>咨询了购买百度离线地图的价格，大约是3年<strong>150万</strong>人民币，<strong>打扰了</strong>。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;首先得承认有点标题党，但是还是不得不向大家宣布一个坏消息，百度离线地图的获取规则变了。可以说一定程度上宣布了自己抓取百度离线地图这条路&lt;st
+      
+    
+    </summary>
+    
+      <category term="前端" scheme="http://zhihaozhang.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+      <category term="前端学习笔记" scheme="http://zhihaozhang.github.io/tags/%E5%89%8D%E7%AB%AF%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
   
   <entry>
     <title>基于百度离线地图时空可视分析系统的实现与性能优化</title>
@@ -480,31 +505,6 @@
       
       
         &lt;h1 id=&quot;从编程范式讲起&quot;&gt;&lt;a href=&quot;#从编程范式讲起&quot; class=&quot;headerlink&quot; title=&quot;从编程范式讲起&quot;&gt;&lt;/a&gt;从编程范式讲起&lt;/h1&gt;&lt;p&gt;或许你经常听到诸如面向对象编程、面向过程编程、面向协议编程、函数式编程这些词，心中也不免疑惑，这些词
-      
-    
-    </summary>
-    
-      <category term="苹果开发" scheme="http://zhihaozhang.github.io/categories/%E8%8B%B9%E6%9E%9C%E5%BC%80%E5%8F%91/"/>
-    
-    
-      <category term="swift" scheme="http://zhihaozhang.github.io/tags/swift/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Swift5新特性</title>
-    <link href="http://zhihaozhang.github.io/2018/05/09/swiftfive/"/>
-    <id>http://zhihaozhang.github.io/2018/05/09/swiftfive/</id>
-    <published>2018-05-09T05:29:58.331Z</published>
-    <updated>2018-05-09T05:29:58.331Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>话说这两天好像是Google IO召开的日子，借机蹭一波热度，唱个反调，浅析一下Swift5可能会出现的新特性，也算是为下个月即将举办的<strong>WWDC</strong>预热预热吧。</p><h1 id="ABI稳定性"><a href="#ABI稳定性" class="headerlink" title="ABI稳定性"></a>ABI稳定性</h1><p>ABI稳定性这个话题是一个历史遗留任务，最初是Swift3的目标，苹果的拖延症一直拖到了Swift5，还不一定可以实现。这也是国内很多公司不敢全面拥抱Swift的<strong>重要原因之一</strong>。</p><h2 id="ABI是啥"><a href="#ABI是啥" class="headerlink" title="ABI是啥"></a>ABI是啥</h2><p>ABI是Application Binary Interfaces（应用二进制接口）的缩写，它描述了应用程序和操作系统或其他应用程序的低级接口。</p><p>在应用程序运行时，Swift二进制需要和其他库或组件通过ABI进行接触，因此ABI定义了非常底层的细节。比如：如何调用一个函数，数据在内存中是如何存储的、元数据在哪以及如何获取到。</p><p>由于现在ABI是不稳定的，因此每一个APP都不得不绑定特定版本的Swift动态库。这样从外面看起来，Swift与App的关联比ios系统要更紧密。</p><p>举个例子来说，app1使用的是Swift 4.0，因此它绑定的是包含4.0 ABI的Swift 4.0动态库，而app2使用的是Swift 4.1，它绑定的就是包含4.1 ABI的Swift 4.1动态库。如果ABI变得稳定了，那么ABI就可以抽出来，集成到ios系统中，因为它可以跟Swift的任一版本兼容。</p><h2 id="ABI的重要性"><a href="#ABI的重要性" class="headerlink" title="ABI的重要性"></a>ABI的重要性</h2><p>通过上面的描述，应该不难看出ABI的重要性了，总结一下ABI稳定性带来的好处吧：</p><ul><li>App所占的大小会减小</li><li>Swift变化也没现在这么频繁</li><li>版本变化时，更少的改动</li><li>因为不需要绑定特定版本的swift，开发者可以做出预编译的框架</li></ul><p>但凡事都有两面性，由于带上了ABI这个脚链，不可避免的也会引入一些缺点：</p><ul><li>限制了接口的变动</li><li>Swift的发展和演化需要考虑的东西也渐渐多了起来</li></ul><h1 id="Async-Await-模式"><a href="#Async-Await-模式" class="headerlink" title="Async/Await 模式"></a>Async/Await 模式</h1><p>熟悉javascript的朋友应该对这个模式不陌生，在ES7中，也加入了这个模式应对异步编程。这个好用的特性，即将引入Swift5！</p><h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><p>之前，例如错误处理、回调之类的异步API用起来挺麻烦的，组合调用时很容易产生出复杂的控制流，用Swift的guard let语法糖在闭包调用中看起来重重嵌套，开发者很难知道当前所处的上下文。</p><p>举个例子：</p><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">loadWebResource</span><span class="params">(<span class="number">_</span> path: String, completionBlock: <span class="params">(result: Resource)</span></span></span> -&gt; <span class="type">Void</span>) &#123; ... &#125;</div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">decodeImage</span><span class="params">(<span class="number">_</span> r1: Resource, <span class="number">_</span> r2: Resource, completionBlock: <span class="params">(result: Image)</span></span></span> -&gt; <span class="type">Void</span>)</div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">dewarpAndCleanupImage</span><span class="params">(<span class="number">_</span> i : Image, completionBlock: <span class="params">(result: Image)</span></span></span> -&gt; <span class="type">Void</span>)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">processImageData1</span><span class="params">(completionBlock: <span class="params">(result: Image)</span></span></span> -&gt; <span class="type">Void</span>) &#123;</div><div class="line">   loadWebResource(<span class="string">"dataprofile.txt"</span>) &#123; dataResource <span class="keyword">in</span></div><div class="line">      loadWebResource(<span class="string">"imagedata.dat"</span>) &#123; imageResource <span class="keyword">in</span></div><div class="line">         decodeImage(dataResource, imageResource) &#123; imageTmp <span class="keyword">in</span></div><div class="line">            dewarpAndCleanupImage(imageTmp) &#123; imageResult <span class="keyword">in</span></div><div class="line">               completionBlock(imageResult)</div><div class="line">             &#125;</div><div class="line">          &#125;</div><div class="line">       &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure><p>引入Async/Await模式后，现在的代码如下：</p><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">loadWebResource</span><span class="params">(<span class="number">_</span> path: String)</span></span> async -&gt; <span class="type">Resource</span></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">decodeImage</span><span class="params">(<span class="number">_</span> r1: Resource, <span class="number">_</span> r2: Resource)</span></span> async -&gt; <span class="type">Image</span></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">dewarpAndCleanupImage</span><span class="params">(<span class="number">_</span> i : Image)</span></span> async -&gt; <span class="type">Image</span></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">processImageData1</span><span class="params">()</span></span> async -&gt; <span class="type">Image</span> &#123;</div><div class="line">    <span class="keyword">let</span> dataResource = await loadWebResource(<span class="string">"dataprofile.txt"</span>)</div><div class="line">    <span class="keyword">let</span> imageResource = await loadWebResource(<span class="string">"imagedata.dat"</span>)</div><div class="line">    <span class="keyword">let</span> imageTmp = await decodeImage(dataResource, imageResource)</div><div class="line">    <span class="keyword">let</span> imageResult = await dewarpAndCleanupImage(imageTmp)</div><div class="line">    <span class="keyword">return</span> imageResult</div><div class="line">&#125;</div></pre></td></tr></table></figure><blockquote><p>此处应有掌声</p></blockquote><h1 id="Actors"><a href="#Actors" class="headerlink" title="Actors"></a>Actors</h1><ul><li>Actors是一个新概念，它表示现实世界中的一些概念，比如“一个文档”、“一台设备”、“一次网络请求”等。</li><li>它是调度队列、可运行在该队列上并受该队列保护的数据的组合</li><li>可以认为是类似于class和protocol的一种新类型</li><li>允许开发者在其中定义内部变量/函数从而管理数据、进行相关操作</li><li>不能返回值、抛出异常、没有inout参数</li><li>开发者可以与之异步通信，Actor可以保证它所保护的数据只被运行于其上的代码接触到</li><li>UIKit和AppKit可以将主线程建模成MainActor</li><li>和class、protocol一样，开发者可以用extension关键字扩展MainActor</li><li>当引用数变为0时，Actor生命周期完成</li></ul><p>举个例子，假设正在开发一个tableview的应用，内容是一个string数组(受保护数据)，代码看起来应该是这样:</p><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">actor <span class="type">TableModel</span> &#123;</div><div class="line">    <span class="keyword">let</span> mainActor : <span class="type">TheMainActor</span></div><div class="line">    <span class="keyword">var</span> theList : [<span class="type">String</span>] = [] &#123;</div><div class="line">        <span class="keyword">didSet</span> &#123;</div><div class="line">            mainActor.updateTableView(theList)</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">init</span>(mainActor: <span class="type">TheMainActor</span>) &#123; </div><div class="line">        <span class="keyword">self</span>.mainActor = mainActor </div><div class="line">    &#125;</div><div class="line">    actor <span class="function"><span class="keyword">func</span> <span class="title">add</span><span class="params">(entry: String)</span></span> &#123;</div><div class="line">      theList.append(entry)</div><div class="line">    &#125;</div><div class="line">  &#125;</div></pre></td></tr></table></figure><h1 id="其他提升"><a href="#其他提升" class="headerlink" title="其他提升"></a>其他提升</h1><ul><li>String:对正则表达式<strong>Language级别</strong>的支持、性能提升。</li><li>标准库的改进</li><li>改进Foundation</li><li>增加了新语法</li></ul><p>让我们一起静待WWDC2018的到来！</p><p>参考</p><ol><li><a href="https://www.developerinsider.in/what-will-be-new-in-swift-5/" target="_blank" rel="external">本文主要翻译自：DeveloperInsider</a>.</li><li><a href="https://www.jianshu.com/p/5860f5542f21" target="_blank" rel="external">Swift库二进制接口(ABI)兼容性研究</a></li><li><a href="https://imtx.me/archives/2370.html" target="_blank" rel="external">Swift 5 的蓝图：ABI 稳定</a></li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;话说这两天好像是Google IO召开的日子，借机蹭一波热度，唱个反调，浅析一下Swift5可能会出现的新特性，也算是为下个月即将举办的&lt;s
       
     
     </summary>
