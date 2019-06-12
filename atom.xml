@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zhihaozhang.github.io/"/>
-  <updated>2019-05-29T13:15:27.971Z</updated>
+  <updated>2019-06-12T02:56:38.803Z</updated>
   <id>http://zhihaozhang.github.io/</id>
   
   <author>
@@ -21,15 +21,16 @@
     <link href="http://zhihaozhang.github.io/2019/05/29/BMapOfflineDeath/"/>
     <id>http://zhihaozhang.github.io/2019/05/29/BMapOfflineDeath/</id>
     <published>2019-05-29T12:59:00.824Z</published>
-    <updated>2019-05-29T13:15:27.971Z</updated>
+    <updated>2019-06-12T02:56:38.803Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>首先得承认有点标题党，但是还是不得不向大家宣布一个坏消息，百度离线地图的获取规则变了。可以说一定程度上宣布了自己抓取百度离线地图这条路<strong>行不通</strong>了。</p><p>之前接到了百度的电话，我们10M/s的下载速度<code>（大约每秒下1000多张图片）</code>抓取地图的爬虫严重影响了他们的服务质量，让我们停止抓取。</p><p>当晚，他们就改变了<strong>地图加载</strong>规则。以下是我们猜测的新规则。</p><h1 id="猜测"><a href="#猜测" class="headerlink" title="猜测"></a>猜测</h1><p>基于一些实验，我们猜测:</p><blockquote><p>百度地图应该改了底图加载的规则，通过地图拖拽事件，回调了某个<em>callback function</em>，创建了<strong>session</strong>。每一次底图如果刷新，session就会刷新。已下载的图片不会受影响，但是新的url没有新建的session就会redirect到百度的error页面。</p></blockquote><p>每次刷新页面，session就重建了，因此获取到的数据都是<strong>error.html</strong>文件。</p><p>咨询了购买百度离线地图的价格，大约是3年<strong>150万</strong>人民币，<strong>打扰了</strong>。</p>]]></content>
+    <content type="html"><![CDATA[<p>【6月6日更新】<br><strong>原来的策略对中国电信手机卡依然有效！！联通和移动均已失效，买张电信卡流量套餐吧。</strong></p><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>首先得承认有点标题党，但是还是不得不向大家宣布一个坏消息，百度离线地图的获取规则变了。可以说一定程度上宣布了自己抓取百度离线地图这条路<strong>行不通</strong>了。</p><p>之前接到了百度的电话，我们10M/s的下载速度<code>（大约每秒下1000多张图片）</code>抓取地图的爬虫严重影响了他们的服务质量，让我们停止抓取。</p><p>当晚，他们就改变了<strong>地图加载</strong>规则。以下是我们猜测的新规则。</p><h1 id="猜测"><a href="#猜测" class="headerlink" title="猜测"></a>猜测</h1><p>基于一些实验，我们猜测:</p><blockquote><p>百度地图应该改了底图加载的规则，通过地图拖拽事件，回调了某个<em>callback function</em>，创建了<strong>session</strong>。每一次底图如果刷新，session就会刷新。已下载的图片不会受影响，但是新的url没有新建的session就会redirect到百度的error页面。</p></blockquote><p>每次刷新页面，session就重建了，因此获取到的数据都是<strong>error.html</strong>文件。</p><p>咨询了购买百度离线地图的价格，大约是3年<strong>150万</strong>人民币，<strong>打扰了</strong>。</p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;首先得承认有点标题党，但是还是不得不向大家宣布一个坏消息，百度离线地图的获取规则变了。可以说一定程度上宣布了自己抓取百度离线地图这条路&lt;st
+        &lt;p&gt;【6月6日更新】&lt;br&gt;&lt;strong&gt;原来的策略对中国电信手机卡依然有效！！联通和移动均已失效，买张电信卡流量套餐吧。&lt;/strong&gt;&lt;/p&gt;
+&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;
       
     
     </summary>
