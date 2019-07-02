@@ -15,7 +15,7 @@
     <meta name="description" content="">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>Zhihao&#39;s Studio</title>
+    <title>helium-ol-map的设计取舍、权衡、实现、踩坑与npm发布 · Zhihao&#39;s Studio</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -196,12 +196,23 @@
 </head>
 
     
+        <body class="post-body">
+    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >Zhihao&#39;s Studio.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">helium-ol-map的设计取舍、权衡、实现、踩坑与npm发布</a>
+            </div>
+    </div>
     
     <a class="home-link" href=/>Zhihao's Studio.</a>
 </header>
@@ -215,24 +226,74 @@
 
 
 
+height:50vh;
+
 >
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
+            
+            helium-ol-map的设计取舍、权衡、实现、踩坑与npm发布
+            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "GIS">GIS</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count">1,582</span> / Reading time: <span class="post-count">6 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2019/07/02</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
         
     </div>
 </div>
@@ -333,75 +394,141 @@
 </script>        
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2014/11/15/浅谈d3.js中的异步文件读取的处理/" >
-            
-                <span>浅谈d3.js中强制异步文件读取同步的四种方法</span>
-        </a>
-        <div class="abstract-content">
-            问题提出在使用d3.js时，我们经常会使用d3.csv()或者d3.json()函数来从文件中读取出数据，不幸的是，偶尔代码的结果并不是我们预料的那样。习惯了过程式编程的我开始的时候也是这样，最让人头疼的是javascript并不会告诉你问题出在哪里了。我第一次遇到这个问题的时候，找了半天bug，确定代码主体部分没有问题之后，我只能开始使用console.log()将变量一个一个的输出到控制台里。第一次遇到这个问题时的图片是这样的：问题出在第72行和第75行，中间几行完全没有对ordertxt进行操作，但是最后的结果就是和预想的输出不吻合，后来找了个其他方法把这个问题给解决了，今天又遇到...
+            <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>经历了上次被百度地图<strong>封号、封IP甚至改变离线地图下载规则</strong>后，我们开始反思，是不是项目绑百度地图太紧了，如果后面需要<code>将应用场景变到其他城市</code>但百度离线地图不可用了，应该怎么办的问题。</p>
+<p>为了摆脱百度地图的<strong>枷锁</strong>，我们不得不站在更高角度上考虑问题，考虑后续如何将系统做得更<em>通用</em>。将之前的<a href="http://zhihaozhang.github.io/2019/05/20/BMapOffline/">博文中</a>介绍的系统实现技术方案(<code>BMap+MapV</code>)拓展到支持更多主流地图引擎<em>（高德地图、腾讯地图、谷歌地图等）</em>。</p>
+<p>经调研，我们最终选定了大名鼎鼎的<a href="https://openlayers.org" target="_blank" rel="external">OpenLayer</a>作为管理图层和绘制地图上层样式的Web GIS引擎。主要是考虑到两点。</p>
+<ol>
+<li>在地图数据源方面，它支持各种类型的瓦片地图，既支持在线的，也支持<strong>离线</strong>的(<code>这对我们很重要</code>)。比如OSM, Bing, MapBox, Stamen, MapQuest等等；还支持各种矢量地图，比如GeoJSON，TopoJSON，KML，GML等等。</li>
+<li>OpenLayer社区活跃，可能会遇到的各种问题都可以找到解决方案，且后续更新也是有保障的。</li>
+</ol>
+<p>因此，这次我们实现了一个Library并发布到了npm上，地址是：<a href="https://www.npmjs.com/package/helium-ol-map" target="_blank" rel="external">helium-ol-map</a>。</p>
+<p>在使用这个库的过程中，我感觉这个库还是很好用的，最直观的感受就是之前十几行的代码现在仅需一两行就搞定了。经过封装，感觉像是使用了声明式的方式在编程，描述我要做一件啥事，而之前是一直在操心这这件事的实现细节。我想，应该是已经达到了做这个库的目的。</p>
+<p><img src="http://ww2.sinaimg.cn/large/006tNc79gy1g4ljr1l99fj31bw0om75y.jpg" alt=""></p>
+<blockquote>
+<p>代码前后对比(注释部分为之前的业务代码，现仅需一行代码)</p>
+</blockquote>
+<p>下文就简单介绍一下这个库的设计与实现过程中遇到问题的解决方案。</p>
+<h1 id="OpenLayer5"><a href="#OpenLayer5" class="headerlink" title="OpenLayer5"></a>OpenLayer5</h1><p>OpenLayer本身API繁多，在做这个库之前我并没用用过，我是看了一两天<a href="http://weilin.me/ol3-primer/index.html" target="_blank" rel="external">OpenLayers 3 Primer</a>对OL3进行了简单的入门。这个部分我就不班门弄斧了，有需要的读者可以自行阅读理解，需要注意的是很多接口已经有所变动，以官网为准，不过了解基本的思想还是挺好的。</p>
+<h1 id="helium-ol-map的设计与实现"><a href="#helium-ol-map的设计与实现" class="headerlink" title="helium-ol-map的设计与实现"></a>helium-ol-map的设计与实现</h1><p>这个库的实现主要分为两步，第一步是确定使用的地图引擎(<em>离线 or 在线</em>)；第二步图层管理方式。</p>
+<h2 id="确定使用的地图引擎"><a href="#确定使用的地图引擎" class="headerlink" title="确定使用的地图引擎"></a>确定使用的地图引擎</h2><p>确定地图引擎之前，可以对比较通用的参数进行配置(同时也需要提供默认值)。比较通用的参数有：<strong>zoom/maxZoom/minZoom/center/origin/extent/elContainer等等</strong>。</p>
+<p>由于每个引擎都有自己对经纬度的标准，确定地图引擎后，就要指定经纬度的投影规则(比如百度地图是<code>BD-09</code>)，然后对原始的经纬度向特定地图引擎规则转换，否则会造成地图的偏移。</p>
+<p>接下来是指定<strong>Tile</strong>和<strong>VectorSource</strong>:</p>
+<ul>
+<li>ol.source.Tile对应的是瓦片数据源，现在网页地图服务中，绝大多数都是使用的瓦片地图，而OpenLayers 3作为一个WebGIS引擎，理所当然应该支持瓦片。</li>
+<li>ol.source.Vector对应的是矢量地图源，点，线，面等等常用的地图元素(Feature)，就囊括到这里面了。这样看来，只要这两种Source就可以搞定80%的需求了。</li>
+</ul>
+<p>如果是离线地图版，还需要指定<em>离线地图的地址</em>。</p>
+<p>好的，有了这些配置，就可以完成初始化地图了。</p>
+<h2 id="图层管理方式"><a href="#图层管理方式" class="headerlink" title="图层管理方式"></a>图层管理方式</h2><p>另一个比较关键的点是对Layer的管理方式，这也是我与同事<strong>争执</strong>的<em>主要矛盾点</em>。由于第一期的地图业务主要是我完成，最终我说服了他，将各层Layer设计为一个key/Value的Object，并提供增删改查的方法；他的方案是给地图提供一个默认Layer，然后遍历这个Layer的各个feature进行管理。</p>
+<p>不过他一直坚持的一点是点线面的绘制应该是在地图这一层进行管理的，但由于图层管理方式采用了我的方案，也就是点线面绘制的Layer在要添加的时候不确定有没有，因此将绘制点线面的返回值设为了需要绘制的feature，到使用的时候指定加到哪个Feature上。</p>
+<p>下面给出了一个该库使用的example：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> MAP_TYPE = <span class="string">'baidu-offline'</span>;</div><div class="line"></div><div class="line">  <span class="keyword">const</span> map = <span class="keyword">new</span> HeliumMap(&#123;</div><div class="line">    mapType: MAP_TYPE,</div><div class="line">    el: <span class="string">'map'</span>,</div><div class="line">    center: [<span class="number">102.870848</span>, <span class="number">25.024963</span>],</div><div class="line">    zoom: <span class="number">10</span></div><div class="line">  &#125;);</div><div class="line"></div><div class="line">  <span class="keyword">const</span> layerManager = <span class="keyword">new</span> HeliumLayerManager(&#123;</div><div class="line">    map : map</div><div class="line">  &#125;);</div><div class="line"></div><div class="line">  <span class="keyword">var</span> markerLayer = layerManager.createLayer();</div><div class="line">  layerManager.addLayer(<span class="string">'markerLayer'</span>,markerLayer);</div><div class="line"></div><div class="line">  <span class="keyword">var</span> marker = map.createMarker(<span class="number">102.870848</span>, <span class="number">25.024963</span>);</div><div class="line">  layerManager.addFeature(marker,<span class="string">'markerLayer'</span>);</div><div class="line"></div><div class="line"></div><div class="line">  <span class="keyword">var</span> lineLayer = layerManager.createLayer();</div><div class="line">  layerManager.addLayer(<span class="string">'lineLayer'</span>,lineLayer);</div><div class="line"></div><div class="line">  <span class="keyword">var</span> line = map.createLine([<span class="number">102.870848</span>,<span class="number">24.024963</span>],[<span class="number">102.870848</span>,<span class="number">26.024963</span>],&#123;<span class="attr">fillColor</span>:<span class="string">"red"</span>,<span class="attr">strokeColor</span>:<span class="string">"red"</span>,<span class="attr">strokeWidth</span>:<span class="number">2</span>&#125;);</div><div class="line">  layerManager.addFeature(line,<span class="string">'lineLayer'</span>);</div><div class="line"></div><div class="line">  <span class="keyword">var</span> polygonLayer = layerManager.createLayer();</div><div class="line">  layerManager.addLayer(<span class="string">'polygonLayer'</span>,polygonLayer);</div><div class="line"></div><div class="line">  <span class="keyword">var</span> polygon = map.createPolygon([[<span class="number">102.870848</span>,<span class="number">25.024963</span>],[<span class="number">102.870848</span>,<span class="number">25.034963</span>],[<span class="number">102.880848</span>,<span class="number">25.034963</span>],[<span class="number">102.880848</span>,<span class="number">25.014963</span>],[<span class="number">102.870848</span>,<span class="number">25.024963</span>]]);</div><div class="line">  layerManager.addFeature(polygon,<span class="string">'polygonLayer'</span>);</div></pre></td></tr></table></figure>
+<h1 id="遇到的一些坑"><a href="#遇到的一些坑" class="headerlink" title="遇到的一些坑"></a>遇到的一些坑</h1><p>实现过程中坑肯定还是会有的，第一个坑就是批量创建feature的时候，ID如果不明确指定而采取deafault-value,那么后面的feature会因此覆盖前面的feature，因此批量初始化feature的时候要确保每个feature有独特的ID。</p>
+<p>第二个坑是坐标转换过程中可能会出现转换失败，需要用try catch包裹住可能throw error的部分。</p>
+<p>第三个坑是坐标偏移，这个问题在上篇博客中是实现的很好的，跟友商的实现方式进行过比较，这次跟友商回到了同一起跑线上。主要是OL3里fromLonLat这个function的默认参数不是我们想要的地图坐标标准，需要明确指定符合自己引擎的标准。</p>
+<h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><p>短时间内上手OpenLayer也增强了我的信心，对于各种框架的使用，我越发找到感觉了。这是我离职前为公司做的最后一个项目了，也算是做到了<em>善始善终</em>。</p>
+<p>最后，祝福公司明天更好，祝福自己的明天更好！</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li><a href="http://weilin.me/ol3-primer/index.html" target="_blank" rel="external">OpenLayers 3 Primer</a></li>
+<li><a href="https://www.npmjs.com/package/helium-ol-map" target="_blank" rel="external">npm:helium-ol-map</a></li>
+<li><a href="https://openlayers.org" target="_blank" rel="external">OpenLayer</a></li>
+</ol>
+
+
+            <! -- 添加捐赠图标 -->
+    <div class ="post-donate">
+    <div id="donate_board" class="donate_bar center">
+        <a id="btn_donate" class="btn_donate" href="javascript:;" title="打赏"></a>
+
+        <div style="text-align:center;color:#00F" >
+           
         </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2014/11/15</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "d3">d3</a>
-    
+
+    <script type="text/javascript">
+        document.getElementById('btn_donate').onclick = function(){
+            $('#donate_board').addClass('hidden');
+            $('#donate_guide').removeClass('hidden');
+        }
+    </script>
 </div>
-            
-        </div>
+<! -- 添加捐赠图标 -->
     </article>
+
+
+
+    <!-- license  -->
     
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2014/11/15/drop and drag in d3js/" >
-            
-                <span>drop and drag in d3</span>
-        </a>
-        <div class="abstract-content">
-            Behavior in d3在d3中，行为被设计成了一种组件，可以创建一系列的事件，并绑定到调用这些行为的元素上。最常见的行为有拖拽与缩放，使用这些行为可以很方便地在拖拽或者缩放的开始、过程中以及结束时达到想要的效果。
-这篇博客中，就以拖拽为例，并借助之前实现的热力图，实现拖拽dimension的label以达到reoder维度的效果。为了使用三个阶段，我们会让开始拖拽的时候，维度名变成红色、字体变大来表示强调的效果；在拖拽过程中，让label紧跟鼠标的位置；并且判断最终的位置，交换两个维度，并重新绘制整个热力图。
-理想情况下，开始移动的时候的，运行情况应该像下面这样。
-drag创建一个...
+        <div class="license-wrapper">
+            <p>原文作者: <a href="http://zhihaozhang.github.io">Chih-Hao</a>
+            <p>原文链接: <a href="http://zhihaozhang.github.io/2019/07/02/OpenLayer/">http://zhihaozhang.github.io/2019/07/02/OpenLayer/</a>
+            <p>发表日期: <a href="http://zhihaozhang.github.io/2019/07/02/OpenLayer/">七月 2日 2019, 2:30:01 下午</a>
+            <p>版权声明: 本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2014/11/15</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "d3">d3</a>
-    
+
+    <div class ="post-donate">
+    <p>~~如果我的博客内容帮助到了您，您可以使用支付宝/微信扫码请我喝一听可乐;如果您对我文章的内容有疑惑，欢迎留言或发email至zhihaozhang@me.com与我进一步交流~~</p>
+
+    <div id="donate_guide" class="donate_bar center hidden" >
+        <!-- 支付宝打赏图案 -->
+        <img src="https://ws1.sinaimg.cn/large/aa2320a8ly1fmz23st4psj20fr0nomz1" height="300" width="200" alt="支付宝打赏"> 
+        <!-- 微信打赏图案 -->
+        <img src="https://ws1.sinaimg.cn/large/aa2320a8ly1fmz23siwjyj20p00xw77e" height="300" width="200" alt="微信打赏">  
+    </div>
+    <script type="text/javascript">
+        document.getElementById('btn_donate').onclick = function(){
+            $('#donate_board').addClass('hidden');
+            $('#donate_guide').removeClass('hidden');
+        }
+    </script>
 </div>
-            
-        </div>
-    </article>
-    
+
     <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2019/05/29/BMapOfflineDeath/" title= 百度离线地图之死 >
+                    <div class="prevTitle">百度离线地图之死</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMTAyMC83NTY5">
+    <script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+    </script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
     
-    <nav class="page-nav">
-        <a class="extend prev" rel="prev" href="/categories/visualization/">&#60; PREV</a><a class="page-number" href="/categories/visualization/">1</a><span class="page-number current">2</span>
-    </nav>
     
+    <!--PC和WAP自适应版-->
+
+    <!--PC版-->
+
+
+    
+    
+
+
 </main>
             <!-- profile -->
             
@@ -470,6 +597,24 @@ drag创建一个...
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#OpenLayer5"><span class="toc-number">2.</span> <span class="toc-text">OpenLayer5</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#helium-ol-map的设计与实现"><span class="toc-number">3.</span> <span class="toc-text">helium-ol-map的设计与实现</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#确定使用的地图引擎"><span class="toc-number">3.1.</span> <span class="toc-text">确定使用的地图引擎</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#图层管理方式"><span class="toc-number">3.2.</span> <span class="toc-text">图层管理方式</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#遇到的一些坑"><span class="toc-number">4.</span> <span class="toc-text">遇到的一些坑</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#后记"><span class="toc-number">5.</span> <span class="toc-text">后记</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考"><span class="toc-number">6.</span> <span class="toc-text">参考</span></a></li></ol>
+    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -1630,6 +1775,8 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
      
     </body>
     <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
