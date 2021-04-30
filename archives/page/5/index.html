@@ -341,14 +341,13 @@
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2014/11/15/D3 on Angular(2)/" >
+        <a class="abstract-title" href = "/2014/11/15/D3 on Angular/" >
             
-                <span>D3 on Angular(2)</span>
+                <span>D3 on Angular</span>
         </a>
         <div class="abstract-content">
-            More Dynamic visualizations上一篇博客介绍了如何借助Angular来完成一个指令，达到可复用目的，但是似乎依然不够动态，我们不得不提前输入想要展示的数组。Angular的最大的特点是双向数据绑定，我们能否借助这个特性来完成更动态的可视化图呢？让Angular帮我们盯着数据，一旦数据改变了，就更新DOM元素。这一切都是Angular帮我们完成的，我们唯一需要做的是指定数据和DOM元素之间的关系，不需要写很多的代码。
-双向数据绑定先来用一个简单的例子来展示一下Angular帮我们完成的双向数据绑定，这里用一个简单的例子来展示一下。
-12345678//\&lt;bo...
+            Angular与D3前面写了几篇分别介绍AngularJS和D3的博客，他们各司其职，都在各自的一亩三分地里备受好评，那么，他们之间能否完成合作，实现共赢呢？这篇博客就来介绍如何将它们结合起来使用，使得我们的可视化能够更具有模块化、方便复用、具有交互性。
+Why Angular使用Angular做可视化有很多原因，但其中最主要的原因还是directives(指令)。 指令使得做可复用的可视化更容易，可以使得我们做的可视化的时候就像使用内置的HTML那么简单，比如我需要一个热力图（后面写博客怎么做），那么我仅仅需要用\\就可以了，想想这种酸爽的滋味吧。即使你不知道热力图是怎么做的，但是你用...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -433,37 +432,6 @@
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2014/11/15/数据可视化之散点图/" >
-            
-                <span>数据可视化之散点图</span>
-        </a>
-        <div class="abstract-content">
-            D3.js是当下最火的可视化库之一，这篇博客记录了如何实现一个最基本的散点图，并用三角形表示数据点。
-代码如下：
-1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283\&lt;!DOCTYPE html\&gt;\&lt;html\&gt;\&lt;head lang=&quot;en&quot;\&gt;\&lt;meta ch...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2014/11/15</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "d3">d3</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
         <a class="abstract-title" href = "/2014/11/15/浅谈d3.js中的异步文件读取的处理/" >
             
                 <span>浅谈d3.js中强制异步文件读取同步的四种方法</span>
@@ -502,6 +470,36 @@
 前言你是否也像我一样，厌倦了d3默认的矩形的brush，或者你发现矩形的brush已经不能满足你的需要了;又或者你只是单纯的被上面的图片所吸引。不管怎样，我们将介绍一下polybrush。
 这篇博客的名字叫polybrush in d3，现在想来，好像有点错误，因为polybrush并不是d3内置的，它是由Geoffrey T. Bell在2012年开发的d3插件，因其方便、好用，所以广受好评。
 但无奈目前中文的相关资料和博客几乎没有，因此我来试着写一下如何使用它，以及它的原理，还会包含源码粗略解读，polybrush.js的github参考项目下载地址是：https://gist.g...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2014/11/15</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "d3">d3</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2014/11/15/冷门但实用的d3.js内置函数/" >
+            
+                <span>冷门但实用的d3.js内置函数</span>
+        </a>
+        <div class="abstract-content">
+            前言在d3.js的API文档中，提供了很多内置的函数，但是有些很有用的内置函数却被无情的忽略了，这篇博客就来整理整理这些被遗忘却很实用的函数。希望整理过后，他们不再被遗忘。
+selection.classed(name,【value】)value参数可选，如果没有指定，则返回与name参数匹配的第一个非空元素是否绑定了指定的CSS类，true表示绑定，false表示未绑定。如果value指定了的话，就是为selection添加/删除CSS类。这点与selection.attr(name,【value】)非常类似，但是相比而言，就冷门的多，恐怕没有多少人不知道selection.attr(...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -668,6 +666,28 @@ Json语法规则JSON 语法是 JavaScript 对象表示语法的子集。1.数据
     <div class="sidebar-content sidebar-content-show-archive">
           <div class="sidebar-panel-archives">
     <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -1612,12 +1632,31 @@ Json语法规则JSON 语法是 JavaScript 对象表示语法的子集。1.数据
     
         </ul>
     
+    <div class="archive-year"> 2014 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/Build reuseable visualization using d3.js and AngularJS/" >Build reusable visualization using d3.js and AngularJS</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/drop and drag in d3js/" >drop and drag in d3</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
     <div class="archive-year"> Invalid date </div>
     <ul class="year-list">
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2021/04/20/workAsContractor2/" >在中国远程为美企工作一年杂记（中）</a>
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2018/11/25/BigScreen/" >两个大屏可视化案例的实现</a>
         </li>
     
     
@@ -1631,7 +1670,12 @@ Json语法规则JSON 语法是 JavaScript 对象表示语法的子集。1.数据
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/drop and drag in d3js/" >drop and drag in d3</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/polybrush in d3/" >polybrush in d3</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/数据可视化之散点图/" >数据可视化之散点图</a>
         </li>
     
     
@@ -1659,31 +1703,7 @@ Json语法规则JSON 语法是 JavaScript 对象表示语法的子集。1.数据
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2018/10/31/match5/" >Match开发笔记 伍 3.0版的新功能与上架</a>
-        </li>
-    
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> 2014 </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2021/04/20/workAsContractor2/" >在中国远程为美企工作一年杂记（中）</a>
         </li>
     
     
@@ -1711,32 +1731,22 @@ Json语法规则JSON 语法是 JavaScript 对象表示语法的子集。1.数据
     
     
         <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
             <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/浅谈d3.js中的异步文件读取的处理/" >浅谈d3.js中强制异步文件读取同步的四种方法</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/数据可视化之散点图/" >数据可视化之散点图</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/Build reuseable visualization using d3.js and AngularJS/" >Build reusable visualization using d3.js and AngularJS</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular/" >D3 on Angular</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/polybrush in d3/" >polybrush in d3</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">04/24</span><a class="archive-post-title" href= "/2014/04/24/用Java生成Json文件/" >用Java生成Json文件</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
         </li>
     
     
@@ -1750,7 +1760,26 @@ Json语法规则JSON 语法是 JavaScript 对象表示语法的子集。1.数据
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2018/11/25/BigScreen/" >两个大屏可视化案例的实现</a>
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2018/10/31/match5/" >Match开发笔记 伍 3.0版的新功能与上架</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2014 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular/" >D3 on Angular</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/24</span><a class="archive-post-title" href= "/2014/04/24/用Java生成Json文件/" >用Java生成Json文件</a>
         </li>
     
     </div>
@@ -1758,23 +1787,23 @@ Json语法规则JSON 语法是 JavaScript 对象表示语法的子集。1.数据
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
-        <span class="sidebar-tag-name" data-tags="Flutter"><span class="iconfont-archer">&#xe606;</span>Flutter</span>
-    
         <span class="sidebar-tag-name" data-tags="前端学习笔记"><span class="iconfont-archer">&#xe606;</span>前端学习笔记</span>
     
         <span class="sidebar-tag-name" data-tags="大屏可视化"><span class="iconfont-archer">&#xe606;</span>大屏可视化</span>
     
-        <span class="sidebar-tag-name" data-tags="d3"><span class="iconfont-archer">&#xe606;</span>d3</span>
+        <span class="sidebar-tag-name" data-tags="Flutter"><span class="iconfont-archer">&#xe606;</span>Flutter</span>
     
         <span class="sidebar-tag-name" data-tags="swift"><span class="iconfont-archer">&#xe606;</span>swift</span>
     
-        <span class="sidebar-tag-name" data-tags="macOS开发"><span class="iconfont-archer">&#xe606;</span>macOS开发</span>
+        <span class="sidebar-tag-name" data-tags="d3"><span class="iconfont-archer">&#xe606;</span>d3</span>
     
-        <span class="sidebar-tag-name" data-tags="随感"><span class="iconfont-archer">&#xe606;</span>随感</span>
+        <span class="sidebar-tag-name" data-tags="macOS开发"><span class="iconfont-archer">&#xe606;</span>macOS开发</span>
     
         <span class="sidebar-tag-name" data-tags="iOS开发"><span class="iconfont-archer">&#xe606;</span>iOS开发</span>
     
         <span class="sidebar-tag-name" data-tags="GIS"><span class="iconfont-archer">&#xe606;</span>GIS</span>
+    
+        <span class="sidebar-tag-name" data-tags="随感"><span class="iconfont-archer">&#xe606;</span>随感</span>
     
         <span class="sidebar-tag-name" data-tags="SVG"><span class="iconfont-archer">&#xe606;</span>SVG</span>
     
@@ -1819,11 +1848,11 @@ jsonContent:
         <div class="sidebar-panel-categories">
     <div class="sidebar-categories-name">
     
-        <span class="sidebar-category-name" data-categories="Flutter"><span class="iconfont-archer">&#xe60a;</span>Flutter</span>
-    
         <span class="sidebar-category-name" data-categories="前端"><span class="iconfont-archer">&#xe60a;</span>前端</span>
     
         <span class="sidebar-category-name" data-categories="visualization"><span class="iconfont-archer">&#xe60a;</span>visualization</span>
+    
+        <span class="sidebar-category-name" data-categories="Flutter"><span class="iconfont-archer">&#xe60a;</span>Flutter</span>
     
         <span class="sidebar-category-name" data-categories="苹果开发"><span class="iconfont-archer">&#xe60a;</span>苹果开发</span>
     

@@ -267,7 +267,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count">6</span> / Reading time: <span class="post-count">1 min</span></span>
+                        <span>Word count: <span class="post-count">1,723</span> / Reading time: <span class="post-count">6 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -396,7 +396,43 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <h1 id="工作内容"><a href="#工作内容" class="headerlink" title="工作内容"></a>工作内容</h1><h2 id="面试"><a href="#面试" class="headerlink" title="面试"></a>面试</h2>
+        <h1 id="工作内容"><a href="#工作内容" class="headerlink" title="工作内容"></a>工作内容</h1><p>上篇博客提到了我工作的内容，这篇会比较详细的写一下工作内容以及我在这一年多工作过程中的感悟。</p>
+<h2 id="面试"><a href="#面试" class="headerlink" title="面试"></a>面试</h2><p>团队中，有人来有人走，所以我们也经常面试<strong>候选人</strong>。起初，我问的问题是比较具体和细节的，说实话，很多是我从Google里搜到的一些面试题，这种一般是有<strong>确定性</strong>答案的问题。有些人回答的并不好，但是他却是perfect match，有些人回答的很好，甚至一字不漏，但他并不是一个很合适的人。</p>
+<p>参加了几场面试过后，我发现两位tech lead喜欢问的是比较开放性的问题，更倾向于规范和实际场景。比如，其中一个人经常问的问题是，「如果现在的代码库里，有一个1000行以上的dart文件，里面穿插着很多UI相关代码，你如何优化代码结构？」 这个问题，就可以很好的区分出初级工程师和中高级工程师。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gq1u09zspnj314p0atjvy.jpg" alt=""></p>
+<blockquote>
+<p>面试者群像</p>
+</blockquote>
+<p>后来除了一些关键性的Flutter特定问题和dart特性，我也开始加入一些开放性的问题，来考察应聘者。考虑到很多应聘者是从原生开发、前端开发甚至UI设计师转Flutter的，并没有实战经验和机会，所以我最经常问的一个问题是：「Flutter有很多issue甚至bug，在你开发过程中，遇到了哪些SDK层面的bug呢？你是怎么解决或绕开它的。」 这个问题，确实是一块<strong>试金石</strong>，能很好的区分出应聘者到底有没有真正在实战中使用过Flutter。另一个我经常面试的问题是，「再过去的工作中，你解决的比较困难的问题是什么？」有人的回答确实<strong>惊艳</strong>到了我，但大部分人都说没遇到什么困难，或者都是Google能搜出答案的那种。惊艳到我的答案是，他想给他建筑师的父亲写一个3D建模软件，但是没找到好用的渲染引擎，于是他自己写了一个，现在github有2000多个star了。</p>
+<p>面试中，记忆最深刻的内容其实上一篇已经写了，那就是一个十多年的Senior Programmer Junior engineer，他说过去十多年里面没遇到很困难的问题，可能是<strong>调包侠</strong>吧，再谈到开放性问题的时候，也是没太多可讲的。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEgy1gplkyzbf6ij31ei0pk76n.jpg" alt=""></p>
+<blockquote>
+<p>Engineer(<strong>工程师</strong>) VS Programmer(<strong>码工</strong>)</p>
+</blockquote>
+<p>另一个印象比较深刻的是一个<strong>以色列小伙</strong>，才20岁出头，没有在大学接受教育，自学成才，技术方面的问题跟他沟通很顺畅，对不少问题也都有很深刻的<strong>见解</strong>，所有人都对他很满意。技术之外，我们也喜欢他积极主动的态度，据他说，受其工程师父亲的影响，他每天6点就起来开始学习和工作了，十年来从未停止过。很可惜，最后他没有加入我们team。</p>
+<p>面试中学到的大概是第一要技术过硬，有良好的解决问题的能力；第二是态度积极主动，对做过的项目要非常熟悉；第三是要尽量将自己定位成一个Engineer(<strong>工程师</strong>)，而不是Programmer(<strong>码工</strong>)。在国外，工程师和科学家是类似的名词；在国内，码工似乎和工人成了类似的名词。</p>
+<h2 id="工程方面"><a href="#工程方面" class="headerlink" title="工程方面"></a>工程方面</h2><p>面试是工作的插曲，最主要的还是做<strong>工程</strong>。在这个项目从0到1的过程中，经历了完整的项目过程；设计，架构，编码，测试，上线，fastlane CI/CD。</p>
+<h3 id="写文档"><a href="#写文档" class="headerlink" title="写文档"></a>写文档</h3><p>写文档是极容易被忽略的一个环节，但是不可否认是很重要的。好的文档可以让别人知道你想怎么做一件事，而且也可以让你在动手之前想清楚准备怎么做，也可以让后面加入的成员快速熟悉你所写的模块。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gq1urzyq2wj31610u0tb5.jpg" alt=""></p>
+<blockquote>
+<p>我最满意的文档截图，清楚的解释了Janus的步骤</p>
+</blockquote>
+<h2 id="Tech-talk"><a href="#Tech-talk" class="headerlink" title="Tech talk"></a>Tech talk</h2><p>Tech talk是每个组员做PPT来讲解自己某个方面的心得或者某个我们组准备新引入的设计模式，大家充分交流，留够Q&amp;A时间。每次都会有录屏，我都会回看3遍左右。</p>
+<h3 id="编码和Review代码"><a href="#编码和Review代码" class="headerlink" title="编码和Review代码"></a>编码和Review代码</h3><p>关于编码，Tech lead的要求是让这个项目看起来就像是一个人写的。我们尽量遵循相同的代码风格、命名规则等，使用了<a href="https://dart.dev/tools/dart-format" target="_blank" rel="external">Dart format</a>这个工具来规范<strong>code style</strong>。</p>
+<p>将代码提交为<strong>Pull Request</strong>供其他人review，至少2个<strong>Agree</strong>的PR才会被merge到QA Branch上。关于PR，要求一个PR代码不要太多，且只涉及单个模块，否则其他人很难做代码评审，遇到这种情况，应该将功能拆分为多个小的PR。</p>
+<p>高手Review我的代码，是让我感觉我这一年进步很大的最<strong>关键途径</strong>。开始的时候，我总是针对某个任务进行编码来解决某个问题，其他人就会提醒我，从更全局的层面去考虑问题，解决某类问题。</p>
+<p>除了自己编码，也有需要<strong>pair programming</strong>的时候，比如某个新特性，涉及你和他之前写的模块，就需要跟同事约好时间，分享自己的屏幕给对方，直播写代码，遇到他有疑问的时候，会打断你，总体还挺有意思的。</p>
+<p>这一年，我从其他开发者身上学到的主要有以下几点：</p>
+<ol>
+<li>对整体项目结构必须了如指掌，<strong>把代码放在正确的地方</strong></li>
+<li>让你的代码简洁而优雅，使得其他团队成员可以读懂代码并理解它打算做什么，必要的时候多<strong>写注释</strong></li>
+<li>实现某个功能过程中，多考虑考虑里面有没有可复用的代码，抽出来成为其他模块可用的<strong>组件</strong>或<strong>方法</strong></li>
+<li>每个工厂日都要有Commit，不要积攒到一起让别人不知所措，产生大量冲突</li>
+<li>礼貌地对待别人的review意见，<strong>不卑不亢</strong>。tech lead也不一定全对，因为他很可能并没有你了解你PR这块业务这么深刻。出现分歧后，在你发表意见时，不管对方是谁，都要尊重对方，耐心说服对方或被对方说服。</li>
+<li>从错误中学习，以免下次再犯类似错误。</li>
+</ol>
+<p>经过小半年的磨合，我的代码规范了很多，PR一次性通过率提升了不少，也得到了Tech lead的肯定。</p>
+
 
             <! -- 添加捐赠图标 -->
     <div class ="post-donate">
@@ -574,7 +610,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#工作内容"><span class="toc-number">1.</span> <span class="toc-text">工作内容</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#面试"><span class="toc-number">1.1.</span> <span class="toc-text">面试</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#工作内容"><span class="toc-number">1.</span> <span class="toc-text">工作内容</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#面试"><span class="toc-number">1.1.</span> <span class="toc-text">面试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#工程方面"><span class="toc-number">1.2.</span> <span class="toc-text">工程方面</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#写文档"><span class="toc-number">1.2.1.</span> <span class="toc-text">写文档</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Tech-talk"><span class="toc-number">1.3.</span> <span class="toc-text">Tech talk</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#编码和Review代码"><span class="toc-number">1.3.1.</span> <span class="toc-text">编码和Review代码</span></a></li></ol></li></ol></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
@@ -587,6 +623,28 @@ top:50vh;
     <div class="sidebar-content sidebar-content-show-archive">
           <div class="sidebar-panel-archives">
     <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -1531,12 +1589,31 @@ top:50vh;
     
         </ul>
     
+    <div class="archive-year"> 2014 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/Build reuseable visualization using d3.js and AngularJS/" >Build reusable visualization using d3.js and AngularJS</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/drop and drag in d3js/" >drop and drag in d3</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
     <div class="archive-year"> Invalid date </div>
     <ul class="year-list">
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2021/04/20/workAsContractor2/" >在中国远程为美企工作一年杂记（中）</a>
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2018/11/25/BigScreen/" >两个大屏可视化案例的实现</a>
         </li>
     
     
@@ -1550,7 +1627,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/drop and drag in d3js/" >drop and drag in d3</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/polybrush in d3/" >polybrush in d3</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/数据可视化之散点图/" >数据可视化之散点图</a>
         </li>
     
     
@@ -1578,31 +1660,7 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2018/10/31/match5/" >Match开发笔记 伍 3.0版的新功能与上架</a>
-        </li>
-    
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> 2014 </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2021/04/20/workAsContractor2/" >在中国远程为美企工作一年杂记（中）</a>
         </li>
     
     
@@ -1630,32 +1688,22 @@ top:50vh;
     
     
         <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
             <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/浅谈d3.js中的异步文件读取的处理/" >浅谈d3.js中强制异步文件读取同步的四种方法</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/数据可视化之散点图/" >数据可视化之散点图</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/Build reuseable visualization using d3.js and AngularJS/" >Build reusable visualization using d3.js and AngularJS</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular/" >D3 on Angular</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/polybrush in d3/" >polybrush in d3</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">04/24</span><a class="archive-post-title" href= "/2014/04/24/用Java生成Json文件/" >用Java生成Json文件</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
         </li>
     
     
@@ -1669,7 +1717,26 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2018/11/25/BigScreen/" >两个大屏可视化案例的实现</a>
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2018/10/31/match5/" >Match开发笔记 伍 3.0版的新功能与上架</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2014 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular/" >D3 on Angular</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/24</span><a class="archive-post-title" href= "/2014/04/24/用Java生成Json文件/" >用Java生成Json文件</a>
         </li>
     
     </div>
@@ -1677,23 +1744,23 @@ top:50vh;
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
-        <span class="sidebar-tag-name" data-tags="Flutter"><span class="iconfont-archer">&#xe606;</span>Flutter</span>
-    
         <span class="sidebar-tag-name" data-tags="前端学习笔记"><span class="iconfont-archer">&#xe606;</span>前端学习笔记</span>
     
         <span class="sidebar-tag-name" data-tags="大屏可视化"><span class="iconfont-archer">&#xe606;</span>大屏可视化</span>
     
-        <span class="sidebar-tag-name" data-tags="d3"><span class="iconfont-archer">&#xe606;</span>d3</span>
+        <span class="sidebar-tag-name" data-tags="Flutter"><span class="iconfont-archer">&#xe606;</span>Flutter</span>
     
         <span class="sidebar-tag-name" data-tags="swift"><span class="iconfont-archer">&#xe606;</span>swift</span>
     
-        <span class="sidebar-tag-name" data-tags="macOS开发"><span class="iconfont-archer">&#xe606;</span>macOS开发</span>
+        <span class="sidebar-tag-name" data-tags="d3"><span class="iconfont-archer">&#xe606;</span>d3</span>
     
-        <span class="sidebar-tag-name" data-tags="随感"><span class="iconfont-archer">&#xe606;</span>随感</span>
+        <span class="sidebar-tag-name" data-tags="macOS开发"><span class="iconfont-archer">&#xe606;</span>macOS开发</span>
     
         <span class="sidebar-tag-name" data-tags="iOS开发"><span class="iconfont-archer">&#xe606;</span>iOS开发</span>
     
         <span class="sidebar-tag-name" data-tags="GIS"><span class="iconfont-archer">&#xe606;</span>GIS</span>
+    
+        <span class="sidebar-tag-name" data-tags="随感"><span class="iconfont-archer">&#xe606;</span>随感</span>
     
         <span class="sidebar-tag-name" data-tags="SVG"><span class="iconfont-archer">&#xe606;</span>SVG</span>
     
@@ -1738,11 +1805,11 @@ jsonContent:
         <div class="sidebar-panel-categories">
     <div class="sidebar-categories-name">
     
-        <span class="sidebar-category-name" data-categories="Flutter"><span class="iconfont-archer">&#xe60a;</span>Flutter</span>
-    
         <span class="sidebar-category-name" data-categories="前端"><span class="iconfont-archer">&#xe60a;</span>前端</span>
     
         <span class="sidebar-category-name" data-categories="visualization"><span class="iconfont-archer">&#xe60a;</span>visualization</span>
+    
+        <span class="sidebar-category-name" data-categories="Flutter"><span class="iconfont-archer">&#xe60a;</span>Flutter</span>
     
         <span class="sidebar-category-name" data-categories="苹果开发"><span class="iconfont-archer">&#xe60a;</span>苹果开发</span>
     
