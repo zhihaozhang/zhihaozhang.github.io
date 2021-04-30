@@ -372,12 +372,15 @@
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2014/11/15/浅谈d3.js中的异步文件读取的处理/" >
+        <a class="abstract-title" href = "/2014/11/15/drop and drag in d3js/" >
             
-                <span>浅谈d3.js中强制异步文件读取同步的四种方法</span>
+                <span>drop and drag in d3</span>
         </a>
         <div class="abstract-content">
-            问题提出在使用d3.js时，我们经常会使用d3.csv()或者d3.json()函数来从文件中读取出数据，不幸的是，偶尔代码的结果并不是我们预料的那样。习惯了过程式编程的我开始的时候也是这样，最让人头疼的是javascript并不会告诉你问题出在哪里了。我第一次遇到这个问题的时候，找了半天bug，确定代码主体部分没有问题之后，我只能开始使用console.log()将变量一个一个的输出到控制台里。第一次遇到这个问题时的图片是这样的：问题出在第72行和第75行，中间几行完全没有对ordertxt进行操作，但是最后的结果就是和预想的输出不吻合，后来找了个其他方法把这个问题给解决了，今天又遇到...
+            Behavior in d3在d3中，行为被设计成了一种组件，可以创建一系列的事件，并绑定到调用这些行为的元素上。最常见的行为有拖拽与缩放，使用这些行为可以很方便地在拖拽或者缩放的开始、过程中以及结束时达到想要的效果。
+这篇博客中，就以拖拽为例，并借助之前实现的热力图，实现拖拽dimension的label以达到reoder维度的效果。为了使用三个阶段，我们会让开始拖拽的时候，维度名变成红色、字体变大来表示强调的效果；在拖拽过程中，让label紧跟鼠标的位置；并且判断最终的位置，交换两个维度，并重新绘制整个热力图。
+理想情况下，开始移动的时候的，运行情况应该像下面这样。
+drag创建一个...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -480,6 +483,22 @@
     <div class="sidebar-content sidebar-content-show-archive">
           <div class="sidebar-panel-archives">
     <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -1429,11 +1448,6 @@
         </li>
     
     
-        <li class="archive-post-item">
-            <span class="archive-post-date">09/29</span><a class="archive-post-title" href= "/2017/09/29/mouseSyncII/" >mouseSync后续功能完善心得</a>
-        </li>
-    
-    
     
     
     
@@ -1458,7 +1472,17 @@
     
     
         <li class="archive-post-item">
+            <span class="archive-post-date">09/29</span><a class="archive-post-title" href= "/2017/09/29/mouseSyncII/" >mouseSync后续功能完善心得</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
             <span class="archive-post-date">09/26</span><a class="archive-post-title" href= "/2017/09/26/青芒 for Mac客户端开发笔记/" >青芒 for Mac客户端开发笔记</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/23</span><a class="archive-post-title" href= "/2017/09/23/让iMac与MacBook高效协同工作——mouseSync开发心得/" >让iMac与MacBook高效协同工作——mouseSync开发心得</a>
         </li>
     
     
@@ -1481,6 +1505,35 @@
     
         </ul>
     
+    <div class="archive-year"> 2014 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/数据可视化之散点图/" >数据可视化之散点图</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/polybrush in d3/" >polybrush in d3</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
     <div class="archive-year"> Invalid date </div>
     <ul class="year-list">
     
@@ -1495,41 +1548,12 @@
     
         </ul>
     
-    <div class="archive-year"> 2017 </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">09/23</span><a class="archive-post-title" href= "/2017/09/23/让iMac与MacBook高效协同工作——mouseSync开发心得/" >让iMac与MacBook高效协同工作——mouseSync开发心得</a>
-        </li>
-    
-    
-    
-    
-    
-        </ul>
-    
     <div class="archive-year"> 2014 </div>
     <ul class="year-list">
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/polybrush in d3/" >polybrush in d3</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/Build reuseable visualization using d3.js and AngularJS/" >Build reusable visualization using d3.js and AngularJS</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/drop and drag in d3js/" >drop and drag in d3</a>
         </li>
     
     
@@ -1539,22 +1563,17 @@
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/数据可视化之散点图/" >数据可视化之散点图</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/Build reuseable visualization using d3.js and AngularJS/" >Build reusable visualization using d3.js and AngularJS</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
         </li>
     
     
         <li class="archive-post-item">
             <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular/" >D3 on Angular</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/drop and drag in d3js/" >drop and drag in d3</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
         </li>
     
     
@@ -1585,9 +1604,9 @@
     
         <span class="sidebar-tag-name" data-tags="前端学习笔记"><span class="iconfont-archer">&#xe606;</span>前端学习笔记</span>
     
-        <span class="sidebar-tag-name" data-tags="d3"><span class="iconfont-archer">&#xe606;</span>d3</span>
-    
         <span class="sidebar-tag-name" data-tags="大屏可视化"><span class="iconfont-archer">&#xe606;</span>大屏可视化</span>
+    
+        <span class="sidebar-tag-name" data-tags="d3"><span class="iconfont-archer">&#xe606;</span>d3</span>
     
         <span class="sidebar-tag-name" data-tags="swift"><span class="iconfont-archer">&#xe606;</span>swift</span>
     
@@ -1601,13 +1620,13 @@
     
         <span class="sidebar-tag-name" data-tags="SVG"><span class="iconfont-archer">&#xe606;</span>SVG</span>
     
-        <span class="sidebar-tag-name" data-tags="效率"><span class="iconfont-archer">&#xe606;</span>效率</span>
-    
         <span class="sidebar-tag-name" data-tags="SwiftTips"><span class="iconfont-archer">&#xe606;</span>SwiftTips</span>
     
         <span class="sidebar-tag-name" data-tags="工作总结"><span class="iconfont-archer">&#xe606;</span>工作总结</span>
     
         <span class="sidebar-tag-name" data-tags="Json"><span class="iconfont-archer">&#xe606;</span>Json</span>
+    
+        <span class="sidebar-tag-name" data-tags="效率"><span class="iconfont-archer">&#xe606;</span>效率</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
@@ -1658,11 +1677,11 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="视频直播应用"><span class="iconfont-archer">&#xe60a;</span>视频直播应用</span>
     
-        <span class="sidebar-category-name" data-categories="监控"><span class="iconfont-archer">&#xe60a;</span>监控</span>
-    
         <span class="sidebar-category-name" data-categories="工作总结"><span class="iconfont-archer">&#xe60a;</span>工作总结</span>
     
         <span class="sidebar-category-name" data-categories="Java"><span class="iconfont-archer">&#xe60a;</span>Java</span>
+    
+        <span class="sidebar-category-name" data-categories="监控"><span class="iconfont-archer">&#xe60a;</span>监控</span>
     
     </div>
     <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
