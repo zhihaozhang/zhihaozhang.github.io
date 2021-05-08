@@ -15,7 +15,7 @@
     <meta name="description" content="">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>D3 on Angular · Zhihao&#39;s Studio</title>
+    <title>在中国远程为美企工作一年杂记（下） · Zhihao&#39;s Studio</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -210,7 +210,7 @@
                 <a href="/" >Zhihao&#39;s Studio.</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">D3 on Angular</a>
+                <a href="#" class="post-name">在中国远程为美企工作一年杂记（下）</a>
             </div>
     </div>
     
@@ -242,7 +242,7 @@ height:50vh;
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            D3 on Angular
+            在中国远程为美企工作一年杂记（下）
             <!-- 404 -->
             
         </h1>
@@ -261,18 +261,18 @@ height:50vh;
                 
                     <div class= post-intro-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "d3">d3</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "工作总结">工作总结</a>
     
 </div>
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count">1,327</span> / Reading time: <span class="post-count">5 min</span></span>
+                        <span>Word count: <span class="post-count">1,229</span> / Reading time: <span class="post-count">4 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
                     <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                    <span class="post-intro-time">2014/11/15</span>
+                    <span class="post-intro-time">2021/05/08</span>
                     
                     <span id="busuanzi_container_page_pv" class="busuanzi-pv">
                         <span class="iconfont-archer">&#xe602;</span>
@@ -396,19 +396,25 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <h1 id="Angular与D3"><a href="#Angular与D3" class="headerlink" title="Angular与D3"></a>Angular与D3</h1><p>前面写了几篇分别介绍AngularJS和D3的博客，他们各司其职，都在各自的一亩三分地里备受好评，那么，他们之间能否完成合作，实现共赢呢？这篇博客就来介绍如何将它们结合起来使用，使得我们的可视化能够更具有<strong>模块化</strong>、<strong>方便复用</strong>、<strong>具有交互性</strong>。</p>
-<h1 id="Why-Angular"><a href="#Why-Angular" class="headerlink" title="Why Angular"></a>Why Angular</h1><p>使用Angular做可视化有很多原因，但其中最主要的原因还是<em>directives(指令)</em>。 指令使得做可复用的可视化更容易，可以使得我们做的可视化的时候就像使用内置的HTML那么简单，比如我需要一个热力图（后面写博客怎么做），那么我仅仅需要用\<heatmap\>\</heatmap\>就可以了，想想这种酸爽的滋味吧。即使你不知道热力图是怎么做的，但是你用directive就可以很容易的使用他。</p>
-<p>另外，还有其他的原因，比如我们就可以使用Angular提供的其他内置的指令来工作了，比如使用ng-switch来使得在特定条件下才展示可视化图；如果我有一个数组，用ng-repeat指令可以绘制很多个图，这些都是Angular可以替你完成的。</p>
-<p>最后一个优势是，AngularJS让建立associate更新更容易的。就像之前的associate brush那篇博客写的那样，没有AngularJS，我不得不找一个id来使得Radviz和scatterplot matrix联系起来，不过有了AngularJS，我们只需要处理好scope里数据的更新即可。</p>
-<p>大部分的web框架建议开发者使用MVC设计模式，在Angular中，大部分情况下，V和M是自动联系起来的，这种双向绑定就发生在scope里。只要改变scope里的变量，它的变化会被自动发送到DOM，因此Angular并不是严格意义上的MVC，而是Model,View,Whatever.</p>
-<h1 id="理解directives"><a href="#理解directives" class="headerlink" title="理解directives"></a>理解directives</h1><p>指令通过给我们权限去建立自己的HTML tags来实现复用。在某种程度上，你已经在用指令了，比如\<input\>\</input\>就是一个指令，他们由几个UI元素的组合而成，不过通过html5展现给你的就是一个简单的API，我们不需要知道他们内部是如何实现的。但是我们可以用它在不同的情况下让用户来输入电子邮件，日期，数值等等。。<br>下面我们来完成一个自己的directive,功能让这个指定说hello world吧。先建立自己的模块myApp,然后在这个模块中建立指令helloWorld。<br>如果你熟悉面向对象编程，应该熟悉构造函数，在指令中，构造函数就是<strong>link函数</strong>，这个函数中包含了这个元素出现在HTML时，所有应该发生的事情。<br>restrict有ACME，这些都是Angular的基础，这里不多介绍了，这里我们使用E。完整的代码如下图所示。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">//  \&lt;html\&gt;</div><div class="line">//  \&lt;head lang=&quot;en&quot;\&gt;</div><div class="line">//    \&lt;meta charset=&quot;UTF-8&quot;\&gt;</div><div class="line">//    \&lt;script src=&quot;./d3.js&quot;\&gt;\&lt;/script\&gt;</div><div class="line">//    \&lt;script src=&quot;./angular.js&quot;\&gt;\&lt;/script\&gt;</div><div class="line">//    \&lt;script src=&quot;./sc.js&quot;\&gt;</div><div class="line">//      var myApp = angular.module(&apos;myApp&apos;,[]());</div><div class="line">//  </div><div class="line">//      myApp.directive(&apos;helloWorld&apos;,function()&#123;</div><div class="line">//  </div><div class="line">//        function link(scope,element,attr)&#123;</div><div class="line">//          element.text=&apos;hello world!&apos;;</div><div class="line">//        &#125;</div><div class="line">//        return &#123;</div><div class="line">//          link:link,</div><div class="line">//          restrict:&apos;E&apos;</div><div class="line">//        &#125;</div><div class="line">//  </div><div class="line">//      &#125;)</div><div class="line">//  </div><div class="line">//    \&lt;/script\&gt;</div><div class="line">//    \&lt;title\&gt;\&lt;/title\&gt;</div><div class="line">//  \&lt;/head\&gt;</div><div class="line">//  \&lt;body ng-app=&quot;myApp&quot;\&gt;</div><div class="line">//    \&lt;hello-world\&gt;hello world!\&lt;/hello-world\&gt;</div><div class="line">//  </div><div class="line">//  </div><div class="line">//  \&lt;/body\&gt;</div><div class="line">//  \&lt;/html\&gt;</div><div class="line"></div></pre></td></tr></table></figure>
-<h1 id="reusable-visualization-directive"><a href="#reusable-visualization-directive" class="headerlink" title="reusable visualization directive"></a>reusable visualization directive</h1><p>上面展示的例子虽然正确，但是却没什么用，这节就完成一个可复用的donut chart指令。首先用d3绘制一个，代码如下:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">//    \&lt;script\&gt;</div><div class="line">//      var color = d3.scale.category10();</div><div class="line">//      var data =[10,20,30]();</div><div class="line">//      var width =300;</div><div class="line">//      var height = 300;</div><div class="line">//      var min = Math.min(width,height);</div><div class="line">//      var svg = d3.select(&apos;body&apos;).append(&apos;svg&apos;);</div><div class="line">//      var pie = d3.layout.pie().sort(null);</div><div class="line">//  </div><div class="line">//      var arc = d3.svg.arc().outerRadius(min/2*0.9).innerRadius(min/2*0.5);</div><div class="line">//  </div><div class="line">//      svg.attr(&#123;width:width,height:height&#125;);</div><div class="line">//  </div><div class="line">//      var g = svg.append(&apos;g&apos;)</div><div class="line">//          .attr(&apos;transform&apos;,&apos;translate(&apos;+width/2+&apos;,&apos;+height/2+&apos;)&apos;);</div><div class="line">//  </div><div class="line">//      g.selectAll(&apos;path&apos;).data(pie(data))</div><div class="line">//          .enter().append(&apos;path&apos;)</div><div class="line">//          .style(&apos;stroke&apos;,&apos;white&apos;)</div><div class="line">//          .attr(&apos;d&apos;,arc)</div><div class="line">//          .attr(&apos;fill&apos;,function(d,i)&#123;return color(i)&#125;)</div><div class="line">//  </div><div class="line">//  </div><div class="line">//    \&lt;/script\&gt;</div><div class="line"></div></pre></td></tr></table></figure>
-<p>和上面的hello world一样，我们需要在module里设置新的指令,不同之处是将名字改成了donutChart了。在link函数里，我们将上面的d3代码全部拷贝进去，不过有些地方也得<strong>变一下</strong>，我们需要将d3.select(‘body’)改成d3.select(element<a href="">0</a>),从全局的dom改成了相对的。为什么不直接使用element呢？因为element是一个jQuery的selection，不是一个DOM元素。<br>如果顺利，将会得到下面的结果。<br><img src="http://i13.tietuku.cn/bf49b11d65040556.jpg" alt=""></p>
-<p>成功了，我们完成了可视化图的复用！</p>
-<h1 id="Isolate-scope"><a href="#Isolate-scope" class="headerlink" title="Isolate scope"></a>Isolate scope</h1><p>但是聪明的你很快就发现了问题，我们的可视化图无论何时都是一样的，这可不行！我们希望可以自己传一些数据，比如第一个图是1，2，3，4；第二个图是2，3，4，5；这样才勉强可以。<br>为了达到这样的目的，我们需要用一个叫isolate scope的东西。它允许我们使用attribute传递数据到指令中。告诉Angular我们的指令需要有一个isolate scope的方法很简单，我们只需从指令声明的返回处增加一个scope属性即可。 在restrict下面增加一行scope:{data:’=},在link函数中，我们就可以直接用scope.data了。<br>当我们使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">\&lt;bodyng-app=&quot;myApp&quot;ng-init=&quot;ourSharedData=[8,2,9]()&quot;\&gt; </div><div class="line">\&lt;donut-chart data=&quot;ourSharedData&quot;\&gt;\&lt;/donut-chart\&gt; </div><div class="line">\&lt;donut-chart data=&quot;ourSharedData&quot;\&gt;\&lt;/donut-chart\&gt; </div><div class="line">\&lt;donut-chart data=&quot;ourSharedData&quot;\&gt;\&lt;/donut-chart\&gt; </div><div class="line"></div></pre></td></tr></table></figure><br>时候，确实达到了我们想要的效果。</p>
-<p><strong>未完待续…</strong> </p>
+        <h1 id="High-level-overview"><a href="#High-level-overview" class="headerlink" title="High-level overview"></a>High-level overview</h1><p>下图是我们应用从整体上的一个架构图，基本上概括了各个模块之间的关系。<br><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gqb4gzysv8j30jt0y0mya.jpg" alt=""></p>
+<p>下面简要说一下各个模块，不涉及过多技术细节。</p>
+<h2 id="音视频直播"><a href="#音视频直播" class="headerlink" title="音视频直播"></a>音视频直播</h2><p>音视频直播这块，选用了<a href="https://janus.conf.meetecho.com" target="_blank" rel="external">Janus</a>,这是<strong>WebRTC</strong>的流媒体服务器，是由<a href="https://www.meetecho.com" target="_blank" rel="external">meetecho公司</a>开发&amp;开源的，本身也处于变化之中，也有一些bug。为了解决这些bug，公司甚至聘请了meetecho公司的员工作为<strong>顾问</strong>来进行个性化定制，开发定制化的plugin插件，以及解决一些<strong>疑难杂症</strong>。</p>
+<p>Janus本身的步骤比较固定，但步骤挺多的(参考下图)，大概有十几步，涉及的概念比较多，观众侧和主持人侧步骤也有差异，这篇展开技术的细节了。最初的实现，是参照官网的Javascript版本实现用<strong>Dart</strong>语言改写的，在第一个视频通话成功接通的那一刻，我兴奋到跳起来了，很久没有这种<strong>成就感满满</strong>的感受了。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gq1urzyq2wj31610u0tb5.jpg" alt=""></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gqb4j3alo3j30vk0a00to.jpg" alt=""></p>
+<h2 id="文字聊天-amp-amp-特定通知"><a href="#文字聊天-amp-amp-特定通知" class="headerlink" title="文字聊天&amp;&amp;特定通知"></a>文字聊天&amp;&amp;特定通知</h2><p>视频使用video-plugin、音频使用audio-plugin,文字聊天功能也是一种特定的Janus Plugin(text-room plugin)，借助这个插件，我们不仅实现了文字聊天功能，也实现了一些特定指令的<strong>广播</strong>和Interaction信息的交换。</p>
+<p>举其中一个例子：主持人由于一些原因把camera关闭了，但是还是可以说话的，为了对粉丝观众造成困惑，就会发送一个通知给到粉丝手机，然后解析出来，展示一个toast告诉用户主持人还在线，只是把<strong>相机</strong>暂时关闭了。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gqb5b9cpgkj31sz0u0dg4.jpg" alt=""></p>
+<h2 id="Interactions"><a href="#Interactions" class="headerlink" title="Interactions"></a>Interactions</h2><p>Interactions over live stream是我们应用的一大卖点，也是通过text-room plugin在主持人和粉丝直接进行交换信息的。信息很复杂，model文件中的属性就有很多项，关键的属性有：坐标、交互类型、是否隐藏、是否需要强调（用一个循环的水波纹动画表示）、附带的信息（商品地址、网站地址、电话号码、Email等…）、字体、颜色等。<br><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gqb5c0hw43j30u01szgsh.jpg" alt=""></p>
+<p>这块几乎是由我完成的，其中遇到了很多坑，记忆比较深刻的有手势缩放在小屏幕上比较难操作的问题、点开某个购物网站需要二次登陆的问题。</p>
+<p>购物这块接入的是<strong>Shopify</strong>，硬啃着英文说明文档把这块搞出来了，挺不易的。</p>
+<h2 id="Firebase"><a href="#Firebase" class="headerlink" title="Firebase"></a>Firebase</h2><p>跟Shopify一样，<a href="https://firebase.google.cn" target="_blank" rel="external">Firebase</a>是国外比较流行的强大工具，第一次知道它是在一次谷歌开发者大会上，在这个项目里，重度的使用了它的一些功能(remote config/performance tracker/Google analytics)，也旁观其他人使用了CI/CD的功能，以及crashlytics来记录和分析出现的bug，详细记录了bug的报错、手机的版本号、用户所在的<strong>地区</strong>等，还真遇到个地区相关的问题，后面发现是由于在某个国家科学上网后，网速慢造成的。</p>
+<h2 id="用户认证模块"><a href="#用户认证模块" class="headerlink" title="用户认证模块"></a>用户认证模块</h2><p>用户认证模块使用了<a href="https://auth0.com" target="_blank" rel="external">Auth0</a>，它方便的集成了各种第三方认证方式，比如Facebook/google/apple/twitter/微软 login，但也遇到了一个坑:apple login只有在第一次登陆的时候会提供first name，last name以及email，后面为了保护用户隐私，Email都是<strong>fake</strong>的，这个与我们的某个业务有所冲突，只得让后端写了api记录下了这些只有第一次才能获取到的信息。</p>
+<h1 id="stand-up-meeting"><a href="#stand-up-meeting" class="headerlink" title="stand-up meeting"></a>stand-up meeting</h1><p>每天的站立会议，大家会首先汇报一下自己今天做了些什么，有没有被<strong>block</strong>住，然后说一下明天准备做什么。有时候也会对某个PR的Review代码的意见进行讨论，讨论是通常是最有价值的部分，权衡各种方案、选型的优缺点。</p>
+<p>唯一的缺点是，开会的时间点是我这边半夜，开完会都1-3点了，而且开完会比较兴奋，很难短时间内入睡。不知道是不是太投入了，老婆说我说梦话说的都是英语。。。</p>
+<h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><p>由于老婆到了孕晚期了，我儿子还有3个月就要出生了，思前想后还是辞去了这份兼职工作，来向家庭倾斜。</p>
+<p>回想这一年，确实解决了蛮多的问题，也接触到了很多新事物（流媒体/firebase/shopify），回头看总体还是学到了蛮多。前两篇都有提到的那个Engineer VS Coder的对话一直激励着我克服这些困难，因为我对于自己的定位是Engineer，Engineer天生就是解决问题的。</p>
+<p>挺特别的一段经历，感谢在做这个项目过程中遇到的每个人！</p>
 
 
             <! -- 添加捐赠图标 -->
@@ -436,8 +442,8 @@ height:50vh;
     
         <div class="license-wrapper">
             <p>原文作者: <a href="http://zhihaozhang.github.io">Chih-Hao</a>
-            <p>原文链接: <a href="http://zhihaozhang.github.io/2014/11/15/D3 on Angular/">http://zhihaozhang.github.io/2014/11/15/D3 on Angular/</a>
-            <p>发表日期: <a href="http://zhihaozhang.github.io/2014/11/15/D3 on Angular/">November 15th 2014, 1:54:57 pm</a>
+            <p>原文链接: <a href="http://zhihaozhang.github.io/2021/05/08/workAsContractorIII/">http://zhihaozhang.github.io/2021/05/08/workAsContractorIII/</a>
+            <p>发表日期: <a href="http://zhihaozhang.github.io/2021/05/08/workAsContractorIII/">五月 8日 2021, 4:28:30 下午</a>
             <p>版权声明: 本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -455,17 +461,12 @@ height:50vh;
     <ul class="post-paginator">
         <li class="next">
             
-                <div class="nextSlogan">Next Post</div>
-                <a href= "/2014/11/15/associate brush/" title= associate brush >
-                    <div class="nextTitle">associate brush</div>
-                </a>
-            
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href= "/2014/11/15/D3 on Angular(2)/" title= D3 on Angular(2) >
-                    <div class="prevTitle">D3 on Angular(2)</div>
+                <a href= "/2021/04/30/workAsContractorII/" title= 在中国远程为美企工作一年杂记（中） >
+                    <div class="prevTitle">在中国远程为美企工作一年杂记（中）</div>
                 </a>
             
         </li>
@@ -584,7 +585,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Angular与D3"><span class="toc-number">1.</span> <span class="toc-text">Angular与D3</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Why-Angular"><span class="toc-number">2.</span> <span class="toc-text">Why Angular</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#理解directives"><span class="toc-number">3.</span> <span class="toc-text">理解directives</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#reusable-visualization-directive"><span class="toc-number">4.</span> <span class="toc-text">reusable visualization directive</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Isolate-scope"><span class="toc-number">5.</span> <span class="toc-text">Isolate scope</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#High-level-overview"><span class="toc-number">1.</span> <span class="toc-text">High-level overview</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#音视频直播"><span class="toc-number">1.1.</span> <span class="toc-text">音视频直播</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文字聊天-amp-amp-特定通知"><span class="toc-number">1.2.</span> <span class="toc-text">文字聊天&&特定通知</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Interactions"><span class="toc-number">1.3.</span> <span class="toc-text">Interactions</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Firebase"><span class="toc-number">1.4.</span> <span class="toc-text">Firebase</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#用户认证模块"><span class="toc-number">1.5.</span> <span class="toc-text">用户认证模块</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#stand-up-meeting"><span class="toc-number">2.</span> <span class="toc-text">stand-up meeting</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#后记"><span class="toc-number">3.</span> <span class="toc-text">后记</span></a></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
