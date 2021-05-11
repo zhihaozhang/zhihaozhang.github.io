@@ -267,7 +267,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count">1,229</span> / Reading time: <span class="post-count">4 min</span></span>
+                        <span>Word count: <span class="post-count">1,508</span> / Reading time: <span class="post-count">5 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -410,11 +410,13 @@ height:50vh;
 <p>购物这块接入的是<strong>Shopify</strong>，硬啃着英文说明文档把这块搞出来了，挺不易的。</p>
 <h2 id="Firebase"><a href="#Firebase" class="headerlink" title="Firebase"></a>Firebase</h2><p>跟Shopify一样，<a href="https://firebase.google.cn" target="_blank" rel="external">Firebase</a>是国外比较流行的强大工具，第一次知道它是在一次谷歌开发者大会上，在这个项目里，重度的使用了它的一些功能(remote config/performance tracker/Google analytics)，也旁观其他人使用了CI/CD的功能，以及crashlytics来记录和分析出现的bug，详细记录了bug的报错、手机的版本号、用户所在的<strong>地区</strong>等，还真遇到个地区相关的问题，后面发现是由于在某个国家科学上网后，网速慢造成的。</p>
 <h2 id="用户认证模块"><a href="#用户认证模块" class="headerlink" title="用户认证模块"></a>用户认证模块</h2><p>用户认证模块使用了<a href="https://auth0.com" target="_blank" rel="external">Auth0</a>，它方便的集成了各种第三方认证方式，比如Facebook/google/apple/twitter/微软 login，但也遇到了一个坑:apple login只有在第一次登陆的时候会提供first name，last name以及email，后面为了保护用户隐私，Email都是<strong>fake</strong>的，这个与我们的某个业务有所冲突，只得让后端写了api记录下了这些只有第一次才能获取到的信息。</p>
-<h1 id="stand-up-meeting"><a href="#stand-up-meeting" class="headerlink" title="stand-up meeting"></a>stand-up meeting</h1><p>每天的站立会议，大家会首先汇报一下自己今天做了些什么，有没有被<strong>block</strong>住，然后说一下明天准备做什么。有时候也会对某个PR的Review代码的意见进行讨论，讨论是通常是最有价值的部分，权衡各种方案、选型的优缺点。</p>
-<p>唯一的缺点是，开会的时间点是我这边半夜，开完会都1-3点了，而且开完会比较兴奋，很难短时间内入睡。不知道是不是太投入了，老婆说我说梦话说的都是英语。。。</p>
+<h1 id="stand-up-meeting"><a href="#stand-up-meeting" class="headerlink" title="stand-up meeting"></a>stand-up meeting</h1><p>每天的站立会议，大家会首先汇报一下自己今天做了些什么，有没有被<strong>block</strong>住，然后说一下明天准备做什么。有时候也会对某个PR的Review代码的意见进行讨论，讨论是通常是这个会议最<strong>有价值</strong>的部分，权衡各种方案、选型的优缺点，组长的</p>
+<p>唯一的缺点是，开会的时间点是我这边半夜，开完会都1-3点了，而且开完会比较兴奋，很难短时间内入睡。不知道是不是太投入了，老婆说我说梦话说的都是英语。</p>
+<p>但是长期熬夜对身体也有一定损伤，直观的感受是睡不够、掉头发，特别是开始的几个月，对Flutter的使用不够熟练，外加之前未曾接触过的直播和firebase，shopify文档，特别焦虑，好在三个月后渐入佳境，运用的得心应手了。</p>
 <h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><p>由于老婆到了孕晚期了，我儿子还有3个月就要出生了，思前想后还是辞去了这份兼职工作，来向家庭倾斜。</p>
 <p>回想这一年，确实解决了蛮多的问题，也接触到了很多新事物（流媒体/firebase/shopify），回头看总体还是学到了蛮多。前两篇都有提到的那个Engineer VS Coder的对话一直激励着我克服这些困难，因为我对于自己的定位是Engineer，Engineer天生就是解决问题的。</p>
-<p>挺特别的一段经历，感谢在做这个项目过程中遇到的每个人！</p>
+<p>其实刚加入team的时候，Flutter<strong>方兴未艾</strong>，包括最早的Tech lead也没有太多实战经验(半年后加入的Tech lead经验颇丰)，招人也不太好招，所以能够得到这份工作机会确实有很多幸运的成分在里面。后来面试过程中，遇到了很多原生开发者和前端开发者情况跟我们刚组建team的时候非常类似，候选者有一些iOS/安卓/web开发经验，但是Flutter的经验不是很充足。但由于随着组内成员的共同进步，大家都看不上这样的人了，虽然开始的时候，我们也都是这样的人。</p>
+<p>总体来说，过去一年是挺特别的一段经历，感谢在做这个项目过程中遇到的每个人！</p>
 
 
             <! -- 添加捐赠图标 -->
@@ -598,6 +600,26 @@ top:50vh;
     <div class="sidebar-content sidebar-content-show-archive">
           <div class="sidebar-panel-archives">
     <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -1580,17 +1602,7 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/Build reuseable visualization using d3.js and AngularJS/" >Build reusable visualization using d3.js and AngularJS</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/drop and drag in d3js/" >drop and drag in d3</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/数据可视化之散点图/" >数据可视化之散点图</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/浅谈d3.js中的异步文件读取的处理/" >浅谈d3.js中强制异步文件读取同步的四种方法</a>
         </li>
     
     
@@ -1599,17 +1611,8 @@ top:50vh;
         </li>
     
     
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> Invalid date </div>
-    <ul class="year-list">
-    
-    
         <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2019/05/29/BMapOfflineDeath/" >百度离线地图之死</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular/" >D3 on Angular</a>
         </li>
     
     
@@ -1637,17 +1640,45 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/浅谈d3.js中的异步文件读取的处理/" >浅谈d3.js中强制异步文件读取同步的四种方法</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/drop and drag in d3js/" >drop and drag in d3</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/Build reuseable visualization using d3.js and AngularJS/" >Build reusable visualization using d3.js and AngularJS</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2019/05/29/BMapOfflineDeath/" >百度离线地图之死</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2014 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/数据可视化之散点图/" >数据可视化之散点图</a>
         </li>
     
     
@@ -1662,6 +1693,20 @@ top:50vh;
     
         <li class="archive-post-item">
             <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2018/11/25/BigScreen/" >两个大屏可视化案例的实现</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2014 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/冷门但实用的d3.js内置函数/" >冷门但实用的d3.js内置函数</a>
         </li>
     
     
@@ -1689,12 +1734,7 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular(2)/" >D3 on Angular(2)</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/D3 on Angular/" >D3 on Angular</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2014/11/15/associate brush/" >associate brush</a>
         </li>
     
     
@@ -1711,17 +1751,17 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="前端学习笔记"><span class="iconfont-archer">&#xe606;</span>前端学习笔记</span>
     
-        <span class="sidebar-tag-name" data-tags="大屏可视化"><span class="iconfont-archer">&#xe606;</span>大屏可视化</span>
-    
         <span class="sidebar-tag-name" data-tags="d3"><span class="iconfont-archer">&#xe606;</span>d3</span>
     
-        <span class="sidebar-tag-name" data-tags="swift"><span class="iconfont-archer">&#xe606;</span>swift</span>
+        <span class="sidebar-tag-name" data-tags="大屏可视化"><span class="iconfont-archer">&#xe606;</span>大屏可视化</span>
     
         <span class="sidebar-tag-name" data-tags="macOS开发"><span class="iconfont-archer">&#xe606;</span>macOS开发</span>
     
-        <span class="sidebar-tag-name" data-tags="随感"><span class="iconfont-archer">&#xe606;</span>随感</span>
+        <span class="sidebar-tag-name" data-tags="swift"><span class="iconfont-archer">&#xe606;</span>swift</span>
     
         <span class="sidebar-tag-name" data-tags="iOS开发"><span class="iconfont-archer">&#xe606;</span>iOS开发</span>
+    
+        <span class="sidebar-tag-name" data-tags="随感"><span class="iconfont-archer">&#xe606;</span>随感</span>
     
         <span class="sidebar-tag-name" data-tags="GIS"><span class="iconfont-archer">&#xe606;</span>GIS</span>
     
@@ -1731,9 +1771,9 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="工作总结"><span class="iconfont-archer">&#xe606;</span>工作总结</span>
     
-        <span class="sidebar-tag-name" data-tags="SwiftTips"><span class="iconfont-archer">&#xe606;</span>SwiftTips</span>
-    
         <span class="sidebar-tag-name" data-tags="Json"><span class="iconfont-archer">&#xe606;</span>Json</span>
+    
+        <span class="sidebar-tag-name" data-tags="SwiftTips"><span class="iconfont-archer">&#xe606;</span>SwiftTips</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
@@ -1782,9 +1822,9 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="随感"><span class="iconfont-archer">&#xe60a;</span>随感</span>
     
-        <span class="sidebar-category-name" data-categories="视频直播应用"><span class="iconfont-archer">&#xe60a;</span>视频直播应用</span>
-    
         <span class="sidebar-category-name" data-categories="监控"><span class="iconfont-archer">&#xe60a;</span>监控</span>
+    
+        <span class="sidebar-category-name" data-categories="视频直播应用"><span class="iconfont-archer">&#xe60a;</span>视频直播应用</span>
     
         <span class="sidebar-category-name" data-categories="工作总结"><span class="iconfont-archer">&#xe60a;</span>工作总结</span>
     
